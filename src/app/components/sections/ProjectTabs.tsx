@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 import type { Project } from '@/data/projects';
 import { buttonVariants } from '../ui/Button';
 import { Pill } from '../ui/Pill';
-import { ExternalLinkIcon, GithubIcon, CodeIcon } from '../ui/Icons';
+import { ExternalLinkIcon, GithubIcon, CodeIcon, CheckIcon } from '../ui/Icons';
 import { ProjectScreenShowcase } from '../ui/ProjectScreenShowcase';
 import { cn } from '@/lib/utils';
 
@@ -42,26 +42,26 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
   };
 
   return (
-    <div className="mt-6 sm:mt-8 space-y-4 sm:space-y-6 w-full min-w-0">
+    <div className="space-y-6 w-full min-w-0">
       {/* Guia de Navegação e Contador de Projetos */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
-        <p className="text-xs font-medium text-secondary-text dark:text-dark-text flex items-center gap-1.5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <p className="text-xs font-medium text-secondary-text dark:text-dark-text flex items-center gap-2">
           <span
             className="h-1.5 w-1.5 rounded-full bg-accent dark:bg-accent-light"
             aria-hidden="true"
           />
           <span>Selecione um projeto para ver telas, arquitetura e regras de negócio:</span>
         </p>
-        <span className="font-mono text-[11px] font-semibold text-accent dark:text-accent-light self-start sm:self-auto">
+        <span className="font-mono text-xs font-semibold text-accent dark:text-accent-light">
           {projects.length} projetos disponíveis
         </span>
       </div>
 
-      {/* Barra de Abas de Projetos */}
+      {/* Barra de Abas em Formato Pill */}
       <div
         role="tablist"
         aria-label="Projetos em destaque e complementares"
-        className="flex overflow-x-auto pb-2.5 gap-1.5 sm:gap-2 border-b border-border-light dark:border-border-dark scrollbar-none snap-x touch-pan-x w-full min-w-0"
+        className="flex overflow-x-auto pb-2 gap-2 border-b border-border-light dark:border-border-dark scrollbar-none snap-x touch-pan-x w-full min-w-0"
       >
         {projects.map((p, idx) => {
           const isActive = idx === activeIndex;
@@ -79,15 +79,15 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
               onClick={() => setActiveIndex(idx)}
               onKeyDown={(e) => handleKeyDown(e, idx)}
               className={cn(
-                'group flex shrink-0 items-center gap-1.5 sm:gap-2 border px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs font-semibold transition-all duration-200 cursor-pointer min-h-[40px] sm:min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light',
+                'group flex shrink-0 items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light',
                 isActive
-                  ? 'border-accent bg-accent text-white shadow-sm dark:border-accent-light dark:bg-accent-light dark:text-dark-bg'
-                  : 'border-border-light bg-white text-secondary-text hover:border-accent/40 hover:text-accent dark:border-border-dark dark:bg-dark-card dark:text-dark-text dark:hover:border-accent-light/40 dark:hover:text-accent-light'
+                  ? 'border-accent bg-accent text-white shadow-md shadow-accent/25 dark:border-accent-light dark:bg-accent-light dark:text-dark-bg dark:shadow-accent-light/25 font-semibold'
+                  : 'border-border-light bg-light-surface text-secondary-text hover:border-accent hover:text-primary-text dark:border-border-dark dark:bg-dark-surface dark:text-dark-text dark:hover:border-accent-light dark:hover:text-light-text'
               )}
             >
               <span
                 className={cn(
-                  'font-mono text-[10px] sm:text-[11px]',
+                  'font-mono text-[11px]',
                   isActive
                     ? 'text-white/80 dark:text-dark-bg/80'
                     : 'text-accent dark:text-accent-light'
@@ -115,180 +115,148 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
         role="tabpanel"
         id={`project-panel-${activeIndex}`}
         aria-labelledby={`project-tab-${activeIndex}`}
-        className="grid gap-6 sm:gap-8 border border-border-light bg-white/50 p-3 sm:p-6 shadow-sm dark:border-border-dark dark:bg-dark-card/50 lg:grid-cols-[1.1fr_0.9fr] lg:items-start w-full min-w-0 overflow-hidden"
+        className="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full min-w-0 items-start"
       >
-        {/* Coluna do Showcase Visual e Ações Rápidas */}
-        <div className="space-y-3.5 sm:space-y-4 w-full min-w-0">
-          <ProjectScreenShowcase
-            key={current.shortTitle}
-            screens={current.screens ?? []}
-            title={current.title}
-            demoUrl={current.demoUrl}
-            defaultImageUrl={current.imageUrl}
-            defaultImageAlt={current.imageAlt}
-          />
+        {/* Coluna Esquerda: Showcase Visual e Ações (7 Colunas) */}
+        <div className="lg:col-span-7 flex flex-col justify-between space-y-4 rounded-card border border-border-light bg-light-surface p-4 sm:p-5 dark:border-border-dark dark:bg-dark-surface min-w-0 overflow-hidden">
+          <div className="space-y-3.5">
+            <div className="flex flex-wrap items-center justify-between gap-2 min-w-0">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-accent dark:text-accent-light font-bold">
+                Projeto 0{activeIndex + 1} / 0{projects.length}
+              </span>
+              <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-emerald-700 dark:text-emerald-400">
+                <span
+                  className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"
+                  aria-hidden="true"
+                />
+                Sistema em Produção
+              </span>
+            </div>
 
-          {/* Botões de Ação */}
-          <div className="grid gap-2.5 sm:gap-3 grid-cols-1 sm:grid-cols-2 w-full min-w-0">
-            <a
-              href={current.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(
-                buttonVariants({ variant: 'outline', size: 'lg' }),
-                'w-full border-border-light bg-white hover:bg-light-surface dark:border-border-dark dark:bg-dark-card dark:hover:bg-dark-surface min-h-[44px]'
-              )}
-            >
-              <GithubIcon className="h-4 w-4" />
-              Ver código
-            </a>
-            {current.demoUrl && (
+            <div className="min-w-0">
+              <h3 className="font-heading text-xl sm:text-2xl font-bold tracking-tight text-primary-text dark:text-light-text truncate">
+                {current.shortTitle}
+              </h3>
+              <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-secondary-text dark:text-dark-text">
+                {current.description}
+              </p>
+            </div>
+
+            {/* Showcase Visual das Telas */}
+            <ProjectScreenShowcase
+              key={current.shortTitle}
+              screens={current.screens ?? []}
+              title={current.title}
+              demoUrl={current.demoUrl}
+              defaultImageUrl={current.imageUrl}
+              defaultImageAlt={current.imageAlt}
+            />
+          </div>
+
+          <div className="space-y-3 pt-2">
+            {/* Botões de Ação */}
+            <div className="grid gap-2.5 grid-cols-1 sm:grid-cols-2 w-full min-w-0">
               <a
-                href={current.demoUrl}
+                href={current.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cn(
-                  buttonVariants({ variant: 'primary', size: 'lg' }),
-                  'w-full min-h-[44px]'
-                )}
+                className={cn(buttonVariants({ variant: 'outline', size: 'default' }), 'w-full')}
               >
-                <ExternalLinkIcon className="h-4 w-4" />
-                {current.demoLabel ?? 'Acessar aplicação'}
+                <GithubIcon className="h-4 w-4" />
+                Ver código
               </a>
-            )}
+              {current.demoUrl && (
+                <a
+                  href={current.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(buttonVariants({ variant: 'primary', size: 'default' }), 'w-full')}
+                >
+                  <ExternalLinkIcon className="h-4 w-4" />
+                  {current.demoLabel ?? 'Acessar aplicação'}
+                </a>
+              )}
+            </div>
+
+            {/* Tags de Stack */}
+            <div className="flex flex-wrap gap-1.5 pt-1 border-t border-border-light/70 dark:border-border-dark/70">
+              {current.tags.map((tag) => (
+                <Pill key={tag}>{tag}</Pill>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Coluna de Detalhes Técnicos */}
-        <div className="space-y-3.5 sm:space-y-4 w-full min-w-0 overflow-hidden">
-          <div className="flex flex-wrap items-center justify-between gap-2 min-w-0">
-            <p className="font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-accent dark:text-accent-light shrink-0">
-              Projeto 0{activeIndex + 1} de 0{projects.length}
-            </p>
-            {current.metrics && (
-              <div className="flex flex-wrap gap-1 sm:gap-1.5 min-w-0">
-                {current.metrics.map((metric) => (
-                  <span
-                    key={metric}
-                    className="border border-border-light bg-light-surface px-1.5 sm:px-2 py-0.5 font-mono text-[9px] sm:text-[10px] font-semibold text-secondary-text dark:border-border-dark dark:bg-dark-surface dark:text-dark-text"
-                  >
-                    {metric}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="min-w-0">
-            <h3 className="text-xl font-bold tracking-tight text-primary-text dark:text-light-text sm:text-3xl truncate">
-              {current.shortTitle}
-            </h3>
-            <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed text-secondary-text dark:text-dark-text">
-              {current.description}
-            </p>
-          </div>
-
-          {/* Decisões e Responsabilidade */}
-          {(current.responsibility || current.decision) && (
-            <div className="grid gap-2 sm:gap-2.5 grid-cols-1 min-w-0">
-              {current.responsibility && (
-                <div className="border border-border-light bg-white/70 p-2.5 sm:p-3 dark:border-border-dark dark:bg-dark-card/70 min-w-0">
-                  <dt className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-accent dark:text-accent-light">
-                    Minha responsabilidade
-                  </dt>
-                  <dd className="mt-1 text-[11px] sm:text-xs leading-relaxed text-secondary-text dark:text-dark-text">
-                    {current.responsibility}
-                  </dd>
-                </div>
-              )}
-              {current.decision && (
-                <div className="border border-border-light bg-white/70 p-2.5 sm:p-3 dark:border-border-dark dark:bg-dark-card/70 min-w-0">
-                  <dt className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-accent dark:text-accent-light">
-                    Decisão técnica
-                  </dt>
-                  <dd className="mt-1 text-[11px] sm:text-xs leading-relaxed text-secondary-text dark:text-dark-text">
-                    {current.decision}
-                  </dd>
-                </div>
-              )}
+        {/* Coluna Direita: Engenharia, Responsabilidade & Decisões (5 Colunas) */}
+        <div className="lg:col-span-5 rounded-card border border-border-light bg-light-surface p-5 dark:border-border-dark dark:bg-dark-surface space-y-4 min-w-0">
+          {/* Minha responsabilidade */}
+          {current.responsibility && (
+            <div className="space-y-1 min-w-0">
+              <dt className="font-mono text-[11px] font-bold uppercase tracking-wider text-accent dark:text-accent-light">
+                Minha responsabilidade
+              </dt>
+              <dd className="text-xs sm:text-[13px] leading-relaxed text-secondary-text dark:text-dark-text">
+                {current.responsibility}
+              </dd>
             </div>
           )}
 
-          {/* Evidências Implementadas */}
+          {/* Decisão técnica */}
+          {current.decision && (
+            <div className="space-y-1 min-w-0 pt-3 border-t border-border-light/60 dark:border-border-dark/60">
+              <dt className="font-mono text-[11px] font-bold uppercase tracking-wider text-accent dark:text-accent-light">
+                Decisão técnica
+              </dt>
+              <dd className="text-xs sm:text-[13px] leading-relaxed text-secondary-text dark:text-dark-text">
+                {current.decision}
+              </dd>
+            </div>
+          )}
+
+          {/* Implementado */}
           {current.evidence && current.evidence.length > 0 && (
-            <div className="border-l-2 border-accent pl-3 sm:pl-3.5 dark:border-accent-light min-w-0">
-              <p className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-primary-text dark:text-light-text">
+            <div className="space-y-2 min-w-0 pt-3 border-t border-border-light/60 dark:border-border-dark/60">
+              <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-primary-text dark:text-light-text">
                 Implementado
               </p>
-              <ul className="mt-1 sm:mt-1.5 grid gap-1 text-[11px] sm:text-xs text-secondary-text dark:text-dark-text min-w-0">
+              <ul className="grid gap-1.5 text-xs text-secondary-text dark:text-dark-text min-w-0">
                 {current.evidence.slice(0, 4).map((item) => (
-                  <li key={item} className="break-words">
-                    • {item}
+                  <li key={item} className="flex items-start gap-2 break-words">
+                    <CheckIcon className="h-3.5 w-3.5 text-accent dark:text-accent-light shrink-0 mt-0.5" />
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
           )}
 
-          {/* Destaque Técnico para Projetos Secundários */}
-          {current.technicalHighlight && (
-            <div className="border-l-2 border-accent pl-3 sm:pl-3.5 dark:border-accent-light min-w-0">
-              <p className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-primary-text dark:text-light-text">
-                Destaque técnico
-              </p>
-              <p className="mt-1 text-[11px] sm:text-xs leading-relaxed text-secondary-text dark:text-dark-text">
-                {current.technicalHighlight}
-              </p>
-            </div>
-          )}
-
           {/* Deep Links de Arquitetura no GitHub */}
           {current.architectureLinks && current.architectureLinks.length > 0 && (
-            <div className="border border-border-light bg-light-surface/60 p-2.5 sm:p-3 dark:border-border-dark dark:bg-dark-surface/60 min-w-0">
-              <p className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-accent dark:text-accent-light flex items-center gap-1.5">
-                <CodeIcon className="h-3.5 w-3.5" />
-                Arquitetura no GitHub
-              </p>
-              <div className="mt-2 flex flex-wrap gap-1.5 min-w-0">
+            <div className="pt-3 border-t border-border-light/60 dark:border-border-dark/60 flex flex-wrap items-center gap-1.5 min-w-0">
+              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-secondary-text dark:text-dark-text flex items-center gap-1 shrink-0">
+                <CodeIcon className="h-3 w-3 text-accent dark:text-accent-light" />
+                <span>Arquitetura no GitHub</span>
+              </span>
+              <div className="flex flex-wrap gap-1.5 min-w-0">
                 {current.architectureLinks.map((link) => (
                   <a
                     key={link.label}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group/link inline-flex items-center gap-1.5 rounded-sm border border-border-light bg-white px-2 py-1 text-[11px] font-medium text-secondary-text shadow-2xs transition-all hover:border-accent hover:text-accent dark:border-border-dark dark:bg-dark-card dark:text-dark-text dark:hover:border-accent-light dark:hover:text-accent-light"
+                    className="inline-flex items-center gap-1 rounded-full border border-border-light/80 bg-light-card px-2 py-0.5 font-mono text-[10px] text-secondary-text transition-colors hover:border-accent hover:text-accent dark:border-border-dark/80 dark:bg-dark-card dark:text-dark-text dark:hover:border-accent-light dark:hover:text-accent-light"
                     title={`Ver ${link.label} no GitHub`}
                   >
                     {link.badge && (
-                      <span className="font-mono text-[9px] font-bold text-accent dark:text-accent-light">
+                      <span className="font-bold text-accent dark:text-accent-light">
                         [{link.badge}]
                       </span>
                     )}
-                    <span>{link.label}</span>
-                    <ExternalLinkIcon className="h-3 w-3 opacity-60 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                    <span className="truncate">{link.label}</span>
+                    <ExternalLinkIcon className="h-2.5 w-2.5 opacity-60 shrink-0" />
                   </a>
                 ))}
               </div>
-            </div>
-          )}
-
-          {/* Tags */}
-          <div className="flex flex-wrap gap-1 sm:gap-1.5 pt-1 min-w-0">
-            {current.tags.map((tag) => (
-              <Pill key={tag}>{tag}</Pill>
-            ))}
-          </div>
-
-          {/* Acesso Rápido */}
-          {current.demoNote && (
-            <div className="flex items-center gap-2 border border-border-light bg-light-surface p-2 sm:p-2.5 text-[11px] sm:text-xs text-secondary-text dark:border-border-dark dark:bg-dark-surface dark:text-dark-text min-w-0">
-              <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500" aria-hidden="true" />
-              <span className="break-words min-w-0">
-                <strong className="font-semibold text-primary-text dark:text-light-text">
-                  Acesso rápido:
-                </strong>{' '}
-                {current.demoNote}
-              </span>
             </div>
           )}
         </div>
