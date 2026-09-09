@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import { experienciasAnteriores, trajectorySkills } from '@/data/experience';
-import { RevealOnScroll } from '../ui/RevealOnScroll';
 import Section from '../ui/Section';
+import { SectionHeader } from '../ui/SectionHeader';
+import { Pill } from '../ui/Pill';
 
 const About = () => {
   return (
@@ -10,152 +11,121 @@ const About = () => {
       spacing="editorial"
       className="border-b border-border-light dark:border-border-dark"
     >
-      <RevealOnScroll className="mx-auto max-w-6xl">
-        <div className="grid gap-4 border-b border-border-light pb-6 dark:border-border-dark md:grid-cols-[0.75fr_1.25fr] md:items-end">
-          <div>
-            <div className="flex items-center gap-3 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-accent dark:text-accent-light">
-              <span className="h-px w-10 bg-current" aria-hidden="true" />
-              Perfil & Trajetória
-            </div>
-            <h2 className="mt-2 text-3xl font-bold tracking-[-0.035em] text-primary-text dark:text-light-text md:text-4xl">
-              Sobre mim
-            </h2>
-          </div>
-          <p className="max-w-xl text-sm leading-relaxed text-secondary-text dark:text-dark-text md:justify-self-end">
-            Graduando em Análise e Desenvolvimento de Sistemas com experiência prática autônoma em
-            suporte e manutenção de TI, unindo método investigativo à construção de software.
-          </p>
-        </div>
+      <div className="mx-auto max-w-container">
+        <SectionHeader
+          eyebrow="Perfil & Trajetória"
+          title="Sobre mim"
+          subtitle="Graduando em Análise e Desenvolvimento de Sistemas com experiência prática autônoma em suporte e manutenção de TI, unindo método investigativo à construção de software."
+        />
 
-        <div className="mt-8 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10">
-          {/* Coluna Esquerda: Perfil em Destaque + Formação Acadêmica */}
-          <div className="space-y-5">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-8 items-stretch w-full min-w-0">
+          {/* Coluna Esquerda: Perfil e Formação */}
+          <div className="flex flex-col justify-between gap-5 min-w-0 w-full">
             {/* Card Principal de Perfil */}
-            <div className="border border-border-light bg-white/60 p-5 shadow-sm dark:border-border-dark dark:bg-dark-card/60">
-              <div className="flex items-center justify-between gap-3 border-b border-border-light pb-3 dark:border-border-dark">
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
-                  Desenvolvedor
-                </p>
-                <span className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-emerald-700 dark:text-emerald-300">
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                  </span>
-                  Disponível
-                </span>
-              </div>
-
-              <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5">
-                <div className="relative mx-auto sm:mx-0 h-32 w-32 sm:h-36 sm:w-36 shrink-0 overflow-hidden rounded-2xl border-2 border-border-light bg-light-surface shadow-md dark:border-border-dark dark:bg-dark-card">
-                  <Image
-                    src="/images/profile.webp"
-                    alt="Foto de Tharcio Santos"
-                    fill
-                    quality={95}
-                    className="object-cover transition-transform duration-300 hover:scale-105"
-                    sizes="(max-width: 640px) 128px, 144px"
-                  />
-                </div>
-                <div className="space-y-1.5 text-center sm:text-left">
-                  <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-primary-text dark:text-light-text">
-                    Tharcio Santos
-                  </h3>
-                  <p className="text-xs sm:text-sm font-medium text-secondary-text dark:text-dark-text">
-                    Desenvolvedor Full Stack Júnior
+            <div className="flex-1 rounded-xl border border-border-light/80 bg-light-surface/60 p-5 sm:p-6 dark:border-border-dark/80 dark:bg-dark-surface/60 flex flex-col justify-between">
+              <div>
+                <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3 border-b border-border-light/60 pb-3 dark:border-border-dark/60">
+                  <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
+                    Perfil Profissional
                   </p>
-                  <p className="font-mono text-xs text-accent dark:text-accent-light">
+                  <span className="font-mono text-[11px] text-secondary-text/80 dark:text-dark-text/80">
                     Caeté / BH e Região · Remoto
+                  </span>
+                </div>
+
+                <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-4">
+                  <div className="relative mx-auto sm:mx-0 h-24 w-24 sm:h-28 sm:w-28 shrink-0 overflow-hidden rounded-full border-2 border-border-light bg-light-bg shadow-sm dark:border-border-dark dark:bg-dark-bg">
+                    <Image
+                      src="/images/profile.webp"
+                      alt="Foto de Tharcio Santos"
+                      fill
+                      quality={75}
+                      className="object-cover"
+                      sizes="(max-width: 640px) 96px, 112px"
+                    />
+                  </div>
+                  <div className="space-y-0.5 text-center sm:text-left">
+                    <h3 className="font-heading text-lg sm:text-xl font-semibold tracking-tight text-primary-text dark:text-light-text">
+                      Tharcio Santos
+                    </h3>
+                    <p className="text-xs sm:text-sm font-medium text-secondary-text dark:text-dark-text">
+                      Desenvolvedor Full Stack Júnior
+                    </p>
+                    <p className="font-mono text-[11px] text-accent dark:text-accent-light">
+                      Foco em arquitetura segura e interfaces funcionais
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-4 border-t border-border-light/60 pt-3.5 dark:border-border-dark/60">
+                  <p className="text-xs leading-relaxed text-secondary-text dark:text-dark-text">
+                    Minha transição para a programação nasceu ao diagnosticar e resolver problemas
+                    técnicos no suporte: percebi que queria ir além da manutenção de máquinas e
+                    passar a{' '}
+                    <strong className="font-semibold text-primary-text dark:text-light-text">
+                      construir sistemas completos, seguros e confiáveis
+                    </strong>{' '}
+                    que resolvam dores reais das pessoas e empresas.
                   </p>
                 </div>
-              </div>
-
-              {/* Parágrafo de Motivação & Propósito */}
-              <div className="mt-4 border-t border-border-light pt-3.5 dark:border-border-dark">
-                <p className="text-xs leading-relaxed text-secondary-text dark:text-dark-text">
-                  Minha transição para a programação nasceu ao diagnosticar e resolver problemas
-                  técnicos no suporte: percebi que queria ir além da manutenção de máquinas e passar
-                  a{' '}
-                  <strong className="font-semibold text-primary-text dark:text-light-text">
-                    construir sistemas completos, seguros e confiáveis
-                  </strong>{' '}
-                  que resolvam dores reais das pessoas e empresas.
-                </p>
               </div>
             </div>
 
-            {/* Card de Formação Acadêmica */}
-            <div className="border border-border-light bg-white/60 p-5 shadow-sm dark:border-border-dark dark:bg-dark-card/60">
-              <div className="flex items-center justify-between border-b border-border-light pb-2.5 dark:border-border-dark">
+            {/* Card de Formação Acadêmica Compacto */}
+            <div className="rounded-xl border border-border-light/80 bg-light-surface/60 p-4 sm:p-5 dark:border-border-dark/80 dark:bg-dark-surface/60">
+              <div className="flex items-center justify-between border-b border-border-light/60 pb-2.5 dark:border-border-dark/60">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
                   Formação Acadêmica
                 </p>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-secondary-text dark:text-dark-text">
-                  Ensino Superior
+                <span className="font-mono text-[10px] uppercase tracking-wider text-secondary-text/80 dark:text-dark-text/80">
+                  Graduação
                 </span>
               </div>
-              <h4 className="mt-3 text-sm sm:text-base font-bold text-primary-text dark:text-light-text">
+              <h4 className="mt-3 font-heading text-sm sm:text-base font-semibold text-primary-text dark:text-light-text">
                 Análise e Desenvolvimento de Sistemas
               </h4>
-              <div className="mt-3.5 grid grid-cols-3 gap-2 border-t border-border-light pt-3 text-xs dark:border-border-dark">
-                <div>
-                  <span className="block font-mono text-[10px] uppercase text-secondary-text dark:text-dark-text">
-                    Instituição
-                  </span>
-                  <span className="font-semibold text-primary-text dark:text-light-text">
-                    Anhanguera
-                  </span>
-                </div>
-                <div>
-                  <span className="block font-mono text-[10px] uppercase text-secondary-text dark:text-dark-text">
-                    Status
-                  </span>
-                  <span className="font-semibold text-primary-text dark:text-light-text">
-                    Cursando
-                  </span>
-                </div>
-                <div>
-                  <span className="block font-mono text-[10px] uppercase text-secondary-text dark:text-dark-text">
-                    Conclusão
-                  </span>
-                  <span className="font-semibold text-primary-text dark:text-light-text">
-                    Julho de 2027
-                  </span>
-                </div>
+              <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] text-secondary-text dark:text-dark-text">
+                <span>Anhanguera</span>
+                <span>·</span>
+                <span>Cursando</span>
+                <span>·</span>
+                <span className="text-primary-text dark:text-light-text font-medium">
+                  Julho de 2027
+                </span>
               </div>
             </div>
           </div>
 
-          {/* Coluna Direita: Linha do Tempo de Experiências & Habilidades Transferidas */}
-          <div className="space-y-6">
-            <div className="border border-border-light bg-white/60 p-5 shadow-sm dark:border-border-dark dark:bg-dark-card/60">
-              <div className="mb-5 flex items-center justify-between border-b border-border-light pb-2.5 dark:border-border-dark">
+          {/* Coluna Direita: Trajetória Profissional e Competências Integradas */}
+          <div className="rounded-xl border border-border-light/80 bg-light-surface/60 p-5 sm:p-6 dark:border-border-dark/80 dark:bg-dark-surface/60 flex flex-col justify-between w-full min-w-0">
+            <div>
+              <div className="mb-4 flex items-center justify-between border-b border-border-light/60 pb-3 dark:border-border-dark/60">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
                   Experiências Profissionais
                 </p>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-secondary-text dark:text-dark-text">
-                  Trajetória
+                <span className="font-mono text-[10px] uppercase tracking-wider text-secondary-text/80 dark:text-dark-text/80">
+                  Trajetória & Bagagem
                 </span>
               </div>
 
-              {/* Timeline Contínua */}
-              <div className="relative pl-6 sm:pl-7 space-y-6 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-px before:bg-border-light dark:before:bg-border-dark">
+              {/* Linha do Tempo */}
+              <div className="relative pl-5 space-y-4 before:absolute before:left-1.5 before:top-2 before:bottom-2 before:w-px before:bg-border-light dark:before:bg-border-dark">
                 {experienciasAnteriores.map((item) => (
                   <article key={`${item.role}-${item.org}`} className="group relative">
-                    {/* Node / Marcador da Timeline */}
                     <span
                       aria-hidden="true"
-                      className="absolute -left-[20px] sm:-left-[24px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-accent bg-white transition-colors duration-200 group-hover:bg-accent dark:bg-dark-card"
+                      className="absolute -left-[19px] top-1.5 h-2 w-2 rounded-full border border-accent bg-white dark:bg-dark-card"
                     />
 
                     <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-                      <h4 className="text-sm font-bold text-primary-text dark:text-light-text transition-colors duration-200 group-hover:text-accent dark:group-hover:text-accent-light">
+                      <h4 className="font-heading text-xs sm:text-sm font-semibold text-primary-text dark:text-light-text">
                         {item.role} · {item.org}
                       </h4>
-                      <span className="shrink-0 font-mono text-xs text-secondary-text dark:text-dark-text">
+                      <span className="shrink-0 font-mono text-[10px] sm:text-[11px] text-secondary-text/80 dark:text-dark-text/80">
                         {item.period}
                       </span>
                     </div>
-                    <p className="mt-1.5 text-xs leading-relaxed text-secondary-text dark:text-dark-text">
+                    <p className="mt-1 text-xs leading-relaxed text-secondary-text dark:text-dark-text">
                       {item.summary}
                     </p>
                   </article>
@@ -163,30 +133,22 @@ const About = () => {
               </div>
             </div>
 
-            {/* Habilidades Transferidas */}
-            <div className="border border-border-light bg-white/60 p-5 shadow-sm dark:border-border-dark dark:bg-dark-card/60">
-              <div className="flex items-center justify-between border-b border-border-light pb-2.5 dark:border-border-dark">
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
-                  Habilidades transferidas
-                </p>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-secondary-text dark:text-dark-text">
-                  Competências
-                </span>
-              </div>
-              <div className="mt-3.5 flex flex-wrap gap-2">
+            {/* Habilidades Transferidas Integradas Organicamente */}
+            <div className="mt-6 border-t border-border-light/60 pt-4 dark:border-border-dark/60">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-secondary-text/90 dark:text-dark-text/90 mb-2.5">
+                Competências transferidas para a engenharia de software
+              </p>
+              <div className="flex flex-wrap gap-1.5">
                 {trajectorySkills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="border border-border-light bg-light-surface px-2.5 py-1 font-mono text-xs text-secondary-text transition-colors duration-200 hover:border-accent/40 dark:border-border-dark dark:bg-dark-surface dark:text-dark-text"
-                  >
+                  <Pill key={skill} className="text-[11px] px-2.5 py-0.5">
                     {skill}
-                  </span>
+                  </Pill>
                 ))}
               </div>
             </div>
           </div>
         </div>
-      </RevealOnScroll>
+      </div>
     </Section>
   );
 };

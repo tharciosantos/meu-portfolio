@@ -77,7 +77,6 @@ describe('conteúdo principal do redesign', () => {
 
     expect(screen.getByRole('tab', { name: /ManutFlow/i })).toBeInTheDocument();
     expect(screen.getByRole('tab', { name: /HelpFlow/i })).toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: /DevLinks/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 3, name: 'ManutFlow' })).toBeInTheDocument();
     expect(screen.getByText('Minha responsabilidade')).toBeInTheDocument();
     expect(screen.getByText('Decisão técnica')).toBeInTheDocument();

@@ -111,18 +111,18 @@ export function MobileNav({ links, activeSection = '' }: MobileNavProps) {
         aria-expanded={isOpen}
         aria-controls={MOBILE_MENU_ID}
         className={cn(
-          'relative z-[60] inline-flex h-10 w-10 items-center justify-center border transition-colors',
+          'relative z-[60] inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all active:scale-95',
           isOpen
-            ? 'border-accent bg-accent text-white shadow-lg shadow-accent/20 ring-2 ring-accent-border hover:bg-accent-hover dark:border-accent-light dark:bg-accent-light dark:text-dark-bg dark:ring-accent-light/30 dark:hover:bg-accent-light-hover'
-            : 'border-transparent text-primary-text hover:bg-light-surface hover:text-accent dark:text-light-text dark:hover:bg-dark-surface dark:hover:text-accent-light'
+            ? 'border-accent bg-accent text-white hover:bg-accent-hover dark:border-accent-light dark:bg-accent-light dark:text-dark-bg dark:hover:bg-accent-light-hover'
+            : 'border-border-light bg-light-surface text-primary-text hover:border-accent dark:border-border-dark dark:bg-dark-surface dark:text-light-text dark:hover:border-accent-light'
         )}
       >
-        {isOpen ? <CloseIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
+        {isOpen ? <CloseIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
       </button>
 
       {isOpen && (
         <div
-          className="fixed inset-x-0 bottom-0 top-16 z-40 bg-black/40 backdrop-blur-sm md:hidden"
+          className="fixed inset-0 z-40 bg-black/30 md:hidden"
           style={{
             opacity: isClosing ? 0 : 1,
             transition: 'opacity 0.2s ease',
@@ -139,14 +139,14 @@ export function MobileNav({ links, activeSection = '' }: MobileNavProps) {
           role="dialog"
           aria-modal="true"
           aria-label="Menu de navegação"
-          className="fixed left-0 right-0 top-16 z-50 border-b border-border-light bg-light-card shadow-lg shadow-slate-900/10 dark:border-border-dark dark:bg-dark-bg dark:shadow-black/30 md:hidden"
+          className="fixed inset-x-4 top-16 z-50 rounded-card border border-border-light bg-light-card p-4 dark:border-border-dark dark:bg-dark-card md:hidden"
           style={{
             opacity: isClosing ? 0 : 1,
             transform: isClosing ? 'translateY(-8px)' : 'translateY(0)',
             transition: 'opacity 0.2s ease, transform 0.2s ease',
           }}
         >
-          <div className="mx-auto flex max-w-sm flex-col items-stretch gap-2 px-6 py-5">
+          <div className="flex flex-col items-stretch gap-1">
             {links.map((link) => {
               const isActive = activeSection === sectionIdFromHref(link.href);
               const isFirstLink = link.href === links[0]?.href;
@@ -159,12 +159,12 @@ export function MobileNav({ links, activeSection = '' }: MobileNavProps) {
                   onClick={handleClose}
                   className={
                     link.cta
-                      ? cn(buttonVariants({ variant: 'primary', size: 'lg' }), 'mt-2 w-full')
+                      ? cn(buttonVariants({ variant: 'primary', size: 'default' }), 'mt-2 w-full')
                       : cn(
-                          'w-full border border-transparent px-4 py-3 text-center text-base font-medium transition-colors',
+                          'w-full rounded-full px-4 py-2.5 text-center text-sm font-medium transition-colors',
                           isActive
-                            ? 'border border-accent-border bg-accent-subtle font-semibold text-accent shadow-sm dark:border-accent-border-dark dark:bg-accent-subtle-dark dark:text-accent-light'
-                            : 'text-secondary-text hover:border-border-light hover:bg-light-surface hover:text-accent dark:text-dark-text dark:hover:border-border-dark dark:hover:bg-dark-surface dark:hover:text-accent-light'
+                            ? 'border border-border-light bg-light-surface font-semibold text-accent dark:border-border-dark dark:bg-dark-surface dark:text-accent-light'
+                            : 'text-secondary-text hover:bg-light-surface hover:text-primary-text dark:text-dark-text dark:hover:bg-dark-surface dark:hover:text-light-text'
                         )
                   }
                   aria-current={isActive ? 'location' : undefined}

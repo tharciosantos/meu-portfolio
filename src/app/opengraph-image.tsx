@@ -16,8 +16,8 @@ export default function OpenGraphImage() {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        background: '#0d1117',
-        color: '#e2e8f0',
+        background: '#141712',
+        color: '#ECEFE8',
         padding: '64px',
         fontFamily: 'Arial, sans-serif',
         position: 'relative',
@@ -28,7 +28,7 @@ export default function OpenGraphImage() {
           position: 'absolute',
           inset: 0,
           background:
-            'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(15, 118, 110, 0.18), transparent)',
+            'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(122, 155, 103, 0.22), transparent)',
         }}
       />
 
@@ -57,7 +57,7 @@ export default function OpenGraphImage() {
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: 0,
-              background: '#0f766e',
+              background: '#3E5136',
               color: '#ffffff',
               fontSize: 28,
               fontWeight: 900,
@@ -66,14 +66,14 @@ export default function OpenGraphImage() {
             T
           </div>
           <span>
-            Tharcio<span style={{ color: '#2dd4bf' }}>.dev</span>
+            Tharcio<span style={{ color: '#7A9B67' }}>.dev</span>
           </span>
         </div>
         <div
           style={{
-            border: '1px solid rgba(45, 212, 191, 0.45)',
+            border: '1px solid rgba(122, 155, 103, 0.45)',
             borderRadius: 999,
-            color: '#2dd4bf',
+            color: '#7A9B67',
             padding: '10px 18px',
             fontSize: 22,
             fontWeight: 700,
@@ -91,16 +91,16 @@ export default function OpenGraphImage() {
           position: 'relative',
         }}
       >
-        <div style={{ color: '#2dd4bf', fontSize: 28, fontWeight: 700 }}>
+        <div style={{ color: '#7A9B67', fontSize: 28, fontWeight: 700 }}>
           React · Next.js · Node.js · TypeScript
         </div>
         <div style={{ maxWidth: 900, fontSize: 78, lineHeight: 1.02, fontWeight: 900 }}>
           Tharcio Santos
         </div>
-        <div style={{ maxWidth: 950, color: '#cbd5e1', fontSize: 34, lineHeight: 1.28 }}>
+        <div style={{ maxWidth: 950, color: '#ECEFE8', fontSize: 34, lineHeight: 1.28 }}>
           Desenvolvo sistemas completos, da interface aos dados.
         </div>
-        <div style={{ maxWidth: 950, color: '#a8b4c7', fontSize: 30, lineHeight: 1.28 }}>
+        <div style={{ maxWidth: 950, color: '#97A090', fontSize: 30, lineHeight: 1.28 }}>
           Aplicações web, APIs e bancos de dados com foco em usabilidade e boas práticas.
         </div>
       </div>
@@ -109,7 +109,7 @@ export default function OpenGraphImage() {
         style={{
           display: 'flex',
           gap: '16px',
-          color: '#a8b4c7',
+          color: '#97A090',
           fontSize: 24,
           position: 'relative',
         }}

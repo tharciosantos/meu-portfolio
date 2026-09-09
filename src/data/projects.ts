@@ -46,6 +46,8 @@ export const projects: Project[] = [
       'Garantir que cada usuário acesse apenas seus próprios equipamentos e ordens de manutenção.',
     decision:
       'Aplicar proteção em três camadas com proxy, getUser() na API e Row Level Security no banco.',
+    technicalHighlight:
+      'Segurança em três camadas (Proxy, API getUser e Supabase RLS), modelagem PostgreSQL e suíte de 169 testes unitários no Vitest.',
     evidence: [
       '169 testes automatizados em 17 arquivos',
       'CRUD completo com busca, filtros, paginação e histórico',
@@ -115,6 +117,8 @@ export const projects: Project[] = [
       'Organizar autenticação, permissões, regras de negócio e histórico sem comprometer a clareza do fluxo.',
     decision:
       'Separar acessos com roles CLIENT/AGENT e centralizar validação com Zod e persistência com Prisma.',
+    technicalHighlight:
+      'Autorização RBAC (Client/Agent) com NextAuth e JWT, validações centralizadas com Zod e persistência relacional com Prisma ORM.',
     evidence: [
       'Autenticação por credenciais e GitHub, com recuperação de senha',
       'Controle de acesso por perfil e propriedade de chamados',
@@ -186,6 +190,16 @@ export const projects: Project[] = [
       'Plataforma completa de gerenciamento e compartilhamento de links estilo Linktree, com autenticação JWT, upload de avatar via Cloudinary e perfil público.',
     technicalHighlight:
       'Upload de imagem via Cloudinary, cache e invalidação com TanStack Query, e testes end-to-end com Cypress no fluxo principal.',
+    responsibility:
+      'Desenvolvimento de aplicação SPA com gerenciamento de estado assíncrono, fluxo de autenticação e manipulação de mídia.',
+    decision:
+      'Adotar TanStack Query para orquestração de cache e Cypress para validação end-to-end de fluxos críticos de usuário.',
+    evidence: [
+      'Testes End-to-End no Cypress cobrindo fluxos críticos',
+      'Upload otimizado de imagens via Cloudinary CDN',
+      'Cache e sincronização de dados com TanStack Query',
+      'Perfil público leve e compartilhável para bio de redes',
+    ],
     outcome: 'Upload · sincronização · testes E2E',
     metrics: ['Testes E2E Cypress', 'Cloudinary CDN', 'TanStack Query'],
     architectureLinks: [
@@ -239,6 +253,16 @@ export const projects: Project[] = [
       'Aplicação web progressiva para organizar compras por corredores, calcular o progresso da compra em tempo real, auto-categorizar produtos e compartilhar no WhatsApp.',
     technicalHighlight:
       'PWA offline-first com Service Worker, banco local de 220 itens em 11 setores, auto-categorização inteligente e exportação formatada para o WhatsApp.',
+    responsibility:
+      'Arquitetura e desenvolvimento de PWA offline-first com catálogo pré-carregado e gerador de listas para mensageria.',
+    decision:
+      'Empregar Service Workers para cache estático total e estrutura de dados local indexada por setores para operar sem conexão.',
+    evidence: [
+      'PWA instalável com Service Worker e cache-first ativo',
+      'Catálogo de 220 itens distribuídos em 11 setores de mercado',
+      'Operação 100% autônoma e offline sem requisições a servidor',
+      'Exportação estruturada e formatada para o WhatsApp',
+    ],
     outcome: 'PWA · 220 itens · 100% offline',
     metrics: ['PWA Offline Ready', '220 Itens Mapeados', '11 Setores'],
     architectureLinks: [
@@ -282,6 +306,16 @@ export const projects: Project[] = [
       'Painel financeiro para consulta de cotações, variações de 24h, indicadores de mercado e páginas dinâmicas detalhadas por ativo.',
     technicalHighlight:
       'Consumo da CoinGecko API no Next.js App Router, rotas dinâmicas /coin/[id], blindagem com dados de contingência e filtros client-side.',
+    responsibility:
+      'Construção de interface analítica de mercado financeiro com consumo de API externa e tratamento de contingência.',
+    decision:
+      'Implementar camada de contingência (fallback local) contra rate limit (HTTP 429) e roteamento dinâmico no App Router.',
+    evidence: [
+      'Consumo dinâmico da CoinGecko API com cotações e KPIs',
+      'Mecanismo de fallback automático para tolerância a falhas e rate limits',
+      'Rotas dinâmicas /coin/[id] com estatísticas de mercado',
+      'Filtros rápidos por maiores altas, baixas e volume de 24h',
+    ],
     outcome: 'FinTech · CoinGecko API · rotas dinâmicas',
     metrics: ['CoinGecko API Live', 'Next.js App Router', 'FinTech UI'],
     architectureLinks: [

@@ -2,7 +2,13 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
-import { SearchIcon, ChevronLeftIcon, ChevronRightIcon, CloseIcon } from './Icons';
+import {
+  SearchIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  CloseIcon,
+  ExternalLinkIcon,
+} from './Icons';
 import { cn } from '@/lib/utils';
 
 export type ProjectScreen = {
@@ -132,7 +138,7 @@ export function ProjectScreenShowcase({
   return (
     <>
       <div
-        className="group/showcase relative w-full min-w-0 overflow-hidden border border-border-light bg-white p-3 shadow-sm transition-all duration-300 dark:border-border-dark dark:bg-dark-card sm:p-4 touch-pan-y"
+        className="group/showcase relative w-full min-w-0 flex flex-col gap-2.5 touch-pan-y"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onTouchStart={handleTouchStart}
@@ -142,118 +148,85 @@ export function ProjectScreenShowcase({
         aria-roledescription="carousel"
         aria-label={`Demonstração visual do projeto ${title}`}
       >
-        {/* Barra Superior de Segmentos / Stories */}
-        <div className="mb-2.5 space-y-2 border-b border-border-light pb-2 dark:border-border-dark sm:mb-3 sm:pb-2.5">
-          <div className="flex items-center justify-between text-xs gap-2 min-w-0">
-            <div className="flex items-center gap-1.5 min-w-0">
-              <span className="font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light shrink-0">
-                Telas do Sistema
-              </span>
-              <span className="text-secondary-text dark:text-dark-text">·</span>
-              <span className="font-mono text-[10px] sm:text-[11px] font-semibold text-secondary-text dark:text-dark-text shrink-0">
-                Tela 0{currentIndex + 1} de 0{total}
-              </span>
-            </div>
+        {/* Barra Superior com Controles e Domínio */}
+        <div className="flex flex-wrap items-center justify-between gap-2 min-w-0">
+          <div className="flex items-center gap-1.5 min-w-0">
+            <span className="font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light shrink-0">
+              Telas do Sistema
+            </span>
+            <span className="text-secondary-text/50 dark:text-dark-text/50">·</span>
+            <span className="font-mono text-[10px] sm:text-[11px] text-secondary-text dark:text-dark-text shrink-0">
+              Tela 0{currentIndex + 1} de 0{total}
+            </span>
+          </div>
 
-            {/* Botão de Ampliação Claro, Compacto com Tokens Semânticos */}
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="font-mono text-[10px] text-secondary-text/80 dark:text-dark-text/80 hidden sm:inline">
+              {extractDomain(demoUrl)}
+            </span>
             <button
               type="button"
               onClick={() => setIsModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold bg-light-surface hover:bg-white text-primary-text border border-border-light dark:bg-dark-surface dark:hover:bg-dark-card dark:text-light-text dark:border-border-dark shadow-xs transition-all cursor-pointer shrink-0 min-h-[36px] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light"
-              title="Ampliar visualização em tela cheia com alta resolução"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-light-surface hover:bg-light-card text-primary-text border border-border-light dark:bg-dark-surface dark:hover:bg-dark-card dark:text-light-text dark:border-border-dark shadow-xs transition-all cursor-pointer shrink-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light"
+              title="Ampliar visualização em tela cheia"
               aria-label="Ampliar tela do projeto em alta resolução"
             >
-              <SearchIcon className="h-3.5 w-3.5 text-secondary-text dark:text-dark-text" />
-              <span className="font-sans font-medium text-[11px] sm:text-xs">Ampliar</span>
+              <SearchIcon className="h-3 w-3 text-secondary-text dark:text-dark-text" />
+              <span className="font-sans font-medium text-[11px]">Ampliar</span>
             </button>
           </div>
-
-          {/* Segmentos de Progresso Clicáveis */}
-          {total > 1 && (
-            <div
-              className="grid gap-1 sm:gap-1.5 w-full min-w-0"
-              style={{ gridTemplateColumns: `repeat(${total}, minmax(0, 1fr))` }}
-            >
-              {items.map((item, idx) => {
-                const isCurrent = idx === currentIndex;
-                return (
-                  <button
-                    key={item.label}
-                    type="button"
-                    onClick={() => setCurrentIndex(idx)}
-                    className="group/segment flex flex-col gap-1 text-left cursor-pointer focus:outline-none py-0.5 min-w-0 overflow-hidden"
-                    aria-label={`Ir para tela: ${item.label}`}
-                    aria-current={isCurrent}
-                  >
-                    <div className="h-1 w-full overflow-hidden rounded-full bg-light-surface dark:bg-dark-surface">
-                      <div
-                        className={cn(
-                          'h-full transition-all duration-300',
-                          isCurrent
-                            ? 'bg-accent dark:bg-accent-light w-full'
-                            : idx < currentIndex
-                              ? 'bg-accent/40 dark:bg-accent-light/40 w-full'
-                              : 'w-0'
-                        )}
-                      />
-                    </div>
-                    <span
-                      className={cn(
-                        'block truncate font-mono text-[9px] sm:text-[10px] whitespace-nowrap transition-colors',
-                        isCurrent
-                          ? 'font-bold text-primary-text dark:text-light-text'
-                          : 'text-secondary-text/70 dark:text-dark-text/70 hover:text-primary-text dark:hover:text-light-text'
-                      )}
-                    >
-                      {item.label}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          )}
         </div>
 
-        {/* Moldura de Navegador com Aspect Ratio Fixo e Tokens Semânticos */}
-        <div className="relative aspect-[16/9] w-full min-w-0 overflow-hidden rounded border border-border-light bg-light-surface shadow-inner dark:border-border-dark dark:bg-dark-card">
-          {/* Barra de Janela do Navegador */}
-          <div className="absolute top-0 left-0 right-0 z-20 flex h-6 items-center justify-between border-b border-border-light bg-light-surface/95 px-2 sm:px-2.5 backdrop-blur-sm dark:border-border-dark dark:bg-dark-surface/95">
-            <div className="flex items-center gap-1 shrink-0" aria-hidden="true">
-              <span className="h-1.5 w-1.5 rounded-full bg-red-500/80" />
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-500/80" />
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500/80" />
+        {/* Segmentos Clicáveis das Telas */}
+        {total > 1 && (
+          <div className="flex items-center gap-1 overflow-x-auto scrollbar-none py-0.5 min-w-0">
+            {items.map((item, idx) => {
+              const isCurrent = idx === currentIndex;
+              return (
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={() => setCurrentIndex(idx)}
+                  className={cn(
+                    'px-2.5 py-1 rounded-full text-[11px] font-mono transition-all cursor-pointer truncate shrink-0',
+                    isCurrent
+                      ? 'bg-accent text-white dark:bg-accent-light dark:text-dark-bg font-bold shadow-xs'
+                      : 'border border-border-light/70 bg-light-surface text-secondary-text hover:border-accent hover:text-primary-text dark:border-border-dark/70 dark:bg-dark-surface dark:text-dark-text dark:hover:text-light-text'
+                  )}
+                  aria-label={`Ir para tela: ${item.label}`}
+                  aria-current={isCurrent}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Frame da Imagem com aspect ratio idêntico às telas reais (1920/909) para eliminar bordas pretas */}
+        <div className="relative aspect-[1920/909] w-full min-w-0 overflow-hidden rounded-xl border border-border-light/80 bg-light-surface dark:border-border-dark/80 dark:bg-dark-surface shadow-xs">
+          {items.map((item, idx) => (
+            <div
+              key={item.imageUrl}
+              className={cn(
+                'absolute inset-0 transition-opacity duration-300 ease-in-out pointer-events-none select-none',
+                idx === currentIndex ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none z-0'
+              )}
+            >
+              <Image
+                src={item.imageUrl}
+                alt={item.caption}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, (max-width: 1536px) 60vw, 900px"
+                className="object-cover object-top pointer-events-none select-none"
+                quality={95}
+                priority={idx === 0}
+                draggable={false}
+              />
             </div>
-            <span className="font-mono text-[8px] sm:text-[9px] text-secondary-text dark:text-dark-text truncate max-w-[160px] sm:max-w-none">
-              {extractDomain(demoUrl)}
-            </span>
-            <span className="h-1.5 w-1.5 shrink-0" aria-hidden="true" />
-          </div>
+          ))}
 
-          {/* Imagens com Top-Padding para a Barra do Navegador */}
-          <div className="absolute inset-0 pt-6 pointer-events-none select-none">
-            {items.map((item, idx) => (
-              <div
-                key={item.imageUrl}
-                className={cn(
-                  'absolute inset-0 top-6 transition-opacity duration-300 ease-in-out pointer-events-none select-none',
-                  idx === currentIndex ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none z-0'
-                )}
-              >
-                <Image
-                  src={item.imageUrl}
-                  alt={item.caption}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, (max-width: 1280px) 55vw, 600px"
-                  className="object-contain pointer-events-none select-none"
-                  quality={90}
-                  priority={idx === 0}
-                  draggable={false}
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Botões de Navegação Manual (< e >) com Touch Targets Otimizados */}
+          {/* Botões de Navegação Manual (< e >) */}
           {total > 1 && (
             <>
               <button
@@ -262,10 +235,10 @@ export function ProjectScreenShowcase({
                   e.stopPropagation();
                   prevSlide();
                 }}
-                className="absolute left-1.5 sm:left-2 top-1/2 -translate-y-1/2 z-20 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-border-light bg-white/95 text-primary-text opacity-85 sm:opacity-0 shadow-md backdrop-blur-sm transition-all hover:bg-white group-hover/showcase:opacity-95 dark:border-border-dark dark:bg-dark-surface/95 dark:text-light-text dark:hover:bg-dark-surface cursor-pointer text-sm sm:text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light active:scale-95"
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-20 flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-border-light/80 bg-white/90 text-primary-text opacity-90 sm:opacity-0 shadow-sm backdrop-blur-sm transition-all hover:bg-white group-hover/showcase:opacity-100 dark:border-border-dark/80 dark:bg-dark-surface/90 dark:text-light-text dark:hover:bg-dark-surface cursor-pointer text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light active:scale-95"
                 aria-label="Tela anterior"
               >
-                <ChevronLeftIcon className="h-4 w-4" />
+                <ChevronLeftIcon className="h-3.5 w-3.5" />
               </button>
               <button
                 type="button"
@@ -273,17 +246,17 @@ export function ProjectScreenShowcase({
                   e.stopPropagation();
                   nextSlide();
                 }}
-                className="absolute right-1.5 sm:right-2 top-1/2 -translate-y-1/2 z-20 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-border-light bg-white/95 text-primary-text opacity-85 sm:opacity-0 shadow-md backdrop-blur-sm transition-all hover:bg-white group-hover/showcase:opacity-95 dark:border-border-dark dark:bg-dark-surface/95 dark:text-light-text dark:hover:bg-dark-surface cursor-pointer text-sm sm:text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light active:scale-95"
+                className="absolute right-2 top-1/2 -translate-y-1/2 z-20 flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-border-light/80 bg-white/90 text-primary-text opacity-90 sm:opacity-0 shadow-sm backdrop-blur-sm transition-all hover:bg-white group-hover/showcase:opacity-100 dark:border-border-dark/80 dark:bg-dark-surface/90 dark:text-light-text dark:hover:bg-dark-surface cursor-pointer text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light active:scale-95"
                 aria-label="Próxima tela"
               >
-                <ChevronRightIcon className="h-4 w-4" />
+                <ChevronRightIcon className="h-3.5 w-3.5" />
               </button>
             </>
           )}
         </div>
 
-        {/* Legenda Dinâmica com Altura Fixa */}
-        <div className="mt-2.5 sm:mt-3 flex h-7 items-center justify-between gap-2 border-t border-border-light pt-2 text-xs dark:border-border-dark sm:pt-2.5 min-w-0">
+        {/* Legenda Limpa da Tela Ativa */}
+        <div className="flex items-center justify-between gap-2 text-xs min-w-0 pt-0.5">
           <p
             className="truncate text-secondary-text dark:text-dark-text text-[11px] sm:text-xs min-w-0 flex-1"
             title={`${activeItem.label}: ${activeItem.caption}`}
@@ -293,10 +266,6 @@ export function ProjectScreenShowcase({
             </span>{' '}
             {activeItem.caption}
           </p>
-          <span className="inline-flex shrink-0 items-center gap-1 font-mono text-[9px] sm:text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
-            Online
-          </span>
         </div>
       </div>
 
@@ -314,16 +283,16 @@ export function ProjectScreenShowcase({
         >
           {/* Card Flutuante da Barra Superior do Modal */}
           <div
-            className="w-full max-w-6xl mb-2 sm:mb-3.5 p-2.5 sm:p-4 bg-dark-card border border-border-dark rounded-xl sm:rounded-2xl shadow-xl flex items-center justify-between gap-2 sm:gap-3 text-light-text shrink-0"
+            className="w-full max-w-7xl 2xl:max-w-[1720px] mb-2 sm:mb-3 p-2.5 sm:p-3.5 bg-dark-card border border-border-dark rounded-xl sm:rounded-2xl shadow-xl flex items-center justify-between gap-2 sm:gap-3 text-light-text shrink-0"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
-                <span className="font-extrabold text-xs sm:text-base text-light-text tracking-tight">
+                <span className="font-semibold text-xs sm:text-sm text-light-text tracking-tight">
                   {title}
                 </span>
                 <span className="text-dark-text">·</span>
-                <span className="font-mono text-[10px] sm:text-xs font-bold text-accent-light bg-accent-subtle-dark px-2 py-0.5 rounded-md border border-accent-border-dark">
+                <span className="font-mono text-[10px] sm:text-xs font-medium text-accent-light bg-accent-subtle-dark px-2 py-0.5 rounded-full border border-accent-border-dark">
                   Tela 0{currentIndex + 1} de 0{total} · {activeItem.label}
                 </span>
               </div>
@@ -336,10 +305,22 @@ export function ProjectScreenShowcase({
               <span className="text-[11px] font-mono text-dark-text hidden lg:inline">
                 Navegue com as setas ou deslize na tela
               </span>
+              <a
+                href={activeItem.imageUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-1.5 rounded-full bg-dark-surface hover:bg-dark-card active:scale-95 text-light-text text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer border border-border-dark shadow-sm min-h-[34px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
+                title="Abrir imagem original em tamanho nativo (1920x909)"
+              >
+                <ExternalLinkIcon className="h-3.5 w-3.5 text-accent-light" />
+                <span className="font-mono text-[11px] sm:text-xs hidden sm:inline">
+                  Ver original
+                </span>
+              </a>
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="px-3 sm:px-4 py-2 rounded-lg sm:rounded-xl bg-dark-surface hover:bg-dark-card active:scale-95 text-light-text text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer border border-border-dark shadow-md min-h-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
+                className="px-3 py-1.5 rounded-full bg-dark-surface hover:bg-dark-card active:scale-95 text-light-text text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer border border-border-dark shadow-sm min-h-[34px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
                 aria-label="Fechar tela cheia"
               >
                 <CloseIcon className="h-3.5 w-3.5" />
@@ -348,18 +329,18 @@ export function ProjectScreenShowcase({
             </div>
           </div>
 
-          {/* Imagem em Resolução Máxima com Controles Laterais */}
+          {/* Imagem em Resolução Máxima com fidelidade nativa 100% (unoptimized) */}
           <div
-            className="relative w-full max-w-6xl aspect-[16/9] rounded-xl sm:rounded-2xl overflow-hidden bg-dark-bg border border-border-dark shadow-2xl flex items-center justify-center shrink-0 transform-gpu"
+            className="relative w-full max-w-7xl 2xl:max-w-[1720px] aspect-[1920/909] rounded-xl sm:rounded-2xl overflow-hidden bg-dark-bg border border-border-dark shadow-2xl flex items-center justify-center shrink-0 transform-gpu"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
               src={activeItem.imageUrl}
               alt={activeItem.caption}
               fill
-              sizes="(max-width: 1280px) 100vw, 1152px"
-              className="object-contain"
-              quality={90}
+              unoptimized
+              sizes="100vw"
+              className="object-cover object-top"
               priority
               decoding="async"
             />

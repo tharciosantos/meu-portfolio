@@ -14,7 +14,7 @@ const navLinkClass = (isActive: boolean) =>
     'relative text-sm font-medium transition-colors',
     isActive
       ? 'font-semibold text-accent dark:text-accent-light'
-      : 'text-secondary-text hover:text-accent dark:text-dark-text dark:hover:text-accent-light',
+      : 'text-secondary-text hover:text-primary-text dark:text-dark-text dark:hover:text-light-text',
     isActive &&
       'after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:rounded-full after:bg-accent dark:after:bg-accent-light'
   );
@@ -28,7 +28,7 @@ export function NavbarClient() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 30);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -37,29 +37,26 @@ export function NavbarClient() {
   return (
     <nav
       className={cn(
-        'sticky top-0 z-50 border-b px-6 py-3 transition-all duration-150',
+        'sticky top-0 z-50 border-b px-4 sm:px-6 py-2.5 transition-colors duration-150',
         scrolled
-          ? 'border-border-light bg-light-bg shadow-[0_1px_3px_rgba(0,0,0,0.06)] dark:border-border-dark dark:bg-dark-bg dark:shadow-[0_1px_3px_rgba(0,0,0,0.3)]'
-          : 'border-border-light/0 bg-light-bg dark:border-border-dark/0 dark:bg-dark-bg'
+          ? 'border-border-light bg-light-bg/95 backdrop-blur-xs dark:border-border-dark dark:bg-dark-bg/95'
+          : 'border-transparent bg-light-bg dark:bg-dark-bg'
       )}
       role="navigation"
       aria-label="Navegação principal"
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between">
+      <div className="mx-auto flex max-w-container items-center justify-between">
         <Link
           href="/"
-          className="group inline-flex items-center gap-2 text-base font-bold tracking-[-0.02em] text-primary-text transition-colors hover:text-accent dark:text-light-text dark:hover:text-accent-light"
+          className="group inline-flex items-center gap-1.5 text-base font-bold tracking-tight text-primary-text transition-colors hover:text-accent dark:text-light-text dark:hover:text-accent-light"
           aria-label="Tharcio.dev, voltar para o início"
         >
-          <span className="inline-flex h-7 w-7 items-center justify-center border border-accent bg-accent text-xs font-extrabold text-white transition-colors group-hover:bg-accent-hover dark:border-accent-light dark:bg-accent-light dark:text-dark-bg dark:group-hover:bg-accent-light-hover">
-            T
-          </span>
-          <span>
+          <span className="font-heading text-lg font-bold tracking-tight">
             Tharcio<span className="text-accent dark:text-accent-light">.dev</span>
           </span>
         </Link>
 
-        <div className="hidden items-center gap-5 md:flex">
+        <div className="hidden items-center gap-6 md:flex">
           {mainLinks.map((link: NavLink) => {
             const isActive = activeSection === sectionIdFromHref(link.href);
             return (
@@ -75,12 +72,12 @@ export function NavbarClient() {
           })}
         </div>
 
-        <div className="hidden items-center space-x-4 md:flex">
+        <div className="hidden items-center space-x-3 md:flex">
           {ctaLink && (
             <Link
               href={ctaLink.href}
               className={cn(
-                buttonVariants({ variant: 'outline' }),
+                buttonVariants({ variant: 'outline', size: 'sm' }),
                 isCtaActive &&
                   'border-accent text-accent dark:border-accent-light dark:text-accent-light'
               )}
@@ -92,7 +89,7 @@ export function NavbarClient() {
           <ThemeSwitcher />
         </div>
 
-        <div className="flex items-center gap-4 md:hidden">
+        <div className="flex items-center gap-3 md:hidden">
           <ThemeSwitcher />
           <MobileNav links={navLinks} activeSection={activeSection} />
         </div>
