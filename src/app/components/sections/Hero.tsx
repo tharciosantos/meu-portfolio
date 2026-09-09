@@ -1,127 +1,129 @@
 import { buttonVariants } from '../ui/Button';
 import { GITHUB_URL, LINKEDIN_URL, RESUME_URL } from '@/data/constants';
 import { cn } from '@/lib/utils';
-import { Pill } from '../ui/Pill';
 import Section from '../ui/Section';
+import { Metric } from '../ui/Metric';
 import { ArrowRightIcon, DocumentIcon, GithubIcon, LinkedinIcon } from '../ui/Icons';
-import { HeroParallaxBackground } from '../ui/HeroParallaxBackground';
-
-const stackItems = ['Next.js', 'TypeScript', 'React', 'Node.js', 'Supabase'];
 
 const Hero = () => {
   return (
     <Section
       id="home"
       spacing="hero"
-      className="relative overflow-hidden border-b border-border-light dark:border-border-dark"
+      className="flex min-h-[calc(100vh-3.5rem)] flex-col justify-between border-b border-border-light dark:border-border-dark"
     >
-      <HeroParallaxBackground />
+      <div className="mx-auto flex w-full max-w-container flex-1 flex-col justify-between">
+        {/* Bloco Central Superior */}
+        <div className="my-auto py-6 sm:py-8">
+          {/* Eyebrow & Status */}
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="flex items-center gap-2 font-mono text-metadata uppercase tracking-wider text-accent dark:text-accent-light">
+              <span
+                className="h-2 w-2 rounded-full bg-accent dark:bg-accent-light"
+                aria-hidden="true"
+              />
+              <span>Software Developer · Brazil</span>
+            </div>
 
-      <div className="mx-auto max-w-4xl">
-        <div className="stagger-1 animate-fade-up opacity-0 mb-6 inline-flex items-center gap-2 border border-emerald-300 bg-emerald-50/80 px-3 py-1 text-xs font-semibold text-emerald-800 dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-300">
-          <span className="relative flex h-2 w-2" aria-hidden="true">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-          </span>
-          <span>Disponível para Estágio / Júnior · Full Stack</span>
-        </div>
+            <span className="text-secondary-text dark:text-dark-text" aria-hidden="true">
+              /
+            </span>
 
-        <div className="stagger-1 animate-fade-up opacity-0 flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-secondary-text dark:text-dark-text">
-          <span className="h-px w-10 bg-accent dark:bg-accent-light" aria-hidden="true" />
-          Desenvolvedor Full Stack · Sistemas, APIs e Bancos de Dados
-        </div>
+            <div className="inline-flex items-center gap-2 text-metadata text-secondary-text dark:text-dark-text">
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
+              </span>
+              <span>Disponível para Estágio / Júnior · Full Stack</span>
+            </div>
+          </div>
 
-        <div className="mt-7">
-          <h1
-            className="text-5xl font-extrabold leading-[0.98] tracking-[-0.045em] text-primary-text dark:text-light-text sm:text-6xl md:text-7xl lg:text-[4.5rem]"
-            style={{
-              textShadow: '0 0 60px rgba(15,118,110,0.12), 0 0 120px rgba(15,118,110,0.06)',
-            }}
-          >
+          {/* Headline Principal */}
+          <h1 className="mt-6 max-w-3xl font-heading text-hero text-primary-text dark:text-light-text">
             Desenvolvo sistemas completos, da interface aos dados.
           </h1>
-        </div>
 
-        <div className="stagger-3 animate-fade-up opacity-0 mt-7 max-w-2xl">
-          <p className="text-base leading-relaxed text-secondary-text dark:text-dark-text md:text-lg">
+          {/* Subtitle */}
+          <p className="mt-4 max-w-prose-wide text-body-lg text-secondary-text dark:text-dark-text">
             Com projetos publicados e experiência técnica autônoma, construo aplicações web focadas
             em usabilidade, controle de acesso seguro e cobertura consistente de testes.
           </p>
-        </div>
 
-        <div className="stagger-4 animate-fade-up opacity-0 mt-6 flex flex-wrap items-center gap-3">
-          {stackItems.map((item) => (
-            <Pill key={item}>{item}</Pill>
-          ))}
-        </div>
+          {/* Assinatura Técnica / Code Snippet */}
+          <div className="mt-6 max-w-md">
+            <div className="flex items-center justify-between rounded-card border border-border-light bg-light-surface px-4 py-2.5 font-mono text-xs text-secondary-text dark:border-border-dark dark:bg-dark-surface dark:text-dark-text">
+              <div className="flex items-center gap-2 truncate">
+                <span className="text-accent dark:text-accent-light font-bold">$</span>
+                <span className="truncate">
+                  git clone https://github.com/tharciosantos/helpflow
+                </span>
+              </div>
+              <span className="ml-3 shrink-0 rounded-full border border-border-light bg-light-bg px-2 py-0.5 text-[10px] uppercase dark:border-border-dark dark:bg-dark-bg">
+                main
+              </span>
+            </div>
+          </div>
 
-        <div className="stagger-5 animate-fade-up opacity-0 mt-8 flex flex-wrap items-center gap-3">
-          <a
-            href="#projetos"
-            className={cn(buttonVariants({ variant: 'primary', size: 'lg' }), 'group shadow-md')}
-          >
-            Explorar projetos
-            <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-1" />
-          </a>
-          <a
-            href={RESUME_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(buttonVariants({ variant: 'outline', size: 'lg' }), 'group')}
-          >
-            <DocumentIcon className="h-4 w-4 transition-transform duration-200 ease-out group-hover:-translate-y-0.5" />
-            Baixar currículo
-          </a>
-
-          <div className="flex items-center gap-2 sm:ml-1">
+          {/* Ações / CTAs */}
+          <div className="mt-6 flex flex-wrap items-center gap-3">
             <a
-              href={GITHUB_URL}
+              href="#projetos"
+              className={cn(
+                buttonVariants({ variant: 'primary', size: 'lg' }),
+                'group text-base px-8 py-3 h-12'
+              )}
+            >
+              Explorar projetos
+              <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-1" />
+            </a>
+
+            <a
+              href={RESUME_URL}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="GitHub de Tharcio Santos"
-              className={cn(buttonVariants({ variant: 'outline', size: 'icon' }), 'h-11 w-11')}
+              className={cn(buttonVariants({ variant: 'outline', size: 'lg' }), 'group')}
             >
-              <GithubIcon className="h-4 w-4" />
+              <DocumentIcon className="h-4 w-4" />
+              Baixar currículo
             </a>
-            <a
-              href={LINKEDIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn de Tharcio Santos"
-              className={cn(buttonVariants({ variant: 'outline', size: 'icon' }), 'h-11 w-11')}
-            >
-              <LinkedinIcon className="h-4 w-4" />
-            </a>
+
+            <div className="flex items-center gap-2">
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub de Tharcio Santos"
+                className={cn(buttonVariants({ variant: 'outline', size: 'icon' }))}
+              >
+                <GithubIcon className="h-4 w-4" />
+              </a>
+              <a
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn de Tharcio Santos"
+                className={cn(buttonVariants({ variant: 'outline', size: 'icon' }))}
+              >
+                <LinkedinIcon className="h-4 w-4" />
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Faixa de Métricas Rápidas */}
-        <div className="stagger-6 animate-fade-up opacity-0 mt-12 grid grid-cols-1 gap-3 border-t border-border-light pt-8 dark:border-border-dark sm:grid-cols-3 sm:gap-4">
-          <div className="border border-border-light bg-white/70 p-3.5 shadow-sm dark:border-border-dark dark:bg-dark-card/70">
-            <span className="font-mono text-xl font-bold tracking-tight text-primary-text dark:text-light-text sm:text-2xl">
-              2 Sistemas
-            </span>
-            <p className="mt-1 text-xs text-secondary-text dark:text-dark-text">
-              Publicados com demo em 1 clique e simulador
-            </p>
-          </div>
+        {/* Métricas Rápidas Ancoradas no Rodapé do Hero */}
+        <div className="w-full pt-4 pb-2">
+          <div className="grid grid-cols-1 gap-4 border-t border-border-light pt-6 dark:border-border-dark sm:grid-cols-3">
+            <div className="rounded-card border border-border-light bg-light-surface p-4 dark:border-border-dark dark:bg-dark-surface">
+              <Metric value="2 Sistemas" label="Publicados com demo em 1 clique e simulador" />
+            </div>
 
-          <div className="border border-border-light bg-white/70 p-3.5 shadow-sm dark:border-border-dark dark:bg-dark-card/70">
-            <span className="font-mono text-xl font-bold tracking-tight text-accent dark:text-accent-light sm:text-2xl">
-              250+ Testes
-            </span>
-            <p className="mt-1 text-xs text-secondary-text dark:text-dark-text">
-              Automatizados cobrindo fluxos críticos e APIs
-            </p>
-          </div>
+            <div className="rounded-card border border-border-light bg-light-surface p-4 dark:border-border-dark dark:bg-dark-surface">
+              <Metric value="250+ Testes" label="Automatizados cobrindo fluxos críticos e APIs" />
+            </div>
 
-          <div className="border border-border-light bg-white/70 p-3.5 shadow-sm dark:border-border-dark dark:bg-dark-card/70">
-            <span className="font-mono text-xl font-bold tracking-tight text-primary-text dark:text-light-text sm:text-2xl">
-              Segurança
-            </span>
-            <p className="mt-1 text-xs text-secondary-text dark:text-dark-text">
-              Isolamento em camadas (RBAC e Supabase RLS)
-            </p>
+            <div className="rounded-card border border-border-light bg-light-surface p-4 dark:border-border-dark dark:bg-dark-surface">
+              <Metric value="Segurança" label="Isolamento em camadas (RBAC e Supabase RLS)" />
+            </div>
           </div>
         </div>
       </div>
