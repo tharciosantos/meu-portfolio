@@ -124,4 +124,44 @@ describe('ProjectTabs', () => {
       'https://github.com/test/helpflow#rls'
     );
   });
+
+  it('renderiza o conteúdo de engenharia minimalista de forma coerente ao alternar entre projetos', () => {
+    const projectsWithDetails: Project[] = [
+      {
+        ...mockProjects[0],
+        responsibility: 'Arquitetura de autenticação e permissões de chamados.',
+        decision: 'Separar papéis com RBAC e validar schemas com Zod.',
+        evidence: ['Validação Zod de formulários', 'Autenticação NextAuth com JWT'],
+      },
+      {
+        ...mockProjects[1],
+        responsibility: 'Modelagem de equipamentos e ordens industriais.',
+        decision: 'Proteção multi-tenant com Supabase RLS no banco.',
+        evidence: ['169 testes no Vitest', 'Proteção com Row Level Security'],
+      },
+    ];
+
+    render(<ProjectTabs projects={projectsWithDetails} />);
+
+    // Projeto inicial: HelpFlow
+    expect(screen.getByText('Minha responsabilidade')).toBeInTheDocument();
+    expect(
+      screen.getByText('Arquitetura de autenticação e permissões de chamados.')
+    ).toBeInTheDocument();
+    expect(screen.getByText('Decisão técnica')).toBeInTheDocument();
+    expect(
+      screen.getByText('Separar papéis com RBAC e validar schemas com Zod.')
+    ).toBeInTheDocument();
+    expect(screen.getByText('Validação Zod de formulários')).toBeInTheDocument();
+
+    // Alterna para ManutFlow
+    const manutTab = screen.getByRole('tab', { name: /ManutFlow/i });
+    fireEvent.click(manutTab);
+
+    expect(screen.getByText('Modelagem de equipamentos e ordens industriais.')).toBeInTheDocument();
+    expect(
+      screen.getByText('Proteção multi-tenant com Supabase RLS no banco.')
+    ).toBeInTheDocument();
+    expect(screen.getByText('169 testes no Vitest')).toBeInTheDocument();
+  });
 });

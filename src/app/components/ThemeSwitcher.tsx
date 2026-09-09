@@ -29,7 +29,7 @@ export const ThemeSwitcher = () => {
     <div className="relative group">
       <button
         onClick={toggleTheme}
-        className="rounded-md p-2 text-secondary-text transition-[background-color,color] duration-150 ease-out hover:bg-accent-subtle hover:text-accent dark:text-dark-text dark:hover:bg-accent-subtle-dark dark:hover:text-accent-light"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-light/70 bg-light-surface text-secondary-text transition-all hover:border-accent hover:text-accent dark:border-border-dark/70 dark:bg-dark-surface dark:text-dark-text dark:hover:border-accent-light dark:hover:text-accent-light active:scale-95 cursor-pointer"
         aria-label="Alternar tema"
       >
         <span

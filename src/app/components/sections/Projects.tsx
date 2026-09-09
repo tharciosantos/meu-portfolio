@@ -1,7 +1,10 @@
 import { projects } from '@/data/projects';
-import { RevealOnScroll } from '../ui/RevealOnScroll';
+import { GITHUB_URL } from '@/data/constants';
 import Section from '../ui/Section';
+import { SectionHeader } from '../ui/SectionHeader';
 import { ProjectTabs } from './ProjectTabs';
+
+const featuredProjects = projects.filter((p) => p.kind === 'featured');
 
 const Projects = () => {
   return (
@@ -10,25 +13,28 @@ const Projects = () => {
       spacing="editorial"
       className="border-b border-border-light dark:border-border-dark"
     >
-      <RevealOnScroll className="mx-auto max-w-6xl">
-        <div className="grid gap-4 border-b border-border-light pb-6 dark:border-border-dark md:grid-cols-[0.75fr_1.25fr] md:items-end">
-          <div>
-            <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-accent dark:text-accent-light">
-              Trabalho selecionado
-            </p>
-            <h2 className="mt-2 text-3xl font-bold tracking-[-0.035em] text-primary-text dark:text-light-text md:text-4xl">
-              Projetos
-            </h2>
-          </div>
-          <p className="max-w-xl text-sm leading-relaxed text-secondary-text dark:text-dark-text md:justify-self-end">
-            Sistemas full stack e aplicações publicadas com demonstração interativa, autenticação,
-            testes automatizados e regras de negócio. Navegue pelas abas abaixo para explorar cada
-            solução.
-          </p>
-        </div>
+      <div className="mx-auto max-w-container">
+        <SectionHeader
+          eyebrow="Sistemas em Produção"
+          title="Projetos"
+          subtitle="Sistemas full stack desenvolvidos do zero, com autenticação em camadas, banco relacional, regras de negócio e suítes de testes automatizados."
+        />
 
-        <ProjectTabs projects={projects} />
-      </RevealOnScroll>
+        <ProjectTabs projects={featuredProjects} />
+
+        {/* Nota elegante de outros projetos no GitHub */}
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 rounded-xl border border-border-light/60 bg-light-surface/40 px-5 py-3.5 text-xs text-secondary-text dark:border-border-dark/60 dark:bg-dark-surface/40 dark:text-dark-text">
+          <p>Buscando outros experimentos, PWAs ou integrações com APIs públicas?</p>
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light shrink-0"
+          >
+            Ver todos os repositórios no GitHub →
+          </a>
+        </div>
+      </div>
     </Section>
   );
 };

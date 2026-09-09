@@ -1,4 +1,4 @@
-import { Inter, Outfit } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import './globals.css';
@@ -60,16 +60,16 @@ const jsonLd = {
 
 // ─── FONTES ─────────────────────────────────────────────────────────────────
 
-const inter = Inter({
+const geistSans = Geist({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-geist-sans',
 });
 
-const outfit = Outfit({
+const geistMono = Geist_Mono({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-outfit',
+  variable: '--font-geist-mono',
 });
 
 export const metadata: Metadata = {
@@ -166,8 +166,8 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f5f7f6' },
-    { media: '(prefers-color-scheme: dark)', color: '#0b1114' },
+    { media: '(prefers-color-scheme: light)', color: '#F7F4EE' },
+    { media: '(prefers-color-scheme: dark)', color: '#141712' },
   ],
   colorScheme: 'light dark',
 };
@@ -184,7 +184,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body
-        className={`${inter.variable} ${outfit.variable} min-h-screen bg-light-bg font-sans text-primary-text antialiased dark:bg-dark-bg dark:text-light-text`}
+        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-light-bg font-sans text-primary-text antialiased dark:bg-dark-bg dark:text-light-text`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ReadingProgressBar />
