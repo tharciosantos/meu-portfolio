@@ -130,6 +130,7 @@ const Contact = () => {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`${link.action} de ${link.label}`}
                   className="group flex items-center justify-between gap-3 py-3.5 sm:py-4 transition-colors hover:text-accent dark:hover:text-accent-light min-w-0"
                 >
                   <span className="flex items-center gap-3 min-w-0 flex-1">

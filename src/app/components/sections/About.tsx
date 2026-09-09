@@ -28,7 +28,7 @@ const About = () => {
                   <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
                     Perfil Profissional
                   </p>
-                  <span className="font-mono text-[11px] text-secondary-text/80 dark:text-dark-text/80">
+                  <span className="font-mono text-[11px] text-primary-text dark:text-light-text">
                     Caeté / BH e Região · Remoto
                   </span>
                 </div>
@@ -77,7 +77,7 @@ const About = () => {
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
                   Formação Acadêmica
                 </p>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-secondary-text/80 dark:text-dark-text/80">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-primary-text dark:text-light-text">
                   Graduação
                 </span>
               </div>
@@ -103,7 +103,7 @@ const About = () => {
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
                   Experiências Profissionais
                 </p>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-secondary-text/80 dark:text-dark-text/80">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-primary-text dark:text-light-text">
                   Trajetória & Bagagem
                 </span>
               </div>
@@ -121,7 +121,7 @@ const About = () => {
                       <h4 className="font-heading text-xs sm:text-sm font-semibold text-primary-text dark:text-light-text">
                         {item.role} · {item.org}
                       </h4>
-                      <span className="shrink-0 font-mono text-[10px] sm:text-[11px] text-secondary-text/80 dark:text-dark-text/80">
+                      <span className="shrink-0 font-mono text-[10px] sm:text-[11px] text-primary-text dark:text-light-text">
                         {item.period}
                       </span>
                     </div>

@@ -192,24 +192,28 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
           {/* Minha responsabilidade */}
           {current.responsibility && (
             <div className="space-y-1 min-w-0">
-              <dt className="font-mono text-[11px] font-bold uppercase tracking-wider text-accent dark:text-accent-light">
-                Minha responsabilidade
-              </dt>
-              <dd className="text-xs sm:text-[13px] leading-relaxed text-secondary-text dark:text-dark-text">
-                {current.responsibility}
-              </dd>
+              <dl>
+                <dt className="font-mono text-[11px] font-bold uppercase tracking-wider text-primary-text dark:text-light-text">
+                  Minha responsabilidade
+                </dt>
+                <dd className="text-xs sm:text-[13px] leading-relaxed text-primary-text dark:text-light-text">
+                  {current.responsibility}
+                </dd>
+              </dl>
             </div>
           )}
 
           {/* Decisão técnica */}
           {current.decision && (
             <div className="space-y-1 min-w-0 pt-3 border-t border-border-light/60 dark:border-border-dark/60">
-              <dt className="font-mono text-[11px] font-bold uppercase tracking-wider text-accent dark:text-accent-light">
-                Decisão técnica
-              </dt>
-              <dd className="text-xs sm:text-[13px] leading-relaxed text-secondary-text dark:text-dark-text">
-                {current.decision}
-              </dd>
+              <dl>
+                <dt className="font-mono text-[11px] font-bold uppercase tracking-wider text-primary-text dark:text-light-text">
+                  Decisão técnica
+                </dt>
+                <dd className="text-xs sm:text-[13px] leading-relaxed text-primary-text dark:text-light-text">
+                  {current.decision}
+                </dd>
+              </dl>
             </div>
           )}
 
