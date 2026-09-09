@@ -89,7 +89,7 @@ const Capabilities = () => {
               </div>
 
               {item.usedIn.length > 0 && (
-                <div className="mt-5 border-t border-border-light/40 pt-2.5 font-mono text-[10px] text-secondary-text/80 dark:border-border-dark/40 dark:text-dark-text/80">
+                <div className="mt-5 border-t border-border-light/40 pt-2.5 font-mono text-[10px] text-primary-text dark:border-border-dark/40 dark:text-light-text">
                   <span className="font-semibold text-primary-text/90 dark:text-light-text/90">
                     Projetos:
                   </span>{' '}

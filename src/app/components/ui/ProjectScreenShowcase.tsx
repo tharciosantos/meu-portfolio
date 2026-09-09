@@ -161,7 +161,7 @@ export function ProjectScreenShowcase({
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            <span className="font-mono text-[10px] text-secondary-text/80 dark:text-dark-text/80 hidden sm:inline">
+            <span className="font-mono text-[10px] text-primary-text dark:text-light-text hidden sm:inline">
               {extractDomain(demoUrl)}
             </span>
             <button
