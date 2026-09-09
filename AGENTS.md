@@ -1,6 +1,6 @@
 # Tharcio Santos — Portfólio
 
-> Manual Operacional para Agentes de IA · v2.0
+> Manual Operacional para Agentes de IA · v2.2
 
 Este documento é a **fonte única de verdade** para agentes que trabalham neste repositório. Qualquer divergência entre o comportamento do agente e este manual é um bug — reporte ao usuário.
 
@@ -508,8 +508,8 @@ tharcioport/
 └── src/
     ├── app/
     │   ├── components/
-    │   │   ├── sections/   # Hero, Projects, Process, Capabilities, About, Experience, Contact
-    │   │   ├── ui/         # Button, ProjectCard, Section, RevealOnScroll, Icons, etc.
+    │   │   ├── sections/   # Hero, Projects, Process, Capabilities, About, Contact
+    │   │   ├── ui/         # Button, Pill, Section, SectionHeader, RevealOnScroll, Icons, TechIcons, ProjectScreenShowcase, etc.
     │   │   ├── Navbar.tsx, MobileNav.tsx, Footer.tsx, BackToTop.tsx
     │   │   ├── ThemeProvider.tsx, ThemeSwitcher.tsx, ClientAnalytics.tsx
     │   │   └── __tests__/
@@ -585,7 +585,16 @@ Importe de `@/app/components/ui/Icons`:
 `ArrowRightIcon`, `ArrowUpIcon`, `DocumentIcon`, `MenuIcon`, `CloseIcon`,
 `SunIcon`, `MoonIcon`, `MailIcon`, `GithubIcon`, `LinkedinIcon`,
 `ExternalLinkIcon`, `CheckIcon`, `CopyIcon`, `CodeIcon`, `DatabaseIcon`,
-`RocketIcon`, `TechBadgeIcon` (requer `label`)
+`RocketIcon`, `SearchIcon`, `ChevronLeftIcon`, `ChevronRightIcon`,
+`TechBadgeIcon` (requer `label`)
+
+Importe de `@/app/components/ui/TechIcons`:
+
+`TechIcon` (resolver automático por nome), `NextJsIcon`, `ReactIcon`,
+`TypeScriptIcon`, `TailwindIcon`, `NodeJsIcon`, `RestApiIcon`,
+`NextAuthIcon`, `ZodIcon`, `PrismaIcon`, `PostgresIcon`, `SupabaseIcon`,
+`RlsIcon`, `VercelIcon`, `VitestIcon`, `CypressIcon`, `GitIcon`,
+`GitHubIcon`, `GitHubActionsIcon`
 
 ### 12.5 Organização de Imports
 
@@ -607,11 +616,11 @@ O projeto utiliza variáveis CSS para fontes (via `next/font/google`):
 
 ```css
 /* Definidas em layout.tsx e consumidas via Tailwind */
-font-sans: var(--font-inter); /* Inter para body */
-font-heading: var(--font-outfit); /* Outfit para headings */
+font-sans: var(--font-geist-sans); /* Geist Sans para body e headings */
+font-mono: var(--font-geist-mono); /* Geist Mono para código e metadados */
 ```
 
-**Regra:** Use as classes Tailwind `font-sans` e `font-heading`. Não declare novas variáveis CSS sem necessidade.
+**Regra:** Use as classes Tailwind `font-sans`, `font-heading` (usa Geist Sans) e `font-mono`. Não declare novas variáveis CSS sem necessidade.
 
 ### 12.7 Nomenclatura
 
@@ -638,17 +647,21 @@ type Project = {
   description: string;
   imageUrl?: string;
   imageAlt?: string;
+  screens?: ProjectScreen[];
   githubUrl: string;
   demoUrl?: string;
   demoLabel?: string;
+  demoNote?: string;
+  metrics?: string[];
   tags: string[];
-  kind: 'featured' | 'building' | 'secondary';
+  kind: 'featured' | 'secondary';
   outcome?: string;
   technicalHighlight?: string;
   responsibility?: string;
   challenge?: string;
   decision?: string;
   evidence?: string[];
+  architectureLinks?: ArchitectureLink[];
   nextStep?: string;
 };
 ```
@@ -683,20 +696,13 @@ SITE_URL = 'https://tharcio-portfolio.vercel.app';
 GITHUB_URL = 'https://github.com/tharciosantos';
 LINKEDIN_URL = 'https://www.linkedin.com/in/tharcio-santos-dev/';
 RESUME_URL = '/curriculo-tharcio-santos.pdf';
-SECTION_IDS = [
-  'projetos',
-  'processo',
-  'habilidades',
-  'sobre-mim',
-  'experiencia',
-  'contato',
-] as const;
+SECTION_IDS = ['projetos', 'processo', 'habilidades', 'sobre-mim', 'contato'] as const;
 navLinks = [
   { href: '#projetos', label: 'Projetos' },
   { href: '#processo', label: 'Processo' },
   { href: '#habilidades', label: 'Habilidades' },
   { href: '#sobre-mim', label: 'Sobre' },
-  { href: '#contato', label: 'Contato' }, // CTA
+  { href: '#contato', label: 'Contato', cta: true },
 ];
 ```
 
@@ -711,22 +717,26 @@ navLinks = [
 
 ### 14.2 Cores
 
+**Paleta:** Verde Musgo Imperial (accent) + Âmbar Vermilion (highlight) em fundos neutros terra.
+
 | Uso              | Light                           | Dark                           |
 | ---------------- | ------------------------------- | ------------------------------ |
-| Fundo            | `bg-light-bg` (#f5f7f6)         | `bg-dark-bg` (#0b1114)         |
-| Card             | `bg-light-card` (#ffffff)       | `bg-dark-card` (#111a1e)       |
-| Superfície       | `bg-light-surface` (#edf3f1)    | `bg-dark-surface` (#172329)    |
-| Texto primário   | `text-primary-text` (#12201f)   | `text-light-text` (#edf6f3)    |
-| Texto secundário | `text-secondary-text` (#52615f) | `text-dark-text` (#9fb2ae)     |
-| Borda            | `border-border-light` (#dce5e2) | `border-border-dark` (#263438) |
-| Accent           | `bg-accent` (#0f766e)           | `bg-accent` (#0f766e)          |
+| Fundo            | `bg-light-bg` (#F7F4EE)         | `bg-dark-bg` (#141712)         |
+| Card             | `bg-light-card` (#FFFFFF)       | `bg-dark-card` (#1C201A)       |
+| Superfície       | `bg-light-surface` (#EFECE3)    | `bg-dark-surface` (#242921)    |
+| Texto primário   | `text-primary-text` (#23271F)   | `text-light-text` (#ECEFE8)    |
+| Texto secundário | `text-secondary-text` (#5F6656) | `text-dark-text` (#97A090)     |
+| Borda            | `border-border-light` (#DFD9CC) | `border-border-dark` (#2E362A) |
+| Accent           | `bg-accent` (#3E5136)           | `bg-accent` (#3E5136)          |
 
-Hover: `accent-hover` (#115e59) · Light: `accent-light` (#5eead4)
+Hover: `accent-hover` (#2E3D28) · Light: `accent-light` (#7A9B67)  
+Highlight: `highlight` (#D95B30) · Hover: `highlight-hover` (#C24C23)
 
 ### 14.3 Fontes
 
-- **Body:** Inter (`var(--font-inter)`)
-- **Heading:** Outfit (`var(--font-outfit)`)
+- **Body:** Geist Sans (`var(--font-geist-sans)`)
+- **Heading:** Geist Sans (`var(--font-geist-sans)`)
+- **Mono:** Geist Mono (`var(--font-geist-mono)`)
 - Carregadas via `next/font/google` em `layout.tsx`
 
 ### 14.4 Animações
@@ -742,7 +752,7 @@ Hover: `accent-hover` (#115e59) · Light: `accent-light` (#5eead4)
 | `reveal-up`      | 0.44s   | Revelação com clip-path    |
 | `gradient-shift` | 8s      | Gradiente animado          |
 
-**Stagger classes:** `stagger-1` a `stagger-5` (100ms delay cada)
+**Stagger classes:** `stagger-1` a `stagger-6` (100ms delay cada)
 
 ---
 
@@ -1132,10 +1142,11 @@ refactor(hooks): extrai useActiveSection do Navbar para hook próprio
 
 ---
 
-> **Versão 2.1** · Fonte única de verdade para agentes de IA · Mantido por Tharcio Santos
+> **Versão 2.2** · Fonte única de verdade para agentes de IA · Mantido por Tharcio Santos
 >
-> | Versão | Data     | Mudanças                                                                                                   |
-> | ------ | -------- | ---------------------------------------------------------------------------------------------------------- |
-> | 1.0    | —        | Documentação inicial do projeto                                                                            |
-> | 2.0    | Jul/2026 | Manual operacional completo para agentes de IA                                                             |
-> | 2.1    | Ago/2026 | Alinha stack à migração Next 16 (Turbopack), flat config do ESLint, CI com cobertura e pre-commit com lint |
+> | Versão | Data     | Mudanças                                                                                                                                                    |
+> | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | 1.0    | —        | Documentação inicial do projeto                                                                                                                             |
+> | 2.0    | Jul/2026 | Manual operacional completo para agentes de IA                                                                                                              |
+> | 2.1    | Ago/2026 | Alinha stack à migração Next 16 (Turbopack), flat config do ESLint, CI com cobertura e pre-commit com lint                                                  |
+> | 2.2    | Set/2026 | Corrige divergências: fontes (Geist Sans/Mono), paleta (moss green #3E5136), tipos (kind sem 'building'), SECTION_IDS (sem 'experiencia'), ícones completos |
