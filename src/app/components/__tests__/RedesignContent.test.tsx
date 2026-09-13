@@ -94,6 +94,22 @@ describe('conteúdo principal do redesign', () => {
     expect(screen.queryByRole('heading', { level: 3, name: 'ManutFlow' })).not.toBeInTheDocument();
   });
 
+  it('exibe os projetos secundários em cards compactos com links distintos', () => {
+    render(<Projects />);
+
+    expect(screen.getByRole('heading', { level: 3, name: 'Outros projetos' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 4, name: 'DevLinks' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 4, name: 'Lista de Mercado' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 4, name: 'Crypto Dashboard' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Ver código de DevLinks no GitHub' })).toHaveAttribute(
+      'href',
+      'https://github.com/tharciosantos/devlinks-web'
+    );
+    expect(
+      screen.getByRole('link', { name: 'Acessar dashboard do projeto Crypto Dashboard' })
+    ).toHaveAttribute('href', 'https://crypto-dashboard-five-sandy.vercel.app/');
+  });
+
   it('unifica perfil atual, formação e trajetória anterior com clareza', () => {
     render(<About />);
 

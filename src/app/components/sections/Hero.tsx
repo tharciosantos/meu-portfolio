@@ -55,7 +55,7 @@ const Hero = () => {
               <div className="flex items-center gap-2 truncate">
                 <span className="text-accent dark:text-accent-light font-bold">$</span>
                 <span className="truncate">
-                  git clone https://github.com/tharciosantos/helpflow
+                  git clone https://github.com/tharciosantos/manutflow
                 </span>
               </div>
               <span className="ml-3 shrink-0 rounded-full border border-border-light bg-light-bg px-2 py-0.5 text-[10px] uppercase dark:border-border-dark dark:bg-dark-bg">

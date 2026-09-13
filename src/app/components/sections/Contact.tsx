@@ -28,8 +28,8 @@ const Contact = () => {
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
                   Status Profissional
                 </p>
-                <div className="flex items-center gap-2 text-xs font-semibold text-amber-700 dark:text-amber-400">
-                  <span className="relative flex h-2 w-2 shrink-0">
+                <div className="flex items-center gap-2 text-xs font-semibold text-amber-800 dark:text-amber-400">
+                  <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
                     <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
                   </span>
@@ -63,7 +63,7 @@ const Contact = () => {
             <div className="mt-6 border-t border-border-light/60 pt-4 dark:border-border-dark/60">
               <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] text-secondary-text dark:text-dark-text">
                 {/* Badge de Alta Visibilidade: Início Imediato */}
-                <span className="inline-flex items-center gap-1.5 rounded-md border border-amber-500/40 bg-amber-500/10 px-2.5 py-1 font-semibold text-amber-700 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-300 shadow-xs shrink-0">
+                <span className="inline-flex items-center gap-1.5 rounded-md border border-amber-500/40 bg-amber-500/10 px-2.5 py-1 font-semibold text-amber-800 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-300 shadow-xs shrink-0">
                   <svg
                     viewBox="0 0 24 24"
                     fill="currentColor"
