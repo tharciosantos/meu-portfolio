@@ -135,7 +135,7 @@ const About = () => {
 
             {/* Habilidades Transferidas Integradas Organicamente */}
             <div className="mt-6 border-t border-border-light/60 pt-4 dark:border-border-dark/60">
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-secondary-text/90 dark:text-dark-text/90 mb-2.5">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-secondary-text dark:text-dark-text mb-2.5">
                 Competências transferidas para a engenharia de software
               </p>
               <div className="flex flex-wrap gap-1.5">

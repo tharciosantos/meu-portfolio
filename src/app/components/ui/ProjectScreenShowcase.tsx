@@ -154,7 +154,9 @@ export function ProjectScreenShowcase({
             <span className="font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light shrink-0">
               Telas do Sistema
             </span>
-            <span className="text-secondary-text/50 dark:text-dark-text/50">·</span>
+            <span className="text-secondary-text/50 dark:text-dark-text/50" aria-hidden="true">
+              ·
+            </span>
             <span className="font-mono text-[10px] sm:text-[11px] text-secondary-text dark:text-dark-text shrink-0">
               Tela 0{currentIndex + 1} de 0{total}
             </span>
@@ -291,7 +293,9 @@ export function ProjectScreenShowcase({
                 <span className="font-semibold text-xs sm:text-sm text-light-text tracking-tight">
                   {title}
                 </span>
-                <span className="text-dark-text">·</span>
+                <span className="text-dark-text" aria-hidden="true">
+                  ·
+                </span>
                 <span className="font-mono text-[10px] sm:text-xs font-medium text-accent-light bg-accent-subtle-dark px-2 py-0.5 rounded-full border border-accent-border-dark">
                   Tela 0{currentIndex + 1} de 0{total} · {activeItem.label}
                 </span>

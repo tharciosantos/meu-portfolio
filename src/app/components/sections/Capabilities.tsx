@@ -35,6 +35,7 @@ const Capabilities = () => {
             {marqueeTechs.concat(marqueeTechs).map((tech, idx) => (
               <div
                 key={`${tech}-${idx}`}
+                aria-hidden={idx >= marqueeTechs.length}
                 className="flex items-center gap-2 rounded-lg border border-border-light/80 bg-light-surface/60 px-3 py-1.5 text-xs text-secondary-text transition-all hover:border-accent hover:text-primary-text dark:border-border-dark/80 dark:bg-dark-surface/60 dark:text-dark-text dark:hover:border-accent-light dark:hover:text-light-text shrink-0 select-none cursor-default"
               >
                 <TechIcon
