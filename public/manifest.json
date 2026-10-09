@@ -4,8 +4,8 @@
   "description": "Portfólio de Tharcio Santos com aplicações web completas, da interface ao banco de dados, desenvolvidas com foco em usabilidade e boas práticas.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0d1117",
-  "theme_color": "#0f766e",
+  "background_color": "#FAFAF9",
+  "theme_color": "#B91C1C",
   "icons": [
     {
       "src": "/icons/favicon-16x16.png",

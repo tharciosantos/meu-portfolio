@@ -65,7 +65,7 @@
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-[#C8C0AF] dark:bg-[#3B4536];
+    @apply bg-[#D6CFC7] dark:bg-[#44403C];
   }
 }
 

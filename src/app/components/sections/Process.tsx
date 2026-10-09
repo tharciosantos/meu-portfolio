@@ -52,7 +52,7 @@ const Process = () => {
               <div>
                 {/* Nó Numérico no Trilho */}
                 <div className="flex items-center">
-                  <span className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-accent/40 bg-light-bg dark:bg-dark-bg font-mono text-xs font-bold text-accent dark:text-accent-light shadow-xs group-hover:border-accent group-hover:scale-105 transition-all">
+                  <span className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-accent/40 bg-light-bg dark:bg-dark-bg font-mono text-xs font-bold text-accent dark:text-accent-light shadow-xs group-hover:border-accent group-hover:scale-105 transition-all">
                     {item.num}
                   </span>
                 </div>

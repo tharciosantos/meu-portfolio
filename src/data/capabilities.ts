@@ -26,8 +26,9 @@ export const capabilities: Capability[] = [
   },
   {
     title: 'Testes & Versionamento',
-    technologies: ['Vitest', 'Cypress', 'Git', 'GitHub', 'GitHub Actions'],
-    description: 'Testes automatizados (unitários e E2E), integração contínua (CI) e fluxo Git.',
+    technologies: ['Vitest', 'Git', 'GitHub', 'GitHub Actions'],
+    description:
+      'Testes automatizados (unitários e integração), integração contínua (CI) e fluxo Git.',
     usedIn: ['HelpFlow', 'ManutFlow', 'DevLinks'],
   },
 ];

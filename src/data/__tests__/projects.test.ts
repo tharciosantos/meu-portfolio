@@ -43,7 +43,7 @@ describe('projects', () => {
     expect(helpflow!.evidence).toContain(
       'Autenticação por credenciais e GitHub, com recuperação de senha'
     );
-    expect(helpflow!.evidence).toContain('Validação, rate limiting, testes unitários e E2E');
+    expect(helpflow!.evidence).toContain('82 testes Vitest + 15 fluxos E2E no Cypress');
   });
 
   it('deve manter os projetos secundários compactos e identificados', () => {

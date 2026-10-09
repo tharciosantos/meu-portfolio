@@ -111,7 +111,7 @@ export function MobileNav({ links, activeSection = '' }: MobileNavProps) {
         aria-expanded={isOpen}
         aria-controls={MOBILE_MENU_ID}
         className={cn(
-          'relative z-[60] inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all active:scale-95',
+          'relative z-[60] inline-flex h-10 w-10 items-center justify-center rounded-md border transition-all active:scale-95',
           isOpen
             ? 'border-accent bg-accent text-white hover:bg-accent-hover dark:border-accent-light dark:bg-accent-light dark:text-dark-bg dark:hover:bg-accent-light-hover'
             : 'border-border-light bg-light-surface text-primary-text hover:border-accent dark:border-border-dark dark:bg-dark-surface dark:text-light-text dark:hover:border-accent-light'
@@ -139,7 +139,7 @@ export function MobileNav({ links, activeSection = '' }: MobileNavProps) {
           role="dialog"
           aria-modal="true"
           aria-label="Menu de navegação"
-          className="fixed inset-x-4 top-16 z-50 rounded-card border border-border-light bg-light-card p-4 dark:border-border-dark dark:bg-dark-card md:hidden"
+          className="fixed inset-x-4 top-16 z-50 rounded-md border border-border-light bg-light-card p-4 dark:border-border-dark dark:bg-dark-card md:hidden"
           style={{
             opacity: isClosing ? 0 : 1,
             transform: isClosing ? 'translateY(-8px)' : 'translateY(0)',
@@ -161,7 +161,7 @@ export function MobileNav({ links, activeSection = '' }: MobileNavProps) {
                     link.cta
                       ? cn(buttonVariants({ variant: 'primary', size: 'default' }), 'mt-2 w-full')
                       : cn(
-                          'w-full rounded-full px-4 py-2.5 text-center text-sm font-medium transition-colors',
+                          'w-full rounded-md px-4 py-2.5 text-center text-sm font-medium transition-colors',
                           isActive
                             ? 'border border-border-light bg-light-surface font-semibold text-accent dark:border-border-dark dark:bg-dark-surface dark:text-accent-light'
                             : 'text-secondary-text hover:bg-light-surface hover:text-primary-text dark:text-dark-text dark:hover:bg-dark-surface dark:hover:text-light-text'

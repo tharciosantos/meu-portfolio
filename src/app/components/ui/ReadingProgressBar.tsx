@@ -35,7 +35,7 @@ export function ReadingProgressBar() {
     <div className="fixed left-0 top-0 z-[100] h-[3px] w-full bg-transparent" aria-hidden="true">
       <div
         ref={progressRef}
-        className="h-full origin-left bg-gradient-to-r from-accent to-accent-light transition-[transform] duration-150 ease-out dark:from-accent-light dark:to-accent"
+        className="h-full origin-left bg-accent transition-[transform] duration-150 ease-out dark:bg-accent-light"
         style={{ transform: 'scaleX(0)' }}
       />
     </div>

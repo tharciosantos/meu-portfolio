@@ -22,17 +22,17 @@ const Contact = () => {
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:gap-8 items-stretch w-full min-w-0">
           {/* Informações de Disponibilidade e Contratação */}
-          <div className="rounded-xl border border-border-light/80 bg-light-surface/60 p-4 sm:p-6 dark:border-border-dark/80 dark:bg-dark-surface/60 flex flex-col justify-between w-full min-w-0">
+          <div className="rounded-md border border-border-light/80 bg-light-surface/60 p-4 sm:p-6 dark:border-border-dark/80 dark:bg-dark-surface/60 flex flex-col justify-between w-full min-w-0">
             <div>
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border-light/60 pb-3 dark:border-border-dark/60">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
                   Status Profissional
                 </p>
-                <div className="flex items-center gap-2 text-xs font-semibold text-amber-800 dark:text-amber-400">
-                  <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
-                  </span>
+                <div className="flex items-center gap-2 text-xs font-semibold text-accent dark:text-accent-light">
+                  <span
+                    className="h-2 w-2 shrink-0 rounded-full bg-accent dark:bg-accent-light"
+                    aria-hidden="true"
+                  />
                   <span>Disponível para contratação</span>
                 </div>
               </div>
@@ -61,31 +61,22 @@ const Contact = () => {
             </div>
 
             <div className="mt-6 border-t border-border-light/60 pt-4 dark:border-border-dark/60">
-              <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] text-secondary-text dark:text-dark-text">
-                {/* Badge de Alta Visibilidade: Início Imediato */}
-                <span className="inline-flex items-center gap-1.5 rounded-md border border-amber-500/40 bg-amber-500/10 px-2.5 py-1 font-semibold text-amber-800 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-300 shadow-xs shrink-0">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="h-3.5 w-3.5 text-amber-500 dark:text-amber-400 animate-pulse shrink-0"
-                    aria-hidden="true"
-                  >
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                  </svg>
-                  <span>Início imediato</span>
-                </span>
-                <span className="rounded-md border border-border-light/70 bg-light-card/60 px-2.5 py-1 dark:border-border-dark/70 dark:bg-dark-card/60 shrink-0">
-                  💼 CLT / Estágio
-                </span>
-                <span className="rounded-md border border-border-light/70 bg-light-card/60 px-2.5 py-1 dark:border-border-dark/70 dark:bg-dark-card/60 shrink-0">
-                  📍 BH e Remoto
-                </span>
-              </div>
+              <ul className="flex flex-wrap items-center gap-2 font-mono text-[11px] text-secondary-text dark:text-dark-text">
+                <li className="inline-flex items-center gap-1.5 rounded-md border border-border-light/70 bg-light-card/60 px-2.5 py-1 dark:border-border-dark/70 dark:bg-dark-card/60">
+                  Início imediato
+                </li>
+                <li className="rounded-md border border-border-light/70 bg-light-card/60 px-2.5 py-1 dark:border-border-dark/70 dark:bg-dark-card/60">
+                  CLT / Estágio
+                </li>
+                <li className="rounded-md border border-border-light/70 bg-light-card/60 px-2.5 py-1 dark:border-border-dark/70 dark:bg-dark-card/60">
+                  BH e Remoto
+                </li>
+              </ul>
             </div>
           </div>
 
           {/* Canais Diretos de Contato */}
-          <div className="rounded-xl border border-border-light/80 bg-light-surface/60 p-4 sm:p-6 dark:border-border-dark/80 dark:bg-dark-surface/60 flex flex-col justify-between w-full min-w-0">
+          <div className="rounded-md border border-border-light/80 bg-light-surface/60 p-4 sm:p-6 dark:border-border-dark/80 dark:bg-dark-surface/60 flex flex-col justify-between w-full min-w-0">
             <div className="border-b border-border-light/60 pb-3 dark:border-border-dark/60">
               <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
                 Canais de contato
@@ -98,7 +89,7 @@ const Contact = () => {
                 <span className="flex items-center gap-3 min-w-0">
                   <span
                     aria-hidden="true"
-                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border-light bg-light-card text-accent dark:border-border-dark dark:bg-dark-card dark:text-accent-light shadow-xs"
+                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border-light bg-light-card text-accent dark:border-border-dark dark:bg-dark-card dark:text-accent-light shadow-xs"
                   >
                     <MailIcon className="h-4 w-4" />
                   </span>
@@ -116,7 +107,7 @@ const Contact = () => {
                   <CopyEmailButton />
                   <a
                     href={`mailto:${EMAIL}`}
-                    className="inline-flex items-center rounded-lg border border-border-light bg-light-card px-3 py-1.5 font-mono text-xs font-medium text-accent hover:border-accent hover:text-accent-hover dark:border-border-dark dark:bg-dark-card dark:text-accent-light dark:hover:border-accent-light transition-all shadow-xs"
+                    className="inline-flex items-center rounded-md border border-border-light bg-light-card px-3 py-1.5 font-mono text-xs font-medium text-accent hover:border-accent hover:text-accent-hover dark:border-border-dark dark:bg-dark-card dark:text-accent-light dark:hover:border-accent-light transition-all shadow-xs"
                   >
                     Abrir
                   </a>
@@ -136,7 +127,7 @@ const Contact = () => {
                   <span className="flex items-center gap-3 min-w-0 flex-1">
                     <span
                       aria-hidden="true"
-                      className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border-light bg-light-card text-accent dark:border-border-dark dark:bg-dark-card dark:text-accent-light shadow-xs transition-colors group-hover:border-accent dark:group-hover:border-accent-light"
+                      className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border-light bg-light-card text-accent dark:border-border-dark dark:bg-dark-card dark:text-accent-light shadow-xs transition-colors group-hover:border-accent dark:group-hover:border-accent-light"
                     >
                       {icones[link.label]}
                     </span>
@@ -166,7 +157,7 @@ const Contact = () => {
                 <span className="flex items-center gap-3 min-w-0 flex-1">
                   <span
                     aria-hidden="true"
-                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border-light bg-light-card text-accent dark:border-border-dark dark:bg-dark-card dark:text-accent-light shadow-xs transition-colors group-hover:border-accent dark:group-hover:border-accent-light"
+                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border-light bg-light-card text-accent dark:border-border-dark dark:bg-dark-card dark:text-accent-light shadow-xs transition-colors group-hover:border-accent dark:group-hover:border-accent-light"
                   >
                     <DocumentIcon className="h-4 w-4" />
                   </span>

@@ -16,7 +16,7 @@ Apresentar a trajetória, sistemas reais em produção, código-fonte, decisões
 
 ## Positioning
 
-Desenvolvedor Full Stack com sólida base em engenharia de software: sistemas completos, APIs resilientes, modelagem de bancos de dados relacionais, segurança e testes automatizados. Diferencia-se por apresentar produtos reais em produção com métricas concretas e acesso demo em 1-clique (ex: HelpFlow com autenticação e E2E; ManutFlow com 163 testes automatizados e 3 camadas de segurança), em vez de apenas listar tecnologias.
+Desenvolvedor Full Stack com sólida base em engenharia de software: sistemas completos, APIs resilientes, modelagem de bancos de dados relacionais, segurança e testes automatizados. Diferencia-se por apresentar produtos reais em produção com métricas concretas e acesso demo em 1-clique (ex: HelpFlow com 82 testes Vitest e 15 fluxos E2E; ManutFlow com 169 testes automatizados e 3 camadas de segurança), em vez de apenas listar tecnologias.
 
 ## Operating Context
 
@@ -28,21 +28,21 @@ Desenvolvedor Full Stack com sólida base em engenharia de software: sistemas co
 
 - Construído com Next.js 16 (App Router, Turbopack), React 19, TypeScript strict e Tailwind CSS.
 - Suporte a tema escuro/claro/sistema com tokens semânticos via `next-themes`.
-- Navegação interativa com scroll spy, barra de progresso de leitura, filtro de projetos e reveal ao rolar a página (IntersectionObserver nativo sem dependências pesadas).
+- Navegação interativa com scroll spy, barra de progresso de leitura, abas de projetos e reveal ao rolar a página (IntersectionObserver nativo sem dependências pesadas).
 - Alta performance (Core Web Vitals), acessibilidade semântica (ARIA, foco visível, focus trap no mobile, suporte a `prefers-reduced-motion`) e SEO técnico completo.
 - Dados centralizados em `src/data/` com testes automatizados via Vitest e Testing Library.
 
 ## Brand Commitments
 
 - **Nome / Identidade:** Tharcio Santos — Desenvolvedor Full Stack.
-- **Estética e Paleta:** Direção editorial limpa, profissional e tecnológica com fundo grafite/neutro, tipografia semântica e acentos teal/ciano.
+- **Estética e Paleta:** Direção editorial limpa, profissional e minimalista com fundo gelo/neutro, tipografia semântica e accent carmesim.
 - **Tom de voz:** Objetivo, técnico, confiante e transparente, focado em decisões de engenharia, arquitetura e resultados comprováveis.
 
 ## Evidence on Hand
 
-- **HelpFlow:** Sistema de help desk Full Stack com autenticação por credenciais e GitHub, recuperação de senha, RBAC, PostgreSQL, Supabase, Prisma, Vitest e Cypress (link da aplicação e repositório GitHub).
-- **ManutFlow:** Sistema de gestão de manutenção em produção com 163 testes automatizados em 15 arquivos, 3 camadas de segurança (proxy.ts, getUser, RLS) e demo com 1-clique (link da aplicação e repositório GitHub).
-- **Projetos complementares:** DevLinks (React Query, Cloudinary, Cypress), Lista de Mercado (PWA mobile-first offline), Crypto Dashboard (CoinGecko API).
+- **HelpFlow:** Sistema de help desk Full Stack com autenticação por credenciais e GitHub, recuperação de senha, RBAC, PostgreSQL, Supabase, Prisma, 82 testes Vitest e 15 fluxos E2E no Cypress (link da aplicação e repositório GitHub).
+- **ManutFlow:** Sistema de gestão de manutenção em produção com 169 testes automatizados em 17 arquivos, 3 camadas de segurança (proxy.ts, getUser, RLS) e demo com 1-clique (link da aplicação e repositório GitHub).
+- **Projetos complementares:** DevLinks (TanStack Query, E2E Cypress no fluxo de login/links), Lista de Mercado (PWA mobile-first offline), Crypto Dashboard (CoinGecko API).
 - **Currículo PDF:** Disponível em `/curriculo-tharcio-santos.pdf`.
 - **Qualidade de código:** Suíte de testes com Vitest, pipeline CI no GitHub Actions e metas Lighthouse ≥ 95.
 
