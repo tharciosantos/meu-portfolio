@@ -43,50 +43,40 @@ module.exports = {
         'prose-wide': '680px',
       },
       borderRadius: {
-        card: '12px',
+        card: '8px',
       },
       spacing: {
         section: 'clamp(2.5rem, 5vw, 4.5rem)',
       },
       colors: {
         /* Backgrounds */
-        'dark-bg': '#141712',
-        'dark-card': '#1C201A',
-        'dark-surface': '#242921',
-        'light-bg': '#F7F4EE',
+        'dark-bg': '#141210',
+        'dark-card': '#1D1917',
+        'dark-surface': '#26211E',
+        'light-bg': '#FAFAF9',
         'light-card': '#FFFFFF',
-        'light-surface': '#EFECE3',
+        'light-surface': '#F1ECE8',
 
         /* Texto */
-        'light-text': '#ECEFE8',
-        'dark-text': '#97A090',
-        'primary-text': '#23271F',
-        'secondary-text': '#5F6656',
+        'light-text': '#F5F0EB',
+        'dark-text': '#A8A29E',
+        'primary-text': '#1C1917',
+        'secondary-text': '#57534E',
 
         /* Bordas */
-        'border-light': '#DFD9CC',
-        'border-dark': '#2E362A',
+        'border-light': '#E7E0D9',
+        'border-dark': '#33302D',
 
-        /* Accent — Verde Musgo Imperial / Jade */
+        /* Accent — Carmesim */
         accent: {
-          DEFAULT: '#3E5136',
-          hover: '#2E3D28',
-          light: '#7A9B67',
-          'light-hover': '#91B57D',
-          subtle: '#EBF0E6',
-          'subtle-dark': 'rgba(122, 155, 103, 0.12)',
-          border: '#C8D4C2',
-          'border-dark': '#7A9B67',
-        },
-
-        /* Highlight — Âmbar Vermilion (Olho do Dragão / Esferas) */
-        highlight: {
-          DEFAULT: '#D95B30',
-          hover: '#C24C23',
-          light: '#E66A40',
-          'light-hover': '#F07D55',
-          subtle: '#FDF1EB',
-          'subtle-dark': 'rgba(230, 106, 64, 0.15)',
+          DEFAULT: '#B91C1C',
+          hover: '#991B1B',
+          light: '#F87171',
+          'light-hover': '#FCA5A5',
+          subtle: '#FDECEC',
+          'subtle-dark': 'rgba(248, 113, 113, 0.12)',
+          border: '#F3C2C2',
+          'border-dark': '#F87171',
         },
       },
       keyframes: {
@@ -109,22 +99,6 @@ module.exports = {
         ping: {
           '75%, 100%': { transform: 'scale(2)', opacity: '0' },
         },
-        'stagger-in': {
-          '0%': { opacity: '0', transform: 'translateY(16px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        'reveal-up': {
-          '0%': { clipPath: 'inset(0 0 96% 0)' },
-          '100%': { clipPath: 'inset(0 0 0% 0)' },
-        },
-        'gradient-shift': {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-        },
-        marquee: {
-          '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-50%)' },
-        },
       },
       animation: {
         'fade-in': 'fade-in 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards',
@@ -132,10 +106,6 @@ module.exports = {
         'fade-down': 'fade-down 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
         'scale-x-in': 'scale-x-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both',
         ping: 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',
-        'stagger-in': 'stagger-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-        'reveal-up': 'reveal-up 0.44s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-        'gradient-shift': 'gradient-shift 8s ease infinite',
-        marquee: 'marquee 35s linear infinite',
       },
       backdropBlur: {
         xs: '2px',
