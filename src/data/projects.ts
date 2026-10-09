@@ -124,7 +124,7 @@ export const projects: Project[] = [
       'Controle de acesso por perfil e propriedade de chamados',
       'Acesso de demonstração com 1-clique (visões Client e Agent)',
       'CRUD paginado de tickets com status e prioridades',
-      'Validação, rate limiting, testes unitários e E2E',
+      '82 testes Vitest + 15 fluxos E2E no Cypress',
     ],
     demoNote:
       'Inclui simulador interativo na tela inicial e acesso demo com 1-clique para Solicitante e Agente.',
@@ -187,21 +187,20 @@ export const projects: Project[] = [
     title: 'DevLinks: Agregador de Links',
     shortTitle: 'DevLinks',
     description:
-      'Plataforma completa de gerenciamento e compartilhamento de links estilo Linktree, com autenticação JWT, upload de avatar via Cloudinary e perfil público.',
+      'Plataforma completa de gerenciamento e compartilhamento de links estilo Linktree, com autenticação JWT, upload de avatar e perfil público.',
     technicalHighlight:
-      'Upload de imagem via Cloudinary, cache e invalidação com TanStack Query, e testes end-to-end com Cypress no fluxo principal.',
+      'Upload de avatar com FormData, cache e invalidação com TanStack Query, e E2E com Cypress no fluxo de login e links.',
     responsibility:
       'Desenvolvimento de aplicação SPA com gerenciamento de estado assíncrono, fluxo de autenticação e manipulação de mídia.',
     decision:
-      'Adotar TanStack Query para orquestração de cache e Cypress para validação end-to-end de fluxos críticos de usuário.',
+      'Adotar TanStack Query para orquestração de cache e Cypress para validação end-to-end do fluxo de login e links.',
     evidence: [
-      'Testes End-to-End no Cypress cobrindo fluxos críticos',
-      'Upload otimizado de imagens via Cloudinary CDN',
-      'Cache e sincronização de dados com TanStack Query',
+      'E2E no Cypress cobrindo login e gerenciamento de links',
+      'Upload de avatar e sincronização com TanStack Query',
       'Perfil público leve e compartilhável para bio de redes',
     ],
     outcome: 'Upload · sincronização · testes E2E',
-    metrics: ['Testes E2E Cypress', 'Cloudinary CDN', 'TanStack Query'],
+    metrics: ['E2E Cypress (login/links)', 'TanStack Query', 'JWT + Axios'],
     architectureLinks: [
       {
         label: 'Testes E2E Cypress',
@@ -243,7 +242,7 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/tharciosantos/devlinks-web',
     demoUrl: 'https://devlinks-web-api.vercel.app/',
     demoLabel: 'Acessar aplicação',
-    tags: ['React', 'TanStack Query', 'Cloudinary', 'Cypress', 'Tailwind CSS', 'Node.js'],
+    tags: ['React', 'TanStack Query', 'Cypress', 'Tailwind CSS', 'Node.js'],
     kind: 'secondary',
   },
   {

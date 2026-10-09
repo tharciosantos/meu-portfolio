@@ -91,7 +91,7 @@ def build_resume() -> None:
     story.append(paragraph(
         '<b>Linguagens:</b> JavaScript, TypeScript, SQL &nbsp; <b>Frontend:</b> React, Next.js, Vite, Tailwind CSS, TanStack Query<br/>'
         '<b>Backend:</b> Node.js, Express, APIs REST, Prisma &nbsp; <b>Bancos:</b> PostgreSQL, MongoDB, Supabase<br/>'
-        '<b>Qualidade:</b> Vitest, Cypress, Zod, ESLint &nbsp; <b>Ferramentas:</b> Git, GitHub Actions, Vercel, Cloudinary',
+        '<b>Qualidade:</b> Vitest, Cypress, Zod, ESLint &nbsp; <b>Ferramentas:</b> Git, GitHub Actions, Vercel',
         styles['body'],
     ))
     story += section('PROJETOS EM PRODUÇÃO', styles)
@@ -106,7 +106,7 @@ def build_resume() -> None:
         'Tecnologias: Next.js, Prisma, PostgreSQL, Supabase, NextAuth.',
     ], styles)
     story += job('DevLinks - Plataforma de Links Personalizados', 'código | demo', [
-        'Frontend e API para links personalizados, com JWT, upload via Cloudinary, TanStack Query e testes E2E com Cypress.',
+        'Frontend e API para links personalizados, com JWT, upload de avatar, TanStack Query e testes E2E com Cypress.',
         'Outros projetos: Crypto Dashboard e Lista de Mercado PWA - código e demos disponíveis no portfólio.',
     ], styles)
     story += section('FORMAÇÃO ACADÊMICA', styles)
