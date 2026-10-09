@@ -717,20 +717,19 @@ navLinks = [
 
 ### 14.2 Cores
 
-**Paleta:** Verde Musgo Imperial (accent) + Âmbar Vermilion (highlight) em fundos neutros terra.
+**Paleta:** Carmesim (accent) em fundos neutros gelo.
 
 | Uso              | Light                           | Dark                           |
 | ---------------- | ------------------------------- | ------------------------------ |
-| Fundo            | `bg-light-bg` (#F7F4EE)         | `bg-dark-bg` (#141712)         |
-| Card             | `bg-light-card` (#FFFFFF)       | `bg-dark-card` (#1C201A)       |
-| Superfície       | `bg-light-surface` (#EFECE3)    | `bg-dark-surface` (#242921)    |
-| Texto primário   | `text-primary-text` (#23271F)   | `text-light-text` (#ECEFE8)    |
-| Texto secundário | `text-secondary-text` (#5F6656) | `text-dark-text` (#97A090)     |
-| Borda            | `border-border-light` (#DFD9CC) | `border-border-dark` (#2E362A) |
-| Accent           | `bg-accent` (#3E5136)           | `bg-accent` (#3E5136)          |
+| Fundo            | `bg-light-bg` (#FAFAF9)         | `bg-dark-bg` (#141210)         |
+| Card             | `bg-light-card` (#FFFFFF)       | `bg-dark-card` (#1D1917)       |
+| Superfície       | `bg-light-surface` (#F1ECE8)    | `bg-dark-surface` (#26211E)    |
+| Texto primário   | `text-primary-text` (#1C1917)   | `text-light-text` (#F5F0EB)    |
+| Texto secundário | `text-secondary-text` (#57534E) | `text-dark-text` (#A8A29E)     |
+| Borda            | `border-border-light` (#E7E0D9) | `border-border-dark` (#33302D) |
+| Accent           | `bg-accent` (#B91C1C)           | `bg-accent` (#B91C1C)          |
 
-Hover: `accent-hover` (#2E3D28) · Light: `accent-light` (#7A9B67)  
-Highlight: `highlight` (#D95B30) · Hover: `highlight-hover` (#C24C23)
+Hover: `accent-hover` (#991B1B) · Light: `accent-light` (#F87171)
 
 ### 14.3 Fontes
 
@@ -741,18 +740,13 @@ Highlight: `highlight` (#D95B30) · Hover: `highlight-hover` (#C24C23)
 
 ### 14.4 Animações
 
-| Animação         | Duração | Uso                        |
-| ---------------- | ------- | -------------------------- |
-| `fade-in`        | 0.8s    | Entrada simples            |
-| `fade-up`        | 0.8s    | Revelação com deslocamento |
-| `fade-down`      | 0.5s    | Entrada do topo            |
-| `scale-x-in`     | 0.6s    | Barra horizontal           |
-| `ping`           | 2s      | Efeito pulsante            |
-| `stagger-in`     | 0.5s    | Entrada em cascata         |
-| `reveal-up`      | 0.44s   | Revelação com clip-path    |
-| `gradient-shift` | 8s      | Gradiente animado          |
-
-**Stagger classes:** `stagger-1` a `stagger-6` (100ms delay cada)
+| Animação     | Duração | Uso                        |
+| ------------ | ------- | -------------------------- |
+| `fade-in`    | 0.8s    | Entrada simples            |
+| `fade-up`    | 0.8s    | Revelação com deslocamento |
+| `fade-down`  | 0.5s    | Entrada do topo            |
+| `scale-x-in` | 0.6s    | Barra horizontal           |
+| `ping`       | 2s      | Efeito pulsante            |
 
 ---
 
@@ -1144,9 +1138,9 @@ refactor(hooks): extrai useActiveSection do Navbar para hook próprio
 
 > **Versão 2.2** · Fonte única de verdade para agentes de IA · Mantido por Tharcio Santos
 >
-> | Versão | Data     | Mudanças                                                                                                                                                    |
-> | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-> | 1.0    | —        | Documentação inicial do projeto                                                                                                                             |
-> | 2.0    | Jul/2026 | Manual operacional completo para agentes de IA                                                                                                              |
-> | 2.1    | Ago/2026 | Alinha stack à migração Next 16 (Turbopack), flat config do ESLint, CI com cobertura e pre-commit com lint                                                  |
-> | 2.2    | Set/2026 | Corrige divergências: fontes (Geist Sans/Mono), paleta (moss green #3E5136), tipos (kind sem 'building'), SECTION_IDS (sem 'experiencia'), ícones completos |
+> | Versão | Data     | Mudanças                                                                                                                                                  |
+> | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | 1.0    | —        | Documentação inicial do projeto                                                                                                                           |
+> | 2.0    | Jul/2026 | Manual operacional completo para agentes de IA                                                                                                            |
+> | 2.1    | Ago/2026 | Alinha stack à migração Next 16 (Turbopack), flat config do ESLint, CI com cobertura e pre-commit com lint                                                |
+> | 2.2    | Set/2026 | Corrige divergências: fontes (Geist Sans/Mono), paleta (carmesim #B91C1C), tipos (kind sem 'building'), SECTION_IDS (sem 'experiencia'), ícones completos |

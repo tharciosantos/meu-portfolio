@@ -6,7 +6,7 @@ Portfólio de Tharcio Santos, Desenvolvedor Full Stack com foco em sistemas, API
 
 [Ver versão pública atual](https://tharcio-portfolio.vercel.app) · [LinkedIn](https://www.linkedin.com/in/tharcio-santos-dev/) · [Email](mailto:tharciosantos09@gmail.com)
 
-![Screenshot do redesign editorial do portfólio de Tharcio Santos](./screenshot-portfolio.jpg)
+![Screenshot do redesign editorial do portfólio de Tharcio Santos](./screenshot-portfolio.png)
 
 </div>
 
@@ -16,7 +16,7 @@ Portfólio de Tharcio Santos, Desenvolvedor Full Stack com foco em sistemas, API
 
 Este projeto apresenta minha trajetória como estudante de Análise e Desenvolvimento de Sistemas e Desenvolvedor Full Stack. O portfólio reúne sistemas publicados, habilidades demonstradas em contexto e o processo que uso para evoluir cada projeto.
 
-A interface segue uma direção editorial: hierarquia visual clara, leitura rápida, conteúdo organizado por evidências e uma paleta baseada em tons terrosos com verde musgo (moss green) como accent e âmbar vermilion como highlight. Dark e light mode compartilham os mesmos tokens semânticos, com contraste, foco visível e estados interativos consistentes.
+A interface segue uma direção editorial: hierarquia visual clara, leitura rápida, conteúdo organizado por evidências e uma paleta baseada em tons neutros com carmesim como accent. Dark e light mode compartilham os mesmos tokens semânticos, com contraste, foco visível e estados interativos consistentes.
 
 ---
 
@@ -36,20 +36,20 @@ A interface segue uma direção editorial: hierarquia visual clara, leitura ráp
 Mais do que uma vitrine, este repositório reúne práticas aplicadas em frontend e engenharia de software:
 
 - **Arquitetura moderna:** Next.js 16 (Turbopack) com App Router, componentes organizados por responsabilidade e dados compartilhados fora da interface quando apropriado.
-- **Sistema de design próprio:** tokens semânticos no Tailwind para fundos, superfícies, textos, bordas e accent verde musgo (`#3E5136`) com highlight âmbar (`#D95B30`) nos dois temas.
+- **Sistema de design próprio:** tokens semânticos no Tailwind para fundos, superfícies, textos, bordas e accent carmesim (`#B91C1C`) nos dois temas.
 - **Componentização:** componentes reutilizáveis com React e TypeScript, como `Button`, `Pill`, `Section`, `SectionHeader`, `ProjectScreenShowcase` e `RevealOnScroll`.
 - **Conteúdo organizado:** projetos, habilidades, experiências e constantes vivem em `src/data`; textos editoriais específicos permanecem próximos das respectivas seções.
 - **Acessibilidade e responsividade:** navegação por teclado, foco visível, atributos ARIA, focus trap no menu mobile e layouts adaptados para diferentes larguras.
 - **Interatividade controlada:** Navbar como Client Component para scroll spy, menu mobile e alternância de tema. Animações de entrada com IntersectionObserver e CSS transitions, sem dependências externas.
 - **Scroll reveal global:** componente `RevealOnScroll` reutilizável com IntersectionObserver, sem listeners redundantes de scroll.
-- **Micro-interações refinadas:** botões com sombra sutil que intensifica no hover, cards com `hover:-translate-y-1`, abas de projetos com sombra quando ativas e feedback visual com `active:scale-[0.98]`.
+- **Micro-interações contidas:** botões com sombra sutil no CTA primário, abas de projetos com estado ativo sólido e feedback visual com `active:scale-[0.98]`.
 - **Barra de progresso de leitura:** `ReadingProgressBar` fixa no topo que preenche conforme o scroll, usando `scaleX` para performance.
 - **ProjectScreenShowcase:** carousel de telas dos projetos com navegação por teclado, swipe gestures, auto-play pausável e lightbox modal em alta resolução.
-- **Hero otimizado:** CTA principal ampliado com tamanho e contraste diferenciados, foto de perfil aumentada na seção About para maior presença visual.
+- **Hero direto:** proposta Full Stack em sistemas, APIs e bancos de dados, com CTAs padronizados para explorar projetos e baixar currículo.
 - **Performance:** bundle otimizado via **Turbopack** (padrão do Next 16), imagens em WebP/AVIF com quality tiers, ícones SVG locais, CSS crítico otimizado e Analytics carregado dinamicamente.
 - **SEO técnico:** sitemap, `robots.txt`, Open Graph, Twitter Card, Schema.org e `themeColor` por preferência de tema.
 - **Integração contínua:** GitHub Actions validando formatação, lint, tipos, testes e build.
-- **Qualidade de código:** Vitest, Testing Library, ESLint, Prettier, Husky e lint-staged, com 71 testes automatizados cobrindo componentes, hooks e dados.
+- **Qualidade de código:** Vitest, Testing Library, ESLint, Prettier, Husky e lint-staged, com 70 testes automatizados cobrindo componentes, hooks e dados.
 
 ### Metas Lighthouse
 
@@ -78,7 +78,7 @@ Sistema completo para controle de equipamentos, ordens de manutenção, respons�
 
 Sistema de help desk Full Stack para abertura, acompanhamento e gerenciamento de chamados internos, com autenticação por credenciais e GitHub, recuperação de senha, controle de acesso por perfil e propriedade dos chamados.
 
-- **Destaques:** Acesso demo com 1-clique (perfis Client e Agent), CRUD paginado de tickets, validação com Zod, rate limiting e testes unitários e E2E.
+- **Destaques:** Acesso demo com 1-clique (perfis Client e Agent), CRUD paginado de tickets, validação com Zod, rate limiting, 82 testes Vitest e 15 fluxos E2E no Cypress.
 - **Stack:** Next.js, React, JavaScript, Prisma, Supabase, PostgreSQL, NextAuth, Zod, Vitest, Cypress
 - **Links:** [Aplicação](https://helpflow.vercel.app/) · [Código](https://github.com/tharciosantos/helpflow)
 
@@ -86,9 +86,9 @@ Sistema de help desk Full Stack para abertura, acompanhamento e gerenciamento de
 
 #### DevLinks
 
-Perfil personalizável com avatar, links dinâmicos, upload via Cloudinary, estado sincronizado com React Query e testes end-to-end com Cypress.
+Perfil personalizável com avatar, links dinâmicos, upload com FormData, estado sincronizado com TanStack Query e E2E com Cypress no fluxo de login e links.
 
-- **Stack:** React, Vite, JavaScript, Tailwind CSS, React Query, Cloudinary, Cypress, GitHub Actions
+- **Stack:** React, Vite, JavaScript, Tailwind CSS, TanStack Query, Cypress, GitHub Actions
 - **Links:** [Aplicação](https://devlinks-web-api.vercel.app/) · [Código](https://github.com/tharciosantos/devlinks-web) · [API](https://github.com/tharciosantos/devlinks-api)
 
 #### Lista de Mercado
@@ -145,7 +145,7 @@ Dashboard para consulta de criptomoedas com busca, rotas dinâmicas, renderizaç
 
 ## Decisões Técnicas
 
-- **Paleta moss green + âmbar:** cores semânticas `accent` (#3E5136), `accent-light` (#7A9B67) e `highlight` (#D95B30) centralizam a identidade visual terrosa nos dois temas.
+- **Paleta carmesim:** cores semânticas `accent` (#B91C1C) e `accent-light` (#F87171) centralizam a identidade visual energética nos dois temas.
 - **Fontes Geist:** Geist Sans para body e headings, Geist Mono para código e metadados, carregadas via `next/font/google`.
 - **Dados e interface:** informações reutilizadas por diferentes componentes ficam em `src/data`; textos editoriais específicos permanecem nos componentes das seções para manter contexto e legibilidade.
 - **Sistema de componentes com CVA:** `Button` usa `class-variance-authority` com sombras sutis para hierarquia visual, sem depender apenas de cores.
