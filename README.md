@@ -86,9 +86,9 @@ Sistema de help desk Full Stack para abertura, acompanhamento e gerenciamento de
 
 #### DevLinks
 
-Perfil personalizável com avatar, links dinâmicos, upload com FormData, estado sincronizado com TanStack Query e E2E com Cypress no fluxo de login e links.
+Perfil personalizável com avatar, links dinâmicos e API própria em repositório separado: upload via Cloudinary, persistência no MongoDB, estado sincronizado com TanStack Query e E2E com Cypress no fluxo de login e links.
 
-- **Stack:** React, Vite, JavaScript, Tailwind CSS, TanStack Query, Cypress, GitHub Actions
+- **Stack:** React, Vite, JavaScript, Tailwind CSS, TanStack Query, Express, MongoDB, Cloudinary, Cypress, GitHub Actions
 - **Links:** [Aplicação](https://devlinks-web-api.vercel.app/) · [Código](https://github.com/tharciosantos/devlinks-web) · [API](https://github.com/tharciosantos/devlinks-api)
 
 #### Lista de Mercado

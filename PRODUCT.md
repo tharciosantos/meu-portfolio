@@ -42,7 +42,7 @@ Desenvolvedor Full Stack com sólida base em engenharia de software: sistemas co
 
 - **HelpFlow:** Sistema de help desk Full Stack com autenticação por credenciais e GitHub, recuperação de senha, RBAC, PostgreSQL, Supabase, Prisma, 82 testes Vitest e 15 fluxos E2E no Cypress (link da aplicação e repositório GitHub).
 - **ManutFlow:** Sistema de gestão de manutenção em produção com 169 testes automatizados em 17 arquivos, 3 camadas de segurança (proxy.ts, getUser, RLS) e demo com 1-clique (link da aplicação e repositório GitHub).
-- **Projetos complementares:** DevLinks (TanStack Query, E2E Cypress no fluxo de login/links), Lista de Mercado (PWA mobile-first offline), Crypto Dashboard (CoinGecko API).
+- **Projetos complementares:** DevLinks (frontend React + API Express com Cloudinary/MongoDB, TanStack Query, E2E Cypress no fluxo de login/links), Lista de Mercado (PWA mobile-first offline), Crypto Dashboard (CoinGecko API).
 - **Currículo PDF:** Disponível em `/curriculo-tharcio-santos.pdf`.
 - **Qualidade de código:** Suíte de testes com Vitest, pipeline CI no GitHub Actions e metas Lighthouse ≥ 95.
 
