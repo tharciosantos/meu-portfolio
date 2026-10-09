@@ -68,6 +68,19 @@ describe('projects', () => {
     });
   });
 
+  it('DevLinks deve evidenciar frontend e API desacoplados com upload real', () => {
+    const devlinks = projects.find((p) => p.shortTitle === 'DevLinks');
+
+    expect(devlinks).toBeTruthy();
+    expect(devlinks!.evidence).toContain(
+      'Upload de avatar via Cloudinary na API Express (MongoDB + JWT)'
+    );
+    expect(devlinks!.tags).toContain('Cloudinary');
+    expect(devlinks!.architectureLinks?.some((link) => link.url.includes('devlinks-api'))).toBe(
+      true
+    );
+  });
+
   it('projetos principais devem conter deep links de arquitetura válidos', () => {
     const manutflow = projects.find((p) => p.shortTitle === 'ManutFlow');
     expect(manutflow?.architectureLinks).toBeDefined();

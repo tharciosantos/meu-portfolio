@@ -187,25 +187,31 @@ export const projects: Project[] = [
     title: 'DevLinks: Agregador de Links',
     shortTitle: 'DevLinks',
     description:
-      'Plataforma completa de gerenciamento e compartilhamento de links estilo Linktree, com autenticação JWT, upload de avatar e perfil público.',
+      'Plataforma full-stack de links estilo Linktree com frontend e API em repositórios separados, autenticação JWT, upload de avatar via Cloudinary e perfil público.',
     technicalHighlight:
-      'Upload de avatar com FormData, cache e invalidação com TanStack Query, e E2E com Cypress no fluxo de login e links.',
+      'API Express com JWT, MongoDB e upload no Cloudinary; frontend React + Vite com TanStack Query; E2E com Cypress no fluxo de login e links.',
     responsibility:
-      'Desenvolvimento de aplicação SPA com gerenciamento de estado assíncrono, fluxo de autenticação e manipulação de mídia.',
+      'Desenvolvimento full-stack em dois repositórios: SPA React (estado assíncrono e mídia) e API Express (auth, ownership e uploads).',
     decision:
-      'Adotar TanStack Query para orquestração de cache e Cypress para validação end-to-end do fluxo de login e links.',
+      'Separar frontend e backend (SPA + API REST) com TanStack Query no client, JWT + ownership no servidor, Cloudinary para mídia e Cypress no fluxo de login e links.',
     evidence: [
       'E2E no Cypress cobrindo login e gerenciamento de links',
-      'Upload de avatar e sincronização com TanStack Query',
+      'Upload de avatar via Cloudinary na API Express (MongoDB + JWT)',
+      'Cache e sincronização com TanStack Query + testes de integração na API (Vitest)',
       'Perfil público leve e compartilhável para bio de redes',
     ],
     outcome: 'Upload · sincronização · testes E2E',
-    metrics: ['E2E Cypress (login/links)', 'TanStack Query', 'JWT + Axios'],
+    metrics: ['Cloudinary + MongoDB', 'TanStack Query', 'E2E Cypress (login/links)'],
     architectureLinks: [
       {
         label: 'Testes E2E Cypress',
         url: 'https://github.com/tharciosantos/devlinks-web/tree/main/cypress',
         badge: 'Cypress',
+      },
+      {
+        label: 'API Express + Cloudinary',
+        url: 'https://github.com/tharciosantos/devlinks-api',
+        badge: 'Backend',
       },
       {
         label: 'API Client & Services',
@@ -242,7 +248,7 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/tharciosantos/devlinks-web',
     demoUrl: 'https://devlinks-web-api.vercel.app/',
     demoLabel: 'Acessar aplicação',
-    tags: ['React', 'TanStack Query', 'Cypress', 'Tailwind CSS', 'Node.js'],
+    tags: ['React', 'TanStack Query', 'Express', 'MongoDB', 'Cloudinary', 'Cypress'],
     kind: 'secondary',
   },
   {
