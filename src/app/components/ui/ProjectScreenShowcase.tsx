@@ -169,7 +169,7 @@ export function ProjectScreenShowcase({
             <button
               type="button"
               onClick={() => setIsModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-light-surface hover:bg-light-card text-primary-text border border-border-light dark:bg-dark-surface dark:hover:bg-dark-card dark:text-light-text dark:border-border-dark shadow-xs transition-all cursor-pointer shrink-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-light-surface hover:bg-light-card text-primary-text border border-border-light dark:bg-dark-surface dark:hover:bg-dark-card dark:text-light-text dark:border-border-dark shadow-xs transition-all cursor-pointer shrink-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light"
               title="Ampliar visualização em tela cheia"
               aria-label="Ampliar tela do projeto em alta resolução"
             >
@@ -190,7 +190,7 @@ export function ProjectScreenShowcase({
                   type="button"
                   onClick={() => setCurrentIndex(idx)}
                   className={cn(
-                    'px-2.5 py-1 rounded-full text-[11px] font-mono transition-all cursor-pointer truncate shrink-0',
+                    'px-2.5 py-1 rounded-md text-[11px] font-mono transition-all cursor-pointer truncate shrink-0',
                     isCurrent
                       ? 'bg-accent text-white dark:bg-accent-light dark:text-dark-bg font-bold shadow-xs'
                       : 'border border-border-light/70 bg-light-surface text-secondary-text hover:border-accent hover:text-primary-text dark:border-border-dark/70 dark:bg-dark-surface dark:text-dark-text dark:hover:text-light-text'
@@ -206,7 +206,7 @@ export function ProjectScreenShowcase({
         )}
 
         {/* Frame da Imagem com aspect ratio idêntico às telas reais (1920/909) para eliminar bordas pretas */}
-        <div className="relative aspect-[1920/909] w-full min-w-0 overflow-hidden rounded-xl border border-border-light/80 bg-light-surface dark:border-border-dark/80 dark:bg-dark-surface shadow-xs">
+        <div className="relative aspect-[1920/909] w-full min-w-0 overflow-hidden rounded-md border border-border-light/80 bg-light-surface dark:border-border-dark/80 dark:bg-dark-surface shadow-xs">
           {items.map((item, idx) => (
             <div
               key={item.imageUrl}
@@ -237,7 +237,7 @@ export function ProjectScreenShowcase({
                   e.stopPropagation();
                   prevSlide();
                 }}
-                className="absolute left-2 top-1/2 -translate-y-1/2 z-20 flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-border-light/80 bg-white/90 text-primary-text opacity-90 sm:opacity-0 shadow-sm backdrop-blur-sm transition-all hover:bg-white group-hover/showcase:opacity-100 dark:border-border-dark/80 dark:bg-dark-surface/90 dark:text-light-text dark:hover:bg-dark-surface cursor-pointer text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light active:scale-95"
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-20 flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-md border border-border-light/80 bg-white/90 text-primary-text opacity-90 sm:opacity-0 shadow-sm backdrop-blur-sm transition-all hover:bg-white group-hover/showcase:opacity-100 dark:border-border-dark/80 dark:bg-dark-surface/90 dark:text-light-text dark:hover:bg-dark-surface cursor-pointer text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light active:scale-95"
                 aria-label="Tela anterior"
               >
                 <ChevronLeftIcon className="h-3.5 w-3.5" />
@@ -248,7 +248,7 @@ export function ProjectScreenShowcase({
                   e.stopPropagation();
                   nextSlide();
                 }}
-                className="absolute right-2 top-1/2 -translate-y-1/2 z-20 flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-border-light/80 bg-white/90 text-primary-text opacity-90 sm:opacity-0 shadow-sm backdrop-blur-sm transition-all hover:bg-white group-hover/showcase:opacity-100 dark:border-border-dark/80 dark:bg-dark-surface/90 dark:text-light-text dark:hover:bg-dark-surface cursor-pointer text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light active:scale-95"
+                className="absolute right-2 top-1/2 -translate-y-1/2 z-20 flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-md border border-border-light/80 bg-white/90 text-primary-text opacity-90 sm:opacity-0 shadow-sm backdrop-blur-sm transition-all hover:bg-white group-hover/showcase:opacity-100 dark:border-border-dark/80 dark:bg-dark-surface/90 dark:text-light-text dark:hover:bg-dark-surface cursor-pointer text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light active:scale-95"
                 aria-label="Próxima tela"
               >
                 <ChevronRightIcon className="h-3.5 w-3.5" />
@@ -285,7 +285,7 @@ export function ProjectScreenShowcase({
         >
           {/* Card Flutuante da Barra Superior do Modal */}
           <div
-            className="w-full max-w-7xl 2xl:max-w-[1720px] mb-2 sm:mb-3 p-2.5 sm:p-3.5 bg-dark-card border border-border-dark rounded-xl sm:rounded-2xl shadow-xl flex items-center justify-between gap-2 sm:gap-3 text-light-text shrink-0"
+            className="w-full max-w-7xl 2xl:max-w-[1720px] mb-2 sm:mb-3 p-2.5 sm:p-3.5 bg-dark-card border border-border-dark rounded-md sm:rounded-md shadow-xl flex items-center justify-between gap-2 sm:gap-3 text-light-text shrink-0"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="min-w-0 flex-1">
@@ -296,7 +296,7 @@ export function ProjectScreenShowcase({
                 <span className="text-dark-text" aria-hidden="true">
                   ·
                 </span>
-                <span className="font-mono text-[10px] sm:text-xs font-medium text-accent-light bg-accent-subtle-dark px-2 py-0.5 rounded-full border border-accent-border-dark">
+                <span className="font-mono text-[10px] sm:text-xs font-medium text-accent-light bg-accent-subtle-dark px-2 py-0.5 rounded-md border border-accent-border-dark">
                   Tela 0{currentIndex + 1} de 0{total} · {activeItem.label}
                 </span>
               </div>
@@ -313,7 +313,7 @@ export function ProjectScreenShowcase({
                 href={activeItem.imageUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3 py-1.5 rounded-full bg-dark-surface hover:bg-dark-card active:scale-95 text-light-text text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer border border-border-dark shadow-sm min-h-[34px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
+                className="px-3 py-1.5 rounded-md bg-dark-surface hover:bg-dark-card active:scale-95 text-light-text text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer border border-border-dark shadow-sm min-h-[34px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
                 title="Abrir imagem original em tamanho nativo (1920x909)"
               >
                 <ExternalLinkIcon className="h-3.5 w-3.5 text-accent-light" />
@@ -324,7 +324,7 @@ export function ProjectScreenShowcase({
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="px-3 py-1.5 rounded-full bg-dark-surface hover:bg-dark-card active:scale-95 text-light-text text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer border border-border-dark shadow-sm min-h-[34px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
+                className="px-3 py-1.5 rounded-md bg-dark-surface hover:bg-dark-card active:scale-95 text-light-text text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer border border-border-dark shadow-sm min-h-[34px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
                 aria-label="Fechar tela cheia"
               >
                 <CloseIcon className="h-3.5 w-3.5" />
@@ -335,7 +335,7 @@ export function ProjectScreenShowcase({
 
           {/* Imagem em Resolução Máxima com fidelidade nativa 100% (unoptimized) */}
           <div
-            className="relative w-full max-w-7xl 2xl:max-w-[1720px] aspect-[1920/909] rounded-xl sm:rounded-2xl overflow-hidden bg-dark-bg border border-border-dark shadow-2xl flex items-center justify-center shrink-0 transform-gpu"
+            className="relative w-full max-w-7xl 2xl:max-w-[1720px] aspect-[1920/909] rounded-md sm:rounded-md overflow-hidden bg-dark-bg border border-border-dark shadow-2xl flex items-center justify-center shrink-0 transform-gpu"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
@@ -354,7 +354,7 @@ export function ProjectScreenShowcase({
               <button
                 type="button"
                 onClick={prevSlide}
-                className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-20 min-h-[44px] min-w-[44px] sm:h-14 sm:w-14 rounded-full bg-dark-card/90 hover:bg-dark-card active:scale-95 text-light-text text-lg sm:text-2xl flex items-center justify-center border border-border-dark backdrop-blur-sm transition-all cursor-pointer shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
+                className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-20 min-h-[44px] min-w-[44px] sm:h-14 sm:w-14 rounded-md bg-dark-card/90 hover:bg-dark-card active:scale-95 text-light-text text-lg sm:text-2xl flex items-center justify-center border border-border-dark backdrop-blur-sm transition-all cursor-pointer shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
                 aria-label="Tela anterior"
                 title="Tela anterior"
               >
@@ -367,7 +367,7 @@ export function ProjectScreenShowcase({
               <button
                 type="button"
                 onClick={nextSlide}
-                className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-20 min-h-[44px] min-w-[44px] sm:h-14 sm:w-14 rounded-full bg-dark-card/90 hover:bg-dark-card active:scale-95 text-light-text text-lg sm:text-2xl flex items-center justify-center border border-border-dark backdrop-blur-sm transition-all cursor-pointer shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
+                className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-20 min-h-[44px] min-w-[44px] sm:h-14 sm:w-14 rounded-md bg-dark-card/90 hover:bg-dark-card active:scale-95 text-light-text text-lg sm:text-2xl flex items-center justify-center border border-border-dark backdrop-blur-sm transition-all cursor-pointer shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
                 aria-label="Próxima tela"
                 title="Próxima tela"
               >
