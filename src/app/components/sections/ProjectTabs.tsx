@@ -61,7 +61,7 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
       <div
         role="tablist"
         aria-label="Projetos em destaque e complementares"
-        className="flex overflow-x-auto pb-2 gap-2 border-b border-border-light dark:border-border-dark scrollbar-none snap-x touch-pan-x w-full min-w-0"
+        className="flex overflow-x-auto pb-2 gap-2 border-b border-border-light dark:border-border-dark [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x touch-pan-x w-full min-w-0"
       >
         {projects.map((p, idx) => {
           const isActive = idx === activeIndex;
@@ -79,9 +79,9 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
               onClick={() => setActiveIndex(idx)}
               onKeyDown={(e) => handleKeyDown(e, idx)}
               className={cn(
-                'group flex shrink-0 items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light',
+                'group flex shrink-0 items-center gap-2 rounded-md border px-3 py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light',
                 isActive
-                  ? 'border-accent bg-accent text-white shadow-md shadow-accent/25 dark:border-accent-light dark:bg-accent-light dark:text-dark-bg dark:shadow-accent-light/25 font-semibold'
+                  ? 'border-accent bg-accent text-white shadow-sm dark:border-accent-light dark:bg-accent-light dark:text-dark-bg font-semibold'
                   : 'border-border-light bg-light-surface text-secondary-text hover:border-accent hover:text-primary-text dark:border-border-dark dark:bg-dark-surface dark:text-dark-text dark:hover:border-accent-light dark:hover:text-light-text'
               )}
             >
@@ -100,7 +100,7 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
                 <span
                   className={cn(
                     'h-1.5 w-1.5 rounded-full shrink-0',
-                    isActive ? 'bg-white dark:bg-dark-bg' : 'bg-emerald-500'
+                    isActive ? 'bg-white dark:bg-dark-bg' : 'bg-accent dark:bg-accent-light'
                   )}
                   aria-hidden="true"
                 />
@@ -118,15 +118,15 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
         className="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full min-w-0 items-start"
       >
         {/* Coluna Esquerda: Showcase Visual e Ações (7 Colunas) */}
-        <div className="lg:col-span-7 flex flex-col justify-between space-y-4 rounded-card border border-border-light bg-light-surface p-4 sm:p-5 dark:border-border-dark dark:bg-dark-surface min-w-0 overflow-hidden">
+        <div className="lg:col-span-7 flex flex-col justify-between space-y-4 rounded-md border border-border-light bg-light-surface p-4 sm:p-5 dark:border-border-dark dark:bg-dark-surface min-w-0 overflow-hidden">
           <div className="space-y-3.5">
             <div className="flex flex-wrap items-center justify-between gap-2 min-w-0">
               <span className="font-mono text-[11px] uppercase tracking-wider text-accent dark:text-accent-light font-bold">
                 Projeto 0{activeIndex + 1} / 0{projects.length}
               </span>
-              <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-emerald-700 dark:text-emerald-400">
+              <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-accent dark:text-accent-light">
                 <span
-                  className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"
+                  className="h-1.5 w-1.5 rounded-full bg-accent dark:bg-accent-light"
                   aria-hidden="true"
                 />
                 Sistema em Produção
@@ -188,7 +188,7 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
         </div>
 
         {/* Coluna Direita: Engenharia, Responsabilidade & Decisões (5 Colunas) */}
-        <div className="lg:col-span-5 rounded-card border border-border-light bg-light-surface p-5 dark:border-border-dark dark:bg-dark-surface space-y-4 min-w-0">
+        <div className="lg:col-span-5 rounded-md border border-border-light bg-light-surface p-5 dark:border-border-dark dark:bg-dark-surface space-y-4 min-w-0">
           {/* Minha responsabilidade */}
           {current.responsibility && (
             <div className="space-y-1 min-w-0">
@@ -248,7 +248,7 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 rounded-full border border-border-light/80 bg-light-card px-2 py-0.5 font-mono text-[10px] text-secondary-text transition-colors hover:border-accent hover:text-accent dark:border-border-dark/80 dark:bg-dark-card dark:text-dark-text dark:hover:border-accent-light dark:hover:text-accent-light"
+                    className="inline-flex items-center gap-1 rounded-md border border-border-light/80 bg-light-card px-2 py-0.5 font-mono text-[10px] text-secondary-text transition-colors hover:border-accent hover:text-accent dark:border-border-dark/80 dark:bg-dark-card dark:text-dark-text dark:hover:border-accent-light dark:hover:text-accent-light"
                     title={`Ver ${link.label} no GitHub`}
                   >
                     {link.badge && (

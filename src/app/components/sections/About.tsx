@@ -22,7 +22,7 @@ const About = () => {
           {/* Coluna Esquerda: Perfil e Formação */}
           <div className="flex flex-col justify-between gap-5 min-w-0 w-full">
             {/* Card Principal de Perfil */}
-            <div className="flex-1 rounded-xl border border-border-light/80 bg-light-surface/60 p-5 sm:p-6 dark:border-border-dark/80 dark:bg-dark-surface/60 flex flex-col justify-between">
+            <div className="flex-1 rounded-md border border-border-light/80 bg-light-surface/60 p-5 sm:p-6 dark:border-border-dark/80 dark:bg-dark-surface/60 flex flex-col justify-between">
               <div>
                 <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3 border-b border-border-light/60 pb-3 dark:border-border-dark/60">
                   <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
@@ -72,7 +72,7 @@ const About = () => {
             </div>
 
             {/* Card de Formação Acadêmica Compacto */}
-            <div className="rounded-xl border border-border-light/80 bg-light-surface/60 p-4 sm:p-5 dark:border-border-dark/80 dark:bg-dark-surface/60">
+            <div className="rounded-md border border-border-light/80 bg-light-surface/60 p-4 sm:p-5 dark:border-border-dark/80 dark:bg-dark-surface/60">
               <div className="flex items-center justify-between border-b border-border-light/60 pb-2.5 dark:border-border-dark/60">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
                   Formação Acadêmica
@@ -97,7 +97,7 @@ const About = () => {
           </div>
 
           {/* Coluna Direita: Trajetória Profissional e Competências Integradas */}
-          <div className="rounded-xl border border-border-light/80 bg-light-surface/60 p-5 sm:p-6 dark:border-border-dark/80 dark:bg-dark-surface/60 flex flex-col justify-between w-full min-w-0">
+          <div className="rounded-md border border-border-light/80 bg-light-surface/60 p-5 sm:p-6 dark:border-border-dark/80 dark:bg-dark-surface/60 flex flex-col justify-between w-full min-w-0">
             <div>
               <div className="mb-4 flex items-center justify-between border-b border-border-light/60 pb-3 dark:border-border-dark/60">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">

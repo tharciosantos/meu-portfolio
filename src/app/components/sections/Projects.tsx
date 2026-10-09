@@ -36,11 +36,11 @@ const Projects = () => {
               um com código aberto e demo publicada.
             </p>
 
-            <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {secondaryProjects.map((project) => (
-                <article
+                <li
                   key={project.shortTitle}
-                  className="flex min-w-0 flex-col justify-between gap-4 rounded-card border border-border-light bg-light-surface p-4 sm:p-5 dark:border-border-dark dark:bg-dark-surface"
+                  className="flex min-w-0 flex-col justify-between gap-4 rounded-md border border-border-light bg-light-card p-4 sm:p-5 dark:border-border-dark dark:bg-dark-card"
                 >
                   <div className="min-w-0 space-y-2">
                     <h4 className="font-heading text-base font-semibold tracking-tight text-primary-text dark:text-light-text">
@@ -85,14 +85,14 @@ const Projects = () => {
                       </a>
                     )}
                   </div>
-                </article>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         )}
 
         {/* Nota elegante de outros projetos no GitHub */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 rounded-xl border border-border-light/60 bg-light-surface/40 px-5 py-3.5 text-xs text-secondary-text dark:border-border-dark/60 dark:bg-dark-surface/40 dark:text-dark-text">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 rounded-md border border-border-light/60 bg-light-surface/40 px-5 py-3.5 text-xs text-secondary-text dark:border-border-dark/60 dark:bg-dark-surface/40 dark:text-dark-text">
           <p>Quer ver o código-fonte completo e o histórico de evolução de cada projeto?</p>
           <a
             href={GITHUB_URL}
