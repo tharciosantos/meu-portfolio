@@ -15,6 +15,7 @@ export type ArchitectureLink = {
 export type Project = {
   title: string;
   shortTitle: string;
+  slug: string;
   description: string;
   imageUrl?: string;
   imageAlt?: string;
@@ -40,6 +41,7 @@ export const projects: Project[] = [
   {
     title: 'ManutFlow: Controle de Manutenção',
     shortTitle: 'ManutFlow',
+    slug: 'manutflow',
     description:
       'Sistema completo para cadastro de equipamentos, abertura de ordens de serviço e dashboard com indicadores de status e prioridade.',
     responsibility:
@@ -111,6 +113,7 @@ export const projects: Project[] = [
   {
     title: 'HelpFlow: Sistema de Help Desk',
     shortTitle: 'HelpFlow',
+    slug: 'helpflow',
     description:
       'Sistema full stack para abertura, acompanhamento e gerenciamento de chamados internos.',
     responsibility:
@@ -188,6 +191,7 @@ export const projects: Project[] = [
   {
     title: 'DevLinks: Agregador de Links',
     shortTitle: 'DevLinks',
+    slug: 'devlinks',
     description:
       'Plataforma full-stack de links estilo Linktree com frontend e API em repositórios separados, autenticação JWT, upload de avatar via Cloudinary e perfil público.',
     technicalHighlight:
@@ -256,6 +260,7 @@ export const projects: Project[] = [
   {
     title: 'Lista de Mercado: PWA',
     shortTitle: 'Lista de Mercado',
+    slug: 'lista-de-mercado',
     description:
       'Aplicação web progressiva para organizar compras por corredores, calcular o progresso da compra em tempo real, auto-categorizar produtos e compartilhar no WhatsApp.',
     technicalHighlight:
@@ -309,6 +314,7 @@ export const projects: Project[] = [
   {
     title: 'Crypto Dashboard',
     shortTitle: 'Crypto Dashboard',
+    slug: 'crypto-dashboard',
     description:
       'Painel financeiro para consulta de cotações, variações de 24h, indicadores de mercado e páginas dinâmicas detalhadas por ativo.',
     technicalHighlight:
@@ -370,6 +376,7 @@ export const projectsEn: Project[] = [
   {
     title: 'ManutFlow: Maintenance Control',
     shortTitle: 'ManutFlow',
+    slug: 'manutflow',
     description:
       'A complete system for registering equipment, opening service orders, and a dashboard with status and priority indicators.',
     responsibility:
@@ -440,6 +447,7 @@ export const projectsEn: Project[] = [
   {
     title: 'HelpFlow: Help Desk System',
     shortTitle: 'HelpFlow',
+    slug: 'helpflow',
     description: 'Full-stack system for opening, tracking, and managing internal tickets.',
     responsibility:
       'Complete product development, from interface and business rules to persistence and deploy.',
@@ -516,6 +524,7 @@ export const projectsEn: Project[] = [
   {
     title: 'DevLinks: Link Aggregator',
     shortTitle: 'DevLinks',
+    slug: 'devlinks',
     description:
       'Full-stack Linktree-style links platform with frontend and API in separate repositories, JWT authentication, avatar upload via Cloudinary, and a public profile.',
     technicalHighlight:
@@ -583,6 +592,7 @@ export const projectsEn: Project[] = [
   {
     title: 'Grocery List: PWA',
     shortTitle: 'Grocery List',
+    slug: 'lista-de-mercado',
     description:
       'Progressive web app for organizing shopping by aisles, calculating purchase progress in real time, auto-categorizing products, and sharing on WhatsApp.',
     technicalHighlight:
@@ -636,6 +646,7 @@ export const projectsEn: Project[] = [
   {
     title: 'Crypto Dashboard',
     shortTitle: 'Crypto Dashboard',
+    slug: 'crypto-dashboard',
     description:
       'Financial panel for checking quotes, 24h changes, market indicators, and dynamic detail pages per asset.',
     technicalHighlight:
