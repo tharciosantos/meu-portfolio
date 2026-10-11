@@ -1,12 +1,12 @@
 'use client';
 
+import Link from 'next/link';
 import { getProjects } from '@/data/projects';
 import { GITHUB_URL } from '@/data/constants';
 import Section from '../ui/Section';
 import { SectionHeader } from '../ui/SectionHeader';
-import { ProjectTabs } from './ProjectTabs';
 import { Pill } from '../ui/Pill';
-import { ExternalLinkIcon, GithubIcon } from '../ui/Icons';
+import { ExternalLinkIcon, GithubIcon, ArrowRightIcon } from '../ui/Icons';
 import { useLanguage } from '@/app/hooks/useLanguage';
 
 const Projects = () => {
@@ -28,9 +28,67 @@ const Projects = () => {
           subtitle={t.projects.subtitle}
         />
 
-        <ProjectTabs projects={featuredProjects} />
+        {/* Cases principais: cards com link para a página do projeto */}
+        <ul className="grid list-none grid-cols-1 gap-4 lg:grid-cols-2">
+          {featuredProjects.map((project) => (
+            <li
+              key={project.slug}
+              className="flex min-w-0 flex-col justify-between gap-4 rounded-md border border-border-light bg-light-card p-5 sm:p-6 dark:border-border-dark dark:bg-dark-card"
+            >
+              <div className="min-w-0 space-y-3">
+                <h3 className="font-heading text-xl font-semibold tracking-tight text-primary-text dark:text-light-text">
+                  <Link
+                    href={`/projetos/${project.slug}`}
+                    className="transition-colors hover:text-accent dark:hover:text-accent-light"
+                  >
+                    {project.title}
+                  </Link>
+                </h3>
+                <p className="text-sm leading-relaxed text-secondary-text dark:text-dark-text">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {project.tags.map((tag) => (
+                    <Pill key={tag}>{tag}</Pill>
+                  ))}
+                </div>
+              </div>
 
-        {/* Outros projetos: vitrine compacta sem case study completo */}
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-border-light/70 pt-4 dark:border-border-dark/70">
+                <Link
+                  href={`/projetos/${project.slug}`}
+                  className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light"
+                >
+                  {t.projects.viewCase}
+                  <ArrowRightIcon className="h-3.5 w-3.5" />
+                </Link>
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={t.projects.ariaViewCode.replace('{name}', project.shortTitle)}
+                  className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light"
+                >
+                  <GithubIcon className="h-3.5 w-3.5" aria-hidden="true" />
+                  {t.projects.viewCode}
+                </a>
+                {project.demoUrl && (
+                  <a
+                    href={project.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light"
+                  >
+                    <ExternalLinkIcon className="h-3.5 w-3.5" aria-hidden="true" />
+                    {project.demoLabel ?? t.projects.demoDefault}
+                  </a>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        {/* Outros projetos: vitrine compacta */}
         {secondaryProjects.length > 0 && (
           <div className="mt-10 w-full min-w-0">
             <h3 className="font-heading text-lg sm:text-xl font-semibold tracking-tight text-primary-text dark:text-light-text">
@@ -43,12 +101,17 @@ const Projects = () => {
             <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {secondaryProjects.map((project) => (
                 <li
-                  key={project.shortTitle}
+                  key={project.slug}
                   className="flex min-w-0 flex-col justify-between gap-4 rounded-md border border-border-light bg-light-card p-4 sm:p-5 dark:border-border-dark dark:bg-dark-card"
                 >
                   <div className="min-w-0 space-y-2">
                     <h4 className="font-heading text-base font-semibold tracking-tight text-primary-text dark:text-light-text">
-                      {project.shortTitle}
+                      <Link
+                        href={`/projetos/${project.slug}`}
+                        className="transition-colors hover:text-accent dark:hover:text-accent-light"
+                      >
+                        {project.shortTitle}
+                      </Link>
                     </h4>
                     {project.outcome && (
                       <p className="font-mono text-[11px] font-medium text-accent dark:text-accent-light">
@@ -66,12 +129,19 @@ const Projects = () => {
                   </div>
 
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-border-light/70 pt-3 dark:border-border-dark/70">
+                    <Link
+                      href={`/projetos/${project.slug}`}
+                      className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light"
+                    >
+                      {t.projects.viewCase}
+                      <ArrowRightIcon className="h-3.5 w-3.5" />
+                    </Link>
                     <a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={t.projects.ariaViewCode.replace('{name}', project.shortTitle)}
-                      className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light rounded-sm"
+                      className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light"
                     >
                       <GithubIcon className="h-3.5 w-3.5" aria-hidden="true" />
                       {t.projects.viewCode}
@@ -81,10 +151,7 @@ const Projects = () => {
                         href={project.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={t.projects.ariaDemo
-                          .replace('{label}', project.demoLabel ?? t.projects.demoDefault)
-                          .replace('{name}', project.shortTitle)}
-                        className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light rounded-sm"
+                        className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light"
                       >
                         <ExternalLinkIcon className="h-3.5 w-3.5" aria-hidden="true" />
                         {project.demoLabel ?? t.projects.demoDefault}

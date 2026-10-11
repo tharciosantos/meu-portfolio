@@ -36,4 +36,12 @@ describe('i18n (pt/en)', () => {
     expect(getExperiencias('en')[0].role).toBe('IT Support and Maintenance Technician');
     expect(getTrajectorySkills('en')[0]).toBe('Organization and deadlines');
   });
+
+  it('mantém slugs únicos e estáveis entre os idiomas', () => {
+    const ptSlugs = projects.map((p) => p.slug).sort();
+    const enSlugs = projectsEn.map((p) => p.slug).sort();
+
+    expect(ptSlugs).toHaveLength(new Set(ptSlugs).size);
+    expect(enSlugs).toEqual(ptSlugs);
+  });
 });

@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import Footer from '../Footer';
 import Navbar from '../Navbar';
@@ -72,42 +72,39 @@ describe('conteúdo principal do redesign', () => {
     );
   });
 
-  it('destaca projetos e permite alternar entre eles pelas abas', () => {
+  it('destaca os cases principais com link para a página de cada projeto', () => {
     render(<Projects />);
 
-    expect(screen.getByRole('tab', { name: /ManutFlow/i })).toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: /HelpFlow/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 3, name: 'ManutFlow' })).toBeInTheDocument();
-    expect(screen.getByText('Minha responsabilidade')).toBeInTheDocument();
-    expect(screen.getByText('Decisão técnica')).toBeInTheDocument();
-    expect(screen.getByText('Implementado')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'ManutFlow: Controle de Manutenção' })).toHaveAttribute(
+      'href',
+      '/projetos/manutflow'
+    );
+    expect(screen.getByRole('link', { name: 'HelpFlow: Sistema de Help Desk' })).toHaveAttribute(
+      'href',
+      '/projetos/helpflow'
+    );
   });
 
-  it('alterna o projeto ativo ao clicar em uma aba', () => {
-    render(<Projects />);
-
-    const helpFlowTab = screen.getByRole('tab', { name: /HelpFlow/i });
-    fireEvent.click(helpFlowTab);
-
-    expect(helpFlowTab).toHaveAttribute('aria-selected', 'true');
-    expect(screen.getByRole('heading', { level: 3, name: 'HelpFlow' })).toBeInTheDocument();
-    expect(screen.queryByRole('heading', { level: 3, name: 'ManutFlow' })).not.toBeInTheDocument();
-  });
-
-  it('exibe os projetos secundários em cards compactos com links distintos', () => {
+  it('exibe os projetos secundários em cards compactos com link para a página', () => {
     render(<Projects />);
 
     expect(screen.getByRole('heading', { level: 3, name: 'Outros projetos' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 4, name: 'DevLinks' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 4, name: 'Lista de Mercado' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 4, name: 'Crypto Dashboard' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'DevLinks' })).toHaveAttribute(
+      'href',
+      '/projetos/devlinks'
+    );
+    expect(screen.getByRole('link', { name: 'Lista de Mercado' })).toHaveAttribute(
+      'href',
+      '/projetos/lista-de-mercado'
+    );
+    expect(screen.getByRole('link', { name: 'Crypto Dashboard' })).toHaveAttribute(
+      'href',
+      '/projetos/crypto-dashboard'
+    );
     expect(screen.getByRole('link', { name: 'Ver código de DevLinks no GitHub' })).toHaveAttribute(
       'href',
       'https://github.com/tharciosantos/devlinks-web'
     );
-    expect(
-      screen.getByRole('link', { name: 'Acessar dashboard do projeto Crypto Dashboard' })
-    ).toHaveAttribute('href', 'https://crypto-dashboard-five-sandy.vercel.app/');
   });
 
   it('unifica perfil atual, formação e trajetória anterior com clareza', () => {
