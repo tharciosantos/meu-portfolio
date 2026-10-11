@@ -1,15 +1,20 @@
-import { projects } from '@/data/projects';
+'use client';
+
+import { getProjects } from '@/data/projects';
 import { GITHUB_URL } from '@/data/constants';
 import Section from '../ui/Section';
 import { SectionHeader } from '../ui/SectionHeader';
 import { ProjectTabs } from './ProjectTabs';
 import { Pill } from '../ui/Pill';
 import { ExternalLinkIcon, GithubIcon } from '../ui/Icons';
-
-const featuredProjects = projects.filter((p) => p.kind === 'featured');
-const secondaryProjects = projects.filter((p) => p.kind === 'secondary');
+import { useLanguage } from '@/app/hooks/useLanguage';
 
 const Projects = () => {
+  const { language, t } = useLanguage();
+  const projects = getProjects(language);
+  const featuredProjects = projects.filter((p) => p.kind === 'featured');
+  const secondaryProjects = projects.filter((p) => p.kind === 'secondary');
+
   return (
     <Section
       id="projetos"
@@ -18,9 +23,9 @@ const Projects = () => {
     >
       <div className="mx-auto max-w-container">
         <SectionHeader
-          eyebrow="Sistemas em Produção"
-          title="Projetos"
-          subtitle="Sistemas full stack desenvolvidos do zero, com autenticação em camadas, banco relacional, regras de negócio e suítes de testes automatizados."
+          eyebrow={t.projects.eyebrow}
+          title={t.projects.title}
+          subtitle={t.projects.subtitle}
         />
 
         <ProjectTabs projects={featuredProjects} />
@@ -29,11 +34,10 @@ const Projects = () => {
         {secondaryProjects.length > 0 && (
           <div className="mt-10 w-full min-w-0">
             <h3 className="font-heading text-lg sm:text-xl font-semibold tracking-tight text-primary-text dark:text-light-text">
-              Outros projetos
+              {t.projects.othersTitle}
             </h3>
             <p className="mt-1 max-w-prose-wide text-sm leading-relaxed text-secondary-text dark:text-dark-text">
-              Experimentos e integrações que ampliam a stack para além dos cases principais — cada
-              um com código aberto e demo publicada.
+              {t.projects.othersSubtitle}
             </p>
 
             <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -66,22 +70,24 @@ const Projects = () => {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`Ver código de ${project.shortTitle} no GitHub`}
+                      aria-label={t.projects.ariaViewCode.replace('{name}', project.shortTitle)}
                       className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light rounded-sm"
                     >
                       <GithubIcon className="h-3.5 w-3.5" aria-hidden="true" />
-                      Ver código
+                      {t.projects.viewCode}
                     </a>
                     {project.demoUrl && (
                       <a
                         href={project.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`${project.demoLabel ?? 'Acessar aplicação'} do projeto ${project.shortTitle}`}
+                        aria-label={t.projects.ariaDemo
+                          .replace('{label}', project.demoLabel ?? t.projects.demoDefault)
+                          .replace('{name}', project.shortTitle)}
                         className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light rounded-sm"
                       >
                         <ExternalLinkIcon className="h-3.5 w-3.5" aria-hidden="true" />
-                        {project.demoLabel ?? 'Acessar aplicação'}
+                        {project.demoLabel ?? t.projects.demoDefault}
                       </a>
                     )}
                   </div>
@@ -93,14 +99,14 @@ const Projects = () => {
 
         {/* Nota elegante de outros projetos no GitHub */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 rounded-md border border-border-light/60 bg-light-surface/40 px-5 py-3.5 text-xs text-secondary-text dark:border-border-dark/60 dark:bg-dark-surface/40 dark:text-dark-text">
-          <p>Quer ver o código-fonte completo e o histórico de evolução de cada projeto?</p>
+          <p>{t.projects.viewAllNote}</p>
           <a
             href={GITHUB_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light shrink-0"
           >
-            Ver todos os repositórios no GitHub →
+            {t.projects.viewAllRepos}
           </a>
         </div>
       </div>

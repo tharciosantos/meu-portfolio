@@ -7,12 +7,14 @@ import { Pill } from '../ui/Pill';
 import { ExternalLinkIcon, GithubIcon, CodeIcon, CheckIcon } from '../ui/Icons';
 import { ProjectScreenShowcase } from '../ui/ProjectScreenShowcase';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/app/hooks/useLanguage';
 
 type ProjectTabsProps = {
   projects: Project[];
 };
 
 export function ProjectTabs({ projects }: ProjectTabsProps) {
+  const { t } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const current = projects[activeIndex] ?? projects[0];
@@ -50,10 +52,10 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
             className="h-1.5 w-1.5 rounded-full bg-accent dark:bg-accent-light"
             aria-hidden="true"
           />
-          <span>Selecione um projeto para ver telas, arquitetura e regras de negócio:</span>
+          <span>{t.tabs.hint}</span>
         </p>
         <span className="font-mono text-xs font-semibold text-accent dark:text-accent-light">
-          {projects.length} projetos disponíveis
+          {t.tabs.available.replace('{count}', String(projects.length))}
         </span>
       </div>
 
@@ -122,14 +124,16 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
           <div className="space-y-3.5">
             <div className="flex flex-wrap items-center justify-between gap-2 min-w-0">
               <span className="font-mono text-[11px] uppercase tracking-wider text-accent dark:text-accent-light font-bold">
-                Projeto 0{activeIndex + 1} / 0{projects.length}
+                {t.tabs.counter
+                  .replace('{index}', String(activeIndex + 1))
+                  .replace('{total}', String(projects.length))}
               </span>
               <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-accent dark:text-accent-light">
                 <span
                   className="h-1.5 w-1.5 rounded-full bg-accent dark:bg-accent-light"
                   aria-hidden="true"
                 />
-                Sistema em Produção
+                {t.tabs.inProduction}
               </span>
             </div>
 
@@ -163,7 +167,7 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
                 className={cn(buttonVariants({ variant: 'outline', size: 'default' }), 'w-full')}
               >
                 <GithubIcon className="h-4 w-4" />
-                Ver código
+                {t.tabs.viewCode}
               </a>
               {current.demoUrl && (
                 <a
@@ -173,7 +177,7 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
                   className={cn(buttonVariants({ variant: 'primary', size: 'default' }), 'w-full')}
                 >
                   <ExternalLinkIcon className="h-4 w-4" />
-                  {current.demoLabel ?? 'Acessar aplicação'}
+                  {current.demoLabel ?? t.projects.demoDefault}
                 </a>
               )}
             </div>
@@ -194,7 +198,7 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
             <div className="space-y-1 min-w-0">
               <dl>
                 <dt className="font-mono text-[11px] font-bold uppercase tracking-wider text-primary-text dark:text-light-text">
-                  Minha responsabilidade
+                  {t.tabs.responsibility}
                 </dt>
                 <dd className="text-xs sm:text-[13px] leading-relaxed text-primary-text dark:text-light-text">
                   {current.responsibility}
@@ -208,7 +212,7 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
             <div className="space-y-1 min-w-0 pt-3 border-t border-border-light/60 dark:border-border-dark/60">
               <dl>
                 <dt className="font-mono text-[11px] font-bold uppercase tracking-wider text-primary-text dark:text-light-text">
-                  Decisão técnica
+                  {t.tabs.decision}
                 </dt>
                 <dd className="text-xs sm:text-[13px] leading-relaxed text-primary-text dark:text-light-text">
                   {current.decision}
@@ -221,7 +225,7 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
           {current.evidence && current.evidence.length > 0 && (
             <div className="space-y-2 min-w-0 pt-3 border-t border-border-light/60 dark:border-border-dark/60">
               <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-primary-text dark:text-light-text">
-                Implementado
+                {t.tabs.implemented}
               </p>
               <ul className="grid gap-1.5 text-xs text-secondary-text dark:text-dark-text min-w-0">
                 {current.evidence.slice(0, 4).map((item) => (
@@ -239,7 +243,7 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
             <div className="pt-3 border-t border-border-light/60 dark:border-border-dark/60 flex flex-wrap items-center gap-1.5 min-w-0">
               <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-secondary-text dark:text-dark-text flex items-center gap-1 shrink-0">
                 <CodeIcon className="h-3 w-3 text-accent dark:text-accent-light" />
-                <span>Arquitetura no GitHub</span>
+                <span>{t.tabs.architecture}</span>
               </span>
               <div className="flex flex-wrap gap-1.5 min-w-0">
                 {current.architectureLinks.map((link) => (
@@ -249,7 +253,7 @@ export function ProjectTabs({ projects }: ProjectTabsProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 rounded-md border border-border-light/80 bg-light-card px-2 py-0.5 font-mono text-[10px] text-secondary-text transition-colors hover:border-accent hover:text-accent dark:border-border-dark/80 dark:bg-dark-card dark:text-dark-text dark:hover:border-accent-light dark:hover:text-accent-light"
-                    title={`Ver ${link.label} no GitHub`}
+                    title={t.tabs.ariaArchitecture.replace('{label}', link.label)}
                   >
                     {link.badge && (
                       <span className="font-bold text-accent dark:text-accent-light">

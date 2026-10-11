@@ -10,6 +10,7 @@ import {
   ExternalLinkIcon,
 } from './Icons';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/app/hooks/useLanguage';
 
 export type ProjectScreen = {
   label: string;
@@ -41,6 +42,7 @@ export function ProjectScreenShowcase({
   defaultImageUrl,
   defaultImageAlt,
 }: ProjectScreenShowcaseProps) {
+  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -55,7 +57,7 @@ export function ProjectScreenShowcase({
       : defaultImageUrl
         ? [
             {
-              label: 'Visão Geral',
+              label: t.showcase.overview,
               imageUrl: defaultImageUrl,
               caption: defaultImageAlt ?? `Interface de ${title}`,
             },
@@ -146,19 +148,21 @@ export function ProjectScreenShowcase({
         onTouchEnd={handleTouchEnd}
         role="region"
         aria-roledescription="carousel"
-        aria-label={`Demonstração visual do projeto ${title}`}
+        aria-label={t.showcase.carouselAria.replace('{title}', title)}
       >
         {/* Barra Superior com Controles e Domínio */}
         <div className="flex flex-wrap items-center justify-between gap-2 min-w-0">
           <div className="flex items-center gap-1.5 min-w-0">
             <span className="font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light shrink-0">
-              Telas do Sistema
+              {t.showcase.screensLabel}
             </span>
             <span className="text-secondary-text/50 dark:text-dark-text/50" aria-hidden="true">
               ·
             </span>
             <span className="font-mono text-[10px] sm:text-[11px] text-secondary-text dark:text-dark-text shrink-0">
-              Tela 0{currentIndex + 1} de 0{total}
+              {t.showcase.counter
+                .replace('{current}', String(currentIndex + 1))
+                .replace('{total}', String(total))}
             </span>
           </div>
 
@@ -170,11 +174,11 @@ export function ProjectScreenShowcase({
               type="button"
               onClick={() => setIsModalOpen(true)}
               className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-light-surface hover:bg-light-card text-primary-text border border-border-light dark:bg-dark-surface dark:hover:bg-dark-card dark:text-light-text dark:border-border-dark shadow-xs transition-all cursor-pointer shrink-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light"
-              title="Ampliar visualização em tela cheia"
-              aria-label="Ampliar tela do projeto em alta resolução"
+              title={t.showcase.expandTitle}
+              aria-label={t.showcase.expandAria}
             >
               <SearchIcon className="h-3 w-3 text-secondary-text dark:text-dark-text" />
-              <span className="font-sans font-medium text-[11px]">Ampliar</span>
+              <span className="font-sans font-medium text-[11px]">{t.showcase.expand}</span>
             </button>
           </div>
         </div>
@@ -195,7 +199,7 @@ export function ProjectScreenShowcase({
                       ? 'bg-accent text-white dark:bg-accent-light dark:text-dark-bg font-bold shadow-xs'
                       : 'border border-border-light/70 bg-light-surface text-secondary-text hover:border-accent hover:text-primary-text dark:border-border-dark/70 dark:bg-dark-surface dark:text-dark-text dark:hover:text-light-text'
                   )}
-                  aria-label={`Ir para tela: ${item.label}`}
+                  aria-label={t.showcase.goToScreen.replace('{label}', item.label)}
                   aria-current={isCurrent}
                 >
                   {item.label}
@@ -238,7 +242,7 @@ export function ProjectScreenShowcase({
                   prevSlide();
                 }}
                 className="absolute left-2 top-1/2 -translate-y-1/2 z-20 flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-md border border-border-light/80 bg-white/90 text-primary-text opacity-90 sm:opacity-0 shadow-sm backdrop-blur-sm transition-all hover:bg-white group-hover/showcase:opacity-100 dark:border-border-dark/80 dark:bg-dark-surface/90 dark:text-light-text dark:hover:bg-dark-surface cursor-pointer text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light active:scale-95"
-                aria-label="Tela anterior"
+                aria-label={t.showcase.prev}
               >
                 <ChevronLeftIcon className="h-3.5 w-3.5" />
               </button>
@@ -249,7 +253,7 @@ export function ProjectScreenShowcase({
                   nextSlide();
                 }}
                 className="absolute right-2 top-1/2 -translate-y-1/2 z-20 flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-md border border-border-light/80 bg-white/90 text-primary-text opacity-90 sm:opacity-0 shadow-sm backdrop-blur-sm transition-all hover:bg-white group-hover/showcase:opacity-100 dark:border-border-dark/80 dark:bg-dark-surface/90 dark:text-light-text dark:hover:bg-dark-surface cursor-pointer text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light active:scale-95"
-                aria-label="Próxima tela"
+                aria-label={t.showcase.next}
               >
                 <ChevronRightIcon className="h-3.5 w-3.5" />
               </button>
@@ -281,7 +285,9 @@ export function ProjectScreenShowcase({
           onTouchEnd={handleTouchEnd}
           role="dialog"
           aria-modal="true"
-          aria-label={`Visualização em alta resolução de ${title} - ${activeItem.label}`}
+          aria-label={t.showcase.modalAria
+            .replace('{title}', title)
+            .replace('{label}', activeItem.label)}
         >
           {/* Card Flutuante da Barra Superior do Modal */}
           <div
@@ -307,7 +313,7 @@ export function ProjectScreenShowcase({
 
             <div className="flex items-center gap-2 shrink-0">
               <span className="text-[11px] font-mono text-dark-text hidden lg:inline">
-                Navegue com as setas ou deslize na tela
+                {t.showcase.navigateHint}
               </span>
               <a
                 href={activeItem.imageUrl}
@@ -318,17 +324,17 @@ export function ProjectScreenShowcase({
               >
                 <ExternalLinkIcon className="h-3.5 w-3.5 text-accent-light" />
                 <span className="font-mono text-[11px] sm:text-xs hidden sm:inline">
-                  Ver original
+                  {t.showcase.viewOriginal}
                 </span>
               </a>
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
                 className="px-3 py-1.5 rounded-md bg-dark-surface hover:bg-dark-card active:scale-95 text-light-text text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer border border-border-dark shadow-sm min-h-[34px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
-                aria-label="Fechar tela cheia"
+                aria-label={t.showcase.closeFullscreen}
               >
                 <CloseIcon className="h-3.5 w-3.5" />
-                <span className="font-mono text-[11px] sm:text-xs">Fechar</span>
+                <span className="font-mono text-[11px] sm:text-xs">{t.showcase.close}</span>
               </button>
             </div>
           </div>
@@ -355,8 +361,8 @@ export function ProjectScreenShowcase({
                 type="button"
                 onClick={prevSlide}
                 className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-20 min-h-[44px] min-w-[44px] sm:h-14 sm:w-14 rounded-md bg-dark-card/90 hover:bg-dark-card active:scale-95 text-light-text text-lg sm:text-2xl flex items-center justify-center border border-border-dark backdrop-blur-sm transition-all cursor-pointer shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
-                aria-label="Tela anterior"
-                title="Tela anterior"
+                aria-label={t.showcase.prev}
+                title={t.showcase.prev}
               >
                 <ChevronLeftIcon className="h-6 w-6 sm:h-8 sm:w-8" />
               </button>
@@ -368,8 +374,8 @@ export function ProjectScreenShowcase({
                 type="button"
                 onClick={nextSlide}
                 className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-20 min-h-[44px] min-w-[44px] sm:h-14 sm:w-14 rounded-md bg-dark-card/90 hover:bg-dark-card active:scale-95 text-light-text text-lg sm:text-2xl flex items-center justify-center border border-border-dark backdrop-blur-sm transition-all cursor-pointer shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
-                aria-label="Próxima tela"
-                title="Próxima tela"
+                aria-label={t.showcase.next}
+                title={t.showcase.next}
               >
                 <ChevronRightIcon className="h-6 w-6 sm:h-8 sm:w-8" />
               </button>

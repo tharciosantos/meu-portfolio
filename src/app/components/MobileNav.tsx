@@ -6,6 +6,7 @@ import { sectionIdFromHref, type NavLink } from '../../data/constants';
 import { buttonVariants } from './ui/Button';
 import { cn } from '@/lib/utils';
 import { CloseIcon, MenuIcon } from './ui/Icons';
+import { useLanguage } from '@/app/hooks/useLanguage';
 
 type MobileNavProps = {
   links: NavLink[];
@@ -15,6 +16,7 @@ type MobileNavProps = {
 const MOBILE_MENU_ID = 'mobile-navigation-menu';
 
 export function MobileNav({ links, activeSection = '' }: MobileNavProps) {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const triggerButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -107,7 +109,7 @@ export function MobileNav({ links, activeSection = '' }: MobileNavProps) {
       <button
         ref={triggerButtonRef}
         onClick={isOpen ? handleClose : handleOpen}
-        aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
+        aria-label={isOpen ? t.nav.closeMenu : t.nav.openMenu}
         aria-expanded={isOpen}
         aria-controls={MOBILE_MENU_ID}
         className={cn(
@@ -138,7 +140,7 @@ export function MobileNav({ links, activeSection = '' }: MobileNavProps) {
           id={MOBILE_MENU_ID}
           role="dialog"
           aria-modal="true"
-          aria-label="Menu de navegação"
+          aria-label={t.nav.ariaMenu}
           className="fixed inset-x-4 top-16 z-50 rounded-md border border-border-light bg-light-card p-4 dark:border-border-dark dark:bg-dark-card md:hidden"
           style={{
             opacity: isClosing ? 0 : 1,
@@ -169,7 +171,7 @@ export function MobileNav({ links, activeSection = '' }: MobileNavProps) {
                   }
                   aria-current={isActive ? 'location' : undefined}
                 >
-                  {link.label}
+                  {t.nav.links[link.href] ?? link.label}
                 </Link>
               );
             })}
