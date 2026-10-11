@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  createContext,
-  useCallback,
-  useEffect,
-  useMemo,
-  useSyncExternalStore,
-} from 'react';
+import { createContext, useCallback, useEffect, useMemo, useSyncExternalStore } from 'react';
 import type { ReactNode } from 'react';
 import { DEFAULT_LANGUAGE, getDictionary } from '@/data/i18n';
 import type { Dictionary, Language } from '@/data/i18n';

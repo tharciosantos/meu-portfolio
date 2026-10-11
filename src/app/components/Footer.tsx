@@ -25,10 +25,7 @@ const Footer = () => {
           </div>
 
           {/* Navegação Rápida */}
-          <nav
-            aria-label={t.nav.footerNav}
-            className="flex flex-wrap items-center gap-x-5 gap-y-2"
-          >
+          <nav aria-label={t.nav.footerNav} className="flex flex-wrap items-center gap-x-5 gap-y-2">
             {navLinks.map((link) => (
               <a
                 key={link.href}

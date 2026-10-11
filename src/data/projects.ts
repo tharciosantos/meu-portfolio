@@ -478,7 +478,8 @@ export const projectsEn: Project[] = [
     ],
     nextStep: 'Expand integration tests and add observability to critical flows.',
     imageUrl: '/images/helpflow-screenshot.webp',
-    imageAlt: 'HelpFlow interface showing a ticket management panel with ticket list, status, and priority',
+    imageAlt:
+      'HelpFlow interface showing a ticket management panel with ticket list, status, and priority',
     screens: [
       {
         label: 'Home',
@@ -605,7 +606,8 @@ export const projectsEn: Project[] = [
         badge: 'Offline-First',
       },
     ],
-    demoNote: 'Installable on smartphones with offline functionality and structured WhatsApp export.',
+    demoNote:
+      'Installable on smartphones with offline functionality and structured WhatsApp export.',
     imageUrl: '/images/lista-mercado/tela-lista-pendentes.webp',
     imageAlt: 'Grocery List interface with product list and sectors',
     screens: [
@@ -662,7 +664,8 @@ export const projectsEn: Project[] = [
         badge: 'Resilience',
       },
     ],
-    demoNote: 'Real-time monitoring with market KPIs, gainers/losers filters, and detailed statistics.',
+    demoNote:
+      'Real-time monitoring with market KPIs, gainers/losers filters, and detailed statistics.',
     imageUrl: '/images/crypto-dashboard/tela-mercado.webp',
     imageAlt: 'Cryptocurrency dashboard with quotes, KPIs, and filters',
     screens: [

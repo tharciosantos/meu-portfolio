@@ -6,8 +6,12 @@ import { getExperiencias, getTrajectorySkills } from '../experience';
 
 describe('i18n (pt/en)', () => {
   it('retorna o dicionário correto por idioma', () => {
-    expect(getDictionary('pt').hero.headline).toBe('Desenvolvo sistemas completos, da interface aos dados.');
-    expect(getDictionary('en').hero.headline).toBe('I build complete systems, from interface to data.');
+    expect(getDictionary('pt').hero.headline).toBe(
+      'Desenvolvo sistemas completos, da interface aos dados.'
+    );
+    expect(getDictionary('en').hero.headline).toBe(
+      'I build complete systems, from interface to data.'
+    );
   });
 
   it('mantém a mesma estrutura de chaves entre pt e en', () => {

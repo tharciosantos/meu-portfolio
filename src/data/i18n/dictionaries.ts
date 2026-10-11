@@ -114,8 +114,7 @@ const pt = {
       },
       {
         step: 'Qualidade & Entrega',
-        detail:
-          'Aplico testes automatizados, validação de acessibilidade e deploy contínuo.',
+        detail: 'Aplico testes automatizados, validação de acessibilidade e deploy contínuo.',
       },
     ],
   },
@@ -136,8 +135,7 @@ const pt = {
     location: 'Caeté / BH e Região · Remoto',
     role: 'Desenvolvedor Full Stack Júnior',
     focus: 'Foco em arquitetura segura e interfaces funcionais',
-    bio:
-      'Minha transição para a programação nasceu ao diagnosticar e resolver problemas técnicos no suporte: percebi que queria ir além da manutenção de máquinas e passar a construir sistemas completos, seguros e confiáveis que resolvam dores reais das pessoas e empresas.',
+    bio: 'Minha transição para a programação nasceu ao diagnosticar e resolver problemas técnicos no suporte: percebi que queria ir além da manutenção de máquinas e passar a construir sistemas completos, seguros e confiáveis que resolvam dores reais das pessoas e empresas.',
     educationLabel: 'Formação Acadêmica',
     graduation: 'Graduação',
     course: 'Análise e Desenvolvimento de Sistemas',
@@ -327,8 +325,7 @@ const en: typeof pt = {
     location: 'Caeté / BH and region · Remote',
     role: 'Junior Full Stack Developer',
     focus: 'Focused on secure architecture and functional interfaces',
-    bio:
-      'My transition to programming began while diagnosing and solving technical problems in support: I realized I wanted to go beyond machine maintenance and start building complete, secure, and reliable systems that solve real pains for people and companies.',
+    bio: 'My transition to programming began while diagnosing and solving technical problems in support: I realized I wanted to go beyond machine maintenance and start building complete, secure, and reliable systems that solve real pains for people and companies.',
     educationLabel: 'Education',
     graduation: 'Graduation',
     course: 'Systems Analysis and Development',
