@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Contact from '../Contact';
+import { WHATSAPP_URL } from '@/data/constants';
 
 beforeEach(() => {
   Object.defineProperty(navigator, 'clipboard', {
@@ -33,6 +34,14 @@ describe('Contact', () => {
       'href',
       '/curriculo-tharcio-santos.pdf'
     );
+  });
+
+  it('deve renderizar o CTA primário do WhatsApp', () => {
+    render(<Contact />);
+    const whatsappLink = screen.getByRole('link', { name: /Chamar Tharcio Santos no WhatsApp/i });
+    expect(whatsappLink).toHaveAttribute('href', WHATSAPP_URL);
+    expect(whatsappLink).toHaveAttribute('target', '_blank');
+    expect(whatsappLink).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
   it('deve renderizar o botão de copiar e-mail', () => {

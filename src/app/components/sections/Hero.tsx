@@ -1,9 +1,9 @@
 import { buttonVariants } from '../ui/Button';
-import { GITHUB_URL, LINKEDIN_URL, RESUME_URL } from '@/data/constants';
+import { GITHUB_URL, LINKEDIN_URL, RESUME_URL, WHATSAPP_URL } from '@/data/constants';
 import { cn } from '@/lib/utils';
 import Section from '../ui/Section';
 import { Metric } from '../ui/Metric';
-import { ArrowRightIcon, DocumentIcon, GithubIcon, LinkedinIcon } from '../ui/Icons';
+import { ArrowRightIcon, DocumentIcon, GithubIcon, LinkedinIcon, WhatsappIcon } from '../ui/Icons';
 
 const Hero = () => {
   return (
@@ -88,6 +88,15 @@ const Hero = () => {
               >
                 <LinkedinIcon className="h-4 w-4" />
               </a>
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Conversar com Tharcio Santos no WhatsApp"
+                className={cn(buttonVariants({ variant: 'outline', size: 'icon' }))}
+              >
+                <WhatsappIcon className="h-4 w-4" />
+              </a>
             </div>
           </div>
         </div>
@@ -103,9 +112,9 @@ const Hero = () => {
             </div>
 
             <div>
-              <dt className="sr-only">Testes automatizados</dt>
+              <dt className="sr-only">Projetos publicados</dt>
               <dd>
-                <Metric value="169 Testes" label="ManutFlow com Vitest em 17 arquivos" />
+                <Metric value="5 Projetos" label="De sistemas em produção a PWAs e integrações" />
               </dd>
             </div>
 

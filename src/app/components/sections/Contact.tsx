@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react';
 import Section from '../ui/Section';
 import { SectionHeader } from '../ui/SectionHeader';
-import { EMAIL, redesSociais, RESUME_URL } from '@/data/constants';
+import { EMAIL, redesSociais, RESUME_URL, WHATSAPP_DISPLAY, WHATSAPP_URL } from '@/data/constants';
 import { CopyEmailButton } from '../ui/CopyEmailButton';
-import { DocumentIcon, GithubIcon, LinkedinIcon, MailIcon } from '../ui/Icons';
+import { DocumentIcon, GithubIcon, LinkedinIcon, MailIcon, WhatsappIcon } from '../ui/Icons';
 
 const icones: Record<string, ReactNode> = {
   LinkedIn: <LinkedinIcon className="h-5 w-5" />,
@@ -83,7 +83,22 @@ const Contact = () => {
               </p>
             </div>
 
-            <div className="divide-y divide-border-light/60 dark:divide-border-dark/60">
+            {/* CTA primário de conversão — resposta rápida */}
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Chamar Tharcio Santos no WhatsApp"
+              className="mt-4 inline-flex items-center justify-center gap-2 rounded-md bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-[#1DA851] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-dark-bg"
+            >
+              <WhatsappIcon className="h-4 w-4" />
+              Chamar no WhatsApp
+            </a>
+            <p className="mt-1.5 font-mono text-[11px] text-secondary-text dark:text-dark-text">
+              Resposta rápida · {WHATSAPP_DISPLAY}
+            </p>
+
+            <div className="mt-4 divide-y divide-border-light/60 dark:divide-border-dark/60">
               {/* E-mail */}
               <div className="flex flex-col gap-3 py-3.5 sm:py-4 first:pt-2 sm:flex-row sm:items-center sm:justify-between min-w-0">
                 <span className="flex items-center gap-3 min-w-0">
