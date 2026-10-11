@@ -15,6 +15,13 @@ const siteTitle = 'Tharcio Santos | Desenvolvedor Full Stack';
 const siteDescription =
   'Portfólio de Tharcio Santos, desenvolvedor Full Stack com sistemas, APIs e bancos de dados, com foco em segurança, usabilidade e boas práticas.';
 
+const localAddress = {
+  '@type': 'PostalAddress',
+  addressLocality: 'Caeté',
+  addressRegion: 'MG',
+  addressCountry: 'BR',
+};
+
 const personJsonLd = {
   '@type': 'Person',
   '@id': `${SITE_URL}/#person`,
@@ -25,6 +32,12 @@ const personJsonLd = {
     'Desenvolvedor Full Stack com experiência em sistemas, APIs e bancos de dados, com foco em segurança, usabilidade e boas práticas.',
   image: `${SITE_URL}/images/profile.webp`,
   sameAs: [GITHUB_URL, LINKEDIN_URL],
+  address: localAddress,
+  homeLocation: {
+    '@type': 'Place',
+    name: 'Caeté, Minas Gerais, Brasil',
+    address: localAddress,
+  },
   knowsAbout: [
     'React',
     'Next.js',
@@ -98,6 +111,15 @@ export const metadata: Metadata = {
     'Tailwind CSS',
     'Prisma',
     'Supabase',
+    'Belo Horizonte',
+    'Caeté',
+    'Minas Gerais',
+    'Desenvolvedor Belo Horizonte',
+    'Desenvolvedor Caeté',
+    'Desenvolvedor Júnior Belo Horizonte',
+    'Estágio Desenvolvimento Belo Horizonte',
+    'Desenvolvedor Remoto',
+    'Desenvolvedor Full Stack Belo Horizonte',
   ],
   authors: [{ name: 'Tharcio Santos', url: GITHUB_URL }],
   creator: 'Tharcio Santos',
