@@ -12,6 +12,11 @@ export type SocialLink = {
 };
 
 export const EMAIL = 'tharciosantos09@gmail.com';
+export const WHATSAPP_NUMBER = '5531995253423';
+export const WHATSAPP_DISPLAY = '31 99525-3423';
+export const WHATSAPP_MESSAGE =
+  'Olá, Tharcio! Vi seu portfólio e gostaria de conversar sobre uma oportunidade.';
+export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 /** URLs públicas centralizadas para evitar divergências entre as superfícies do portfólio */
 export const SITE_URL = 'https://tharcio-portfolio.vercel.app';

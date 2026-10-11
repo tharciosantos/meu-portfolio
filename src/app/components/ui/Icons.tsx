@@ -113,6 +113,15 @@ export function LinkedinIcon(props: IconProps) {
   );
 }
 
+export function WhatsappIcon(props: IconProps) {
+  return (
+    <svg {...baseProps} {...props}>
+      <path d="M3 21l1.65-4.95A8.96 8.96 0 0 1 3.5 11.5a8.5 8.5 0 1 1 3.4 6.68L3 21z" />
+      <path d="M9 8.5c0 3 1.5 5.5 3.5 7 2 1.5 4 .5 4-.5-1-.5-2-1-2.5-1.5l-1.5 1c-1.5-1-2.5-2-3.5-3.5l1-1.5C9.5 8.5 9 8.5 9 8.5z" />
+    </svg>
+  );
+}
+
 export function ExternalLinkIcon(props: IconProps) {
   return (
     <svg {...baseProps} {...props}>
