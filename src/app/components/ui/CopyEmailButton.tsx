@@ -5,8 +5,10 @@ import { Button } from './Button';
 import { cn } from '@/lib/utils';
 import { EMAIL } from '@/data/constants';
 import { CheckIcon, CopyIcon } from './Icons';
+import { useLanguage } from '@/app/hooks/useLanguage';
 
 export const CopyEmailButton = () => {
+  const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
   const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -31,7 +33,7 @@ export const CopyEmailButton = () => {
   return (
     <Button
       onClick={handleCopyEmail}
-      aria-label={copied ? 'E-mail copiado' : 'Copiar e-mail'}
+      aria-label={copied ? t.contact.copyEmailCopied : t.contact.copyEmail}
       variant="outline"
       size="sm"
       className={cn(
@@ -44,12 +46,12 @@ export const CopyEmailButton = () => {
       {copied ? (
         <>
           <CheckIcon className="h-3.5 w-3.5" />
-          Copiado
+          {t.contact.copied}
         </>
       ) : (
         <>
           <CopyIcon className="h-3.5 w-3.5" />
-          Copiar
+          {t.contact.copy}
         </>
       )}
     </Button>

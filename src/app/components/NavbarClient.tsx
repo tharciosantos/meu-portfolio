@@ -6,8 +6,10 @@ import { type NavLink, navLinks, SECTION_IDS, sectionIdFromHref } from '@/data/c
 import { buttonVariants } from './ui/Button';
 import { cn } from '@/lib/utils';
 import { ThemeSwitcher } from './ThemeSwitcher';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import { MobileNav } from './MobileNav';
 import { useActiveSection } from '@/app/hooks/useActiveSection';
+import { useLanguage } from '@/app/hooks/useLanguage';
 
 const navLinkClass = (isActive: boolean) =>
   cn(
@@ -20,6 +22,7 @@ const navLinkClass = (isActive: boolean) =>
   );
 
 export function NavbarClient() {
+  const { t } = useLanguage();
   const activeSection = useActiveSection(SECTION_IDS);
   const mainLinks = navLinks.filter((link) => link.cta !== true);
   const ctaLink = navLinks.find((link) => link.cta === true);
@@ -43,13 +46,13 @@ export function NavbarClient() {
           : 'border-transparent bg-light-bg dark:bg-dark-bg'
       )}
       role="navigation"
-      aria-label="Navegação principal"
+      aria-label={t.nav.ariaMain}
     >
       <div className="mx-auto flex max-w-container items-center justify-between">
         <Link
           href="/"
           className="group inline-flex items-center gap-1.5 text-base font-bold tracking-tight text-primary-text transition-colors hover:text-accent dark:text-light-text dark:hover:text-accent-light"
-          aria-label="Tharcio.dev, voltar para o início"
+          aria-label={t.nav.backHome}
         >
           <span className="font-heading text-lg font-bold tracking-tight">
             Tharcio<span className="text-accent dark:text-accent-light">.dev</span>
@@ -66,7 +69,7 @@ export function NavbarClient() {
                 className={navLinkClass(isActive)}
                 aria-current={isActive ? 'location' : undefined}
               >
-                {link.label}
+                {t.nav.links[link.href] ?? link.label}
               </Link>
             );
           })}
@@ -83,13 +86,15 @@ export function NavbarClient() {
               )}
               aria-current={isCtaActive ? 'location' : undefined}
             >
-              {ctaLink.label}
+              {t.nav.links[ctaLink.href] ?? ctaLink.label}
             </Link>
           )}
+          <LanguageSwitcher />
           <ThemeSwitcher />
         </div>
 
         <div className="flex items-center gap-3 md:hidden">
+          <LanguageSwitcher />
           <ThemeSwitcher />
           <MobileNav links={navLinks} activeSection={activeSection} />
         </div>

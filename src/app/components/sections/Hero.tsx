@@ -1,11 +1,16 @@
+'use client';
+
 import { buttonVariants } from '../ui/Button';
 import { GITHUB_URL, LINKEDIN_URL, RESUME_URL, WHATSAPP_URL } from '@/data/constants';
 import { cn } from '@/lib/utils';
 import Section from '../ui/Section';
 import { Metric } from '../ui/Metric';
 import { ArrowRightIcon, DocumentIcon, GithubIcon, LinkedinIcon, WhatsappIcon } from '../ui/Icons';
+import { useLanguage } from '@/app/hooks/useLanguage';
 
 const Hero = () => {
+  const { t } = useLanguage();
+
   return (
     <Section
       id="home"
@@ -22,7 +27,7 @@ const Hero = () => {
                 className="h-2 w-2 rounded-full bg-accent dark:bg-accent-light"
                 aria-hidden="true"
               />
-              <span>Software Developer · Brazil</span>
+              <span>{t.hero.eyebrowLocation}</span>
             </div>
 
             <span className="text-secondary-text dark:text-dark-text" aria-hidden="true">
@@ -34,19 +39,18 @@ const Hero = () => {
                 className="h-2 w-2 rounded-full bg-accent dark:bg-accent-light"
                 aria-hidden="true"
               />
-              <span>Disponível para Estágio / Júnior · Full Stack</span>
+              <span>{t.hero.eyebrowStatus}</span>
             </div>
           </div>
 
           {/* Headline Principal */}
           <h1 className="mt-6 max-w-3xl font-heading text-hero text-primary-text dark:text-light-text">
-            Desenvolvo sistemas completos, da interface aos dados.
+            {t.hero.headline}
           </h1>
 
           {/* Subtitle */}
           <p className="mt-4 max-w-prose-wide text-body-lg text-secondary-text dark:text-dark-text">
-            Com projetos publicados e experiência técnica autônoma, construo aplicações web focadas
-            em usabilidade, controle de acesso seguro e cobertura consistente de testes.
+            {t.hero.subtitle}
           </p>
 
           {/* Ações / CTAs */}
@@ -55,7 +59,7 @@ const Hero = () => {
               href="#projetos"
               className={cn(buttonVariants({ variant: 'primary', size: 'lg' }), 'group')}
             >
-              Explorar projetos
+              {t.hero.ctaProjects}
               <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-1" />
             </a>
 
@@ -66,7 +70,7 @@ const Hero = () => {
               className={cn(buttonVariants({ variant: 'outline', size: 'lg' }), 'group')}
             >
               <DocumentIcon className="h-4 w-4" />
-              Baixar currículo
+              {t.hero.ctaResume}
             </a>
 
             <div className="flex items-center gap-2">
@@ -74,7 +78,7 @@ const Hero = () => {
                 href={GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="GitHub de Tharcio Santos"
+                aria-label={t.hero.ariaGithub}
                 className={cn(buttonVariants({ variant: 'outline', size: 'icon' }))}
               >
                 <GithubIcon className="h-4 w-4" />
@@ -83,7 +87,7 @@ const Hero = () => {
                 href={LINKEDIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="LinkedIn de Tharcio Santos"
+                aria-label={t.hero.ariaLinkedin}
                 className={cn(buttonVariants({ variant: 'outline', size: 'icon' }))}
               >
                 <LinkedinIcon className="h-4 w-4" />
@@ -92,7 +96,7 @@ const Hero = () => {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Conversar com Tharcio Santos no WhatsApp"
+                aria-label={t.hero.ariaWhatsapp}
                 className={cn(buttonVariants({ variant: 'outline', size: 'icon' }))}
               >
                 <WhatsappIcon className="h-4 w-4" />
@@ -104,26 +108,14 @@ const Hero = () => {
         {/* Métricas Rápidas Ancoradas no Rodapé do Hero */}
         <div className="w-full pt-4 pb-2">
           <dl className="grid grid-cols-1 gap-4 border-t border-border-light pt-6 dark:border-border-dark sm:grid-cols-3">
-            <div>
-              <dt className="sr-only">Sistemas publicados</dt>
-              <dd>
-                <Metric value="2 Sistemas" label="ManutFlow e HelpFlow em produção" />
-              </dd>
-            </div>
-
-            <div>
-              <dt className="sr-only">Projetos publicados</dt>
-              <dd>
-                <Metric value="5 Projetos" label="De sistemas em produção a PWAs e integrações" />
-              </dd>
-            </div>
-
-            <div>
-              <dt className="sr-only">Segurança</dt>
-              <dd>
-                <Metric value="Segurança" label="Isolamento em camadas (RBAC e Supabase RLS)" />
-              </dd>
-            </div>
+            {t.hero.metrics.map((metric) => (
+              <div key={metric.sr}>
+                <dt className="sr-only">{metric.sr}</dt>
+                <dd>
+                  <Metric value={metric.value} label={metric.label} />
+                </dd>
+              </div>
+            ))}
           </dl>
         </div>
       </div>

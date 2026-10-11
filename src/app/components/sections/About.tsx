@@ -1,10 +1,17 @@
+'use client';
+
 import Image from 'next/image';
-import { experienciasAnteriores, trajectorySkills } from '@/data/experience';
+import { getExperiencias, getTrajectorySkills } from '@/data/experience';
 import Section from '../ui/Section';
 import { SectionHeader } from '../ui/SectionHeader';
 import { Pill } from '../ui/Pill';
+import { useLanguage } from '@/app/hooks/useLanguage';
 
 const About = () => {
+  const { language, t } = useLanguage();
+  const experienciasAnteriores = getExperiencias(language);
+  const trajectorySkills = getTrajectorySkills(language);
+
   return (
     <Section
       id="sobre-mim"
@@ -13,9 +20,9 @@ const About = () => {
     >
       <div className="mx-auto max-w-container">
         <SectionHeader
-          eyebrow="Perfil & Trajetória"
-          title="Sobre mim"
-          subtitle="Graduando em Análise e Desenvolvimento de Sistemas com experiência prática autônoma em suporte e manutenção de TI, unindo método investigativo à construção de software."
+          eyebrow={t.about.eyebrow}
+          title={t.about.title}
+          subtitle={t.about.subtitle}
         />
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-8 items-stretch w-full min-w-0">
@@ -26,10 +33,10 @@ const About = () => {
               <div>
                 <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3 border-b border-border-light/60 pb-3 dark:border-border-dark/60">
                   <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
-                    Perfil Profissional
+                    {t.about.profileLabel}
                   </p>
                   <span className="font-mono text-[11px] text-primary-text dark:text-light-text">
-                    Caeté / BH e Região · Remoto
+                    {t.about.location}
                   </span>
                 </div>
 
@@ -49,23 +56,17 @@ const About = () => {
                       Tharcio Santos
                     </h3>
                     <p className="text-xs sm:text-sm font-medium text-secondary-text dark:text-dark-text">
-                      Desenvolvedor Full Stack Júnior
+                      {t.about.role}
                     </p>
                     <p className="font-mono text-[11px] text-accent dark:text-accent-light">
-                      Foco em arquitetura segura e interfaces funcionais
+                      {t.about.focus}
                     </p>
                   </div>
                 </div>
 
                 <div className="mt-4 border-t border-border-light/60 pt-3.5 dark:border-border-dark/60">
                   <p className="text-xs leading-relaxed text-secondary-text dark:text-dark-text">
-                    Minha transição para a programação nasceu ao diagnosticar e resolver problemas
-                    técnicos no suporte: percebi que queria ir além da manutenção de máquinas e
-                    passar a{' '}
-                    <strong className="font-semibold text-primary-text dark:text-light-text">
-                      construir sistemas completos, seguros e confiáveis
-                    </strong>{' '}
-                    que resolvam dores reais das pessoas e empresas.
+                    {t.about.bio}
                   </p>
                 </div>
               </div>
@@ -75,22 +76,22 @@ const About = () => {
             <div className="rounded-md border border-border-light/80 bg-light-surface/60 p-4 sm:p-5 dark:border-border-dark/80 dark:bg-dark-surface/60">
               <div className="flex items-center justify-between border-b border-border-light/60 pb-2.5 dark:border-border-dark/60">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
-                  Formação Acadêmica
+                  {t.about.educationLabel}
                 </p>
                 <span className="font-mono text-[10px] uppercase tracking-wider text-primary-text dark:text-light-text">
-                  Graduação
+                  {t.about.graduation}
                 </span>
               </div>
               <h4 className="mt-3 font-heading text-sm sm:text-base font-semibold text-primary-text dark:text-light-text">
-                Análise e Desenvolvimento de Sistemas
+                {t.about.course}
               </h4>
               <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] text-secondary-text dark:text-dark-text">
                 <span>Anhanguera</span>
                 <span>·</span>
-                <span>Cursando</span>
+                <span>{t.about.studying}</span>
                 <span>·</span>
                 <span className="text-primary-text dark:text-light-text font-medium">
-                  Julho de 2027
+                  {t.about.graduationDate}
                 </span>
               </div>
             </div>
@@ -101,10 +102,10 @@ const About = () => {
             <div>
               <div className="mb-4 flex items-center justify-between border-b border-border-light/60 pb-3 dark:border-border-dark/60">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
-                  Experiências Profissionais
+                  {t.about.experienceLabel}
                 </p>
                 <span className="font-mono text-[10px] uppercase tracking-wider text-primary-text dark:text-light-text">
-                  Trajetória & Bagagem
+                  {t.about.trajectoryLabel}
                 </span>
               </div>
 
@@ -136,7 +137,7 @@ const About = () => {
             {/* Habilidades Transferidas Integradas Organicamente */}
             <div className="mt-6 border-t border-border-light/60 pt-4 dark:border-border-dark/60">
               <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-secondary-text dark:text-dark-text mb-2.5">
-                Competências transferidas para a engenharia de software
+                {t.about.transferLabel}
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {trajectorySkills.map((skill) => (

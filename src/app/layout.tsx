@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
 import { ReadingProgressBar } from './components/ui/ReadingProgressBar';
 import { ThemeProvider } from './components/ThemeProvider';
+import { LanguageProvider } from './components/LanguageProvider';
 
 import { GITHUB_URL, LINKEDIN_URL, SITE_URL } from '@/data/constants';
 
@@ -209,18 +210,20 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-light-bg font-sans text-primary-text antialiased dark:bg-dark-bg dark:text-light-text`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <ReadingProgressBar />
-          <a href="#conteudo-principal" className="skip-link">
-            Pular para o conteúdo
-          </a>
-          <div className="relative z-10 flex min-h-screen flex-col">
-            <Navbar />
-            <main id="conteudo-principal" className="flex-1">
-              {children}
-            </main>
-            <Footer />
-            <BackToTop />
-          </div>
+          <LanguageProvider>
+            <ReadingProgressBar />
+            <a href="#conteudo-principal" className="skip-link">
+              Pular para o conteúdo
+            </a>
+            <div className="relative z-10 flex min-h-screen flex-col">
+              <Navbar />
+              <main id="conteudo-principal" className="flex-1">
+                {children}
+              </main>
+              <Footer />
+              <BackToTop />
+            </div>
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

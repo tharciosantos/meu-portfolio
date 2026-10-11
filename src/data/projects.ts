@@ -1,3 +1,5 @@
+import type { Language } from './i18n/types';
+
 export type ProjectScreen = {
   label: string;
   imageUrl: string;
@@ -363,3 +365,331 @@ export const projects: Project[] = [
     kind: 'secondary',
   },
 ];
+
+export const projectsEn: Project[] = [
+  {
+    title: 'ManutFlow: Maintenance Control',
+    shortTitle: 'ManutFlow',
+    description:
+      'A complete system for registering equipment, opening service orders, and a dashboard with status and priority indicators.',
+    responsibility:
+      'Modeling and implementation of the equipment system, service orders, and operational indicators. Hands-on experience with IT support and maintenance helped bring the product closer to real equipment and maintenance routines.',
+    challenge: 'Ensuring each user accesses only their own equipment and maintenance orders.',
+    decision:
+      'Applying three-layer protection with a proxy, getUser() in the API, and Row Level Security in the database.',
+    technicalHighlight:
+      'Three-layer security (Proxy, API getUser, and Supabase RLS), PostgreSQL modeling, and a suite of 169 unit tests in Vitest.',
+    evidence: [
+      '169 automated tests in 17 files',
+      'Full CRUD with search, filters, pagination, and history',
+      'Layered protection with session, user_id, and RLS',
+      '1-click demo access with preloaded data',
+      'Operational dashboard with deadlines, indicators, and urgent orders',
+    ],
+    demoNote:
+      'Includes an interactive order simulator and 1-click demo access with pre-registered equipment.',
+    metrics: ['169 automated tests', 'Industrial Simulator', 'Supabase RLS'],
+    architectureLinks: [
+      {
+        label: 'RLS and Proxy Security',
+        url: 'https://github.com/tharciosantos/manutflow/blob/main/src/proxy.ts',
+        badge: 'Supabase RLS',
+      },
+      {
+        label: '169 Tests by Feature (Domain)',
+        url: 'https://github.com/tharciosantos/manutflow/tree/main/src/features',
+        badge: 'Vitest',
+      },
+    ],
+    nextStep: 'Expand automated tests and evolve the dashboard operational indicators.',
+    imageUrl: '/images/manutflow-screenshot.webp',
+    imageAlt: 'ManutFlow dashboard with equipment and service order indicators',
+    screens: [
+      {
+        label: 'Home',
+        imageUrl: '/images/manutflow/preview-landing.webp',
+        caption: 'Home page with interactive order simulator',
+      },
+      {
+        label: 'Login',
+        imageUrl: '/images/manutflow/preview-login.webp',
+        caption: 'Instant 1-click demo access',
+      },
+      {
+        label: 'Dashboard',
+        imageUrl: '/images/manutflow/preview-dashboard.webp',
+        caption: 'Operational panel with SLA metrics and urgent orders',
+      },
+      {
+        label: 'Equipment',
+        imageUrl: '/images/manutflow/preview-equipamentos.webp',
+        caption: 'Equipment inventory with search, filters, and history',
+      },
+      {
+        label: 'Work Orders',
+        imageUrl: '/images/manutflow/preview-ordens.webp',
+        caption: 'Listing and filters of orders by priority and deadline',
+      },
+    ],
+    githubUrl: 'https://github.com/tharciosantos/manutflow',
+    demoUrl: 'https://manutflow.vercel.app',
+    demoLabel: 'Open system',
+    tags: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'PostgreSQL'],
+    kind: 'featured',
+  },
+  {
+    title: 'HelpFlow: Help Desk System',
+    shortTitle: 'HelpFlow',
+    description: 'Full-stack system for opening, tracking, and managing internal tickets.',
+    responsibility:
+      'Complete product development, from interface and business rules to persistence and deploy.',
+    challenge:
+      'Organizing authentication, permissions, business rules, and history without compromising flow clarity.',
+    decision:
+      'Separating access with CLIENT/AGENT roles and centralizing validation with Zod and persistence with Prisma.',
+    technicalHighlight:
+      'RBAC authorization (Client/Agent) with NextAuth and JWT, centralized validation with Zod, and relational persistence with Prisma ORM.',
+    evidence: [
+      'Credential and GitHub authentication, with password recovery',
+      'Access control by profile and ticket ownership',
+      '1-click demo access (Client and Agent views)',
+      'Paginated ticket CRUD with status and priorities',
+      '82 Vitest tests + 15 E2E flows in Cypress',
+    ],
+    demoNote:
+      'Includes an interactive simulator on the home screen and 1-click demo access for Requester and Agent.',
+    metrics: ['Interactive Simulator', 'RBAC (Client/Agent)', 'NextAuth + JWT'],
+    architectureLinks: [
+      {
+        label: 'Prisma & PostgreSQL Modeling',
+        url: 'https://github.com/tharciosantos/helpflow/blob/main/prisma/schema.prisma',
+        badge: 'Prisma Schema',
+      },
+      {
+        label: 'Ticket RBAC Authorization',
+        url: 'https://github.com/tharciosantos/helpflow/blob/main/src/lib/ticketAuthorization.js',
+        badge: 'RBAC (Client/Agent)',
+      },
+      {
+        label: 'Zod Validations & Schemas',
+        url: 'https://github.com/tharciosantos/helpflow/blob/main/src/lib/schemas.js',
+        badge: 'Zod',
+      },
+    ],
+    nextStep: 'Expand integration tests and add observability to critical flows.',
+    imageUrl: '/images/helpflow-screenshot.webp',
+    imageAlt: 'HelpFlow interface showing a ticket management panel with ticket list, status, and priority',
+    screens: [
+      {
+        label: 'Home',
+        imageUrl: '/images/helpflow/home-demonstracao.webp',
+        caption: 'Home page with demo and ticket simulator',
+      },
+      {
+        label: 'Login',
+        imageUrl: '/images/helpflow/login.webp',
+        caption: 'Instant access for Requester and Support',
+      },
+      {
+        label: 'Requester',
+        imageUrl: '/images/helpflow/dashboard-solicitante.webp',
+        caption: 'Client panel for opening and tracking tickets',
+      },
+      {
+        label: 'Agent',
+        imageUrl: '/images/helpflow/dashboard-agent.webp',
+        caption: 'Support panel with triage and ticket queue',
+      },
+      {
+        label: 'Details',
+        imageUrl: '/images/helpflow/detalhe-ticket-agent.webp',
+        caption: 'Detailed ticket record and message history',
+      },
+    ],
+    githubUrl: 'https://github.com/tharciosantos/helpflow',
+    demoUrl: 'https://helpflow.vercel.app/',
+    demoLabel: 'Open app',
+    tags: ['Next.js', 'React', 'JavaScript', 'Prisma', 'Supabase', 'NextAuth'],
+    kind: 'featured',
+  },
+  {
+    title: 'DevLinks: Link Aggregator',
+    shortTitle: 'DevLinks',
+    description:
+      'Full-stack Linktree-style links platform with frontend and API in separate repositories, JWT authentication, avatar upload via Cloudinary, and a public profile.',
+    technicalHighlight:
+      'Express API with JWT, MongoDB, and Cloudinary upload; React + Vite frontend with TanStack Query; Cypress E2E on the login and links flow.',
+    responsibility:
+      'Full-stack development across two repositories: React SPA (async state and media) and Express API (auth, ownership, and uploads).',
+    decision:
+      'Separating frontend and backend (SPA + REST API) with TanStack Query on the client, JWT + ownership on the server, Cloudinary for media, and Cypress on the login and links flow.',
+    evidence: [
+      'Cypress E2E covering login and link management',
+      'Avatar upload via Cloudinary in the Express API (MongoDB + JWT)',
+      'Caching and sync with TanStack Query + API integration tests (Vitest)',
+      'Lightweight, shareable public profile for social bios',
+    ],
+    outcome: 'Upload · sync · E2E tests',
+    metrics: ['Cloudinary + MongoDB', 'TanStack Query', 'E2E Cypress (login/links)'],
+    architectureLinks: [
+      {
+        label: 'Cypress E2E Tests',
+        url: 'https://github.com/tharciosantos/devlinks-web/tree/main/cypress',
+        badge: 'Cypress',
+      },
+      {
+        label: 'Express + Cloudinary API',
+        url: 'https://github.com/tharciosantos/devlinks-api',
+        badge: 'Backend',
+      },
+      {
+        label: 'API Client & Services',
+        url: 'https://github.com/tharciosantos/devlinks-web/blob/main/src/services/api.js',
+        badge: 'API Client',
+      },
+    ],
+    demoNote: 'Includes a quick demo access button with credentials and preloaded links.',
+    imageUrl: '/images/screenshot-devlinks.webp',
+    imageAlt: 'DevLinks dashboard with link management and public profile',
+    screens: [
+      {
+        label: 'Login',
+        imageUrl: '/images/devlinks/tela-login.webp',
+        caption: 'Secure access and 1-click demo button',
+      },
+      {
+        label: 'Sign Up',
+        imageUrl: '/images/devlinks/tela-cadastro.webp',
+        caption: 'Simple, fast account creation for new users',
+      },
+      {
+        label: 'Dashboard',
+        imageUrl: '/images/devlinks/tela-dashboard.webp',
+        caption: 'Link management, specialty, and avatar upload',
+      },
+      {
+        label: 'Public',
+        imageUrl: '/images/devlinks/tela-perfil-publico.webp',
+        caption: 'Shareable public profile page for social and bio',
+      },
+    ],
+    githubUrl: 'https://github.com/tharciosantos/devlinks-web',
+    demoUrl: 'https://devlinks-web-api.vercel.app/',
+    demoLabel: 'Open app',
+    tags: ['React', 'TanStack Query', 'Express', 'MongoDB', 'Cloudinary', 'Cypress'],
+    kind: 'secondary',
+  },
+  {
+    title: 'Grocery List: PWA',
+    shortTitle: 'Grocery List',
+    description:
+      'Progressive web app for organizing shopping by aisles, calculating purchase progress in real time, auto-categorizing products, and sharing on WhatsApp.',
+    technicalHighlight:
+      'Offline-first PWA with Service Worker, a local database of 220 items in 11 sectors, smart auto-categorization, and formatted WhatsApp export.',
+    responsibility:
+      'Architecture and development of an offline-first PWA with a preloaded catalog and a list generator for messaging.',
+    decision:
+      'Using Service Workers for full static caching and a local data structure indexed by sectors to operate offline.',
+    evidence: [
+      'Installable PWA with Service Worker and active cache-first',
+      'Catalog of 220 items across 11 market sectors',
+      '100% autonomous offline operation with no server requests',
+      'Structured, formatted export to WhatsApp',
+    ],
+    outcome: 'PWA · 220 items · 100% offline',
+    metrics: ['PWA Offline Ready', '220 Mapped Items', '11 Sectors'],
+    architectureLinks: [
+      {
+        label: 'PWA Offline & Service Worker',
+        url: 'https://github.com/tharciosantos/lista-mercado/blob/main/vite.config.js',
+        badge: 'Offline-First',
+      },
+    ],
+    demoNote: 'Installable on smartphones with offline functionality and structured WhatsApp export.',
+    imageUrl: '/images/lista-mercado/tela-lista-pendentes.webp',
+    imageAlt: 'Grocery List interface with product list and sectors',
+    screens: [
+      {
+        label: 'Empty List',
+        imageUrl: '/images/lista-mercado/tela-lista-vazia.webp',
+        caption: 'Home screen with a shortcut to load the 220-item Master List',
+      },
+      {
+        label: 'Pending',
+        imageUrl: '/images/lista-mercado/tela-lista-pendentes.webp',
+        caption: 'Items organized by sectors with smart auto-categorization',
+      },
+      {
+        label: 'Cart',
+        imageUrl: '/images/lista-mercado/tela-carrinho.webp',
+        caption: 'Progress tracking and item check in the cart',
+      },
+    ],
+    githubUrl: 'https://github.com/tharciosantos/lista-mercado',
+    demoUrl: 'https://lista-mercado-sage.vercel.app/',
+    demoLabel: 'Open PWA',
+    tags: ['React', 'Vite', 'PWA', 'Tailwind CSS', 'Offline-First'],
+    kind: 'secondary',
+  },
+  {
+    title: 'Crypto Dashboard',
+    shortTitle: 'Crypto Dashboard',
+    description:
+      'Financial panel for checking quotes, 24h changes, market indicators, and dynamic detail pages per asset.',
+    technicalHighlight:
+      'CoinGecko API consumption in the Next.js App Router, dynamic /coin/[id] routes, fallback data protection, and client-side filters.',
+    responsibility:
+      'Building a financial market analytics interface with external API consumption and fallback handling.',
+    decision:
+      'Implementing a fallback layer (local contingency) against rate limits (HTTP 429) and dynamic routing in the App Router.',
+    evidence: [
+      'Dynamic CoinGecko API consumption with quotes and KPIs',
+      'Automatic fallback mechanism for fault tolerance and rate limits',
+      'Dynamic /coin/[id] routes with market statistics',
+      'Quick filters by top gainers, losers, and 24h volume',
+    ],
+    outcome: 'FinTech · CoinGecko API · dynamic routes',
+    metrics: ['CoinGecko API Live', 'Next.js App Router', 'FinTech UI'],
+    architectureLinks: [
+      {
+        label: 'App Router Routes',
+        url: 'https://github.com/tharciosantos/crypto-dashboard/tree/main/src/app',
+        badge: 'App Router',
+      },
+      {
+        label: 'Fallback Data (Contingency)',
+        url: 'https://github.com/tharciosantos/crypto-dashboard/blob/main/src/data/fallbackCoins.js',
+        badge: 'Resilience',
+      },
+    ],
+    demoNote: 'Real-time monitoring with market KPIs, gainers/losers filters, and detailed statistics.',
+    imageUrl: '/images/crypto-dashboard/tela-mercado.webp',
+    imageAlt: 'Cryptocurrency dashboard with quotes, KPIs, and filters',
+    screens: [
+      {
+        label: 'Market',
+        imageUrl: '/images/crypto-dashboard/tela-mercado.webp',
+        caption: 'General panel with market KPIs and real-time quotes',
+      },
+      {
+        label: 'Top Gainers',
+        imageUrl: '/images/crypto-dashboard/tela-maiores-altas.webp',
+        caption: 'Dynamic filter by top gainers and 24h percentage change',
+      },
+      {
+        label: 'Details',
+        imageUrl: '/images/crypto-dashboard/tela-detalhes-ativo.webp',
+        caption: 'Individual asset page with 24h price range and statistics',
+      },
+    ],
+    githubUrl: 'https://github.com/tharciosantos/crypto-dashboard',
+    demoUrl: 'https://crypto-dashboard-five-sandy.vercel.app/',
+    demoLabel: 'Open dashboard',
+    tags: ['Next.js', 'React', 'CoinGecko API', 'Tailwind CSS', 'FinTech'],
+    kind: 'secondary',
+  },
+];
+
+export function getProjects(language: Language): Project[] {
+  return language === 'en' ? projectsEn : projects;
+}

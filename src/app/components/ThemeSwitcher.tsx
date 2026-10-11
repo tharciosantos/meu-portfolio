@@ -3,6 +3,7 @@
 import { useSyncExternalStore, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { MoonIcon, SunIcon } from './ui/Icons';
+import { useLanguage } from '@/app/hooks/useLanguage';
 
 // Detecta renderização no cliente sem setState em effect —
 // evita mismatch de hidratação ao renderizar o tema apenas no browser.
@@ -14,6 +15,7 @@ export const ThemeSwitcher = () => {
   const mounted = useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
   const [rotation, setRotation] = useState(0);
   const { resolvedTheme, setTheme } = useTheme();
+  const { t } = useLanguage();
   const isDark = resolvedTheme === 'dark';
 
   if (!mounted) {
@@ -30,7 +32,7 @@ export const ThemeSwitcher = () => {
       <button
         onClick={toggleTheme}
         className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border-light/70 bg-light-surface text-secondary-text transition-all hover:border-accent hover:text-accent dark:border-border-dark/70 dark:bg-dark-surface dark:text-dark-text dark:hover:border-accent-light dark:hover:text-accent-light active:scale-95 cursor-pointer"
-        aria-label="Alternar tema"
+        aria-label={t.theme.toggle}
       >
         <span
           className="block transition-transform duration-300 ease-in-out"
@@ -43,7 +45,7 @@ export const ThemeSwitcher = () => {
         className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded border border-border-light bg-white px-2 py-1 text-xs font-medium text-secondary-text opacity-0 shadow-sm transition-all duration-200 group-hover:opacity-100 dark:border-border-dark dark:bg-dark-card dark:text-dark-text"
         aria-hidden="true"
       >
-        {isDark ? 'Tema claro' : 'Tema escuro'}
+        {isDark ? t.theme.light : t.theme.dark}
       </span>
     </div>
   );
