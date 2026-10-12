@@ -45,11 +45,12 @@ Mais do que uma vitrine, este repositório reúne práticas aplicadas em fronten
 - **Micro-interações contidas:** botões com sombra sutil no CTA primário, abas de projetos com estado ativo sólido e feedback visual com `active:scale-[0.98]`.
 - **Barra de progresso de leitura:** `ReadingProgressBar` fixa no topo que preenche conforme o scroll, usando `scaleX` para performance.
 - **ProjectScreenShowcase:** carousel de telas dos projetos com navegação por teclado, swipe gestures, auto-play pausável e lightbox modal em alta resolução.
-- **Hero direto:** proposta Full Stack em sistemas, APIs e bancos de dados, com CTAs padronizados para explorar projetos e baixar currículo.
+- **Hero direto:** proposta Full Stack em sistemas, APIs e bancos de dados, com CTAs padronizados para explorar projetos e baixar currículo, além de atalhos para GitHub, LinkedIn e WhatsApp.
 - **Performance:** bundle otimizado via **Turbopack** (padrão do Next 16), imagens em WebP/AVIF com quality tiers, ícones SVG locais, CSS crítico otimizado e Analytics carregado dinamicamente.
-- **SEO técnico:** sitemap, `robots.txt`, Open Graph, Twitter Card, Schema.org e `themeColor` por preferência de tema.
+- **SEO técnico:** sitemap com rotas `/projetos/[slug]`, `robots.txt`, Open Graph, Twitter Card, Schema.org com endereço local (Caeté/MG) e keywords regionais, além de `themeColor` por preferência de tema.
+- **Internacionalização:** dicionários PT/EN sem dependências, com `LanguageProvider`, toggle PT/EN no navbar e persistência em `localStorage`.
 - **Integração contínua:** GitHub Actions validando formatação, lint, tipos, testes e build.
-- **Qualidade de código:** Vitest, Testing Library, ESLint, Prettier, Husky e lint-staged, com 70 testes automatizados cobrindo componentes, hooks e dados.
+- **Qualidade de código:** Vitest, Testing Library, ESLint, Prettier, Husky e lint-staged, com 78 testes automatizados cobrindo componentes, hooks e dados.
 
 ### Metas Lighthouse
 
@@ -109,12 +110,12 @@ Dashboard para consulta de criptomoedas com busca, rotas dinâmicas, renderizaç
 
 ## Seções do Portfólio
 
-1. **Hero:** posicionamento Full Stack em sistemas, APIs e bancos de dados, com CTAs destacados para explorar projetos e baixar currículo.
-2. **Projetos:** ManutFlow, HelpFlow e projetos complementares, com showcase visual de telas, decisões técnicas e links para arquitetura no GitHub.
+1. **Hero:** posicionamento Full Stack em sistemas, APIs e bancos de dados, com CTAs destacados para explorar projetos e baixar currículo, além de atalhos para GitHub, LinkedIn e WhatsApp.
+2. **Projetos:** ManutFlow, HelpFlow e projetos complementares em cards, com case study dedicado em `/projetos/[slug]`, showcase visual de telas, decisões técnicas e links para arquitetura no GitHub.
 3. **Processo:** fluxo geral de análise, escopo, implementação, validação e evolução incremental.
 4. **Competências:** frontend, backend, banco de dados, testes e versionamento organizados por contexto de uso.
 5. **Sobre:** formação, perfil profissional, foto de perfil e experiências anteriores integradas.
-6. **Contato:** email com botão de cópia, LinkedIn, GitHub, currículo e indicadores de disponibilidade.
+6. **Contato:** CTA de WhatsApp com mensagem pré-preenchida, email com botão de cópia, LinkedIn, GitHub, currículo e indicadores de disponibilidade.
 
 ---
 
@@ -131,7 +132,7 @@ Dashboard para consulta de criptomoedas com busca, rotas dinâmicas, renderizaç
 
 - `class-variance-authority`, `clsx` e `tailwind-merge` — variantes e composição de classes.
 - `next-themes` — suporte a tema claro, escuro e preferência do sistema.
-- Ícones SVG locais — 18 ícones gerais (`Icons.tsx`) + 17 ícones técnicos (`TechIcons.tsx`) sem biblioteca externa.
+- Ícones SVG locais — 21 componentes gerais (`Icons.tsx`, incluindo `WhatsappIcon`) + 18 ícones técnicos (`TechIcons.tsx`) sem biblioteca externa.
 - `@vercel/analytics` — métricas de uso carregadas dinamicamente.
 
 ### Qualidade e testes
@@ -152,14 +153,17 @@ Dashboard para consulta de criptomoedas com busca, rotas dinâmicas, renderizaç
 - **Navbar interativa:** `Navbar.tsx` é um Server Component que importa `NavbarClient.tsx` (Client Component). Esta separação mantém o scroll spy, menu mobile e alternador de tema no cliente, enquanto o wrapper permanece no servidor.
 - **RevealOnScroll:** componente client wrapper reutilizável que usa `useScrollReveal` para animar elementos ao scroll com suporte a `prefers-reduced-motion`.
 - **ReadingProgressBar:** barra de progresso fixa no topo atualizada por `ref` e `requestAnimationFrame`, sem renderização React a cada evento de scroll.
-- **ProjectTabs:** abas de navegação com WAI-ARIA completo (roles, keyboard navigation com Arrow/Home/End) e sombra nas abas ativas para contraste.
+- **ProjectCaseStudy:** case dedicado por projeto em `/projetos/[slug]` (estático via `generateStaticParams`, com `generateMetadata` e canonical), com showcase, responsabilidade, decisão técnica, evidências e links de arquitetura.
 - **ProjectScreenShowcase:** carousel com auto-play pausável, swipe gestures para mobile, navegação por teclado e lightbox modal em alta resolução.
 - **Refinamentos visuais:** CTA principal do Hero ampliado (20% maior), foto de perfil aumentada no About, footer com borda accent para mais presença.
-- **Ícones SVG locais:** 35 ícones totais organizados em `Icons.tsx` e `TechIcons.tsx` com resolver automático por nome de tecnologia.
+- **Contato com conversão:** CTA de WhatsApp (`wa.me` com mensagem pré-preenchida) como ação primária na seção de contato, além de atalho no Hero — ampliando os caminhos de conversão além do `mailto`.
+- **SEO local:** keywords regionais (Belo Horizonte, Caeté, Minas Gerais, Remoto) e `PostalAddress` + `homeLocation` no Schema.org para descoberta por recrutadores da região.
+- **i18n PT/EN:** dicionários próprios sem dependências, `LanguageProvider` com persistência em `localStorage`, toggle PT/EN no navbar e dados (projetos, capacidades, experiência) traduzidos — PT como padrão.
+- **Ícones SVG locais:** 21 componentes em `Icons.tsx` (incluindo `WhatsappIcon`) + 18 ícones técnicos em `TechIcons.tsx` com resolver automático por nome de tecnologia.
 - **CSS crítico otimizado:** o build usa `optimizeCss` com `critters` para reduzir bloqueios na renderização inicial.
 - **Analytics dinâmico:** o Analytics da Vercel é isolado em um componente client carregado dinamicamente.
 - **Bundle de produção otimizado:** build via **Turbopack** (padrão do Next 16) com imagens em WebP/AVIF e quality tiers configurados (75, 78, 82, 85, 90, 95).
-- **Testes comportamentais:** 71 testes usando `userEvent` para simular interações mais próximas do uso real.
+- **Testes comportamentais:** parte dos 78 testes usa `userEvent` para simular interações mais próximas do uso real.
 - **CI:** GitHub Actions executa formatação, lint, TypeScript, testes e build antes da integração com `main`.
 - **Pre-commit automático:** Husky e lint-staged executam ESLint e Prettier nos arquivos staged.
 
@@ -176,10 +180,11 @@ meu-portfolio/
 │   ├── app/                 # App Router, páginas, layout e rotas auxiliares
 │   │   ├── components/      # Navbar, Footer, seções e componentes de UI
 │   │   │   ├── __tests__/   # Testes de componentes
-│   │   │   ├── sections/    # Seções do portfólio (Hero, Projects, Process, Capabilities, About, Contact)
+│   │   │   ├── sections/    # Seções do portfólio (Hero, Projects, ProjectCaseStudy, Process, Capabilities, About, Contact)
 │   │   │   └── ui/          # Componentes reutilizáveis (Button, Pill, Icons, TechIcons, ProjectScreenShowcase, etc.)
-│   │   └── hooks/           # Hooks customizados (useScrollReveal, useActiveSection)
-│   ├── data/                # Projetos, habilidades, experiências e constantes
+│   │   ├── projetos/[slug]/ # Case study dedicado por projeto (generateStaticParams + generateMetadata)
+│   │   └── hooks/           # Hooks customizados (useScrollReveal, useActiveSection, useLanguage)
+│   ├── data/                # Projetos, habilidades, experiências, constantes e i18n (dicionários PT/EN)
 │   │   └── __tests__/       # Testes de dados
 │   └── lib/                 # Funções utilitárias (cn)
 └── vitest.setup.ts          # Configuração global dos testes
