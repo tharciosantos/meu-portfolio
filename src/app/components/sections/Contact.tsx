@@ -95,7 +95,7 @@ const Contact = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t.contact.whatsappAria}
-              className="mt-4 inline-flex items-center justify-center gap-2 rounded-md bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-[#1DA851] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-dark-bg"
+              className="mt-3 inline-flex w-fit items-center gap-2 rounded-md bg-[#25D366] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-[#1DA851] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-dark-bg"
             >
               <WhatsappIcon className="h-4 w-4" />
               {t.contact.whatsappCta}
@@ -104,7 +104,7 @@ const Contact = () => {
               {t.contact.whatsappNote} {WHATSAPP_DISPLAY}
             </p>
 
-            <div className="mt-4 divide-y divide-border-light/60 dark:divide-border-dark/60">
+            <div className="mt-3 divide-y divide-border-light/60 dark:divide-border-dark/60">
               {/* E-mail */}
               <div className="flex flex-col gap-3 py-3.5 sm:py-4 first:pt-2 sm:flex-row sm:items-center sm:justify-between min-w-0">
                 <span className="flex items-center gap-3 min-w-0">
