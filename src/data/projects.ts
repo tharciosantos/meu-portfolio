@@ -27,6 +27,7 @@ export type Project = {
   metrics?: string[];
   tags: string[];
   kind: 'featured' | 'secondary';
+  status: 'production' | 'demo';
   outcome?: string;
   technicalHighlight?: string;
   responsibility?: string;
@@ -42,6 +43,7 @@ export const projects: Project[] = [
     title: 'ManutFlow: Controle de Manutenção',
     shortTitle: 'ManutFlow',
     slug: 'manutflow',
+    status: 'production',
     description:
       'Sistema completo para cadastro de equipamentos, abertura de ordens de serviço e dashboard com indicadores de status e prioridade.',
     responsibility:
@@ -51,9 +53,9 @@ export const projects: Project[] = [
     decision:
       'Aplicar proteção em três camadas com proxy, getUser() na API e Row Level Security no banco.',
     technicalHighlight:
-      'Segurança em três camadas (Proxy, API getUser e Supabase RLS), modelagem PostgreSQL e suíte de 169 testes unitários no Vitest.',
+      'Segurança em três camadas (Proxy, API getUser e Supabase RLS), modelagem PostgreSQL e suíte de 184 testes unitários no Vitest.',
     evidence: [
-      '169 testes automatizados em 17 arquivos',
+      '184 testes automatizados em 17 arquivos',
       'CRUD completo com busca, filtros, paginação e histórico',
       'Proteção em camadas com sessão, user_id e RLS',
       'Acesso de demonstração com 1-clique e dados pré-carregados',
@@ -61,7 +63,7 @@ export const projects: Project[] = [
     ],
     demoNote:
       'Inclui simulador interativo de ordens e acesso demo com 1-clique com equipamentos pré-cadastrados.',
-    metrics: ['169 testes automatizados', 'Simulador Industrial', 'Supabase RLS'],
+    metrics: ['184 testes automatizados', 'Simulador Industrial', 'Supabase RLS'],
     architectureLinks: [
       {
         label: 'Segurança RLS e Proxy',
@@ -69,7 +71,7 @@ export const projects: Project[] = [
         badge: 'Supabase RLS',
       },
       {
-        label: '169 Testes por Feature (Domínio)',
+        label: '184 Testes por Feature (Domínio)',
         url: 'https://github.com/tharciosantos/manutflow/tree/main/src/features',
         badge: 'Vitest',
       },
@@ -114,6 +116,7 @@ export const projects: Project[] = [
     title: 'HelpFlow: Sistema de Help Desk',
     shortTitle: 'HelpFlow',
     slug: 'helpflow',
+    status: 'production',
     description:
       'Sistema full stack para abertura, acompanhamento e gerenciamento de chamados internos.',
     responsibility:
@@ -129,7 +132,7 @@ export const projects: Project[] = [
       'Controle de acesso por perfil e propriedade de chamados',
       'Acesso de demonstração com 1-clique (visões Client e Agent)',
       'CRUD paginado de tickets com status e prioridades',
-      '82 testes Vitest + 15 fluxos E2E no Cypress',
+      '169 testes Vitest em 14 arquivos + 15 fluxos E2E no Cypress',
     ],
     demoNote:
       'Inclui simulador interativo na tela inicial e acesso demo com 1-clique para Solicitante e Agente.',
@@ -192,6 +195,7 @@ export const projects: Project[] = [
     title: 'DevLinks: Agregador de Links',
     shortTitle: 'DevLinks',
     slug: 'devlinks',
+    status: 'demo',
     description:
       'Plataforma full-stack de links estilo Linktree com frontend e API em repositórios separados, autenticação JWT, upload de avatar via Cloudinary e perfil público.',
     technicalHighlight:
@@ -261,6 +265,7 @@ export const projects: Project[] = [
     title: 'Lista de Mercado: PWA',
     shortTitle: 'Lista de Mercado',
     slug: 'lista-de-mercado',
+    status: 'demo',
     description:
       'Aplicação web progressiva para organizar compras por corredores, calcular o progresso da compra em tempo real, auto-categorizar produtos e compartilhar no WhatsApp.',
     technicalHighlight:
@@ -286,7 +291,7 @@ export const projects: Project[] = [
     ],
     demoNote:
       'Instalável no smartphone com funcionamento offline e exportação estruturada para o WhatsApp.',
-    imageUrl: '/images/lista-mercado/tela-lista-pendentes.webp',
+    imageUrl: '/images/lista-mercado-screenshot.webp',
     imageAlt: 'Interface do Lista de Mercado com lista de produtos e setores',
     screens: [
       {
@@ -296,7 +301,7 @@ export const projects: Project[] = [
       },
       {
         label: 'Pendentes',
-        imageUrl: '/images/lista-mercado/tela-lista-pendentes.webp',
+        imageUrl: '/images/lista-mercado-screenshot.webp',
         caption: 'Itens organizados por setores e auto-categorização inteligente',
       },
       {
@@ -315,6 +320,7 @@ export const projects: Project[] = [
     title: 'Crypto Dashboard',
     shortTitle: 'Crypto Dashboard',
     slug: 'crypto-dashboard',
+    status: 'demo',
     description:
       'Painel financeiro para consulta de cotações, variações de 24h, indicadores de mercado e páginas dinâmicas detalhadas por ativo.',
     technicalHighlight:
@@ -345,12 +351,12 @@ export const projects: Project[] = [
     ],
     demoNote:
       'Monitoramento em tempo real com KPIs de mercado, filtros por altas/baixas e estatísticas detalhadas.',
-    imageUrl: '/images/crypto-dashboard/tela-mercado.webp',
+    imageUrl: '/images/screenshot-crypto.webp',
     imageAlt: 'Dashboard de criptomoedas com cotações, KPIs e filtros',
     screens: [
       {
         label: 'Mercado',
-        imageUrl: '/images/crypto-dashboard/tela-mercado.webp',
+        imageUrl: '/images/screenshot-crypto.webp',
         caption: 'Painel geral com KPIs de mercado e cotações em tempo real',
       },
       {
@@ -377,6 +383,7 @@ export const projectsEn: Project[] = [
     title: 'ManutFlow: Maintenance Control',
     shortTitle: 'ManutFlow',
     slug: 'manutflow',
+    status: 'production',
     description:
       'A complete system for registering equipment, opening service orders, and a dashboard with status and priority indicators.',
     responsibility:
@@ -385,9 +392,9 @@ export const projectsEn: Project[] = [
     decision:
       'Applying three-layer protection with a proxy, getUser() in the API, and Row Level Security in the database.',
     technicalHighlight:
-      'Three-layer security (Proxy, API getUser, and Supabase RLS), PostgreSQL modeling, and a suite of 169 unit tests in Vitest.',
+      'Three-layer security (Proxy, API getUser, and Supabase RLS), PostgreSQL modeling, and a suite of 184 unit tests in Vitest.',
     evidence: [
-      '169 automated tests in 17 files',
+      '184 automated tests in 17 files',
       'Full CRUD with search, filters, pagination, and history',
       'Layered protection with session, user_id, and RLS',
       '1-click demo access with preloaded data',
@@ -395,7 +402,7 @@ export const projectsEn: Project[] = [
     ],
     demoNote:
       'Includes an interactive order simulator and 1-click demo access with pre-registered equipment.',
-    metrics: ['169 automated tests', 'Industrial Simulator', 'Supabase RLS'],
+    metrics: ['184 automated tests', 'Industrial Simulator', 'Supabase RLS'],
     architectureLinks: [
       {
         label: 'RLS and Proxy Security',
@@ -403,7 +410,7 @@ export const projectsEn: Project[] = [
         badge: 'Supabase RLS',
       },
       {
-        label: '169 Tests by Feature (Domain)',
+        label: '184 Tests by Feature (Domain)',
         url: 'https://github.com/tharciosantos/manutflow/tree/main/src/features',
         badge: 'Vitest',
       },
@@ -448,6 +455,7 @@ export const projectsEn: Project[] = [
     title: 'HelpFlow: Help Desk System',
     shortTitle: 'HelpFlow',
     slug: 'helpflow',
+    status: 'production',
     description: 'Full-stack system for opening, tracking, and managing internal tickets.',
     responsibility:
       'Complete product development, from interface and business rules to persistence and deploy.',
@@ -462,7 +470,7 @@ export const projectsEn: Project[] = [
       'Access control by profile and ticket ownership',
       '1-click demo access (Client and Agent views)',
       'Paginated ticket CRUD with status and priorities',
-      '82 Vitest tests + 15 E2E flows in Cypress',
+      '169 Vitest tests in 14 files + 15 Cypress E2E flows',
     ],
     demoNote:
       'Includes an interactive simulator on the home screen and 1-click demo access for Requester and Agent.',
@@ -525,6 +533,7 @@ export const projectsEn: Project[] = [
     title: 'DevLinks: Link Aggregator',
     shortTitle: 'DevLinks',
     slug: 'devlinks',
+    status: 'demo',
     description:
       'Full-stack Linktree-style links platform with frontend and API in separate repositories, JWT authentication, avatar upload via Cloudinary, and a public profile.',
     technicalHighlight:
@@ -593,6 +602,7 @@ export const projectsEn: Project[] = [
     title: 'Grocery List: PWA',
     shortTitle: 'Grocery List',
     slug: 'lista-de-mercado',
+    status: 'demo',
     description:
       'Progressive web app for organizing shopping by aisles, calculating purchase progress in real time, auto-categorizing products, and sharing on WhatsApp.',
     technicalHighlight:
@@ -618,7 +628,7 @@ export const projectsEn: Project[] = [
     ],
     demoNote:
       'Installable on smartphones with offline functionality and structured WhatsApp export.',
-    imageUrl: '/images/lista-mercado/tela-lista-pendentes.webp',
+    imageUrl: '/images/lista-mercado-screenshot.webp',
     imageAlt: 'Grocery List interface with product list and sectors',
     screens: [
       {
@@ -628,7 +638,7 @@ export const projectsEn: Project[] = [
       },
       {
         label: 'Pending',
-        imageUrl: '/images/lista-mercado/tela-lista-pendentes.webp',
+        imageUrl: '/images/lista-mercado-screenshot.webp',
         caption: 'Items organized by sectors with smart auto-categorization',
       },
       {
@@ -647,6 +657,7 @@ export const projectsEn: Project[] = [
     title: 'Crypto Dashboard',
     shortTitle: 'Crypto Dashboard',
     slug: 'crypto-dashboard',
+    status: 'demo',
     description:
       'Financial panel for checking quotes, 24h changes, market indicators, and dynamic detail pages per asset.',
     technicalHighlight:
@@ -677,12 +688,12 @@ export const projectsEn: Project[] = [
     ],
     demoNote:
       'Real-time monitoring with market KPIs, gainers/losers filters, and detailed statistics.',
-    imageUrl: '/images/crypto-dashboard/tela-mercado.webp',
+    imageUrl: '/images/screenshot-crypto.webp',
     imageAlt: 'Cryptocurrency dashboard with quotes, KPIs, and filters',
     screens: [
       {
         label: 'Market',
-        imageUrl: '/images/crypto-dashboard/tela-mercado.webp',
+        imageUrl: '/images/screenshot-crypto.webp',
         caption: 'General panel with market KPIs and real-time quotes',
       },
       {

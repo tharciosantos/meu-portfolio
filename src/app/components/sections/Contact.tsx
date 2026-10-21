@@ -95,7 +95,7 @@ const Contact = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t.contact.whatsappAria}
-              className="mt-3 inline-flex w-fit items-center gap-2 rounded-md bg-[#25D366] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-[#1DA851] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-dark-bg"
+              className="mt-3 inline-flex w-fit items-center gap-2 rounded-md bg-[#075E54] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-[#054C44] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#075E54] focus-visible:ring-offset-2 dark:focus-visible:ring-[#25D366] dark:focus-visible:ring-offset-dark-bg"
             >
               <WhatsappIcon className="h-4 w-4" />
               {t.contact.whatsappCta}

@@ -23,7 +23,7 @@ A interface segue uma direção editorial: hierarquia visual clara, leitura ráp
 ## Proposta Visual e Estrutura
 
 - **Portfólio editorial:** projetos apresentados por problema, solução, entrega e decisões técnicas.
-- **ManutFlow como case principal:** produto em produção com autenticação, isolamento de dados em 3 camadas de segurança (proxy.ts, getUser(), RLS), gestão de equipamentos e ordens de manutenção, e 169 testes automatizados em 17 arquivos.
+- **ManutFlow como case principal:** produto em produção com autenticação, isolamento de dados em 3 camadas de segurança (proxy.ts, getUser(), RLS), gestão de equipamentos e ordens de manutenção, e 184 testes automatizados em 17 arquivos.
 - **HelpFlow como case complementar:** aplicação com autenticação por credenciais e GitHub, recuperação de senha, controle de acesso RBAC, regras de negócio, banco relacional e deploy.
 - **Projetos complementares:** DevLinks, Lista de Mercado e Crypto Dashboard aparecem como evidências adicionais.
 - **Processo visível:** seção "Como eu trabalho" apresenta o fluxo de análise, escopo, implementação, teste e revisão.
@@ -71,7 +71,7 @@ Os resultados medidos devem ser atualizados apenas após uma nova auditoria da v
 
 Sistema completo para controle de equipamentos, ordens de manutenção, responsáveis, prioridades e histórico. Inclui autenticação com Supabase Auth, três camadas de segurança (proxy.ts, getUser(), RLS), cadastro e gestão de equipamentos, ordens de serviço com controle de status, filtros, busca textual e dashboard com indicadores.
 
-- **Destaques:** Acesso demo com 1-clique e dados pré-carregados, 169 testes automatizados em 17 arquivos, CRUD com busca, filtros, paginação, histórico e acompanhamento de prazos.
+- **Destaques:** Acesso demo com 1-clique e dados pré-carregados, 184 testes automatizados em 17 arquivos, CRUD com busca, filtros, paginação, histórico e acompanhamento de prazos.
 - **Stack:** Next.js, React, TypeScript, Tailwind CSS, Supabase, PostgreSQL
 - **Links:** [Aplicação](https://manutflow.vercel.app) · [Código](https://github.com/tharciosantos/manutflow)
 
@@ -79,7 +79,7 @@ Sistema completo para controle de equipamentos, ordens de manutenção, respons�
 
 Sistema de help desk Full Stack para abertura, acompanhamento e gerenciamento de chamados internos, com autenticação por credenciais e GitHub, recuperação de senha, controle de acesso por perfil e propriedade dos chamados.
 
-- **Destaques:** Acesso demo com 1-clique (perfis Client e Agent), CRUD paginado de tickets, validação com Zod, rate limiting, 82 testes Vitest e 15 fluxos E2E no Cypress.
+- **Destaques:** Acesso demo com 1-clique (perfis Client e Agent), CRUD paginado de tickets, validação com Zod, rate limiting, 169 testes Vitest em 14 arquivos e 15 fluxos E2E no Cypress.
 - **Stack:** Next.js, React, JavaScript, Prisma, Supabase, PostgreSQL, NextAuth, Zod, Vitest, Cypress
 - **Links:** [Aplicação](https://helpflow.vercel.app/) · [Código](https://github.com/tharciosantos/helpflow)
 

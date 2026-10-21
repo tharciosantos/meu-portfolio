@@ -20,8 +20,12 @@ const pt = {
     dark: 'Tema escuro',
   },
   hero: {
-    eyebrowLocation: 'Desenvolvedor de Software · Brasil',
-    eyebrowStatus: 'Disponível para Estágio / Júnior · Full Stack',
+    eyebrowLocation: 'Brasil · Remoto',
+    eyebrowStatus: 'Disponível para estágio ou júnior',
+    showcasePrimaryAlt: 'Página inicial do ManutFlow com simulador interativo de ordens de serviço',
+    showcasePrimaryLabel: 'ManutFlow · Em produção',
+    showcaseSecondaryAlt: 'Painel de atendimento do HelpFlow com tickets e resumo geral',
+    showcaseSecondaryLabel: 'HelpFlow · Em produção',
     headline: 'Desenvolvo sistemas completos, da interface aos dados.',
     subtitle:
       'Com projetos publicados e experiência técnica autônoma, construo aplicações web focadas em usabilidade, controle de acesso seguro e cobertura consistente de testes.',
@@ -38,18 +42,18 @@ const pt = {
       },
       {
         value: '5 Projetos',
-        label: 'De sistemas em produção a PWAs e integrações',
+        label: 'Publicados com demo e código aberto',
         sr: 'Projetos publicados',
       },
       {
-        value: 'Segurança',
-        label: 'Isolamento em camadas (RBAC e Supabase RLS)',
-        sr: 'Segurança',
+        value: '353 Testes',
+        label: 'Vitest no ManutFlow e HelpFlow',
+        sr: 'Testes automatizados',
       },
     ],
   },
   projects: {
-    eyebrow: 'Sistemas em Produção',
+    eyebrow: 'Cases selecionados',
     title: 'Projetos',
     subtitle:
       'Sistemas full stack desenvolvidos do zero, com autenticação em camadas, banco relacional, regras de negócio e suítes de testes automatizados.',
@@ -70,6 +74,7 @@ const pt = {
     available: '{count} projetos disponíveis',
     counter: 'Projeto 0{index} / 0{total}',
     inProduction: 'Sistema em Produção',
+    demoProject: 'Projeto de demonstração',
     responsibility: 'Minha responsabilidade',
     decision: 'Decisão técnica',
     implemented: 'Implementado',
@@ -213,8 +218,12 @@ const en: typeof pt = {
     dark: 'Dark theme',
   },
   hero: {
-    eyebrowLocation: 'Software Developer · Brazil',
-    eyebrowStatus: 'Open to Internship / Junior · Full Stack',
+    eyebrowLocation: 'Brazil · Remote',
+    eyebrowStatus: 'Open to internship or junior roles',
+    showcasePrimaryAlt: 'ManutFlow landing page with an interactive service order simulator',
+    showcasePrimaryLabel: 'ManutFlow · In production',
+    showcaseSecondaryAlt: 'HelpFlow support panel with tickets and overview',
+    showcaseSecondaryLabel: 'HelpFlow · In production',
     headline: 'I build complete systems, from interface to data.',
     subtitle:
       'With published projects and self-driven technical experience, I build web applications focused on usability, secure access control, and consistent test coverage.',
@@ -231,18 +240,18 @@ const en: typeof pt = {
       },
       {
         value: '5 Projects',
-        label: 'From production systems to PWAs and integrations',
+        label: 'Published with demos and open source',
         sr: 'Published projects',
       },
       {
-        value: 'Security',
-        label: 'Layered isolation (RBAC and Supabase RLS)',
-        sr: 'Security',
+        value: '353 Tests',
+        label: 'Vitest across ManutFlow and HelpFlow',
+        sr: 'Automated tests',
       },
     ],
   },
   projects: {
-    eyebrow: 'Production Systems',
+    eyebrow: 'Selected work',
     title: 'Projects',
     subtitle:
       'Full-stack systems built from scratch, with layered authentication, relational databases, business rules, and automated test suites.',
@@ -263,6 +272,7 @@ const en: typeof pt = {
     available: '{count} projects available',
     counter: 'Project 0{index} / 0{total}',
     inProduction: 'System in Production',
+    demoProject: 'Demo project',
     responsibility: 'My responsibility',
     decision: 'Technical decision',
     implemented: 'Implemented',
