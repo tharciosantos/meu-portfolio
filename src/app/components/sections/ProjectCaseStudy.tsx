@@ -17,7 +17,7 @@ export function ProjectCaseStudy({ slug }: ProjectCaseStudyProps) {
   const { language, t } = useLanguage();
   const project = getProjects(language).find((p) => p.slug === slug);
 
-  if (!project) return null;
+  if (!project || project.kind !== 'featured') return null;
 
   return (
     <div className="mx-auto w-full max-w-container min-w-0">
@@ -54,9 +54,33 @@ export function ProjectCaseStudy({ slug }: ProjectCaseStudyProps) {
           {project.status === 'production' ? t.tabs.inProduction : t.tabs.demoProject}
         </span>
       </div>
-      <p className="mb-8 max-w-prose-wide text-body-lg text-secondary-text dark:text-dark-text">
-        {project.description}
-      </p>
+      <div className="mb-8 space-y-3">
+        <p className="max-w-prose-wide text-body-lg text-secondary-text dark:text-dark-text">
+          {project.description}
+        </p>
+
+        {project.challenge && (
+          <p className="max-w-prose-wide text-sm leading-relaxed text-secondary-text dark:text-dark-text">
+            <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-accent dark:text-accent-light">
+              {t.tabs.challenge}
+            </span>{' '}
+            {project.challenge}
+          </p>
+        )}
+
+        {project.metrics && project.metrics.length > 0 && (
+          <ul aria-label={t.tabs.metrics} className="flex list-none flex-wrap gap-1.5 pt-1">
+            {project.metrics.map((metric) => (
+              <li
+                key={metric}
+                className="rounded-md border border-border-light/80 bg-light-card px-2.5 py-1 font-mono text-[10px] text-secondary-text dark:border-border-dark/80 dark:bg-dark-card dark:text-dark-text"
+              >
+                {metric}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full min-w-0 items-start">
         {/* Coluna Esquerda: Showcase Visual e Ações (7 Colunas) */}
@@ -135,7 +159,7 @@ export function ProjectCaseStudy({ slug }: ProjectCaseStudyProps) {
                 {t.tabs.implemented}
               </p>
               <ul className="grid gap-1.5 text-xs text-secondary-text dark:text-dark-text min-w-0">
-                {project.evidence.slice(0, 4).map((item) => (
+                {project.evidence.map((item) => (
                   <li key={item} className="flex items-start gap-2 break-words">
                     <CheckIcon className="h-3.5 w-3.5 text-accent dark:text-accent-light shrink-0 mt-0.5" />
                     <span>{item}</span>
