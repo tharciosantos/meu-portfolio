@@ -25,7 +25,7 @@ A interface segue uma direção editorial: hierarquia visual clara, leitura ráp
 - **Portfólio editorial:** projetos apresentados por problema, solução, entrega e decisões técnicas.
 - **ManutFlow como case principal:** produto em produção com autenticação, isolamento de dados em 3 camadas de segurança (proxy.ts, getUser(), RLS), gestão de equipamentos e ordens de manutenção, e 184 testes automatizados em 17 arquivos.
 - **HelpFlow como case complementar:** aplicação com autenticação por credenciais e GitHub, recuperação de senha, controle de acesso RBAC, regras de negócio, banco relacional e deploy.
-- **Projetos complementares:** DevLinks, Lista de Mercado e Crypto Dashboard aparecem como evidências adicionais.
+- **Projetos complementares:** DevLinks, Lista de Mercado e Crypto Dashboard aparecem em cards compactos, com demo e código, sem case dedicado.
 - **Processo visível:** seção "Como eu trabalho" apresenta o fluxo de análise, escopo, implementação, teste e revisão.
 - **Competências:** tecnologias organizadas por contexto de uso, em vez de uma lista genérica de ferramentas.
 
@@ -47,10 +47,10 @@ Mais do que uma vitrine, este repositório reúne práticas aplicadas em fronten
 - **ProjectScreenShowcase:** carousel de telas dos projetos com navegação por teclado, swipe gestures, auto-play pausável e lightbox modal em alta resolução.
 - **Hero direto:** proposta Full Stack em sistemas, APIs e bancos de dados, com CTAs padronizados para explorar projetos e baixar currículo, além de atalhos para GitHub, LinkedIn e WhatsApp.
 - **Performance:** bundle otimizado via **Turbopack** (padrão do Next 16), imagens em WebP/AVIF com quality tiers, ícones SVG locais, CSS crítico otimizado e Analytics carregado dinamicamente.
-- **SEO técnico:** sitemap com rotas `/projetos/[slug]`, `robots.txt`, Open Graph, Twitter Card, Schema.org com endereço local (Caeté/MG) e keywords regionais, além de `themeColor` por preferência de tema.
+- **SEO técnico:** sitemap com as rotas `/projetos/[slug]` dos cases principais, `robots.txt`, Open Graph, Twitter Card, Schema.org com endereço local (Caeté/MG) e keywords regionais, além de `themeColor` por preferência de tema.
 - **Internacionalização:** dicionários PT/EN sem dependências, com `LanguageProvider`, toggle PT/EN no navbar e persistência em `localStorage`.
 - **Integração contínua:** GitHub Actions validando formatação, lint, tipos, testes e build.
-- **Qualidade de código:** Vitest, Testing Library, ESLint, Prettier, Husky e lint-staged, com 78 testes automatizados cobrindo componentes, hooks e dados.
+- **Qualidade de código:** Vitest, Testing Library, ESLint, Prettier, Husky e lint-staged, com 80 testes automatizados cobrindo componentes, hooks e dados.
 
 ### Metas Lighthouse
 
@@ -111,7 +111,7 @@ Dashboard para consulta de criptomoedas com busca, rotas dinâmicas, renderizaç
 ## Seções do Portfólio
 
 1. **Hero:** posicionamento Full Stack em sistemas, APIs e bancos de dados, com CTAs destacados para explorar projetos e baixar currículo, além de atalhos para GitHub, LinkedIn e WhatsApp.
-2. **Projetos:** ManutFlow, HelpFlow e projetos complementares em cards, com case study dedicado em `/projetos/[slug]`, showcase visual de telas, decisões técnicas e links para arquitetura no GitHub.
+2. **Projetos:** ManutFlow e HelpFlow como cases dedicados em `/projetos/[slug]`, com showcase visual, problema, decisões técnicas e evidências; projetos complementares em cards compactos com demo e código.
 3. **Processo:** fluxo geral de análise, escopo, implementação, validação e evolução incremental.
 4. **Competências:** frontend, backend, banco de dados, testes e versionamento organizados por contexto de uso.
 5. **Sobre:** formação, perfil profissional, foto de perfil e experiências anteriores integradas.
@@ -153,7 +153,7 @@ Dashboard para consulta de criptomoedas com busca, rotas dinâmicas, renderizaç
 - **Navbar interativa:** `Navbar.tsx` é um Server Component que importa `NavbarClient.tsx` (Client Component). Esta separação mantém o scroll spy, menu mobile e alternador de tema no cliente, enquanto o wrapper permanece no servidor.
 - **RevealOnScroll:** componente client wrapper reutilizável que usa `useScrollReveal` para animar elementos ao scroll com suporte a `prefers-reduced-motion`.
 - **ReadingProgressBar:** barra de progresso fixa no topo atualizada por `ref` e `requestAnimationFrame`, sem renderização React a cada evento de scroll.
-- **ProjectCaseStudy:** case dedicado por projeto em `/projetos/[slug]` (estático via `generateStaticParams`, com `generateMetadata` e canonical), com showcase, responsabilidade, decisão técnica, evidências e links de arquitetura.
+- **ProjectCaseStudy:** cases dedicados aos dois projetos principais em `/projetos/[slug]` (estático via `generateStaticParams`, com `generateMetadata` e canonical), com showcase, problema, responsabilidade, decisão técnica, evidências e links de arquitetura.
 - **ProjectScreenShowcase:** carousel com auto-play pausável, swipe gestures para mobile, navegação por teclado e lightbox modal em alta resolução.
 - **Refinamentos visuais:** CTA principal do Hero ampliado (20% maior), foto de perfil aumentada no About, footer com borda accent para mais presença.
 - **Contato com conversão:** CTA de WhatsApp (`wa.me` com mensagem pré-preenchida) como ação primária na seção de contato, além de atalho no Hero — ampliando os caminhos de conversão além do `mailto`.
@@ -163,7 +163,7 @@ Dashboard para consulta de criptomoedas com busca, rotas dinâmicas, renderizaç
 - **CSS crítico otimizado:** o build usa `optimizeCss` com `critters` para reduzir bloqueios na renderização inicial.
 - **Analytics dinâmico:** o Analytics da Vercel é isolado em um componente client carregado dinamicamente.
 - **Bundle de produção otimizado:** build via **Turbopack** (padrão do Next 16) com imagens em WebP/AVIF e quality tiers configurados (75, 78, 82, 85, 90, 95).
-- **Testes comportamentais:** parte dos 78 testes usa `userEvent` para simular interações mais próximas do uso real.
+- **Testes comportamentais:** parte dos 80 testes usa `userEvent` para simular interações mais próximas do uso real.
 - **CI:** GitHub Actions executa formatação, lint, TypeScript, testes e build antes da integração com `main`.
 - **Pre-commit automático:** Husky e lint-staged executam ESLint e Prettier nos arquivos staged.
 
@@ -182,7 +182,7 @@ meu-portfolio/
 │   │   │   ├── __tests__/   # Testes de componentes
 │   │   │   ├── sections/    # Seções do portfólio (Hero, Projects, ProjectCaseStudy, Process, Capabilities, About, Contact)
 │   │   │   └── ui/          # Componentes reutilizáveis (Button, Pill, Icons, TechIcons, ProjectScreenShowcase, etc.)
-│   │   ├── projetos/[slug]/ # Case study dedicado por projeto (generateStaticParams + generateMetadata)
+│   │   ├── projetos/[slug]/ # Cases dos projetos principais (generateStaticParams + generateMetadata)
 │   │   └── hooks/           # Hooks customizados (useScrollReveal, useActiveSection, useLanguage)
 │   ├── data/                # Projetos, habilidades, experiências, constantes e i18n (dicionários PT/EN)
 │   │   └── __tests__/       # Testes de dados

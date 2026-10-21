@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import Footer from '../Footer';
 import Navbar from '../Navbar';
@@ -85,26 +85,30 @@ describe('conteúdo principal do redesign', () => {
     );
   });
 
-  it('exibe os projetos secundários em cards compactos com link para a página', () => {
+  it('exibe os projetos secundários em cards compactos com demo e código', () => {
     render(<Projects />);
 
     expect(screen.getByRole('heading', { level: 3, name: 'Outros projetos' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'DevLinks' })).toHaveAttribute(
+    expect(screen.getByRole('heading', { level: 4, name: 'DevLinks' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 4, name: 'Lista de Mercado' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 4, name: 'Crypto Dashboard' })).toBeInTheDocument();
+
+    expect(screen.getAllByRole('link', { name: /Ver case study/ })).toHaveLength(2);
+    expect(screen.queryByRole('link', { name: 'DevLinks' })).not.toBeInTheDocument();
+
+    const devlinksCard = screen.getByRole('heading', { level: 4, name: 'DevLinks' }).closest('li');
+    expect(devlinksCard).not.toBeNull();
+
+    expect(
+      within(devlinksCard!).getByRole('link', { name: 'Ver código de DevLinks no GitHub' })
+    ).toHaveAttribute('href', 'https://github.com/tharciosantos/devlinks-web');
+    expect(within(devlinksCard!).getByRole('link', { name: /Acessar aplicação/ })).toHaveAttribute(
       'href',
-      '/projetos/devlinks'
+      'https://devlinks-web-api.vercel.app/'
     );
-    expect(screen.getByRole('link', { name: 'Lista de Mercado' })).toHaveAttribute(
-      'href',
-      '/projetos/lista-de-mercado'
-    );
-    expect(screen.getByRole('link', { name: 'Crypto Dashboard' })).toHaveAttribute(
-      'href',
-      '/projetos/crypto-dashboard'
-    );
-    expect(screen.getByRole('link', { name: 'Ver código de DevLinks no GitHub' })).toHaveAttribute(
-      'href',
-      'https://github.com/tharciosantos/devlinks-web'
-    );
+    expect(
+      within(devlinksCard!).queryByRole('link', { name: /Ver case study/ })
+    ).not.toBeInTheDocument();
   });
 
   it('unifica perfil atual, formação e trajetória anterior com clareza', () => {

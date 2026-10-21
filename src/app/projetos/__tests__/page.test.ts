@@ -1,15 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { generateStaticParams, generateMetadata } from '../[slug]/page';
+import { dynamicParams, generateStaticParams, generateMetadata } from '../[slug]/page';
 
 describe('página de projeto (/projetos/[slug])', () => {
-  it('gera params estáticos para todos os projetos', () => {
-    expect(generateStaticParams().map((p) => p.slug)).toEqual([
-      'manutflow',
-      'helpflow',
-      'devlinks',
-      'lista-de-mercado',
-      'crypto-dashboard',
-    ]);
+  it('gera params estáticos apenas para os cases principais', () => {
+    expect(dynamicParams).toBe(false);
+    expect(generateStaticParams().map((p) => p.slug)).toEqual(['manutflow', 'helpflow']);
   });
 
   it('gera metadata correta para um slug válido', async () => {
@@ -22,8 +17,11 @@ describe('página de projeto (/projetos/[slug])', () => {
     );
   });
 
-  it('retorna metadata vazia para um slug inexistente', async () => {
-    const metadata = await generateMetadata({ params: Promise.resolve({ slug: 'x' }) });
-    expect(metadata).toEqual({});
+  it('retorna metadata vazia para slug inexistente ou projeto secundário', async () => {
+    const inexistente = await generateMetadata({ params: Promise.resolve({ slug: 'x' }) });
+    const secundario = await generateMetadata({ params: Promise.resolve({ slug: 'devlinks' }) });
+
+    expect(inexistente).toEqual({});
+    expect(secundario).toEqual({});
   });
 });

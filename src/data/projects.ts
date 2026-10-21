@@ -198,63 +198,9 @@ export const projects: Project[] = [
     status: 'demo',
     description:
       'Plataforma full-stack de links estilo Linktree com frontend e API em repositórios separados, autenticação JWT, upload de avatar via Cloudinary e perfil público.',
-    technicalHighlight:
-      'API Express com JWT, MongoDB e upload no Cloudinary; frontend React + Vite com TanStack Query; E2E com Cypress no fluxo de login e links.',
-    responsibility:
-      'Desenvolvimento full-stack em dois repositórios: SPA React (estado assíncrono e mídia) e API Express (auth, ownership e uploads).',
-    decision:
-      'Separar frontend e backend (SPA + API REST) com TanStack Query no client, JWT + ownership no servidor, Cloudinary para mídia e Cypress no fluxo de login e links.',
-    evidence: [
-      'E2E no Cypress cobrindo login e gerenciamento de links',
-      'Upload de avatar via Cloudinary na API Express (MongoDB + JWT)',
-      'Cache e sincronização com TanStack Query + testes de integração na API (Vitest)',
-      'Perfil público leve e compartilhável para bio de redes',
-    ],
     outcome: 'Upload · sincronização · testes E2E',
-    metrics: ['Cloudinary + MongoDB', 'TanStack Query', 'E2E Cypress (login/links)'],
-    architectureLinks: [
-      {
-        label: 'Testes E2E Cypress',
-        url: 'https://github.com/tharciosantos/devlinks-web/tree/main/cypress',
-        badge: 'Cypress',
-      },
-      {
-        label: 'API Express + Cloudinary',
-        url: 'https://github.com/tharciosantos/devlinks-api',
-        badge: 'Backend',
-      },
-      {
-        label: 'API Client & Services',
-        url: 'https://github.com/tharciosantos/devlinks-web/blob/main/src/services/api.js',
-        badge: 'API Client',
-      },
-    ],
-    demoNote:
-      'Inclui botão de acesso rápido de demonstração com credenciais e links pré-carregados.',
     imageUrl: '/images/screenshot-devlinks.webp',
     imageAlt: 'Dashboard do DevLinks com gerenciamento de links e perfil público',
-    screens: [
-      {
-        label: 'Login',
-        imageUrl: '/images/devlinks/tela-login.webp',
-        caption: 'Acesso seguro e botão de demonstração com 1-clique',
-      },
-      {
-        label: 'Cadastro',
-        imageUrl: '/images/devlinks/tela-cadastro.webp',
-        caption: 'Criação de conta simples e rápida para novos usuários',
-      },
-      {
-        label: 'Dashboard',
-        imageUrl: '/images/devlinks/tela-dashboard.webp',
-        caption: 'Gerenciamento de links, especialidade e upload de avatar',
-      },
-      {
-        label: 'Público',
-        imageUrl: '/images/devlinks/tela-perfil-publico.webp',
-        caption: 'Página de perfil pública compartilhável para redes e bio',
-      },
-    ],
     githubUrl: 'https://github.com/tharciosantos/devlinks-web',
     demoUrl: 'https://devlinks-web-api.vercel.app/',
     demoLabel: 'Acessar aplicação',
@@ -268,48 +214,9 @@ export const projects: Project[] = [
     status: 'demo',
     description:
       'Aplicação web progressiva para organizar compras por corredores, calcular o progresso da compra em tempo real, auto-categorizar produtos e compartilhar no WhatsApp.',
-    technicalHighlight:
-      'PWA offline-first com Service Worker, banco local de 220 itens em 11 setores, auto-categorização inteligente e exportação formatada para o WhatsApp.',
-    responsibility:
-      'Arquitetura e desenvolvimento de PWA offline-first com catálogo pré-carregado e gerador de listas para mensageria.',
-    decision:
-      'Empregar Service Workers para cache estático total e estrutura de dados local indexada por setores para operar sem conexão.',
-    evidence: [
-      'PWA instalável com Service Worker e cache-first ativo',
-      'Catálogo de 220 itens distribuídos em 11 setores de mercado',
-      'Operação 100% autônoma e offline sem requisições a servidor',
-      'Exportação estruturada e formatada para o WhatsApp',
-    ],
     outcome: 'PWA · 220 itens · 100% offline',
-    metrics: ['PWA Offline Ready', '220 Itens Mapeados', '11 Setores'],
-    architectureLinks: [
-      {
-        label: 'PWA Offline & Service Worker',
-        url: 'https://github.com/tharciosantos/lista-mercado/blob/main/vite.config.js',
-        badge: 'Offline-First',
-      },
-    ],
-    demoNote:
-      'Instalável no smartphone com funcionamento offline e exportação estruturada para o WhatsApp.',
     imageUrl: '/images/lista-mercado-screenshot.webp',
     imageAlt: 'Interface do Lista de Mercado com lista de produtos e setores',
-    screens: [
-      {
-        label: 'Lista Vazia',
-        imageUrl: '/images/lista-mercado/tela-lista-vazia.webp',
-        caption: 'Tela inicial com atalho para carregar Lista Mestra de 220 itens',
-      },
-      {
-        label: 'Pendentes',
-        imageUrl: '/images/lista-mercado-screenshot.webp',
-        caption: 'Itens organizados por setores e auto-categorização inteligente',
-      },
-      {
-        label: 'Carrinho',
-        imageUrl: '/images/lista-mercado/tela-carrinho.webp',
-        caption: 'Acompanhamento de progresso e conferência de itens no carrinho',
-      },
-    ],
     githubUrl: 'https://github.com/tharciosantos/lista-mercado',
     demoUrl: 'https://lista-mercado-sage.vercel.app/',
     demoLabel: 'Acessar PWA',
@@ -323,53 +230,9 @@ export const projects: Project[] = [
     status: 'demo',
     description:
       'Painel financeiro para consulta de cotações, variações de 24h, indicadores de mercado e páginas dinâmicas detalhadas por ativo.',
-    technicalHighlight:
-      'Consumo da CoinGecko API no Next.js App Router, rotas dinâmicas /coin/[id], blindagem com dados de contingência e filtros client-side.',
-    responsibility:
-      'Construção de interface analítica de mercado financeiro com consumo de API externa e tratamento de contingência.',
-    decision:
-      'Implementar camada de contingência (fallback local) contra rate limit (HTTP 429) e roteamento dinâmico no App Router.',
-    evidence: [
-      'Consumo dinâmico da CoinGecko API com cotações e KPIs',
-      'Mecanismo de fallback automático para tolerância a falhas e rate limits',
-      'Rotas dinâmicas /coin/[id] com estatísticas de mercado',
-      'Filtros rápidos por maiores altas, baixas e volume de 24h',
-    ],
     outcome: 'FinTech · CoinGecko API · rotas dinâmicas',
-    metrics: ['CoinGecko API Live', 'Next.js App Router', 'FinTech UI'],
-    architectureLinks: [
-      {
-        label: 'Rotas App Router',
-        url: 'https://github.com/tharciosantos/crypto-dashboard/tree/main/src/app',
-        badge: 'App Router',
-      },
-      {
-        label: 'Dados de Contingência (Fallback)',
-        url: 'https://github.com/tharciosantos/crypto-dashboard/blob/main/src/data/fallbackCoins.js',
-        badge: 'Resiliência',
-      },
-    ],
-    demoNote:
-      'Monitoramento em tempo real com KPIs de mercado, filtros por altas/baixas e estatísticas detalhadas.',
     imageUrl: '/images/screenshot-crypto.webp',
     imageAlt: 'Dashboard de criptomoedas com cotações, KPIs e filtros',
-    screens: [
-      {
-        label: 'Mercado',
-        imageUrl: '/images/screenshot-crypto.webp',
-        caption: 'Painel geral com KPIs de mercado e cotações em tempo real',
-      },
-      {
-        label: 'Altas',
-        imageUrl: '/images/crypto-dashboard/tela-maiores-altas.webp',
-        caption: 'Filtro dinâmico por maiores altas e variação percentual de 24h',
-      },
-      {
-        label: 'Detalhes',
-        imageUrl: '/images/crypto-dashboard/tela-detalhes-ativo.webp',
-        caption: 'Página individual do ativo com faixa de preço 24h e estatísticas',
-      },
-    ],
     githubUrl: 'https://github.com/tharciosantos/crypto-dashboard',
     demoUrl: 'https://crypto-dashboard-five-sandy.vercel.app/',
     demoLabel: 'Acessar dashboard',
@@ -536,62 +399,9 @@ export const projectsEn: Project[] = [
     status: 'demo',
     description:
       'Full-stack Linktree-style links platform with frontend and API in separate repositories, JWT authentication, avatar upload via Cloudinary, and a public profile.',
-    technicalHighlight:
-      'Express API with JWT, MongoDB, and Cloudinary upload; React + Vite frontend with TanStack Query; Cypress E2E on the login and links flow.',
-    responsibility:
-      'Full-stack development across two repositories: React SPA (async state and media) and Express API (auth, ownership, and uploads).',
-    decision:
-      'Separating frontend and backend (SPA + REST API) with TanStack Query on the client, JWT + ownership on the server, Cloudinary for media, and Cypress on the login and links flow.',
-    evidence: [
-      'Cypress E2E covering login and link management',
-      'Avatar upload via Cloudinary in the Express API (MongoDB + JWT)',
-      'Caching and sync with TanStack Query + API integration tests (Vitest)',
-      'Lightweight, shareable public profile for social bios',
-    ],
     outcome: 'Upload · sync · E2E tests',
-    metrics: ['Cloudinary + MongoDB', 'TanStack Query', 'E2E Cypress (login/links)'],
-    architectureLinks: [
-      {
-        label: 'Cypress E2E Tests',
-        url: 'https://github.com/tharciosantos/devlinks-web/tree/main/cypress',
-        badge: 'Cypress',
-      },
-      {
-        label: 'Express + Cloudinary API',
-        url: 'https://github.com/tharciosantos/devlinks-api',
-        badge: 'Backend',
-      },
-      {
-        label: 'API Client & Services',
-        url: 'https://github.com/tharciosantos/devlinks-web/blob/main/src/services/api.js',
-        badge: 'API Client',
-      },
-    ],
-    demoNote: 'Includes a quick demo access button with credentials and preloaded links.',
     imageUrl: '/images/screenshot-devlinks.webp',
     imageAlt: 'DevLinks dashboard with link management and public profile',
-    screens: [
-      {
-        label: 'Login',
-        imageUrl: '/images/devlinks/tela-login.webp',
-        caption: 'Secure access and 1-click demo button',
-      },
-      {
-        label: 'Sign Up',
-        imageUrl: '/images/devlinks/tela-cadastro.webp',
-        caption: 'Simple, fast account creation for new users',
-      },
-      {
-        label: 'Dashboard',
-        imageUrl: '/images/devlinks/tela-dashboard.webp',
-        caption: 'Link management, specialty, and avatar upload',
-      },
-      {
-        label: 'Public',
-        imageUrl: '/images/devlinks/tela-perfil-publico.webp',
-        caption: 'Shareable public profile page for social and bio',
-      },
-    ],
     githubUrl: 'https://github.com/tharciosantos/devlinks-web',
     demoUrl: 'https://devlinks-web-api.vercel.app/',
     demoLabel: 'Open app',
@@ -605,48 +415,9 @@ export const projectsEn: Project[] = [
     status: 'demo',
     description:
       'Progressive web app for organizing shopping by aisles, calculating purchase progress in real time, auto-categorizing products, and sharing on WhatsApp.',
-    technicalHighlight:
-      'Offline-first PWA with Service Worker, a local database of 220 items in 11 sectors, smart auto-categorization, and formatted WhatsApp export.',
-    responsibility:
-      'Architecture and development of an offline-first PWA with a preloaded catalog and a list generator for messaging.',
-    decision:
-      'Using Service Workers for full static caching and a local data structure indexed by sectors to operate offline.',
-    evidence: [
-      'Installable PWA with Service Worker and active cache-first',
-      'Catalog of 220 items across 11 market sectors',
-      '100% autonomous offline operation with no server requests',
-      'Structured, formatted export to WhatsApp',
-    ],
     outcome: 'PWA · 220 items · 100% offline',
-    metrics: ['PWA Offline Ready', '220 Mapped Items', '11 Sectors'],
-    architectureLinks: [
-      {
-        label: 'PWA Offline & Service Worker',
-        url: 'https://github.com/tharciosantos/lista-mercado/blob/main/vite.config.js',
-        badge: 'Offline-First',
-      },
-    ],
-    demoNote:
-      'Installable on smartphones with offline functionality and structured WhatsApp export.',
     imageUrl: '/images/lista-mercado-screenshot.webp',
     imageAlt: 'Grocery List interface with product list and sectors',
-    screens: [
-      {
-        label: 'Empty List',
-        imageUrl: '/images/lista-mercado/tela-lista-vazia.webp',
-        caption: 'Home screen with a shortcut to load the 220-item Master List',
-      },
-      {
-        label: 'Pending',
-        imageUrl: '/images/lista-mercado-screenshot.webp',
-        caption: 'Items organized by sectors with smart auto-categorization',
-      },
-      {
-        label: 'Cart',
-        imageUrl: '/images/lista-mercado/tela-carrinho.webp',
-        caption: 'Progress tracking and item check in the cart',
-      },
-    ],
     githubUrl: 'https://github.com/tharciosantos/lista-mercado',
     demoUrl: 'https://lista-mercado-sage.vercel.app/',
     demoLabel: 'Open PWA',
@@ -660,53 +431,9 @@ export const projectsEn: Project[] = [
     status: 'demo',
     description:
       'Financial panel for checking quotes, 24h changes, market indicators, and dynamic detail pages per asset.',
-    technicalHighlight:
-      'CoinGecko API consumption in the Next.js App Router, dynamic /coin/[id] routes, fallback data protection, and client-side filters.',
-    responsibility:
-      'Building a financial market analytics interface with external API consumption and fallback handling.',
-    decision:
-      'Implementing a fallback layer (local contingency) against rate limits (HTTP 429) and dynamic routing in the App Router.',
-    evidence: [
-      'Dynamic CoinGecko API consumption with quotes and KPIs',
-      'Automatic fallback mechanism for fault tolerance and rate limits',
-      'Dynamic /coin/[id] routes with market statistics',
-      'Quick filters by top gainers, losers, and 24h volume',
-    ],
     outcome: 'FinTech · CoinGecko API · dynamic routes',
-    metrics: ['CoinGecko API Live', 'Next.js App Router', 'FinTech UI'],
-    architectureLinks: [
-      {
-        label: 'App Router Routes',
-        url: 'https://github.com/tharciosantos/crypto-dashboard/tree/main/src/app',
-        badge: 'App Router',
-      },
-      {
-        label: 'Fallback Data (Contingency)',
-        url: 'https://github.com/tharciosantos/crypto-dashboard/blob/main/src/data/fallbackCoins.js',
-        badge: 'Resilience',
-      },
-    ],
-    demoNote:
-      'Real-time monitoring with market KPIs, gainers/losers filters, and detailed statistics.',
     imageUrl: '/images/screenshot-crypto.webp',
     imageAlt: 'Cryptocurrency dashboard with quotes, KPIs, and filters',
-    screens: [
-      {
-        label: 'Market',
-        imageUrl: '/images/screenshot-crypto.webp',
-        caption: 'General panel with market KPIs and real-time quotes',
-      },
-      {
-        label: 'Top Gainers',
-        imageUrl: '/images/crypto-dashboard/tela-maiores-altas.webp',
-        caption: 'Dynamic filter by top gainers and 24h percentage change',
-      },
-      {
-        label: 'Details',
-        imageUrl: '/images/crypto-dashboard/tela-detalhes-ativo.webp',
-        caption: 'Individual asset page with 24h price range and statistics',
-      },
-    ],
     githubUrl: 'https://github.com/tharciosantos/crypto-dashboard',
     demoUrl: 'https://crypto-dashboard-five-sandy.vercel.app/',
     demoLabel: 'Open dashboard',

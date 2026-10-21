@@ -59,6 +59,17 @@ describe('projects', () => {
     secundarios.forEach((project) => {
       expect(project.imageUrl).toBeTruthy();
       expect(project.tags.length).toBeGreaterThan(0);
+      expect(project.demoUrl).toBeTruthy();
+      expect(project.screens).toBeUndefined();
+      expect(project.technicalHighlight).toBeUndefined();
+      expect(project.responsibility).toBeUndefined();
+      expect(project.challenge).toBeUndefined();
+      expect(project.decision).toBeUndefined();
+      expect(project.evidence).toBeUndefined();
+      expect(project.metrics).toBeUndefined();
+      expect(project.architectureLinks).toBeUndefined();
+      expect(project.demoNote).toBeUndefined();
+      expect(project.nextStep).toBeUndefined();
     });
   });
 
@@ -70,17 +81,14 @@ describe('projects', () => {
     });
   });
 
-  it('DevLinks deve evidenciar frontend e API desacoplados com upload real', () => {
+  it('DevLinks deve permanecer como card secundário com demo e código', () => {
     const devlinks = projects.find((p) => p.shortTitle === 'DevLinks');
 
     expect(devlinks).toBeTruthy();
-    expect(devlinks!.evidence).toContain(
-      'Upload de avatar via Cloudinary na API Express (MongoDB + JWT)'
-    );
+    expect(devlinks!.kind).toBe('secondary');
+    expect(devlinks!.demoUrl).toContain('devlinks');
+    expect(devlinks!.githubUrl).toContain('devlinks-web');
     expect(devlinks!.tags).toContain('Cloudinary');
-    expect(devlinks!.architectureLinks?.some((link) => link.url.includes('devlinks-api'))).toBe(
-      true
-    );
   });
 
   it('projetos principais devem conter deep links de arquitetura válidos', () => {
