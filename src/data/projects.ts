@@ -291,7 +291,7 @@ export const projects: Project[] = [
     ],
     demoNote:
       'Instalável no smartphone com funcionamento offline e exportação estruturada para o WhatsApp.',
-    imageUrl: '/images/lista-mercado/tela-lista-pendentes.webp',
+    imageUrl: '/images/lista-mercado-screenshot.webp',
     imageAlt: 'Interface do Lista de Mercado com lista de produtos e setores',
     screens: [
       {
@@ -301,7 +301,7 @@ export const projects: Project[] = [
       },
       {
         label: 'Pendentes',
-        imageUrl: '/images/lista-mercado/tela-lista-pendentes.webp',
+        imageUrl: '/images/lista-mercado-screenshot.webp',
         caption: 'Itens organizados por setores e auto-categorização inteligente',
       },
       {
@@ -351,12 +351,12 @@ export const projects: Project[] = [
     ],
     demoNote:
       'Monitoramento em tempo real com KPIs de mercado, filtros por altas/baixas e estatísticas detalhadas.',
-    imageUrl: '/images/crypto-dashboard/tela-mercado.webp',
+    imageUrl: '/images/screenshot-crypto.webp',
     imageAlt: 'Dashboard de criptomoedas com cotações, KPIs e filtros',
     screens: [
       {
         label: 'Mercado',
-        imageUrl: '/images/crypto-dashboard/tela-mercado.webp',
+        imageUrl: '/images/screenshot-crypto.webp',
         caption: 'Painel geral com KPIs de mercado e cotações em tempo real',
       },
       {
@@ -628,7 +628,7 @@ export const projectsEn: Project[] = [
     ],
     demoNote:
       'Installable on smartphones with offline functionality and structured WhatsApp export.',
-    imageUrl: '/images/lista-mercado/tela-lista-pendentes.webp',
+    imageUrl: '/images/lista-mercado-screenshot.webp',
     imageAlt: 'Grocery List interface with product list and sectors',
     screens: [
       {
@@ -638,7 +638,7 @@ export const projectsEn: Project[] = [
       },
       {
         label: 'Pending',
-        imageUrl: '/images/lista-mercado/tela-lista-pendentes.webp',
+        imageUrl: '/images/lista-mercado-screenshot.webp',
         caption: 'Items organized by sectors with smart auto-categorization',
       },
       {
@@ -688,12 +688,12 @@ export const projectsEn: Project[] = [
     ],
     demoNote:
       'Real-time monitoring with market KPIs, gainers/losers filters, and detailed statistics.',
-    imageUrl: '/images/crypto-dashboard/tela-mercado.webp',
+    imageUrl: '/images/screenshot-crypto.webp',
     imageAlt: 'Cryptocurrency dashboard with quotes, KPIs, and filters',
     screens: [
       {
         label: 'Market',
-        imageUrl: '/images/crypto-dashboard/tela-mercado.webp',
+        imageUrl: '/images/screenshot-crypto.webp',
         caption: 'General panel with market KPIs and real-time quotes',
       },
       {
