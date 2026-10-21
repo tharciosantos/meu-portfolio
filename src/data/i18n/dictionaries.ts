@@ -20,7 +20,7 @@ const pt = {
     dark: 'Tema escuro',
   },
   hero: {
-    eyebrowLocation: 'Brasil · Remoto ou híbrido',
+    eyebrowLocation: 'Brasil · Remoto',
     eyebrowStatus: 'Disponível para estágio ou júnior',
     showcasePrimaryAlt: 'Página inicial do ManutFlow com simulador interativo de ordens de serviço',
     showcasePrimaryLabel: 'ManutFlow · Em produção',
@@ -218,7 +218,7 @@ const en: typeof pt = {
     dark: 'Dark theme',
   },
   hero: {
-    eyebrowLocation: 'Brazil · Remote or hybrid',
+    eyebrowLocation: 'Brazil · Remote',
     eyebrowStatus: 'Open to internship or junior roles',
     showcasePrimaryAlt: 'ManutFlow landing page with an interactive service order simulator',
     showcasePrimaryLabel: 'ManutFlow · In production',

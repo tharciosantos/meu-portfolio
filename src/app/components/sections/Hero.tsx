@@ -28,11 +28,9 @@ const Hero = () => {
                 <span>{t.hero.eyebrowStatus}</span>
               </span>
               <span
-                className="hidden text-secondary-text opacity-40 sm:inline dark:text-dark-text"
+                className="hidden h-3 w-px bg-border-light sm:block dark:bg-border-dark"
                 aria-hidden="true"
-              >
-                ·
-              </span>
+              />
               <span className="text-secondary-text dark:text-dark-text">
                 {t.hero.eyebrowLocation}
               </span>
