@@ -34,12 +34,24 @@ export function ProjectCaseStudy({ slug }: ProjectCaseStudyProps) {
         <h1 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-primary-text dark:text-light-text">
           {project.title}
         </h1>
-        <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-accent dark:text-accent-light">
+        <span
+          className={cn(
+            'inline-flex items-center gap-1.5 font-mono text-[10px]',
+            project.status === 'production'
+              ? 'text-accent dark:text-accent-light'
+              : 'text-secondary-text dark:text-dark-text'
+          )}
+        >
           <span
-            className="h-1.5 w-1.5 rounded-full bg-accent dark:bg-accent-light"
+            className={cn(
+              'h-1.5 w-1.5 rounded-full',
+              project.status === 'production'
+                ? 'bg-accent dark:bg-accent-light'
+                : 'bg-secondary-text dark:bg-dark-text'
+            )}
             aria-hidden="true"
           />
-          {t.tabs.inProduction}
+          {project.status === 'production' ? t.tabs.inProduction : t.tabs.demoProject}
         </span>
       </div>
       <p className="mb-8 max-w-prose-wide text-body-lg text-secondary-text dark:text-dark-text">
