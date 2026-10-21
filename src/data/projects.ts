@@ -215,7 +215,7 @@ export const projects: Project[] = [
     description:
       'Aplicação web progressiva para organizar compras por corredores, calcular o progresso da compra em tempo real, auto-categorizar produtos e compartilhar no WhatsApp.',
     outcome: 'PWA · 220 itens · 100% offline',
-    imageUrl: '/images/lista-mercado/tela-lista-pendentes.webp',
+    imageUrl: '/images/lista-mercado-screenshot.webp',
     imageAlt: 'Interface do Lista de Mercado com lista de produtos e setores',
     githubUrl: 'https://github.com/tharciosantos/lista-mercado',
     demoUrl: 'https://lista-mercado-sage.vercel.app/',
@@ -231,7 +231,7 @@ export const projects: Project[] = [
     description:
       'Painel financeiro para consulta de cotações, variações de 24h, indicadores de mercado e páginas dinâmicas detalhadas por ativo.',
     outcome: 'FinTech · CoinGecko API · rotas dinâmicas',
-    imageUrl: '/images/crypto-dashboard/tela-mercado.webp',
+    imageUrl: '/images/screenshot-crypto.webp',
     imageAlt: 'Dashboard de criptomoedas com cotações, KPIs e filtros',
     githubUrl: 'https://github.com/tharciosantos/crypto-dashboard',
     demoUrl: 'https://crypto-dashboard-five-sandy.vercel.app/',
@@ -416,7 +416,7 @@ export const projectsEn: Project[] = [
     description:
       'Progressive web app for organizing shopping by aisles, calculating purchase progress in real time, auto-categorizing products, and sharing on WhatsApp.',
     outcome: 'PWA · 220 items · 100% offline',
-    imageUrl: '/images/lista-mercado/tela-lista-pendentes.webp',
+    imageUrl: '/images/lista-mercado-screenshot.webp',
     imageAlt: 'Grocery List interface with product list and sectors',
     githubUrl: 'https://github.com/tharciosantos/lista-mercado',
     demoUrl: 'https://lista-mercado-sage.vercel.app/',
@@ -432,7 +432,7 @@ export const projectsEn: Project[] = [
     description:
       'Financial panel for checking quotes, 24h changes, market indicators, and dynamic detail pages per asset.',
     outcome: 'FinTech · CoinGecko API · dynamic routes',
-    imageUrl: '/images/crypto-dashboard/tela-mercado.webp',
+    imageUrl: '/images/screenshot-crypto.webp',
     imageAlt: 'Cryptocurrency dashboard with quotes, KPIs, and filters',
     githubUrl: 'https://github.com/tharciosantos/crypto-dashboard',
     demoUrl: 'https://crypto-dashboard-five-sandy.vercel.app/',
