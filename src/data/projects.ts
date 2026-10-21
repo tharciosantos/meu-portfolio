@@ -53,9 +53,9 @@ export const projects: Project[] = [
     decision:
       'Aplicar proteção em três camadas com proxy, getUser() na API e Row Level Security no banco.',
     technicalHighlight:
-      'Segurança em três camadas (Proxy, API getUser e Supabase RLS), modelagem PostgreSQL e suíte de 169 testes unitários no Vitest.',
+      'Segurança em três camadas (Proxy, API getUser e Supabase RLS), modelagem PostgreSQL e suíte de 184 testes unitários no Vitest.',
     evidence: [
-      '169 testes automatizados em 17 arquivos',
+      '184 testes automatizados',
       'CRUD completo com busca, filtros, paginação e histórico',
       'Proteção em camadas com sessão, user_id e RLS',
       'Acesso de demonstração com 1-clique e dados pré-carregados',
@@ -63,7 +63,7 @@ export const projects: Project[] = [
     ],
     demoNote:
       'Inclui simulador interativo de ordens e acesso demo com 1-clique com equipamentos pré-cadastrados.',
-    metrics: ['169 testes automatizados', 'Simulador Industrial', 'Supabase RLS'],
+    metrics: ['184 testes automatizados', 'Simulador Industrial', 'Supabase RLS'],
     architectureLinks: [
       {
         label: 'Segurança RLS e Proxy',
@@ -71,7 +71,7 @@ export const projects: Project[] = [
         badge: 'Supabase RLS',
       },
       {
-        label: '169 Testes por Feature (Domínio)',
+        label: '184 Testes por Feature (Domínio)',
         url: 'https://github.com/tharciosantos/manutflow/tree/main/src/features',
         badge: 'Vitest',
       },
@@ -132,7 +132,7 @@ export const projects: Project[] = [
       'Controle de acesso por perfil e propriedade de chamados',
       'Acesso de demonstração com 1-clique (visões Client e Agent)',
       'CRUD paginado de tickets com status e prioridades',
-      '82 testes Vitest + 15 fluxos E2E no Cypress',
+      '169 testes Vitest + 15 fluxos E2E no Cypress',
     ],
     demoNote:
       'Inclui simulador interativo na tela inicial e acesso demo com 1-clique para Solicitante e Agente.',
@@ -392,9 +392,9 @@ export const projectsEn: Project[] = [
     decision:
       'Applying three-layer protection with a proxy, getUser() in the API, and Row Level Security in the database.',
     technicalHighlight:
-      'Three-layer security (Proxy, API getUser, and Supabase RLS), PostgreSQL modeling, and a suite of 169 unit tests in Vitest.',
+      'Three-layer security (Proxy, API getUser, and Supabase RLS), PostgreSQL modeling, and a suite of 184 unit tests in Vitest.',
     evidence: [
-      '169 automated tests in 17 files',
+      '184 automated tests',
       'Full CRUD with search, filters, pagination, and history',
       'Layered protection with session, user_id, and RLS',
       '1-click demo access with preloaded data',
@@ -402,7 +402,7 @@ export const projectsEn: Project[] = [
     ],
     demoNote:
       'Includes an interactive order simulator and 1-click demo access with pre-registered equipment.',
-    metrics: ['169 automated tests', 'Industrial Simulator', 'Supabase RLS'],
+    metrics: ['184 automated tests', 'Industrial Simulator', 'Supabase RLS'],
     architectureLinks: [
       {
         label: 'RLS and Proxy Security',
@@ -410,7 +410,7 @@ export const projectsEn: Project[] = [
         badge: 'Supabase RLS',
       },
       {
-        label: '169 Tests by Feature (Domain)',
+        label: '184 Tests by Feature (Domain)',
         url: 'https://github.com/tharciosantos/manutflow/tree/main/src/features',
         badge: 'Vitest',
       },
@@ -470,7 +470,7 @@ export const projectsEn: Project[] = [
       'Access control by profile and ticket ownership',
       '1-click demo access (Client and Agent views)',
       'Paginated ticket CRUD with status and priorities',
-      '82 Vitest tests + 15 E2E flows in Cypress',
+      '169 Vitest tests + 15 E2E flows in Cypress',
     ],
     demoNote:
       'Includes an interactive simulator on the home screen and 1-click demo access for Requester and Agent.',
