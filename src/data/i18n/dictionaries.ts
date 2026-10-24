@@ -46,7 +46,7 @@ const pt = {
         sr: 'Projetos publicados',
       },
       {
-        value: '353 Testes',
+        value: '376 Testes',
         label: 'Vitest no ManutFlow e HelpFlow',
         sr: 'Testes automatizados',
       },
@@ -96,6 +96,7 @@ const pt = {
     close: 'Fechar',
     closeFullscreen: 'Fechar tela cheia',
     viewOriginal: 'Ver original',
+    viewOriginalTitle: 'Abrir imagem original em tamanho nativo (1920x909)',
     navigateHint: 'Navegue com as setas ou deslize na tela',
     overview: 'Visão Geral',
     carouselAria: 'Demonstração visual do projeto {title}',
@@ -246,7 +247,7 @@ const en: typeof pt = {
         sr: 'Published projects',
       },
       {
-        value: '353 Tests',
+        value: '376 Tests',
         label: 'Vitest across ManutFlow and HelpFlow',
         sr: 'Automated tests',
       },
@@ -296,6 +297,7 @@ const en: typeof pt = {
     close: 'Close',
     closeFullscreen: 'Close fullscreen',
     viewOriginal: 'View original',
+    viewOriginalTitle: 'Open original image at native size (1920x909)',
     navigateHint: 'Navigate with the arrows or swipe',
     overview: 'Overview',
     carouselAria: 'Visual demonstration of the {title} project',

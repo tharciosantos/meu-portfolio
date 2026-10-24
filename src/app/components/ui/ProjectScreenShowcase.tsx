@@ -303,7 +303,10 @@ export function ProjectScreenShowcase({
                   ·
                 </span>
                 <span className="font-mono text-[10px] sm:text-xs font-medium text-accent-light bg-accent-subtle-dark px-2 py-0.5 rounded-md border border-accent-border-dark">
-                  Tela 0{currentIndex + 1} de 0{total} · {activeItem.label}
+                  {t.showcase.counter
+                    .replace('{current}', String(currentIndex + 1))
+                    .replace('{total}', String(total))}{' '}
+                  · {activeItem.label}
                 </span>
               </div>
               <p className="text-[11px] sm:text-xs text-dark-text truncate mt-0.5 sm:mt-1">
@@ -320,7 +323,7 @@ export function ProjectScreenShowcase({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-3 py-1.5 rounded-md bg-dark-surface hover:bg-dark-card active:scale-95 text-light-text text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer border border-border-dark shadow-sm min-h-[34px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
-                title="Abrir imagem original em tamanho nativo (1920x909)"
+                title={t.showcase.viewOriginalTitle}
               >
                 <ExternalLinkIcon className="h-3.5 w-3.5 text-accent-light" />
                 <span className="font-mono text-[11px] sm:text-xs hidden sm:inline">

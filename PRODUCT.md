@@ -16,7 +16,7 @@ Apresentar a trajetória, sistemas reais em produção, código-fonte, decisões
 
 ## Positioning
 
-Desenvolvedor Full Stack com sólida base em engenharia de software: sistemas completos, APIs resilientes, modelagem de bancos de dados relacionais, segurança e testes automatizados. Diferencia-se por apresentar produtos reais em produção com métricas concretas e acesso demo em 1-clique (ex: HelpFlow com 82 testes Vitest e 15 fluxos E2E; ManutFlow com 169 testes automatizados e 3 camadas de segurança), em vez de apenas listar tecnologias.
+Desenvolvedor Full Stack com sólida base em engenharia de software: sistemas completos, APIs resilientes, modelagem de bancos de dados relacionais, segurança e testes automatizados. Diferencia-se por apresentar produtos reais em produção com métricas concretas e acesso demo em 1-clique (ex: HelpFlow com 169 testes Vitest e 15 fluxos E2E; ManutFlow com 207 testes automatizados e 3 camadas de segurança), em vez de apenas listar tecnologias.
 
 ## Operating Context
 
@@ -40,8 +40,8 @@ Desenvolvedor Full Stack com sólida base em engenharia de software: sistemas co
 
 ## Evidence on Hand
 
-- **HelpFlow:** Sistema de help desk Full Stack com autenticação por credenciais e GitHub, recuperação de senha, RBAC, PostgreSQL, Supabase, Prisma, 82 testes Vitest e 15 fluxos E2E no Cypress (link da aplicação e repositório GitHub).
-- **ManutFlow:** Sistema de gestão de manutenção em produção com 169 testes automatizados em 17 arquivos, 3 camadas de segurança (proxy.ts, getUser, RLS) e demo com 1-clique (link da aplicação e repositório GitHub).
+- **HelpFlow:** Sistema de help desk Full Stack com autenticação por credenciais e GitHub, recuperação de senha, RBAC, PostgreSQL, Supabase, Prisma, 169 testes Vitest em 14 arquivos e 15 fluxos E2E no Cypress (link da aplicação e repositório GitHub).
+- **ManutFlow:** Sistema de gestão de manutenção em produção com 207 testes automatizados em 19 arquivos, 3 camadas de segurança (proxy.ts, getUser, RLS) e demo com 1-clique (link da aplicação e repositório GitHub).
 - **Projetos complementares:** DevLinks (frontend React + API Express com Cloudinary/MongoDB, TanStack Query, E2E Cypress no fluxo de login/links), Lista de Mercado (PWA mobile-first offline), Crypto Dashboard (CoinGecko API).
 - **Currículo PDF:** Disponível em `/curriculo-tharcio-santos.pdf`.
 - **Qualidade de código:** Suíte de testes com Vitest, pipeline CI no GitHub Actions e metas Lighthouse ≥ 95.

@@ -23,7 +23,7 @@ A interface segue uma direção editorial: hierarquia visual clara, leitura ráp
 ## Proposta Visual e Estrutura
 
 - **Portfólio editorial:** projetos apresentados por problema, solução, entrega e decisões técnicas.
-- **ManutFlow como case principal:** produto em produção com autenticação, isolamento de dados em 3 camadas de segurança (proxy.ts, getUser(), RLS), gestão de equipamentos e ordens de manutenção, e 184 testes automatizados em 17 arquivos.
+- **ManutFlow como case principal:** produto em produção com autenticação, isolamento de dados em 3 camadas de segurança (proxy.ts, getUser(), RLS), gestão de equipamentos e ordens de manutenção, e 207 testes automatizados em 19 arquivos.
 - **HelpFlow como case complementar:** aplicação com autenticação por credenciais e GitHub, recuperação de senha, controle de acesso RBAC, regras de negócio, banco relacional e deploy.
 - **Projetos complementares:** DevLinks, Lista de Mercado e Crypto Dashboard aparecem em cards compactos, com demo e código, sem case dedicado.
 - **Processo visível:** seção "Como eu trabalho" apresenta o fluxo de análise, escopo, implementação, teste e revisão.
@@ -45,7 +45,7 @@ Mais do que uma vitrine, este repositório reúne práticas aplicadas em fronten
 - **Micro-interações contidas:** botões com sombra sutil no CTA primário, abas de projetos com estado ativo sólido e feedback visual com `active:scale-[0.98]`.
 - **Barra de progresso de leitura:** `ReadingProgressBar` fixa no topo que preenche conforme o scroll, usando `scaleX` para performance.
 - **ProjectScreenShowcase:** carousel de telas dos projetos com navegação por teclado, swipe gestures, auto-play pausável e lightbox modal em alta resolução.
-- **Hero direto:** proposta Full Stack em sistemas, APIs e bancos de dados, com CTAs padronizados para explorar projetos e baixar currículo, além de atalhos para GitHub, LinkedIn e WhatsApp.
+- **Hero direto:** proposta Full Stack em sistemas, APIs e bancos de dados, com CTAs padronizados para explorar projetos e baixar currículo, além de atalhos diretos para GitHub e LinkedIn.
 - **Performance:** bundle otimizado via **Turbopack** (padrão do Next 16), imagens em WebP/AVIF com quality tiers, ícones SVG locais, CSS crítico otimizado e Analytics carregado dinamicamente.
 - **SEO técnico:** sitemap com as rotas `/projetos/[slug]` dos cases principais, `robots.txt`, Open Graph, Twitter Card, Schema.org com endereço local (Caeté/MG) e keywords regionais, além de `themeColor` por preferência de tema.
 - **Internacionalização:** dicionários PT/EN sem dependências, com `LanguageProvider`, toggle PT/EN no navbar e persistência em `localStorage`.
@@ -71,7 +71,7 @@ Os resultados medidos devem ser atualizados apenas após uma nova auditoria da v
 
 Sistema completo para controle de equipamentos, ordens de manutenção, responsáveis, prioridades e histórico. Inclui autenticação com Supabase Auth, três camadas de segurança (proxy.ts, getUser(), RLS), cadastro e gestão de equipamentos, ordens de serviço com controle de status, filtros, busca textual e dashboard com indicadores.
 
-- **Destaques:** Acesso demo com 1-clique e dados pré-carregados, 184 testes automatizados em 17 arquivos, CRUD com busca, filtros, paginação, histórico e acompanhamento de prazos.
+- **Destaques:** Acesso demo com 1-clique e dados pré-carregados, 207 testes automatizados em 19 arquivos, CRUD com busca, filtros, paginação, histórico e acompanhamento de prazos.
 - **Stack:** Next.js, React, TypeScript, Tailwind CSS, Supabase, PostgreSQL
 - **Links:** [Aplicação](https://manutflow.vercel.app) · [Código](https://github.com/tharciosantos/manutflow)
 
@@ -110,7 +110,7 @@ Dashboard para consulta de criptomoedas com busca, rotas dinâmicas, renderizaç
 
 ## Seções do Portfólio
 
-1. **Hero:** posicionamento Full Stack em sistemas, APIs e bancos de dados, com CTAs destacados para explorar projetos e baixar currículo, além de atalhos para GitHub, LinkedIn e WhatsApp.
+1. **Hero:** posicionamento Full Stack em sistemas, APIs e bancos de dados, com CTAs destacados para explorar projetos e baixar currículo, além de atalhos para GitHub e LinkedIn.
 2. **Projetos:** ManutFlow e HelpFlow como cases dedicados em `/projetos/[slug]`, com showcase visual, problema, decisões técnicas e evidências; projetos complementares em cards compactos com demo e código.
 3. **Processo:** fluxo geral de análise, escopo, implementação, validação e evolução incremental.
 4. **Competências:** frontend, backend, banco de dados, testes e versionamento organizados por contexto de uso.
@@ -156,7 +156,7 @@ Dashboard para consulta de criptomoedas com busca, rotas dinâmicas, renderizaç
 - **ProjectCaseStudy:** cases dedicados aos dois projetos principais em `/projetos/[slug]` (estático via `generateStaticParams`, com `generateMetadata` e canonical), com showcase, problema, responsabilidade, decisão técnica, evidências e links de arquitetura.
 - **ProjectScreenShowcase:** carousel com auto-play pausável, swipe gestures para mobile, navegação por teclado e lightbox modal em alta resolução.
 - **Refinamentos visuais:** CTA principal do Hero ampliado (20% maior), foto de perfil aumentada no About, footer com borda accent para mais presença.
-- **Contato com conversão:** CTA de WhatsApp (`wa.me` com mensagem pré-preenchida) como ação primária na seção de contato, além de atalho no Hero — ampliando os caminhos de conversão além do `mailto`.
+- **Contato com conversão:** CTA de WhatsApp (`wa.me` com mensagem pré-preenchida) como ação primária na seção de contato, além de botão de cópia de e-mail — ampliando os caminhos de conversão além do `mailto`.
 - **SEO local:** keywords regionais (Belo Horizonte, Caeté, Minas Gerais, Remoto) e `PostalAddress` + `homeLocation` no Schema.org para descoberta por recrutadores da região.
 - **i18n PT/EN:** dicionários próprios sem dependências, `LanguageProvider` com persistência em `localStorage`, toggle PT/EN no navbar e dados (projetos, capacidades, experiência) traduzidos — PT como padrão.
 - **Ícones SVG locais:** 21 componentes em `Icons.tsx` (incluindo `WhatsappIcon`) + 18 ícones técnicos em `TechIcons.tsx` com resolver automático por nome de tecnologia.

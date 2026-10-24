@@ -128,4 +128,4 @@ def build_resume() -> None:
 
 
 if __name__ == '__main__':
-    build_resume()
+    import sys; assert '--force' in sys.argv, 'Use --force (canonical source is curriculo-tharcio-santos.docx)'; build_resume()
