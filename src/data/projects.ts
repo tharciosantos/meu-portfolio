@@ -53,9 +53,9 @@ export const projects: Project[] = [
     decision:
       'Aplicar proteção em três camadas com proxy, getUser() na API e Row Level Security no banco.',
     technicalHighlight:
-      'Segurança em três camadas (Proxy, API getUser e Supabase RLS), modelagem PostgreSQL e suíte de 184 testes unitários no Vitest.',
+      'Segurança em três camadas (Proxy, API getUser e Supabase RLS), modelagem PostgreSQL e suíte de 207 testes unitários no Vitest.',
     evidence: [
-      '184 testes automatizados em 17 arquivos',
+      '207 testes automatizados em 19 arquivos',
       'CRUD completo com busca, filtros, paginação e histórico',
       'Proteção em camadas com sessão, user_id e RLS',
       'Acesso de demonstração com 1-clique e dados pré-carregados',
@@ -63,7 +63,7 @@ export const projects: Project[] = [
     ],
     demoNote:
       'Inclui simulador interativo de ordens e acesso demo com 1-clique com equipamentos pré-cadastrados.',
-    metrics: ['184 testes automatizados', 'Simulador Industrial', 'Supabase RLS'],
+    metrics: ['207 testes automatizados', 'Simulador Industrial', 'Supabase RLS'],
     architectureLinks: [
       {
         label: 'Segurança RLS e Proxy',
@@ -71,8 +71,8 @@ export const projects: Project[] = [
         badge: 'Supabase RLS',
       },
       {
-        label: '184 Testes por Feature (Domínio)',
-        url: 'https://github.com/tharciosantos/manutflow/tree/main/src/features',
+        label: '207 Testes Automatizados (19 Suítes)',
+        url: 'https://github.com/tharciosantos/manutflow/tree/main/src',
         badge: 'Vitest',
       },
     ],
@@ -255,9 +255,9 @@ export const projectsEn: Project[] = [
     decision:
       'Applying three-layer protection with a proxy, getUser() in the API, and Row Level Security in the database.',
     technicalHighlight:
-      'Three-layer security (Proxy, API getUser, and Supabase RLS), PostgreSQL modeling, and a suite of 184 unit tests in Vitest.',
+      'Three-layer security (Proxy, API getUser, and Supabase RLS), PostgreSQL modeling, and a suite of 207 unit tests in Vitest.',
     evidence: [
-      '184 automated tests in 17 files',
+      '207 automated tests in 19 files',
       'Full CRUD with search, filters, pagination, and history',
       'Layered protection with session, user_id, and RLS',
       '1-click demo access with preloaded data',
@@ -265,7 +265,7 @@ export const projectsEn: Project[] = [
     ],
     demoNote:
       'Includes an interactive order simulator and 1-click demo access with pre-registered equipment.',
-    metrics: ['184 automated tests', 'Industrial Simulator', 'Supabase RLS'],
+    metrics: ['207 automated tests', 'Industrial Simulator', 'Supabase RLS'],
     architectureLinks: [
       {
         label: 'RLS and Proxy Security',
@@ -273,8 +273,8 @@ export const projectsEn: Project[] = [
         badge: 'Supabase RLS',
       },
       {
-        label: '184 Tests by Feature (Domain)',
-        url: 'https://github.com/tharciosantos/manutflow/tree/main/src/features',
+        label: '207 Automated Tests (19 Suites)',
+        url: 'https://github.com/tharciosantos/manutflow/tree/main/src',
         badge: 'Vitest',
       },
     ],
