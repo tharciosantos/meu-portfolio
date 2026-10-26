@@ -55,9 +55,11 @@ next-env.d.ts
 .mimocode/
 # Impeccable & Local AI Agents
 /.impeccable/
-/.github/
+/.github/*
+!/.github/workflows/
+!/.github/pull_request_template.md
 
 # Documentos internos de planejamento
 PORTFOLIO_SPEC.md
 PRODUCT.md
-DESIGN.md
+DESIGN.md

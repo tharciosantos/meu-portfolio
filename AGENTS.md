@@ -1,6 +1,6 @@
 # Tharcio Santos — Portfólio
 
-> Manual Operacional para Agentes de IA · v2.2
+> Manual Operacional para Agentes de IA · v2.3
 
 Este documento é a **fonte única de verdade** para agentes que trabalham neste repositório. Qualquer divergência entre o comportamento do agente e este manual é um bug — reporte ao usuário.
 
@@ -97,7 +97,7 @@ Execute **todas** as etapas em ordem. Pular é proibido.
 | **3. Localizar**   | Use as ferramentas de busca e leitura disponíveis, preferindo `rg`. Leia antes de editar |
 | **4. Reutilizar**  | Verifique `ui/`, `hooks/`, `lib/`, `data/` antes de criar algo novo                      |
 | **5. Implementar** | Mínimo de mudanças. Siga padrões (seção 12)                                              |
-| **6. Validar**     | `build` + `lint` + `test:run` + `tsc --noEmit`                                           |
+| **6. Validar**     | `build` + `lint` + `test:run` + `tsc --noEmit` + `format:check`                          |
 | **7. Revisar**     | Faça revisão manual com `git diff`. Remova `console.log`                                 |
 | **8. Commitar**    | Conventional Commits. Atômico e descritivo                                               |
 | **9. PR**          | Template da seção 8.4                                                                    |
@@ -110,8 +110,8 @@ Execute **todas** as etapas em ordem. Pular é proibido.
 ```
 RECEBER TAREFA → ANALISAR CONTEXTO → git pull origin main
 → git checkout -b tipo/descricao → IMPLEMENTAR → npm run build
-→ npm run lint → npm run test:run → REVISAR DIFF → COMMIT
-→ git push -u origin branch → CRIAR PR → MERGE (CI verde)
+→ npm run lint → npm run test:run → npx tsc --noEmit → npm run format:check
+→ REVISAR DIFF → COMMIT → git push -u origin branch → CRIAR PR → MERGE (CI verde)
 → git checkout main && git pull → git branch -d branch
 → git push origin --delete branch
 ```
@@ -329,50 +329,63 @@ Props de cliente foram removidas — use data attributes."
 ### 8.1 Título
 
 ```
-tipo(escopo): descrição concisa (≤ 72 caracteres)
+tipo(escopo): descrição concisa no presente do indicativo (≤ 72 caracteres)
 ```
 
-Exemplo: `feat(projects): adiciona grid responsivo com filtro por tags`
+Exemplo: `feat(portfolio): adiciona prova visual dos sistemas`
 
-### 8.2 Descrição
+### 8.2 Regras de Redação e Densidade Técnica (Gold Standard)
 
-Responda: **O quê?** · **Por quê?** · **Como?** · **Impacto?**
+Para garantir máxima clareza para revisores humanos e indexadores de código:
+
+- **Sem emojis nos cabeçalhos ou listas:** Use Markdown puro (`### Features`, `### Fixes`, `### Docs`, `- [x] Feature`). É proibido usar emojis como `✨`, `🐛`, `📝` no corpo ou título do PR.
+- **Resumo de alta densidade (1 a 3 frases):** Descreva o que foi entregue citando nominalmente os módulos, componentes, páginas, rotas ou métricas impactadas. Evite frases genéricas.
+- **Verbos de ação na 3ª pessoa do singular:** Inicie os itens do Changelog com verbos no presente do indicativo: _Adiciona_, _Atualiza_, _Corrige_, _Remove_, _Sincroniza_, _Concentra_, _Extrai_.
+- **Como Testar reprodutível:** Comece sempre com o comando de execução (`1. Rode npm run dev.`) e indique as rotas exatas (ex: `/projetos/manutflow`, `/projetos/helpflow`, etc.) ou interações exatas para validar a entrega.
+- **Tipo de Mudança vertical e limpo:** Liste uma opção por linha, sem emojis, marcando com `[x]` apenas os tipos aplicáveis ao PR.
+- **Validação real antes de marcar o Checklist:** O agente DEVE executar cada comando do checklist no terminal e confirmar saída limpa (exit code 0) antes de marcar `[x]`.
 
 ### 8.3 Changelog
 
+Agrupe apenas pelas categorias presentes no PR, em texto limpo:
+
 ```markdown
-### ✨ Features
+### Features
 
-- Adiciona filtro de projetos por tecnologia
+- Adiciona hero com prova visual dos sistemas
+- Atualiza os cards com novas capturas
 
-### 🐛 Fixes
+### Docs
 
-- Corrige alinhamento do botão CTA no mobile
+- Atualiza o screenshot do README
 ```
 
-### 8.4 Template
+### 8.4 Template Oficial
 
 ```markdown
 ## Resumo
 
-<!-- 2-3 frases -->
+<!-- 1 a 3 frases diretas explicando o que mudou, quais componentes/rotas foram afetados e o impacto. -->
 
 ## Tipo de Mudança
 
-- [ ] ✨ Feature [ ] 🐛 Fix [ ] ♻️ Refactor
-- [ ] 📝 Docs [ ] 🎨 Style [ ] ⚡ Performance
-- [ ] ✅ Test [ ] 🔧 Chore
+- [ ] Feature
+- [ ] Fix
+- [ ] Refactor
+- [ ] Docs
+- [ ] Test
+- [ ] Chore
 
 ## Changelog
 
-### ✨ Features
+### Features
 
-- <!-- item -->
+- <!-- Verbo no presente + entrega objetiva -->
 
 ## Como Testar
 
-1. <!-- passo -->
-2. Verifique <!-- resultado -->
+1. Rode `npm run dev`.
+2. Abra `<!-- rota ou página -->` e confira `<!-- comportamento esperado -->`.
 
 ## Checklist
 
@@ -380,8 +393,53 @@ Responda: **O quê?** · **Por quê?** · **Como?** · **Impacto?**
 - [ ] Lint passa (`npm run lint`)
 - [ ] Testes passam (`npm run test:run`)
 - [ ] TypeScript sem erros (`npx tsc --noEmit`)
+- [ ] Formatação OK (`npm run format:check`)
 - [ ] Apenas arquivos do escopo alterados
-- [ ] Sem console.log ou comentários temporários
+```
+
+### 8.5 Exemplo Real de Referência (Gold Standard)
+
+Título: `feat(portfolio): adiciona prova visual dos sistemas`
+
+```markdown
+## Resumo
+
+Adiciona prova visual dos sistemas na home, com hero e cards usando capturas reais, e atualiza as capturas de ManutFlow, HelpFlow, DevLinks, Lista de Mercado e Crypto Dashboard. Também atualiza o screenshot do README.
+
+## Tipo de Mudança
+
+- [x] Feature
+- [x] Docs
+
+## Changelog
+
+### Features
+
+- Adiciona hero com prova visual dos sistemas
+- Atualiza os cards com novas capturas
+- Atualiza as capturas dos cases ManutFlow e HelpFlow
+- Atualiza Lista de Mercado e Crypto Dashboard para as novas imagens
+
+### Docs
+
+- Atualiza o screenshot do README
+
+## Como Testar
+
+1. Rode `npm run dev`.
+2. Abra a home e confira o hero e os cards de projetos.
+3. Abra `/projetos/manutflow` e `/projetos/helpflow`.
+4. Confira os cards de DevLinks, Lista de Mercado e Crypto Dashboard.
+5. Verifique o screenshot atualizado no README.
+
+## Checklist
+
+- [x] Build passa (`npm run build`)
+- [x] Lint passa (`npm run lint`)
+- [x] Testes passam (`npm run test:run`)
+- [x] TypeScript sem erros (`npx tsc --noEmit`)
+- [x] Formatação OK (`npm run format:check`)
+- [x] Apenas arquivos do escopo alterados
 ```
 
 ---
@@ -403,15 +461,17 @@ Responda: **O quê?** · **Por quê?** · **Como?** · **Impacto?**
 - [ ] `npm run lint` passou?
 - [ ] `npm run test:run` passou?
 - [ ] `npx tsc --noEmit` passou?
+- [ ] `npm run format:check` passou?
 - [ ] `git diff` contém apenas o esperado?
 
 ### 9.3 Antes do PR
 
-- [ ] Checklist 9.2 completo
-- [ ] Título no formato `tipo(escopo): descrição`?
-- [ ] Descrição explica o quê e por quê?
-- [ ] Changelog preenchido?
-- [ ] Passos para teste claros?
+- [ ] Checklist 9.2 completo (todos os comandos executados no terminal com exit code 0)
+- [ ] Título no formato `tipo(escopo): descrição` (sem emojis)?
+- [ ] Resumo de alta densidade (1 a 3 frases) citando módulos/rotas afetados?
+- [ ] Tipo de Mudança vertical e sem emojis?
+- [ ] Changelog preenchido sem emojis e com verbos na 3ª pessoa do presente?
+- [ ] Passos para teste claros e reprodutíveis (iniciando com `1. Rode npm run dev.`)?
 
 ### 9.4 Antes do Merge
 
@@ -838,10 +898,11 @@ function useActiveSection(ids: readonly string[]): string {
 ### 18.1 Validação Obrigatória
 
 ```bash
-npx tsc --noEmit     # 1° — tipos
-npm run lint          # 2° — qualidade
-npm run test:run      # 3° — comportamento
-npm run build         # 4° — build (mais lento)
+npx tsc --noEmit       # 1° — tipos
+npm run format:check   # 2° — formatação (Prettier)
+npm run lint           # 3° — qualidade (ESLint)
+npm run test:run       # 4° — comportamento (Vitest)
+npm run build          # 5° — build (mais lento)
 ```
 
 ### 18.2 CI Pipeline
@@ -1001,22 +1062,37 @@ test(projects): adiciona teste de sanidade para novos projetos
 ```markdown
 ## Resumo
 
-Adiciona o projeto TaskFlow ao portfólio.
+Adiciona o projeto TaskFlow à lista de projetos em destaque na home (`src/data/projects.ts`) e inclui cobertura de testes de sanidade (`src/data/__tests__/projects.test.ts`).
+
+## Tipo de Mudança
+
+- [x] Feature
+- [x] Test
 
 ## Changelog
 
-### ✨ Features
+### Features
 
 - Adiciona TaskFlow (featured) aos projetos
 
+### Tests
+
+- Adiciona teste de sanidade para validação do novo projeto
+
 ## Como Testar
 
-1. Acesse a home e role até "Projetos em Destaque"
-2. Verifique TaskFlow no grid
+1. Rode `npm run dev`.
+2. Abra a home e role até a seção `#projetos` ("Projetos em Destaque").
+3. Confira o card do projeto TaskFlow no grid.
 
 ## Checklist
 
-- [x] Build · Lint · Testes · TypeScript OK
+- [x] Build passa (`npm run build`)
+- [x] Lint passa (`npm run lint`)
+- [x] Testes passam (`npm run test:run`)
+- [x] TypeScript sem erros (`npx tsc --noEmit`)
+- [x] Formatação OK (`npm run format:check`)
+- [x] Apenas arquivos do escopo alterados
 ```
 
 ### 23.2 Corrigir Bug Mobile
@@ -1136,7 +1212,7 @@ refactor(hooks): extrai useActiveSection do Navbar para hook próprio
 
 ---
 
-> **Versão 2.2** · Fonte única de verdade para agentes de IA · Mantido por Tharcio Santos
+> **Versão 2.3** · Fonte única de verdade para agentes de IA · Mantido por Tharcio Santos
 >
 > | Versão | Data     | Mudanças                                                                                                                                                  |
 > | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1144,3 +1220,4 @@ refactor(hooks): extrai useActiveSection do Navbar para hook próprio
 > | 2.0    | Jul/2026 | Manual operacional completo para agentes de IA                                                                                                            |
 > | 2.1    | Ago/2026 | Alinha stack à migração Next 16 (Turbopack), flat config do ESLint, CI com cobertura e pre-commit com lint                                                |
 > | 2.2    | Set/2026 | Corrige divergências: fontes (Geist Sans/Mono), paleta (carmesim #B91C1C), tipos (kind sem 'building'), SECTION_IDS (sem 'experiencia'), ícones completos |
+> | 2.3    | Out/2026 | Refina padrão de Pull Request com template limpo sem emojis, inclusão de verificação de formatação/tipos no checklist e exemplo Gold Standard             |
