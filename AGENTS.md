@@ -1,129 +1,129 @@
-# Tharcio Santos — Portfólio
+﻿# Tharcio Santos â€” PortfÃ³lio
 
-> Manual Operacional para Agentes de IA · v2.3
+> Manual Operacional para Agentes de IA Â· v2.3
 
-Este documento é a **fonte única de verdade** para agentes que trabalham neste repositório. Qualquer divergência entre o comportamento do agente e este manual é um bug — reporte ao usuário.
+Este documento Ã© a **fonte Ãºnica de verdade** para agentes que trabalham neste repositÃ³rio. Qualquer divergÃªncia entre o comportamento do agente e este manual Ã© um bug â€” reporte ao usuÃ¡rio.
 
 ---
 
-## Índice
+## Ãndice
 
-1. [Introdução](#1-introdução)
-2. [Missão do Agente](#2-missão-do-agente)
+1. [IntroduÃ§Ã£o](#1-introduÃ§Ã£o)
+2. [MissÃ£o do Agente](#2-missÃ£o-do-agente)
 3. [Filosofia do Projeto](#3-filosofia-do-projeto)
 4. [Ordem de Prioridade](#4-ordem-de-prioridade)
-5. [Workflow Obrigatório](#5-workflow-obrigatório)
+5. [Workflow ObrigatÃ³rio](#5-workflow-obrigatÃ³rio)
 6. [Workflow Git](#6-workflow-git)
 7. [Commits (Conventional Commits)](#7-commits-conventional-commits)
 8. [Pull Request](#8-pull-request)
 9. [Checklists](#9-checklists)
-10. [Stack e Configuração](#10-stack-e-configuração)
+10. [Stack e ConfiguraÃ§Ã£o](#10-stack-e-configuraÃ§Ã£o)
 11. [Estrutura do Projeto](#11-estrutura-do-projeto)
-12. [Padrões de Código](#12-padrões-de-código)
+12. [PadrÃµes de CÃ³digo](#12-padrÃµes-de-cÃ³digo)
 13. [Tipos de Dados](#13-tipos-de-dados)
 14. [Estilos e Tema](#14-estilos-e-tema)
-15. [Animações e Hooks](#15-animações-e-hooks)
+15. [AnimaÃ§Ãµes e Hooks](#15-animaÃ§Ãµes-e-hooks)
 16. [Regras para IA](#16-regras-para-ia)
 17. [O que NUNCA Fazer](#17-o-que-nunca-fazer)
-18. [Validação e Qualidade](#18-validação-e-qualidade)
+18. [ValidaÃ§Ã£o e Qualidade](#18-validaÃ§Ã£o-e-qualidade)
 19. [Performance](#19-performance)
-20. [Segurança, SEO e Acessibilidade](#20-segurança-seo-e-acessibilidade)
-21. [Consistência de Conteúdo](#21-consistência-de-conteúdo)
+20. [SeguranÃ§a, SEO e Acessibilidade](#20-seguranÃ§a-seo-e-acessibilidade)
+21. [ConsistÃªncia de ConteÃºdo](#21-consistÃªncia-de-conteÃºdo)
 22. [Troubleshooting](#22-troubleshooting)
 23. [Exemplos Completos](#23-exemplos-completos)
 24. [Fluxograma ASCII](#24-fluxograma-ascii)
 
 ---
 
-## 1. Introdução
+## 1. IntroduÃ§Ã£o
 
 ### 1.1 Objetivo
 
-Servir como **manual operacional oficial** para agentes de IA — não apenas documentação de projeto, mas um sistema de regras, workflows e padrões que garante mudanças previsíveis, consistentes e de alta qualidade.
+Servir como **manual operacional oficial** para agentes de IA â€” nÃ£o apenas documentaÃ§Ã£o de projeto, mas um sistema de regras, workflows e padrÃµes que garante mudanÃ§as previsÃ­veis, consistentes e de alta qualidade.
 
 ### 1.2 Escopo
 
-Cobre: fluxo de trabalho completo (tarefa → PR → merge), padrões de código, Git/commits/PRs, regras obrigatórias, proibições e contexto técnico completo do projeto.
+Cobre: fluxo de trabalho completo (tarefa â†’ PR â†’ merge), padrÃµes de cÃ³digo, Git/commits/PRs, regras obrigatÃ³rias, proibiÃ§Ãµes e contexto tÃ©cnico completo do projeto.
 
 ### 1.3 Como Utilizar
 
 1. Leia este documento ao iniciar **qualquer** tarefa.
 2. Siga a [Ordem de Prioridade](#4-ordem-de-prioridade) religiosamente.
-3. Consulte seções relevantes durante a implementação.
-4. Execute os [Checklists](#9-checklists) antes de cada etapa crítica.
-5. Conflito entre manual e solicitação do usuário → **questione o usuário**.
+3. Consulte seÃ§Ãµes relevantes durante a implementaÃ§Ã£o.
+4. Execute os [Checklists](#9-checklists) antes de cada etapa crÃ­tica.
+5. Conflito entre manual e solicitaÃ§Ã£o do usuÃ¡rio â†’ **questione o usuÃ¡rio**.
 
 ---
 
-## 2. Missão do Agente
+## 2. MissÃ£o do Agente
 
-| Princípio            | Descrição                                                 |
-| -------------------- | --------------------------------------------------------- |
-| **Previsibilidade**  | Mudanças que outro engenheiro possa revisar sem surpresas |
-| **Mínimo Impacto**   | Alterar exclusivamente o necessário para cumprir a tarefa |
-| **Rastreabilidade**  | Cada mudança com propósito claro e commit correspondente  |
-| **Responsabilidade** | Não misturar refactor com feature, não alterar escopo     |
+| PrincÃ­pio           | DescriÃ§Ã£o                                                |
+| -------------------- | ---------------------------------------------------------- |
+| **Previsibilidade**  | MudanÃ§as que outro engenheiro possa revisar sem surpresas |
+| **MÃ­nimo Impacto**  | Alterar exclusivamente o necessÃ¡rio para cumprir a tarefa |
+| **Rastreabilidade**  | Cada mudanÃ§a com propÃ³sito claro e commit correspondente |
+| **Responsabilidade** | NÃ£o misturar refactor com feature, nÃ£o alterar escopo    |
 
 ---
 
 ## 3. Filosofia do Projeto
 
-1. **Simplicidade** — Soluções diretas. Não generalizar antes do tempo.
-2. **Consistência** — Siga os padrões observados no código existente.
-3. **Previsibilidade** — Mesma entrada deve produzir mesma saída.
-4. **Legibilidade** — Nomes descritivos > comentários. Estrutura clara > "código inteligente".
-5. **Mudanças Pequenas** — 3 PRs pequenos > 1 PR gigante. Commits atômicos.
-6. **Responsabilidade Única** — Cada componente/função/arquivo com um propósito.
-7. **Reutilização** — Antes de criar, procure no projeto: `ui/`, `hooks/`, `lib/`, `data/`.
+1. **Simplicidade** â€” SoluÃ§Ãµes diretas. NÃ£o generalizar antes do tempo.
+2. **ConsistÃªncia** â€” Siga os padrÃµes observados no cÃ³digo existente.
+3. **Previsibilidade** â€” Mesma entrada deve produzir mesma saÃ­da.
+4. **Legibilidade** â€” Nomes descritivos > comentÃ¡rios. Estrutura clara > "cÃ³digo inteligente".
+5. **MudanÃ§as Pequenas** â€” 3 PRs pequenos > 1 PR gigante. Commits atÃ´micos.
+6. **Responsabilidade Ãšnica** â€” Cada componente/funÃ§Ã£o/arquivo com um propÃ³sito.
+7. **ReutilizaÃ§Ã£o** â€” Antes de criar, procure no projeto: `ui/`, `hooks/`, `lib/`, `data/`.
 
 ---
 
 ## 4. Ordem de Prioridade
 
-Execute **todas** as etapas em ordem. Pular é proibido.
+Execute **todas** as etapas em ordem. Pular Ã© proibido.
 
 ```
- 1. ENTENDER A TAREFA ──► 2. ENTENDER IMPACTO ──► 3. LOCALIZAR ARQUIVOS
-    ↓
- 4. REUTILIZAR COMPONENTES ──► 5. IMPLEMENTAR ──► 6. VALIDAR
-    ↓
- 7. REVISAR ──► 8. COMMITAR ──► 9. CRIAR PR ──► 10. LIMPAR
+ 1. ENTENDER A TAREFA â”€â”€â–º 2. ENTENDER IMPACTO â”€â”€â–º 3. LOCALIZAR ARQUIVOS
+    â†“
+ 4. REUTILIZAR COMPONENTES â”€â”€â–º 5. IMPLEMENTAR â”€â”€â–º 6. VALIDAR
+    â†“
+ 7. REVISAR â”€â”€â–º 8. COMMITAR â”€â”€â–º 9. CRIAR PR â”€â”€â–º 10. LIMPAR
 ```
 
-| Etapa              | Ação                                                                                     |
-| ------------------ | ---------------------------------------------------------------------------------------- |
-| **1. Entender**    | Leia a solicitação, identifique o problema real, questione ambiguidades                  |
-| **2. Impacto**     | Quais arquivos? Dependências? Quebra algo existente?                                     |
-| **3. Localizar**   | Use as ferramentas de busca e leitura disponíveis, preferindo `rg`. Leia antes de editar |
-| **4. Reutilizar**  | Verifique `ui/`, `hooks/`, `lib/`, `data/` antes de criar algo novo                      |
-| **5. Implementar** | Mínimo de mudanças. Siga padrões (seção 12)                                              |
-| **6. Validar**     | `build` + `lint` + `test:run` + `tsc --noEmit` + `format:check`                          |
-| **7. Revisar**     | Faça revisão manual com `git diff`. Remova `console.log`                                 |
-| **8. Commitar**    | Conventional Commits. Atômico e descritivo                                               |
-| **9. PR**          | Template da seção 8.4                                                                    |
-| **10. Limpar**     | Excluir branches local e remota após merge                                               |
+| Etapa              | AÃ§Ã£o                                                                                    |
+| ------------------ | ----------------------------------------------------------------------------------------- |
+| **1. Entender**    | Leia a solicitaÃ§Ã£o, identifique o problema real, questione ambiguidades                 |
+| **2. Impacto**     | Quais arquivos? DependÃªncias? Quebra algo existente?                                     |
+| **3. Localizar**   | Use as ferramentas de busca e leitura disponÃ­veis, preferindo `rg`. Leia antes de editar |
+| **4. Reutilizar**  | Verifique `ui/`, `hooks/`, `lib/`, `data/` antes de criar algo novo                       |
+| **5. Implementar** | MÃ­nimo de mudanÃ§as. Siga padrÃµes (seÃ§Ã£o 12)                                          |
+| **6. Validar**     | `build` + `lint` + `test:run` + `tsc --noEmit` + `format:check`                           |
+| **7. Revisar**     | FaÃ§a revisÃ£o manual com `git diff`. Remova `console.log`                                |
+| **8. Commitar**    | Conventional Commits. AtÃ´mico e descritivo                                               |
+| **9. PR**          | Template da seÃ§Ã£o 8.4                                                                   |
+| **10. Limpar**     | Excluir branches local e remota apÃ³s merge                                               |
 
 ---
 
-## 5. Workflow Obrigatório
+## 5. Workflow ObrigatÃ³rio
 
 ```
-RECEBER TAREFA → ANALISAR CONTEXTO → git pull origin main
-→ git checkout -b tipo/descricao → IMPLEMENTAR → npm run build
-→ npm run lint → npm run test:run → npx tsc --noEmit → npm run format:check
-→ REVISAR DIFF → COMMIT → git push -u origin branch → CRIAR PR → MERGE (CI verde)
-→ git checkout main && git pull → git branch -d branch
-→ git push origin --delete branch
+RECEBER TAREFA â†’ ANALISAR CONTEXTO â†’ git pull origin main
+â†’ git checkout -b tipo/descricao â†’ IMPLEMENTAR â†’ npm run build
+â†’ npm run lint â†’ npm run test:run â†’ npx tsc --noEmit â†’ npm run format:check
+â†’ REVISAR DIFF â†’ COMMIT â†’ git push -u origin branch â†’ CRIAR PR â†’ MERGE (CI verde)
+â†’ git checkout main && git pull â†’ git branch -d branch
+â†’ git push origin --delete branch
 ```
 
 ### 5.1 Receber Tarefa
 
-Leia, interprete e confirme com o usuário.
+Leia, interprete e confirme com o usuÃ¡rio.
 
 ### 5.2 Analisar Contexto
 
-Use as ferramentas de busca e leitura disponíveis para entender o estado do código. Prefira
-`rg` para localizar arquivos e conteúdo.
+Use as ferramentas de busca e leitura disponÃ­veis para entender o estado do cÃ³digo. Prefira
+`rg` para localizar arquivos e conteÃºdo.
 
 ### 5.3 Atualizar Main
 
@@ -139,11 +139,11 @@ Nunca trabalhe em `main` desatualizada.
 git checkout -b tipo/descricao-curta
 ```
 
-Siga a nomenclatura da [seção 6.3](#63-nomenclatura-de-branches).
+Siga a nomenclatura da [seÃ§Ã£o 6.3](#63-nomenclatura-de-branches).
 
 ### 5.5 Implementar
 
-Siga os padrões da seção 12.
+Siga os padrÃµes da seÃ§Ã£o 12.
 
 ### 5.6 Executar Build
 
@@ -169,13 +169,13 @@ npm run test:run   # 100% passando
 git diff        # Apenas arquivos esperados alterados
 ```
 
-Faça uma revisão manual adicional com `git diff`.
+FaÃ§a uma revisÃ£o manual adicional com `git diff`.
 
 ### 5.10 Commit
 
 ```bash
 git add <arquivos>
-git commit -m "tipo(escopo): descrição concisa"
+git commit -m "tipo(escopo): descriÃ§Ã£o concisa"
 ```
 
 ### 5.11 Push
@@ -186,13 +186,13 @@ git push -u origin nome-da-branch
 
 ### 5.12 Criar PR
 
-Siga o template (seção 8.4).
+Siga o template (seÃ§Ã£o 8.4).
 
 ### 5.13 Merge
 
-Após CI verde.
+ApÃ³s CI verde.
 
-### 5.14–5.16 Limpeza
+### 5.14â€“5.16 Limpeza
 
 ```bash
 git checkout main && git pull origin main
@@ -206,22 +206,22 @@ git push origin --delete nome-da-branch
 
 ### 6.1 Modelo: GitHub Flow
 
-Apenas `main` (estável, sempre deployável) + branches de curta duração.
+Apenas `main` (estÃ¡vel, sempre deployÃ¡vel) + branches de curta duraÃ§Ã£o.
 
 ```
-main ────┬──── feat/abc ── PR ── merge ──► main
-         └──── fix/xyz ──── PR ── merge ──► main
+main â”€â”€â”€â”€â”¬â”€â”€â”€â”€ feat/abc â”€â”€ PR â”€â”€ merge â”€â”€â–º main
+         â””â”€â”€â”€â”€ fix/xyz â”€â”€â”€â”€ PR â”€â”€ merge â”€â”€â–º main
 ```
 
 ### 6.2 Regras
 
-- **PR obrigatório** para qualquer alteração em `main`
+- **PR obrigatÃ³rio** para qualquer alteraÃ§Ã£o em `main`
 - **Nunca commitar diretamente na `main`**
 - **Nunca force push**
 
 ### 6.3 Nomenclatura de Branches
 
-Use **kebab-case**, máx 50 caracteres, em português.
+Use **kebab-case**, mÃ¡x 50 caracteres, em portuguÃªs.
 
 | Tipo     | Prefixo     | Exemplos                                                                                |
 | -------- | ----------- | --------------------------------------------------------------------------------------- |
@@ -243,35 +243,35 @@ Use **kebab-case**, máx 50 caracteres, em português.
 ### 7.1 Formato
 
 ```
-tipo(escopo): descrição (≤ 72 caracteres)
+tipo(escopo): descriÃ§Ã£o (â‰¤ 72 caracteres)
 
-[corpo — explica o porquê]
+[corpo â€” explica o porquÃª]
 
-[rodapé — BREAKING CHANGE ou issues]
+[rodapÃ© â€” BREAKING CHANGE ou issues]
 ```
 
 ### 7.2 Tipos
 
-| Tipo       | Quando usar                             | Exemplo                                           |
-| ---------- | --------------------------------------- | ------------------------------------------------- |
-| `feat`     | Nova funcionalidade                     | `feat(projects): adiciona filtro por tecnologia`  |
-| `fix`      | Correção de bug                         | `fix(navbar): menu sobrepondo conteúdo no mobile` |
-| `docs`     | Documentação                            | `docs(readme): atualiza comandos de instalação`   |
-| `style`    | Formatação, CSS (sem mudar lógica)      | `style(button): ajusta padding do outline`        |
-| `refactor` | Mudança interna sem mudar comportamento | `refactor(hooks): extrai lógica para hook`        |
-| `perf`     | Melhoria de performance                 | `perf(images): adiciona lazy loading nas imagens` |
-| `test`     | Testes                                  | `test(contact): cobre validação de formulário`    |
-| `build`    | Build system ou dependências            | `build(deps): atualiza next para 16.3.0`          |
-| `ci`       | CI/CD                                   | `ci(actions): adiciona cache ao workflow`         |
-| `chore`    | Manutenção geral                        | `chore: remove console.log de debug`              |
-| `revert`   | Reversão de commit                      | `revert: volta commit abc1234 que quebrou build`  |
+| Tipo       | Quando usar                              | Exemplo                                            |
+| ---------- | ---------------------------------------- | -------------------------------------------------- |
+| `feat`     | Nova funcionalidade                      | `feat(projects): adiciona filtro por tecnologia`   |
+| `fix`      | CorreÃ§Ã£o de bug                        | `fix(navbar): menu sobrepondo conteÃºdo no mobile` |
+| `docs`     | DocumentaÃ§Ã£o                           | `docs(readme): atualiza comandos de instalaÃ§Ã£o`  |
+| `style`    | FormataÃ§Ã£o, CSS (sem mudar lÃ³gica)    | `style(button): ajusta padding do outline`         |
+| `refactor` | MudanÃ§a interna sem mudar comportamento | `refactor(hooks): extrai lÃ³gica para hook`        |
+| `perf`     | Melhoria de performance                  | `perf(images): adiciona lazy loading nas imagens`  |
+| `test`     | Testes                                   | `test(contact): cobre validaÃ§Ã£o de formulÃ¡rio`  |
+| `build`    | Build system ou dependÃªncias            | `build(deps): atualiza next para 16.3.0`           |
+| `ci`       | CI/CD                                    | `ci(actions): adiciona cache ao workflow`          |
+| `chore`    | ManutenÃ§Ã£o geral                       | `chore: remove console.log de debug`               |
+| `revert`   | ReversÃ£o de commit                      | `revert: volta commit abc1234 que quebrou build`   |
 
 ### 7.3 Regras
 
-- **Imperativo:** "adiciona", não "adicionado" nem "adicionando"
-- **Linha ≤ 72 caracteres**
+- **Imperativo:** "adiciona", nÃ£o "adicionado" nem "adicionando"
+- **Linha â‰¤ 72 caracteres**
 - **Escopo opcional** mas recomendado
-- **Corpo separado** por linha em branco — explica **porquê** e **como**
+- **Corpo separado** por linha em branco â€” explica **porquÃª** e **como**
 
 ### 7.4 Exemplos
 
@@ -289,13 +289,13 @@ Usa estado URL para permitir compartilhamento do filtro aplicado."
 git commit -m "fix(mobile): corrige scroll lock ao abrir menu"
 
 # Docs
-git commit -m "docs(readme): atualiza comandos de instalação"
+git commit -m "docs(readme): atualiza comandos de instalaÃ§Ã£o"
 
 # Style
 git commit -m "style(button): padroniza padding das variantes"
 
 # Refactor
-git commit -m "refactor: extrai função cn para lib/utils"
+git commit -m "refactor: extrai funÃ§Ã£o cn para lib/utils"
 
 # Perf
 git commit -m "perf(images): adiciona lazy loading nos projetos"
@@ -310,40 +310,40 @@ git commit -m "build(deps): atualiza next para 16.3.0"
 git commit -m "ci(actions): adiciona cache para acelerar build"
 
 # Chore
-git commit -m "chore: remove console.log e comentários temporários"
+git commit -m "chore: remove console.log e comentÃ¡rios temporÃ¡rios"
 
 # Revert
 git commit -m "revert: volta commit abc1234 que quebrou build"
 
 # Breaking change
-git commit -m "feat: migra seções para server components
+git commit -m "feat: migra seÃ§Ãµes para server components
 
-BREAKING CHANGE: Hero e About agora são server components.
-Props de cliente foram removidas — use data attributes."
+BREAKING CHANGE: Hero e About agora sÃ£o server components.
+Props de cliente foram removidas â€” use data attributes."
 ```
 
 ---
 
 ## 8. Pull Request
 
-### 8.1 Título
+### 8.1 TÃ­tulo
 
 ```
-tipo(escopo): descrição concisa no presente do indicativo (≤ 72 caracteres)
+tipo(escopo): descriÃ§Ã£o concisa no presente do indicativo (â‰¤ 72 caracteres)
 ```
 
 Exemplo: `feat(portfolio): adiciona prova visual dos sistemas`
 
-### 8.2 Regras de Redação e Densidade Técnica (Gold Standard)
+### 8.2 Regras de RedaÃ§Ã£o e Densidade TÃ©cnica (Gold Standard)
 
-Para garantir máxima clareza para revisores humanos e indexadores de código:
+Para garantir mÃ¡xima clareza para revisores humanos e indexadores de cÃ³digo:
 
-- **Sem emojis nos cabeçalhos ou listas:** Use Markdown puro (`### Features`, `### Fixes`, `### Docs`, `- [x] Feature`). É proibido usar emojis como `✨`, `🐛`, `📝` no corpo ou título do PR.
-- **Resumo de alta densidade (1 a 3 frases):** Descreva o que foi entregue citando nominalmente os módulos, componentes, páginas, rotas ou métricas impactadas. Evite frases genéricas.
-- **Verbos de ação na 3ª pessoa do singular:** Inicie os itens do Changelog com verbos no presente do indicativo: _Adiciona_, _Atualiza_, _Corrige_, _Remove_, _Sincroniza_, _Concentra_, _Extrai_.
-- **Como Testar reprodutível:** Comece sempre com o comando de execução (`1. Rode npm run dev.`) e indique as rotas exatas (ex: `/projetos/manutflow`, `/projetos/helpflow`, etc.) ou interações exatas para validar a entrega.
-- **Tipo de Mudança vertical e limpo:** Liste uma opção por linha, sem emojis, marcando com `[x]` apenas os tipos aplicáveis ao PR.
-- **Validação real antes de marcar o Checklist:** O agente DEVE executar cada comando do checklist no terminal e confirmar saída limpa (exit code 0) antes de marcar `[x]`.
+- **Sem emojis nos cabeÃ§alhos ou listas:** Use Markdown puro (`### Features`, `### Fixes`, `### Docs`, `- [x] Feature`). Ã‰ proibido usar emojis como `âœ¨`, `ðŸ›`, `ðŸ“` no corpo ou tÃ­tulo do PR.
+- **Resumo de alta densidade (1 a 3 frases):** Descreva o que foi entregue citando nominalmente os mÃ³dulos, componentes, pÃ¡ginas, rotas ou mÃ©tricas impactadas. Evite frases genÃ©ricas.
+- **Verbos de aÃ§Ã£o na 3Âª pessoa do singular:** Inicie os itens do Changelog com verbos no presente do indicativo: _Adiciona_, _Atualiza_, _Corrige_, _Remove_, _Sincroniza_, _Concentra_, _Extrai_.
+- **Como Testar reprodutÃ­vel:** Comece sempre com o comando de execuÃ§Ã£o (`1. Rode npm run dev.`) e indique as rotas exatas (ex: `/projetos/manutflow`, `/projetos/helpflow`, etc.) ou interaÃ§Ãµes exatas para validar a entrega.
+- **Tipo de MudanÃ§a vertical e limpo:** Liste uma opÃ§Ã£o por linha, sem emojis, marcando com `[x]` apenas os tipos aplicÃ¡veis ao PR.
+- **ValidaÃ§Ã£o real antes de marcar o Checklist:** O agente DEVE executar cada comando do checklist no terminal e confirmar saÃ­da limpa (exit code 0) antes de marcar `[x]`.
 
 ### 8.3 Changelog
 
@@ -367,7 +367,7 @@ Agrupe apenas pelas categorias presentes no PR, em texto limpo:
 
 <!-- 1 a 3 frases diretas explicando o que mudou, quais componentes/rotas foram afetados e o impacto. -->
 
-## Tipo de Mudança
+## Tipo de MudanÃ§a
 
 - [ ] Feature
 - [ ] Fix
@@ -385,7 +385,7 @@ Agrupe apenas pelas categorias presentes no PR, em texto limpo:
 ## Como Testar
 
 1. Rode `npm run dev`.
-2. Abra `<!-- rota ou página -->` e confira `<!-- comportamento esperado -->`.
+2. Abra `<!-- rota ou pÃ¡gina -->` e confira `<!-- comportamento esperado -->`.
 
 ## Checklist
 
@@ -393,20 +393,20 @@ Agrupe apenas pelas categorias presentes no PR, em texto limpo:
 - [ ] Lint passa (`npm run lint`)
 - [ ] Testes passam (`npm run test:run`)
 - [ ] TypeScript sem erros (`npx tsc --noEmit`)
-- [ ] Formatação OK (`npm run format:check`)
+- [ ] FormataÃ§Ã£o OK (`npm run format:check`)
 - [ ] Apenas arquivos do escopo alterados
 ```
 
-### 8.5 Exemplo Real de Referência (Gold Standard)
+### 8.5 Exemplo Real de ReferÃªncia (Gold Standard)
 
-Título: `feat(portfolio): adiciona prova visual dos sistemas`
+TÃ­tulo: `feat(portfolio): adiciona prova visual dos sistemas`
 
 ```markdown
 ## Resumo
 
-Adiciona prova visual dos sistemas na home, com hero e cards usando capturas reais, e atualiza as capturas de ManutFlow, HelpFlow, DevLinks, Lista de Mercado e Crypto Dashboard. Também atualiza o screenshot do README.
+Adiciona prova visual dos sistemas na home, com hero e cards usando capturas reais, e atualiza as capturas de ManutFlow, HelpFlow, DevLinks, Lista de Mercado e Crypto Dashboard. TambÃ©m atualiza o screenshot do README.
 
-## Tipo de Mudança
+## Tipo de MudanÃ§a
 
 - [x] Feature
 - [x] Docs
@@ -438,7 +438,7 @@ Adiciona prova visual dos sistemas na home, com hero e cards usando capturas rea
 - [x] Lint passa (`npm run lint`)
 - [x] Testes passam (`npm run test:run`)
 - [x] TypeScript sem erros (`npx tsc --noEmit`)
-- [x] Formatação OK (`npm run format:check`)
+- [x] FormataÃ§Ã£o OK (`npm run format:check`)
 - [x] Apenas arquivos do escopo alterados
 ```
 
@@ -448,11 +448,11 @@ Adiciona prova visual dos sistemas na home, com hero e cards usando capturas rea
 
 ### 9.1 Antes do Commit
 
-- [ ] Mudança atômica (uma responsabilidade)?
+- [ ] MudanÃ§a atÃ´mica (uma responsabilidade)?
 - [ ] Apenas arquivos relevantes alterados?
 - [ ] Sem `console.log`, `debugger`, `TODO:`?
-- [ ] Código segue padrões da seção 12?
-- [ ] Componentes existentes reutilizados quando possível?
+- [ ] CÃ³digo segue padrÃµes da seÃ§Ã£o 12?
+- [ ] Componentes existentes reutilizados quando possÃ­vel?
 - [ ] Mensagem de commit segue Conventional Commits?
 
 ### 9.2 Antes do Push
@@ -462,16 +462,16 @@ Adiciona prova visual dos sistemas na home, com hero e cards usando capturas rea
 - [ ] `npm run test:run` passou?
 - [ ] `npx tsc --noEmit` passou?
 - [ ] `npm run format:check` passou?
-- [ ] `git diff` contém apenas o esperado?
+- [ ] `git diff` contÃ©m apenas o esperado?
 
 ### 9.3 Antes do PR
 
 - [ ] Checklist 9.2 completo (todos os comandos executados no terminal com exit code 0)
-- [ ] Título no formato `tipo(escopo): descrição` (sem emojis)?
-- [ ] Resumo de alta densidade (1 a 3 frases) citando módulos/rotas afetados?
-- [ ] Tipo de Mudança vertical e sem emojis?
-- [ ] Changelog preenchido sem emojis e com verbos na 3ª pessoa do presente?
-- [ ] Passos para teste claros e reprodutíveis (iniciando com `1. Rode npm run dev.`)?
+- [ ] TÃ­tulo no formato `tipo(escopo): descriÃ§Ã£o` (sem emojis)?
+- [ ] Resumo de alta densidade (1 a 3 frases) citando mÃ³dulos/rotas afetados?
+- [ ] Tipo de MudanÃ§a vertical e sem emojis?
+- [ ] Changelog preenchido sem emojis e com verbos na 3Âª pessoa do presente?
+- [ ] Passos para teste claros e reprodutÃ­veis (iniciando com `1. Rode npm run dev.`)?
 
 ### 9.4 Antes do Merge
 
@@ -479,7 +479,7 @@ Adiciona prova visual dos sistemas na home, com hero e cards usando capturas rea
 - [ ] Sem conflitos com `main`?
 - [ ] Branch atualizado com `main`?
 
-### 9.5 Após Merge
+### 9.5 ApÃ³s Merge
 
 - [ ] `git checkout main && git pull`
 - [ ] `git branch -d nome-da-branch`
@@ -487,25 +487,25 @@ Adiciona prova visual dos sistemas na home, com hero e cards usando capturas rea
 
 ---
 
-## 10. Stack e Configuração
+## 10. Stack e ConfiguraÃ§Ã£o
 
 ### 10.1 Stack Oficial
 
-| Camada          | Tecnologia                                      |
-| --------------- | ----------------------------------------------- |
-| **Framework**   | Next.js 16.x (App Router, Turbopack)            |
-| **Linguagem**   | TypeScript strict (ES2022), React 19.2          |
-| **Estilização** | Tailwind CSS 3.x (dark mode: `class`)           |
-| **Testes**      | Vitest + React Testing Library (jsdom, globals) |
-| **Lint/Format** | ESLint (flat config) + Prettier                 |
-| **Git Hooks**   | Husky + lint-staged                             |
-| **CI**          | GitHub Actions (`.github/workflows/ci.yml`)     |
-| **Utilitários** | `cva`, `clsx`, `tailwind-merge`                 |
-| **Analytics**   | `@vercel/analytics`                             |
+| Camada            | Tecnologia                                      |
+| ----------------- | ----------------------------------------------- |
+| **Framework**     | Next.js 16.x (App Router, Turbopack)            |
+| **Linguagem**     | TypeScript strict (ES2022), React 19.2          |
+| **EstilizaÃ§Ã£o** | Tailwind CSS 3.x (dark mode: `class`)           |
+| **Testes**        | Vitest + React Testing Library (jsdom, globals) |
+| **Lint/Format**   | ESLint (flat config) + Prettier                 |
+| **Git Hooks**     | Husky + lint-staged                             |
+| **CI**            | GitHub Actions (`.github/workflows/ci.yml`)     |
+| **UtilitÃ¡rios**  | `cva`, `clsx`, `tailwind-merge`                 |
+| **Analytics**     | `@vercel/analytics`                             |
 
-**NOTA:** O projeto **não** utiliza TanStack Query, Axios, Cypress nem nenhuma biblioteca de estado global. Elas foram deliberadamente omitidas por não serem necessárias (sem chamadas HTTP complexas, sem estado global compartilhado). Testes E2E (Cypress) não estão configurados — se necessário no futuro, será adicionado.
+**NOTA:** O projeto **nÃ£o** utiliza TanStack Query, Axios, Cypress nem nenhuma biblioteca de estado global. Elas foram deliberadamente omitidas por nÃ£o serem necessÃ¡rias (sem chamadas HTTP complexas, sem estado global compartilhado). Testes E2E (Cypress) nÃ£o estÃ£o configurados â€” se necessÃ¡rio no futuro, serÃ¡ adicionado.
 
-### 10.2 Configurações Críticas
+### 10.2 ConfiguraÃ§Ãµes CrÃ­ticas
 
 ```jsonc
 // tsconfig.json
@@ -525,7 +525,7 @@ Adiciona prova visual dos sistemas na home, com hero e cards usando capturas rea
 ```
 
 ```js
-// eslint.config.mjs — flat config do eslint-config-next@16 (exports nativos)
+// eslint.config.mjs â€” flat config do eslint-config-next@16 (exports nativos)
 import nextCoreWebVitals from 'eslint-config-next/core-web-vitals';
 import nextTypescript from 'eslint-config-next/typescript';
 import prettierConfig from 'eslint-config-prettier/flat';
@@ -540,24 +540,24 @@ export default [
 ];
 ```
 
-> ⚠️ O `eslint-config-next@16` exporta configs flat nativas — `FlatCompat` (`@eslint/eslintrc`) não funciona mais aqui.
+> âš ï¸ O `eslint-config-next@16` exporta configs flat nativas â€” `FlatCompat` (`@eslint/eslintrc`) nÃ£o funciona mais aqui.
 
 ### 10.3 Scripts
 
-| Comando                 | Descrição                             |
-| ----------------------- | ------------------------------------- |
-| `npm run dev`           | Next.js dev server                    |
-| `npm run build`         | Next.js build (Turbopack)             |
-| `npm start`             | Server com build gerado               |
-| `npm run lint`          | ESLint                                |
-| `npm run lint:fix`      | ESLint auto-fix                       |
-| `npm run format`        | Prettier — formatar                   |
-| `npm run format:check`  | Prettier — verificar                  |
-| `npm run test`          | Vitest (watch)                        |
-| `npm run test:run`      | Vitest (run once)                     |
-| `npm run test:coverage` | Vitest com cobertura (threshold ≥80%) |
-| `npm run test:watch`    | Vitest (watch interativo)             |
-| `npm run analyze`       | Build com bundle analyzer             |
+| Comando                 | DescriÃ§Ã£o                             |
+| ----------------------- | --------------------------------------- |
+| `npm run dev`           | Next.js dev server                      |
+| `npm run build`         | Next.js build (Turbopack)               |
+| `npm start`             | Server com build gerado                 |
+| `npm run lint`          | ESLint                                  |
+| `npm run lint:fix`      | ESLint auto-fix                         |
+| `npm run format`        | Prettier â€” formatar                   |
+| `npm run format:check`  | Prettier â€” verificar                  |
+| `npm run test`          | Vitest (watch)                          |
+| `npm run test:run`      | Vitest (run once)                       |
+| `npm run test:coverage` | Vitest com cobertura (threshold â‰¥80%) |
+| `npm run test:watch`    | Vitest (watch interativo)               |
+| `npm run analyze`       | Build com bundle analyzer               |
 
 ---
 
@@ -565,42 +565,42 @@ export default [
 
 ```
 tharcioport/
-└── src/
-    ├── app/
-    │   ├── components/
-    │   │   ├── sections/   # Hero, Projects, Process, Capabilities, About, Contact
-    │   │   ├── ui/         # Button, Pill, Section, SectionHeader, RevealOnScroll, Icons, TechIcons, ProjectScreenShowcase, etc.
-    │   │   ├── Navbar.tsx, MobileNav.tsx, Footer.tsx, BackToTop.tsx
-    │   │   ├── ThemeProvider.tsx, ThemeSwitcher.tsx, ClientAnalytics.tsx
-    │   │   └── __tests__/
-    │   ├── hooks/           # useScrollReveal, useActiveSection
-    │   ├── layout.tsx       # RootLayout (SEO, Schema.org, fontes)
-    │   ├── page.tsx         # Home (Hero → Projects → Process → ... → Contact)
-    │   ├── error.tsx        # Error boundary
-    │   ├── not-found.tsx    # Página 404
-    │   ├── globals.css      # Tailwind directives + estilos globais
-    │   ├── opengraph-image.tsx, robots.ts, sitemap.ts
-    ├── data/                # capabilities, constants, experience, projects
-    │   └── __tests__/
-    └── lib/
-        └── utils.ts         # cn()
+â””â”€â”€ src/
+    â”œâ”€â”€ app/
+    â”‚   â”œâ”€â”€ components/
+    â”‚   â”‚   â”œâ”€â”€ sections/   # Hero, Projects, Process, Capabilities, About, Contact
+    â”‚   â”‚   â”œâ”€â”€ ui/         # Button, Pill, Section, SectionHeader, RevealOnScroll, Icons, TechIcons, ProjectScreenShowcase, etc.
+    â”‚   â”‚   â”œâ”€â”€ Navbar.tsx, MobileNav.tsx, Footer.tsx, BackToTop.tsx
+    â”‚   â”‚   â”œâ”€â”€ ThemeProvider.tsx, ThemeSwitcher.tsx, ClientAnalytics.tsx
+    â”‚   â”‚   â””â”€â”€ __tests__/
+    â”‚   â”œâ”€â”€ hooks/           # useScrollReveal, useActiveSection
+    â”‚   â”œâ”€â”€ layout.tsx       # RootLayout (SEO, Schema.org, fontes)
+    â”‚   â”œâ”€â”€ page.tsx         # Home (Hero â†’ Projects â†’ Process â†’ ... â†’ Contact)
+    â”‚   â”œâ”€â”€ error.tsx        # Error boundary
+    â”‚   â”œâ”€â”€ not-found.tsx    # PÃ¡gina 404
+    â”‚   â”œâ”€â”€ globals.css      # Tailwind directives + estilos globais
+    â”‚   â”œâ”€â”€ opengraph-image.tsx, robots.ts, sitemap.ts
+    â”œâ”€â”€ data/                # capabilities, constants, experience, projects
+    â”‚   â””â”€â”€ __tests__/
+    â””â”€â”€ lib/
+        â””â”€â”€ utils.ts         # cn()
 ```
 
 ---
 
-## 12. Padrões de Código
+## 12. PadrÃµes de CÃ³digo
 
 ### 12.1 Componentes React
 
 **Regras de `'use client'`:**
 
-- Use **apenas** quando necessário (hooks, eventos, interatividade)
-- Seções (`sections/`) devem ser **server components** quando possível
-- Componentes são Server Components por padrão, inclusive em `ui/`
+- Use **apenas** quando necessÃ¡rio (hooks, eventos, interatividade)
+- SeÃ§Ãµes (`sections/`) devem ser **server components** quando possÃ­vel
+- Componentes sÃ£o Server Components por padrÃ£o, inclusive em `ui/`
 - Use `'use client'` somente quando hooks, eventos ou APIs do navegador exigirem
-- Prefira receber dados como props (server→client)
+- Prefira receber dados como props (serverâ†’client)
 
-**Padrão de componente UI:**
+**PadrÃ£o de componente UI:**
 
 ```tsx
 const buttonVariants = cva('inline-flex items-center justify-center rounded-md', {
@@ -624,21 +624,21 @@ Button.displayName = 'Button';
 
 ### 12.2 Hooks
 
-| Hook                             | Descrição                           | Retorno             |
-| -------------------------------- | ----------------------------------- | ------------------- |
-| `useScrollReveal<T>(threshold?)` | IntersectionObserver para animações | `{ ref, visible }`  |
-| `useActiveSection(ids)`          | Scroll spy                          | `string` (id ativo) |
+| Hook                             | DescriÃ§Ã£o                           | Retorno             |
+| -------------------------------- | ------------------------------------- | ------------------- |
+| `useScrollReveal<T>(threshold?)` | IntersectionObserver para animaÃ§Ãµes | `{ ref, visible }`  |
+| `useActiveSection(ids)`          | Scroll spy                            | `string` (id ativo) |
 
-### 12.3 Utilitários
+### 12.3 UtilitÃ¡rios
 
 ```ts
-// Use cn() para classes condicionais em código novo ou modificado.
+// Use cn() para classes condicionais em cÃ³digo novo ou modificado.
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 ```
 
-### 12.4 Ícones
+### 12.4 Ãcones
 
 Importe de `@/app/components/ui/Icons`:
 
@@ -650,13 +650,13 @@ Importe de `@/app/components/ui/Icons`:
 
 Importe de `@/app/components/ui/TechIcons`:
 
-`TechIcon` (resolver automático por nome), `NextJsIcon`, `ReactIcon`,
+`TechIcon` (resolver automÃ¡tico por nome), `NextJsIcon`, `ReactIcon`,
 `TypeScriptIcon`, `TailwindIcon`, `NodeJsIcon`, `RestApiIcon`,
 `NextAuthIcon`, `ZodIcon`, `PrismaIcon`, `PostgresIcon`, `SupabaseIcon`,
 `RlsIcon`, `VercelIcon`, `VitestIcon`, `CypressIcon`, `GitIcon`,
 `GitHubIcon`, `GitHubActionsIcon`
 
-### 12.5 Organização de Imports
+### 12.5 OrganizaÃ§Ã£o de Imports
 
 ```
 1. React/Next.js
@@ -664,7 +664,7 @@ Importe de `@/app/components/ui/TechIcons`:
 3. Componentes @/app/components
 4. Hooks @/app/hooks
 5. Dados @/data
-6. Utilitários @/lib
+6. UtilitÃ¡rios @/lib
 7. CSS
 
 (Linha em branco entre grupos)
@@ -672,25 +672,25 @@ Importe de `@/app/components/ui/TechIcons`:
 
 ### 12.6 CSS Custom Properties
 
-O projeto utiliza variáveis CSS para fontes (via `next/font/google`):
+O projeto utiliza variÃ¡veis CSS para fontes (via `next/font/google`):
 
 ```css
 /* Definidas em layout.tsx e consumidas via Tailwind */
 font-sans: var(--font-geist-sans); /* Geist Sans para body e headings */
-font-mono: var(--font-geist-mono); /* Geist Mono para código e metadados */
+font-mono: var(--font-geist-mono); /* Geist Mono para cÃ³digo e metadados */
 ```
 
-**Regra:** Use as classes Tailwind `font-sans`, `font-heading` (usa Geist Sans) e `font-mono`. Não declare novas variáveis CSS sem necessidade.
+**Regra:** Use as classes Tailwind `font-sans`, `font-heading` (usa Geist Sans) e `font-mono`. NÃ£o declare novas variÃ¡veis CSS sem necessidade.
 
 ### 12.7 Nomenclatura
 
-| Entidade          | Padrão            | Exemplos                  |
+| Entidade          | PadrÃ£o           | Exemplos                  |
 | ----------------- | ----------------- | ------------------------- |
 | Componentes       | PascalCase        | `ProjectCard`, `Navbar`   |
 | Hooks             | camelCase + `use` | `useScrollReveal`         |
 | Arquivos de dados | kebab-case        | `capabilities.ts`         |
 | Constantes        | UPPER_SNAKE_CASE  | `SECTION_IDS`             |
-| Variáveis         | camelCase         | `activeSection`           |
+| VariÃ¡veis        | camelCase         | `activeSection`           |
 | Tipos/Interfaces  | PascalCase        | `Project`, `Capability`   |
 | Pastas            | camelCase         | `sections`, `ui`, `hooks` |
 
@@ -772,24 +772,24 @@ navLinks = [
 
 ### 14.1 Tema
 
-- `next-themes` com `attribute="class"` — tema inicial: sistema
+- `next-themes` com `attribute="class"` â€” tema inicial: sistema
 - Classes condicionais: `dark:` para escuro, sem prefixo para claro
 
 ### 14.2 Cores
 
 **Paleta:** Carmesim (accent) em fundos neutros gelo.
 
-| Uso              | Light                           | Dark                           |
-| ---------------- | ------------------------------- | ------------------------------ |
-| Fundo            | `bg-light-bg` (#FAFAF9)         | `bg-dark-bg` (#141210)         |
-| Card             | `bg-light-card` (#FFFFFF)       | `bg-dark-card` (#1D1917)       |
-| Superfície       | `bg-light-surface` (#F1ECE8)    | `bg-dark-surface` (#26211E)    |
-| Texto primário   | `text-primary-text` (#1C1917)   | `text-light-text` (#F5F0EB)    |
-| Texto secundário | `text-secondary-text` (#57534E) | `text-dark-text` (#A8A29E)     |
-| Borda            | `border-border-light` (#E7E0D9) | `border-border-dark` (#33302D) |
-| Accent           | `bg-accent` (#B91C1C)           | `bg-accent` (#B91C1C)          |
+| Uso               | Light                           | Dark                           |
+| ----------------- | ------------------------------- | ------------------------------ |
+| Fundo             | `bg-light-bg` (#FAFAF9)         | `bg-dark-bg` (#141210)         |
+| Card              | `bg-light-card` (#FFFFFF)       | `bg-dark-card` (#1D1917)       |
+| SuperfÃ­cie       | `bg-light-surface` (#F1ECE8)    | `bg-dark-surface` (#26211E)    |
+| Texto primÃ¡rio   | `text-primary-text` (#1C1917)   | `text-light-text` (#F5F0EB)    |
+| Texto secundÃ¡rio | `text-secondary-text` (#57534E) | `text-dark-text` (#A8A29E)     |
+| Borda             | `border-border-light` (#E7E0D9) | `border-border-dark` (#33302D) |
+| Accent            | `bg-accent` (#B91C1C)           | `bg-accent` (#B91C1C)          |
 
-Hover: `accent-hover` (#991B1B) · Light: `accent-light` (#F87171)
+Hover: `accent-hover` (#991B1B) Â· Light: `accent-light` (#F87171)
 
 ### 14.3 Fontes
 
@@ -798,33 +798,33 @@ Hover: `accent-hover` (#991B1B) · Light: `accent-light` (#F87171)
 - **Mono:** Geist Mono (`var(--font-geist-mono)`)
 - Carregadas via `next/font/google` em `layout.tsx`
 
-### 14.4 Animações
+### 14.4 AnimaÃ§Ãµes
 
-| Animação     | Duração | Uso                        |
-| ------------ | ------- | -------------------------- |
-| `fade-in`    | 0.8s    | Entrada simples            |
-| `fade-up`    | 0.8s    | Revelação com deslocamento |
-| `fade-down`  | 0.5s    | Entrada do topo            |
-| `scale-x-in` | 0.6s    | Barra horizontal           |
-| `ping`       | 2s      | Efeito pulsante            |
+| AnimaÃ§Ã£o   | DuraÃ§Ã£o | Uso                          |
+| ------------ | --------- | ---------------------------- |
+| `fade-in`    | 0.8s      | Entrada simples              |
+| `fade-up`    | 0.8s      | RevelaÃ§Ã£o com deslocamento |
+| `fade-down`  | 0.5s      | Entrada do topo              |
+| `scale-x-in` | 0.6s      | Barra horizontal             |
+| `ping`       | 2s        | Efeito pulsante              |
 
 ---
 
-## 15. Animações e Hooks
+## 15. AnimaÃ§Ãµes e Hooks
 
 ### 15.1 RevealOnScroll
 
 ```tsx
 <RevealOnScroll as="section" delay={200}>
-  <h2>Conteúdo animado</h2>
+  <h2>ConteÃºdo animado</h2>
 </RevealOnScroll>
 ```
 
-Props: `children`, `className`, `as` (tag, padrão `div`), `delay` (ms)
+Props: `children`, `className`, `as` (tag, padrÃ£o `div`), `delay` (ms)
 
 ### 15.2 prefers-reduced-motion
 
-Todas as animações desativadas quando ativo. `useScrollReveal` marca como visível imediatamente.
+Todas as animaÃ§Ãµes desativadas quando ativo. `useScrollReveal` marca como visÃ­vel imediatamente.
 
 ### 15.3 useScrollReveal
 
@@ -840,7 +840,7 @@ function useScrollReveal<T extends HTMLElement>(threshold = 0.12) {
 ```ts
 function useActiveSection(ids: readonly string[]): string {
   // rootMargin: '-40% 0px -55% 0px'
-  // Retorna id da seção visível
+  // Retorna id da seÃ§Ã£o visÃ­vel
 }
 ```
 
@@ -850,29 +850,29 @@ function useActiveSection(ids: readonly string[]): string {
 
 ### 16.1 Regras Absolutas
 
-| #   | Regra                                               | Motivo                     |
-| --- | --------------------------------------------------- | -------------------------- |
-| 1   | Nunca alterar código **fora do escopo**             | Cada mudança custa revisão |
-| 2   | Nunca atualizar dependências sem autorização        | Pode quebrar build         |
-| 3   | Nunca modificar config do projeto sem autorização   | CI valida configurações    |
-| 4   | Nunca fazer alterações **cosméticas**               | Polui diff                 |
-| 5   | Nunca misturar refactor com feature no mesmo commit | Viola atomicidade          |
-| 6   | Nunca fazer **force push**                          | Destrói histórico          |
-| 7   | Nunca trabalhar diretamente na `main`               | Exceto docs autorizados    |
-| 8   | Nunca ignorar CI — se falhar, **corrija**           | CI é a verdade             |
+| #   | Regra                                               | Motivo                       |
+| --- | --------------------------------------------------- | ---------------------------- |
+| 1   | Nunca alterar cÃ³digo **fora do escopo**            | Cada mudanÃ§a custa revisÃ£o |
+| 2   | Nunca atualizar dependÃªncias sem autorizaÃ§Ã£o     | Pode quebrar build           |
+| 3   | Nunca modificar config do projeto sem autorizaÃ§Ã£o | CI valida configuraÃ§Ãµes    |
+| 4   | Nunca fazer alteraÃ§Ãµes **cosmÃ©ticas**            | Polui diff                   |
+| 5   | Nunca misturar refactor com feature no mesmo commit | Viola atomicidade            |
+| 6   | Nunca fazer **force push**                          | DestrÃ³i histÃ³rico          |
+| 7   | Nunca trabalhar diretamente na `main`               | Exceto docs autorizados      |
+| 8   | Nunca ignorar CI â€” se falhar, **corrija**         | CI Ã© a verdade              |
 
-### 16.2 Regras Obrigatórias
+### 16.2 Regras ObrigatÃ³rias
 
-| #   | Regra                                                                                                   |
-| --- | ------------------------------------------------------------------------------------------------------- |
-| 1   | Sempre revisar `git diff` antes de commitar                                                             |
-| 2   | Sempre remover `console.log` e comentários temporários                                                  |
-| 3   | Sempre preservar a arquitetura existente                                                                |
-| 4   | Sempre reutilizar componentes existentes                                                                |
-| 5   | Sempre preferir mudanças pequenas                                                                       |
-| 6   | Sempre explicar decisões importantes no PR                                                              |
-| 7   | Usar `cn()` para classes condicionais em código novo ou modificado; classes estáticas podem ser strings |
-| 8   | Usar `cva` em sistemas reutilizáveis de variantes de estilo                                             |
+| #   | Regra                                                                                                     |
+| --- | --------------------------------------------------------------------------------------------------------- |
+| 1   | Sempre revisar `git diff` antes de commitar                                                               |
+| 2   | Sempre remover `console.log` e comentÃ¡rios temporÃ¡rios                                                  |
+| 3   | Sempre preservar a arquitetura existente                                                                  |
+| 4   | Sempre reutilizar componentes existentes                                                                  |
+| 5   | Sempre preferir mudanÃ§as pequenas                                                                        |
+| 6   | Sempre explicar decisÃµes importantes no PR                                                               |
+| 7   | Usar `cn()` para classes condicionais em cÃ³digo novo ou modificado; classes estÃ¡ticas podem ser strings |
+| 8   | Usar `cva` em sistemas reutilizÃ¡veis de variantes de estilo                                              |
 
 ---
 
@@ -880,42 +880,42 @@ function useActiveSection(ids: readonly string[]): string {
 
 - **NUNCA** modificar `tsconfig.json`, `tailwind.config.js`, `next.config.mjs`, `eslint.config.mjs`
 - **NUNCA** modificar `.github/workflows/ci.yml`, `.husky/pre-commit`, `vitest.config.ts`
-- **NUNCA** rodar `npm install`/`uninstall` ou `npm audit fix` sem autorização
+- **NUNCA** rodar `npm install`/`uninstall` ou `npm audit fix` sem autorizaÃ§Ã£o
 - **NUNCA** fazer `git push --force` ou `git push --force-with-lease`
 - **NUNCA** commitar na `main` diretamente
-- **NUNCA** misturar tipos de mudança no mesmo commit
-- **NUNCA** deixar `console.log`, `debugger`, `TODO:`, `FIXME:` no código
-- **NUNCA** ignorar erros TypeScript (`strict: true` está ativo)
-- **NUNCA** introduzir dependências para algo que o código atual já resolve
+- **NUNCA** misturar tipos de mudanÃ§a no mesmo commit
+- **NUNCA** deixar `console.log`, `debugger`, `TODO:`, `FIXME:` no cÃ³digo
+- **NUNCA** ignorar erros TypeScript (`strict: true` estÃ¡ ativo)
+- **NUNCA** introduzir dependÃªncias para algo que o cÃ³digo atual jÃ¡ resolve
 - **NUNCA** criar componente novo se um existente pode ser estendido
 - **NUNCA** remover props ou alterar interfaces sem atualizar consumidores
 - **NUNCA** desativar regras de lint sem justificativa documentada
 
 ---
 
-## 18. Validação e Qualidade
+## 18. ValidaÃ§Ã£o e Qualidade
 
-### 18.1 Validação Obrigatória
+### 18.1 ValidaÃ§Ã£o ObrigatÃ³ria
 
 ```bash
-npx tsc --noEmit       # 1° — tipos
-npm run format:check   # 2° — formatação (Prettier)
-npm run lint           # 3° — qualidade (ESLint)
-npm run test:run       # 4° — comportamento (Vitest)
-npm run build          # 5° — build (mais lento)
+npx tsc --noEmit       # 1Â° â€” tipos
+npm run format:check   # 2Â° â€” formataÃ§Ã£o (Prettier)
+npm run lint           # 3Â° â€” qualidade (ESLint)
+npm run test:run       # 4Â° â€” comportamento (Vitest)
+npm run build          # 5Â° â€” build (mais lento)
 ```
 
 ### 18.2 CI Pipeline
 
-Executado em push/PR para `main` (Node 20):
+Executado em push/PR para `main` (Node 22):
 
-**Job 1 — quality:**
+**Job 1 â€” quality:**
 
-1. `npm ci` · 2. `npm run format:check` · 3. `npm run lint` · 4. `npx tsc --noEmit`
+1. `npm ci` Â· 2. `npm run format:check` Â· 3. `npm run lint` Â· 4. `npx tsc --noEmit`
 
-**Job 2 — build-and-test** (após quality):
+**Job 2 â€” build-and-test** (apÃ³s quality):
 
-1. `npm run test:coverage` (Valida threshold de cobertura ≥ 80% stmts) · 2. `npm run build` (com cache do `.next`)
+1. `npm run test:coverage` (Valida threshold de cobertura â‰¥ 80% stmts) Â· 2. `npm run build` (com cache do `.next`)
 
 ### 18.3 Husky + lint-staged
 
@@ -923,71 +923,71 @@ Executado em push/PR para `main` (Node 20):
 
 ### 18.4 Quando Usar Cada Tipo de Teste
 
-| Tipo           | Ferramenta                | Quando usar                                                                                  |
-| -------------- | ------------------------- | -------------------------------------------------------------------------------------------- |
-| **Unitário**   | Vitest + RTL              | Testar componentes, hooks, funções utilitárias e dados no nível de unidade                   |
-| **Integração** | Vitest + RTL              | Testar interações entre componentes (ex: formulário + validação)                             |
-| **E2E**        | Cypress (não configurado) | Testar fluxos completos do usuário. Adicionar **apenas** quando houver necessidade explícita |
+| Tipo             | Ferramenta                 | Quando usar                                                                                    |
+| ---------------- | -------------------------- | ---------------------------------------------------------------------------------------------- |
+| **UnitÃ¡rio**    | Vitest + RTL               | Testar componentes, hooks, funÃ§Ãµes utilitÃ¡rias e dados no nÃ­vel de unidade                 |
+| **IntegraÃ§Ã£o** | Vitest + RTL               | Testar interaÃ§Ãµes entre componentes (ex: formulÃ¡rio + validaÃ§Ã£o)                          |
+| **E2E**          | Cypress (nÃ£o configurado) | Testar fluxos completos do usuÃ¡rio. Adicionar **apenas** quando houver necessidade explÃ­cita |
 
-**Testes manuais:** Execute `npm run dev` e verifique visualmente a mudança no navegador. Foco em: renderização correta, responsividade (mobile/desktop), tema light/dark e comportamento de animações.
+**Testes manuais:** Execute `npm run dev` e verifique visualmente a mudanÃ§a no navegador. Foco em: renderizaÃ§Ã£o correta, responsividade (mobile/desktop), tema light/dark e comportamento de animaÃ§Ãµes.
 
 ---
 
 ## 19. Performance
 
-### 19.1 Boas Práticas
+### 19.1 Boas PrÃ¡ticas
 
-- **Bundler:** **Turbopack** (padrão do Next 16) — sem config customizada de bundler
+- **Bundler:** **Turbopack** (padrÃ£o do Next 16) â€” sem config customizada de bundler
 - **Imagens:** formatos `.avif`/`.webp` (configurado), `loading="lazy"` abaixo da dobra
-- **Bundle:** prefira dynamic imports; evite imports grandes desnecessários
-- **Re-renders:** evite `useEffect` desnecessário; prefira estado derivado
+- **Bundle:** prefira dynamic imports; evite imports grandes desnecessÃ¡rios
+- **Re-renders:** evite `useEffect` desnecessÃ¡rio; prefira estado derivado
 - **CSS:** `experimental.optimizeCss: true` ativo
-- **Console:** `removeConsole` em produção com `{ exclude: ['error'] }` (preserva `console.error` do `error.tsx`)
-- **Compressão:** `compress: true` ativo
+- **Console:** `removeConsole` em produÃ§Ã£o com `{ exclude: ['error'] }` (preserva `console.error` do `error.tsx`)
+- **CompressÃ£o:** `compress: true` ativo
 
-### 19.2 Métricas Alvo
+### 19.2 MÃ©tricas Alvo
 
-- Lighthouse: Performance ≥ 95 · Acessibilidade ≥ 95 · Práticas ≥ 95 · SEO ≥ 95
-- FCP < 1.5s · LCP < 2.5s · CLS < 0.1
+- Lighthouse: Performance â‰¥ 95 Â· Acessibilidade â‰¥ 95 Â· PrÃ¡ticas â‰¥ 95 Â· SEO â‰¥ 95
+- FCP < 1.5s Â· LCP < 2.5s Â· CLS < 0.1
 
 ---
 
-## 20. Segurança, SEO e Acessibilidade
+## 20. SeguranÃ§a, SEO e Acessibilidade
 
-### 20.1 Segurança
+### 20.1 SeguranÃ§a
 
 - `poweredByHeader: false` (remove `X-Powered-By: Next.js`)
-- Contato via `mailto` e cópia de e-mail, sem formulário ou processamento de entrada
-- Sem secrets no código — use variáveis de ambiente
-- CI com `contents: read` (menor privilégio)
+- Contato via `mailto` e cÃ³pia de e-mail, sem formulÃ¡rio ou processamento de entrada
+- Sem secrets no cÃ³digo â€” use variÃ¡veis de ambiente
+- CI com `contents: read` (menor privilÃ©gio)
 
 ### 20.2 SEO
 
 - Metadata completa em `layout.tsx`: title (`%s | Tharcio Santos`), description, keywords, Open Graph, Twitter cards
 - Schema.org JSON-LD: Person, WebSite, ProfilePage
 - Sitemap (`sitemap.ts`) + Robots (`robots.ts`)
-- OG image estática pré-gerada no build (`opengraph-image.tsx`, rota `○`)
+- OG image estÃ¡tica prÃ©-gerada no build (`opengraph-image.tsx`, rota `â—‹`)
 
 ### 20.3 Acessibilidade
 
 - **Skip link:** `.skip-link` ao receber foco
 - **Focus-visible:** anel de foco com `accent`/`accent-light`
-- **Reduced motion:** animações desativadas em `prefers-reduced-motion: reduce`
+- **Reduced motion:** animaÃ§Ãµes desativadas em `prefers-reduced-motion: reduce`
 - **ARIA:** labels e atributos em componentes interativos
 - **Scrollbar customizada:** webkit (claro/escuro)
 
 ---
 
-## 21. Consistência de Conteúdo
+## 21. ConsistÃªncia de ConteÃºdo
 
-| Regra           | Valor             |
-| --------------- | ----------------- |
-| Conclusão ADS   | **julho de 2027** |
-| ManutFlow       | **em produção**   |
-| Idioma conteúdo | Português (BR)    |
-| Idioma código   | Inglês            |
+| Regra            | Valor             |
+| ---------------- | ----------------- |
+| ConclusÃ£o ADS   | **julho de 2027** |
+| ManutFlow        | **em produÃ§Ã£o** |
+| Idioma conteÃºdo | PortuguÃªs (BR)   |
+| Idioma cÃ³digo   | InglÃªs           |
 
-**Superfícies a verificar:** README.md, AGENTS.md, código fonte, currículo, GitHub, LinkedIn. Todas devem ter datas, status de projetos e URLs consistentes.
+**SuperfÃ­cies a verificar:** README.md, AGENTS.md, cÃ³digo fonte, currÃ­culo, GitHub, LinkedIn. Todas devem ter datas, status de projetos e URLs consistentes.
 
 ---
 
@@ -996,53 +996,53 @@ Executado em push/PR para `main` (Node 20):
 ### 22.1 Build Falha
 
 ```
-Possíveis causas:
-1. Erro de tipo → npx tsc --noEmit
-2. Import inexistente → verifique caminhos
-3. Módulo não encontrado → npm ci
-4. Classe Tailwind inválida → verifique tailwind.config.js
+PossÃ­veis causas:
+1. Erro de tipo â†’ npx tsc --noEmit
+2. Import inexistente â†’ verifique caminhos
+3. MÃ³dulo nÃ£o encontrado â†’ npm ci
+4. Classe Tailwind invÃ¡lida â†’ verifique tailwind.config.js
 ```
 
 ### 22.2 Lint Falha
 
 ```
-1. Variável não utilizada → remova ou use
-2. Import não utilizado → remova
-3. Hook com deps incorretas → ajuste array
-4. any explícito → substitua pelo tipo
+1. VariÃ¡vel nÃ£o utilizada â†’ remova ou use
+2. Import nÃ£o utilizado â†’ remova
+3. Hook com deps incorretas â†’ ajuste array
+4. any explÃ­cito â†’ substitua pelo tipo
 ```
 
 ### 22.3 Testes Falham
 
 ```
-1. Snapshot desatualizado → atualize
-2. Componente mudou de interface → atualize testes
-3. Mock desatualizado → atualize
-4. Timezone-dependente → vi.setSystemTime()
+1. Snapshot desatualizado â†’ atualize
+2. Componente mudou de interface â†’ atualize testes
+3. Mock desatualizado â†’ atualize
+4. Timezone-dependente â†’ vi.setSystemTime()
 ```
 
 ### 22.4 CI Falha
 
 ```
-1. Husky bloqueou → npx lint-staged manual
-2. Formatação → npm run format
-3. TypeScript falha no CI mas não local → npx tsc --noEmit
-4. Teste local passa, CI falha → verifique ambiente (Node, OS)
+1. Husky bloqueou â†’ npx lint-staged manual
+2. FormataÃ§Ã£o â†’ npm run format
+3. TypeScript falha no CI mas nÃ£o local â†’ npx tsc --noEmit
+4. Teste local passa, CI falha â†’ verifique ambiente (Node, OS)
 ```
 
 ### 22.5 Git
 
 ```
-git push rejeitado → git merge main (resolver conflitos)
-Force push bloqueado → git pull --rebase
-Husky rejeitou commit → corrija lint/formatação
+git push rejeitado â†’ git merge main (resolver conflitos)
+Force push bloqueado â†’ git pull --rebase
+Husky rejeitou commit â†’ corrija lint/formataÃ§Ã£o
 ```
 
 ---
 
 ## 23. Exemplos Completos
 
-### 23.1 Adicionar Projeto ao Portfólio
+### 23.1 Adicionar Projeto ao PortfÃ³lio
 
 **Tarefa:** Adicionar um projeto chamado "TaskFlow"
 
@@ -1051,7 +1051,7 @@ Husky rejeitou commit → corrija lint/formatação
 **Commits:**
 
 ```
-feat(projects): adiciona TaskFlow à lista de projetos
+feat(projects): adiciona TaskFlow Ã  lista de projetos
 test(projects): adiciona teste de sanidade para novos projetos
 ```
 
@@ -1062,9 +1062,9 @@ test(projects): adiciona teste de sanidade para novos projetos
 ```markdown
 ## Resumo
 
-Adiciona o projeto TaskFlow à lista de projetos em destaque na home (`src/data/projects.ts`) e inclui cobertura de testes de sanidade (`src/data/__tests__/projects.test.ts`).
+Adiciona o projeto TaskFlow Ã  lista de projetos em destaque na home (`src/data/projects.ts`) e inclui cobertura de testes de sanidade (`src/data/__tests__/projects.test.ts`).
 
-## Tipo de Mudança
+## Tipo de MudanÃ§a
 
 - [x] Feature
 - [x] Test
@@ -1077,12 +1077,12 @@ Adiciona o projeto TaskFlow à lista de projetos em destaque na home (`src/data/
 
 ### Tests
 
-- Adiciona teste de sanidade para validação do novo projeto
+- Adiciona teste de sanidade para validaÃ§Ã£o do novo projeto
 
 ## Como Testar
 
 1. Rode `npm run dev`.
-2. Abra a home e role até a seção `#projetos` ("Projetos em Destaque").
+2. Abra a home e role atÃ© a seÃ§Ã£o `#projetos` ("Projetos em Destaque").
 3. Confira o card do projeto TaskFlow no grid.
 
 ## Checklist
@@ -1091,21 +1091,21 @@ Adiciona o projeto TaskFlow à lista de projetos em destaque na home (`src/data/
 - [x] Lint passa (`npm run lint`)
 - [x] Testes passam (`npm run test:run`)
 - [x] TypeScript sem erros (`npx tsc --noEmit`)
-- [x] Formatação OK (`npm run format:check`)
+- [x] FormataÃ§Ã£o OK (`npm run format:check`)
 - [x] Apenas arquivos do escopo alterados
 ```
 
 ### 23.2 Corrigir Bug Mobile
 
-**Tarefa:** Menu mobile não fecha ao clicar em link
+**Tarefa:** Menu mobile nÃ£o fecha ao clicar em link
 
 **Branch:** `fix/menu-mobile-fecha-ao-clicar-link`
 
-**Commit:** `fix(mobile): fecha menu ao clicar em link de navegação`
+**Commit:** `fix(mobile): fecha menu ao clicar em link de navegaÃ§Ã£o`
 
 **Arquivo:** `src/app/components/MobileNav.tsx`
 
-**Mudança:**
+**MudanÃ§a:**
 
 ```tsx
 // ANTES
@@ -1126,7 +1126,7 @@ Adiciona o projeto TaskFlow à lista de projetos em destaque na home (`src/data/
 **Commits:**
 
 ```
-refactor(hooks): extrai useActiveSection do Navbar para hook próprio
+refactor(hooks): extrai useActiveSection do Navbar para hook prÃ³prio
 ```
 
 **Arquivos:** `src/app/hooks/useActiveSection.ts` (novo) + `Navbar.tsx` (simplificado)
@@ -1136,88 +1136,88 @@ refactor(hooks): extrai useActiveSection do Navbar para hook próprio
 ## 24. Fluxograma ASCII
 
 ```
-╔══════════════════════════════════════════════════════════╗
-║        CICLO COMPLETO DE DESENVOLVIMENTO                ║
-╚══════════════════════════════════════════════════════════╝
+â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
+â•‘        CICLO COMPLETO DE DESENVOLVIMENTO                â•‘
+â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-                  ┌─────────────┐
-                  │  TAREFA     │
-                  └──────┬──────┘
-                         ▼
-                  ┌─────────────┐
-                  │  CONTEXTO   │
-                  └──────┬──────┘
-                         ▼
-                  ┌─────────────┐
-           ┌──────┤ git pull    ├──────┐
-           │      │   main      │      │
-           ▼      └──────┬──────┘      ▼
-    ┌──────────┐         ▼        ┌──────────┐
-    │ feat/    │  ┌────────────┐  │ refactor/│
-    │ branch   │  │ fix/branch │  │  branch  │
-    └────┬─────┘  └─────┬──────┘  └────┬─────┘
-         └──────────────┼──────────────┘
-                        ▼
-                 ┌──────────────┐
-                 │ IMPLEMENTAR  │
-                 │  (mínimo)    │
-                 └──────┬───────┘
-                        ▼
-          ┌─────────────┼─────────────┐
-          ▼             ▼             ▼
-   ┌──────────┐  ┌──────────┐  ┌──────────┐
-   │  BUILD   │  │  LINT    │  │  TESTES  │
-   └────┬─────┘  └────┬─────┘  └────┬─────┘
-        └──────────────┼──────────────┘
-                       ▼
-                ┌──────────────┐
-                │  REVISAR     │
-                │  (diff +     │
-                │   reviewer)  │
-                └──────┬───────┘
-                       ▼
-                ┌──────────────┐
-                │   COMMIT     │
-                └──────┬───────┘
-                       ▼
-                ┌──────────────┐
-                │    PUSH      │
-                └──────┬───────┘
-                       ▼
-                ┌──────────────┐
-                │   CRIAR PR   │
-                └──────┬───────┘
-                       ▼
-                ┌──────────────┐
-                │  CI VERDE?   │
-                └──────┬───────┘
-                    ┌──┴──┐
-                    │     │
-                    ▼     ▼
-              ┌────────┐  ┌──────────┐
-              │ MERGE  │  │ CORRIGIR │◄────┐
-              └────┬───┘  └─────┬────┘     │
-                   ▼            │          │
-            ┌────────────┐      │          │
-            │ git pull   │◄─────┘          │
-            │   main     │                 │
-            └──────┬─────┘                 │
-                   ▼                       │
-            ┌────────────┐                 │
-            │ DEL BRANCH │◄────────────────┘
-            │ local +    │
-            │  remota    │
-            └────────────┘
+                  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                  â”‚  TAREFA     â”‚
+                  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜
+                         â–¼
+                  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                  â”‚  CONTEXTO   â”‚
+                  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜
+                         â–¼
+                  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+           â”Œâ”€â”€â”€â”€â”€â”€â”¤ git pull    â”œâ”€â”€â”€â”€â”€â”€â”
+           â”‚      â”‚   main      â”‚      â”‚
+           â–¼      â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜      â–¼
+    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”         â–¼        â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+    â”‚ feat/    â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚ refactor/â”‚
+    â”‚ branch   â”‚  â”‚ fix/branch â”‚  â”‚  branch  â”‚
+    â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜
+         â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                        â–¼
+                 â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                 â”‚ IMPLEMENTAR  â”‚
+                 â”‚  (mÃ­nimo)    â”‚
+                 â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                        â–¼
+          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+          â–¼             â–¼             â–¼
+   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+   â”‚  BUILD   â”‚  â”‚  LINT    â”‚  â”‚  TESTES  â”‚
+   â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜
+        â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                       â–¼
+                â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                â”‚  REVISAR     â”‚
+                â”‚  (diff +     â”‚
+                â”‚   reviewer)  â”‚
+                â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                       â–¼
+                â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                â”‚   COMMIT     â”‚
+                â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                       â–¼
+                â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                â”‚    PUSH      â”‚
+                â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                       â–¼
+                â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                â”‚   CRIAR PR   â”‚
+                â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                       â–¼
+                â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                â”‚  CI VERDE?   â”‚
+                â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                    â”Œâ”€â”€â”´â”€â”€â”
+                    â”‚     â”‚
+                    â–¼     â–¼
+              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+              â”‚ MERGE  â”‚  â”‚ CORRIGIR â”‚â—„â”€â”€â”€â”€â”
+              â””â”€â”€â”€â”€â”¬â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”˜     â”‚
+                   â–¼            â”‚          â”‚
+            â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”      â”‚          â”‚
+            â”‚ git pull   â”‚â—„â”€â”€â”€â”€â”€â”˜          â”‚
+            â”‚   main     â”‚                 â”‚
+            â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜                 â”‚
+                   â–¼                       â”‚
+            â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                 â”‚
+            â”‚ DEL BRANCH â”‚â—„â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+            â”‚ local +    â”‚
+            â”‚  remota    â”‚
+            â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ---
 
-> **Versão 2.3** · Fonte única de verdade para agentes de IA · Mantido por Tharcio Santos
+> **VersÃ£o 2.3** Â· Fonte Ãºnica de verdade para agentes de IA Â· Mantido por Tharcio Santos
 >
-> | Versão | Data     | Mudanças                                                                                                                                                  |
-> | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-> | 1.0    | —        | Documentação inicial do projeto                                                                                                                           |
-> | 2.0    | Jul/2026 | Manual operacional completo para agentes de IA                                                                                                            |
-> | 2.1    | Ago/2026 | Alinha stack à migração Next 16 (Turbopack), flat config do ESLint, CI com cobertura e pre-commit com lint                                                |
-> | 2.2    | Set/2026 | Corrige divergências: fontes (Geist Sans/Mono), paleta (carmesim #B91C1C), tipos (kind sem 'building'), SECTION_IDS (sem 'experiencia'), ícones completos |
-> | 2.3    | Out/2026 | Refina padrão de Pull Request com template limpo sem emojis, inclusão de verificação de formatação/tipos no checklist e exemplo Gold Standard             |
+> | VersÃ£o | Data     | MudanÃ§as                                                                                                                                                   |
+> | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | 1.0     | â€”      | DocumentaÃ§Ã£o inicial do projeto                                                                                                                           |
+> | 2.0     | Jul/2026 | Manual operacional completo para agentes de IA                                                                                                              |
+> | 2.1     | Ago/2026 | Alinha stack Ã  migraÃ§Ã£o Next 16 (Turbopack), flat config do ESLint, CI com cobertura e pre-commit com lint                                               |
+> | 2.2     | Set/2026 | Corrige divergÃªncias: fontes (Geist Sans/Mono), paleta (carmesim #B91C1C), tipos (kind sem 'building'), SECTION_IDS (sem 'experiencia'), Ã­cones completos |
+> | 2.3     | Out/2026 | Refina padrÃ£o de Pull Request com template limpo sem emojis, inclusÃ£o de verificaÃ§Ã£o de formataÃ§Ã£o/tipos no checklist e exemplo Gold Standard         |
