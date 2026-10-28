@@ -130,6 +130,16 @@ describe('conteúdo principal do redesign', () => {
     expect(screen.queryByText(/Busco uma oportunidade/i)).not.toBeInTheDocument();
   });
 
+  it('declara o nível de inglês alinhado ao currículo', () => {
+    render(<About />);
+
+    expect(screen.getByText('Idiomas')).toBeInTheDocument();
+    expect(screen.getByText('Português')).toBeInTheDocument();
+    expect(screen.getByText('Nativo')).toBeInTheDocument();
+    expect(screen.getByText('Inglês')).toBeInTheDocument();
+    expect(screen.getByText('Técnico — leitura de documentação e código')).toBeInTheDocument();
+  });
+
   it('renderiza o Footer editorial e preserva os links profissionais', () => {
     render(<Footer />);
 
