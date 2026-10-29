@@ -51,6 +51,10 @@ export function ProjectScreenShowcase({
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
+  // Foco do lightbox: retenção dentro do diálogo e devolução ao gatilho
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+
   const items =
     screens && screens.length > 0
       ? screens
@@ -123,6 +127,25 @@ export function ProjectScreenShowcase({
         nextSlide();
       } else if (e.key === 'ArrowLeft') {
         prevSlide();
+      } else if (e.key === 'Tab') {
+        const focusableElements = Array.from(
+          modalRef.current?.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          ) ?? []
+        );
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (!firstElement || !lastElement) return;
+
+        const focusIsOutsideDialog = !modalRef.current?.contains(document.activeElement);
+        const shouldWrapBackward = e.shiftKey && document.activeElement === firstElement;
+        const shouldWrapForward = !e.shiftKey && document.activeElement === lastElement;
+
+        if (focusIsOutsideDialog || shouldWrapBackward || shouldWrapForward) {
+          e.preventDefault();
+          (e.shiftKey ? lastElement : firstElement).focus();
+        }
       }
     };
 
@@ -132,6 +155,33 @@ export function ProjectScreenShowcase({
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isModalOpen, nextSlide, prevSlide]);
+
+  // Bloqueia o scroll do documento enquanto o lightbox estiver aberto
+  useEffect(() => {
+    if (!isModalOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isModalOpen]);
+
+  // Move o foco para dentro do diálogo ao abrir e devolve ao gatilho ao fechar
+  useEffect(() => {
+    if (!isModalOpen) return;
+
+    const trigger = triggerRef.current;
+    const frame = window.requestAnimationFrame(() => {
+      modalRef.current?.focus({ preventScroll: true });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      trigger?.focus({ preventScroll: true });
+    };
+  }, [isModalOpen]);
 
   if (total === 0) return null;
 
@@ -171,6 +221,7 @@ export function ProjectScreenShowcase({
               {extractDomain(demoUrl)}
             </span>
             <button
+              ref={triggerRef}
               type="button"
               onClick={() => setIsModalOpen(true)}
               className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-light-surface hover:bg-light-card text-primary-text border border-border-light dark:bg-dark-surface dark:hover:bg-dark-card dark:text-light-text dark:border-border-dark shadow-xs transition-all cursor-pointer shrink-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light"
@@ -278,7 +329,9 @@ export function ProjectScreenShowcase({
       {/* Modal Lightbox de Alta Resolução em Tela Cheia (Com suporte a Swipe no Mobile) */}
       {isModalOpen && (
         <div
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-dark-bg/95 p-2.5 sm:p-6 overflow-hidden backdrop-blur-md transition-opacity duration-200 transform-gpu"
+          ref={modalRef}
+          tabIndex={-1}
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-dark-bg/95 p-2.5 sm:p-6 overflow-hidden backdrop-blur-md transition-opacity duration-200 transform-gpu focus:outline-none"
           onClick={() => setIsModalOpen(false)}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
