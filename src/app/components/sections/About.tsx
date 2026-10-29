@@ -94,6 +94,36 @@ const About = () => {
                   {t.about.graduationDate}
                 </span>
               </div>
+
+              <div className="mt-3 border-t border-border-light/60 pt-2.5 dark:border-border-dark/60">
+                <p className="font-mono text-[10px] font-semibold uppercase tracking-wider text-secondary-text dark:text-dark-text">
+                  {t.about.languagesLabel}
+                </p>
+                <dl className="mt-1.5 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[11px]">
+                  <div className="flex items-baseline gap-1.5">
+                    <dt className="text-secondary-text dark:text-dark-text">
+                      {t.about.languagePortuguese}
+                    </dt>
+                    <dd className="text-primary-text dark:text-light-text">
+                      {t.about.languagePortugueseLevel}
+                    </dd>
+                  </div>
+                  <span
+                    aria-hidden="true"
+                    className="text-secondary-text/50 dark:text-dark-text/50"
+                  >
+                    ·
+                  </span>
+                  <div className="flex items-baseline gap-1.5">
+                    <dt className="text-secondary-text dark:text-dark-text">
+                      {t.about.languageEnglish}
+                    </dt>
+                    <dd className="text-primary-text dark:text-light-text">
+                      {t.about.languageEnglishLevel}
+                    </dd>
+                  </div>
+                </dl>
+              </div>
             </div>
           </div>
 

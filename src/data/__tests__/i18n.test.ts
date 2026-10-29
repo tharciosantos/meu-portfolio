@@ -18,6 +18,38 @@ describe('i18n (pt/en)', () => {
     expect(Object.keys(getDictionary('en'))).toEqual(Object.keys(getDictionary('pt')));
   });
 
+  it('mantém paridade de chaves em todos os níveis aninhados', () => {
+    const collectKeys = (value: unknown, prefix = ''): string[] => {
+      if (Array.isArray(value)) {
+        return value.flatMap((item, index) => collectKeys(item, `${prefix}[${index}]`));
+      }
+      if (value && typeof value === 'object') {
+        return Object.entries(value).flatMap(([key, child]) => {
+          const path = prefix ? `${prefix}.${key}` : key;
+          return [path, ...collectKeys(child, path)];
+        });
+      }
+      return [];
+    };
+
+    expect(collectKeys(getDictionary('en')).sort()).toEqual(
+      collectKeys(getDictionary('pt')).sort()
+    );
+  });
+
+  it('declara os idiomas nos dois dicionários', () => {
+    const pt = getDictionary('pt').about;
+    const en = getDictionary('en').about;
+
+    expect(pt.languagesLabel).toBe('Idiomas');
+    expect(pt.languageEnglishLevel).toContain('documentação');
+
+    expect(en.languagesLabel).toBe('Languages');
+    expect(en.languageEnglishLevel).toContain('Technical');
+
+    expect(pt.languageEnglishLevel).not.toBe(en.languageEnglishLevel);
+  });
+
   it('seleciona projetos em inglês quando solicitado', () => {
     expect(getProjects('pt')).toEqual(projects);
     expect(getProjects('en')).toEqual(projectsEn);
