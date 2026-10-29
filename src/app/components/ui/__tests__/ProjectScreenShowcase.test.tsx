@@ -173,4 +173,89 @@ describe('ProjectScreenShowcase', () => {
 
     expect(screen.getByText('helpflow.vercel.app')).toBeInTheDocument();
   });
+
+  describe('acessibilidade do lightbox', () => {
+    const openModal = () => {
+      const trigger = screen.getByRole('button', { name: /Ampliar tela do projeto/i });
+      trigger.focus();
+      fireEvent.click(trigger);
+      return trigger;
+    };
+
+    beforeEach(() => {
+      // jsdom não executa rAF: roda o callback de imediato, como no MobileNav
+      vi.spyOn(window, 'requestAnimationFrame').mockImplementation((callback) => {
+        callback(0);
+        return 1;
+      });
+    });
+
+    it('bloqueia o scroll do body enquanto o lightbox está aberto', () => {
+      render(<ProjectScreenShowcase screens={mockScreens} title="HelpFlow" />);
+
+      expect(document.body.style.overflow).toBe('');
+
+      openModal();
+      expect(document.body.style.overflow).toBe('hidden');
+
+      fireEvent.keyDown(document, { key: 'Escape' });
+      expect(document.body.style.overflow).toBe('');
+    });
+
+    it('move o foco para dentro do diálogo ao abrir e devolve ao gatilho ao fechar', () => {
+      render(<ProjectScreenShowcase screens={mockScreens} title="HelpFlow" />);
+
+      const trigger = openModal();
+      const dialog = screen.getByRole('dialog');
+
+      expect(dialog).toHaveFocus();
+
+      fireEvent.keyDown(document, { key: 'Escape' });
+
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+      expect(trigger).toHaveFocus();
+    });
+
+    it('mantém o Tab preso dentro do diálogo e envolve do último para o primeiro', () => {
+      render(<ProjectScreenShowcase screens={mockScreens} title="HelpFlow" />);
+
+      openModal();
+      const dialog = screen.getByRole('dialog');
+
+      const focusable = Array.from(
+        dialog.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      // Tab no último elemento envolve para o primeiro
+      last.focus();
+      expect(last).toHaveFocus();
+      fireEvent.keyDown(document, { key: 'Tab' });
+      expect(first).toHaveFocus();
+
+      // Shift+Tab no primeiro elemento envolve para o último
+      fireEvent.keyDown(document, { key: 'Tab', shiftKey: true });
+      expect(last).toHaveFocus();
+
+      expect(dialog).toContainElement(document.activeElement as HTMLElement);
+    });
+
+    it('traz o foco de volta ao diálogo se ele escapar para a página de fundo', () => {
+      render(<ProjectScreenShowcase screens={mockScreens} title="HelpFlow" />);
+
+      openModal();
+      const dialog = screen.getByRole('dialog');
+      const first = dialog.querySelector<HTMLElement>('a[href], button:not([disabled])');
+
+      // Simula foco perdido fora do diálogo (ex: clique no backdrop)
+      const outside = screen.getByRole('button', { name: /Ampliar tela do projeto/i });
+      outside.focus();
+      expect(dialog).not.toContainElement(document.activeElement as HTMLElement);
+
+      fireEvent.keyDown(document, { key: 'Tab' });
+
+      expect(first).toHaveFocus();
+    });
+  });
 });
