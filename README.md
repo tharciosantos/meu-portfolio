@@ -37,11 +37,10 @@ Mais do que uma vitrine, este repositório reúne práticas aplicadas em fronten
 
 - **Arquitetura moderna:** Next.js 16 (Turbopack) com App Router, componentes organizados por responsabilidade e dados compartilhados fora da interface quando apropriado.
 - **Sistema de design próprio:** tokens semânticos no Tailwind para fundos, superfícies, textos, bordas e accent carmesim (`#B91C1C`) nos dois temas.
-- **Componentização:** componentes reutilizáveis com React e TypeScript, como `Button`, `Pill`, `Section`, `SectionHeader`, `ProjectScreenShowcase` e `RevealOnScroll`.
+- **Componentização:** componentes reutilizáveis com React e TypeScript, como `Button`, `Pill`, `Section`, `SectionHeader` e `ProjectScreenShowcase`.
 - **Conteúdo organizado:** projetos, habilidades, experiências e constantes vivem em `src/data`; textos editoriais específicos permanecem próximos das respectivas seções.
 - **Acessibilidade e responsividade:** navegação por teclado, foco visível, atributos ARIA, focus trap no menu mobile e layouts adaptados para diferentes larguras.
-- **Interatividade controlada:** Navbar como Client Component para scroll spy, menu mobile e alternância de tema. Animações de entrada com IntersectionObserver e CSS transitions, sem dependências externas.
-- **Scroll reveal global:** componente `RevealOnScroll` reutilizável com IntersectionObserver, sem listeners redundantes de scroll.
+- **Interatividade controlada:** Navbar como Client Component para scroll spy, menu mobile e alternância de tema. Animações de entrada declarativas em CSS, com `prefers-reduced-motion` respeitado globalmente.
 - **Micro-interações contidas:** botões com sombra sutil no CTA primário, abas de projetos com estado ativo sólido e feedback visual com `active:scale-[0.98]`.
 - **Barra de progresso de leitura:** `ReadingProgressBar` fixa no topo que preenche conforme o scroll, usando `scaleX` para performance.
 - **ProjectScreenShowcase:** carousel de telas dos projetos com navegação por teclado, swipe gestures, auto-play pausável e lightbox modal em alta resolução.
@@ -151,7 +150,7 @@ Dashboard para consulta de criptomoedas com busca, rotas dinâmicas, renderizaç
 - **Dados e interface:** informações reutilizadas por diferentes componentes ficam em `src/data`; textos editoriais específicos permanecem nos componentes das seções para manter contexto e legibilidade.
 - **Sistema de componentes com CVA:** `Button` usa `class-variance-authority` com sombras sutis para hierarquia visual, sem depender apenas de cores.
 - **Navbar interativa:** `Navbar.tsx` é um Server Component que importa `NavbarClient.tsx` (Client Component). Esta separação mantém o scroll spy, menu mobile e alternador de tema no cliente, enquanto o wrapper permanece no servidor.
-- **RevealOnScroll:** componente client wrapper reutilizável que usa `useScrollReveal` para animar elementos ao scroll com suporte a `prefers-reduced-motion`.
+- **Animações declarativas:** entradas com `animate-fade-in`/`fade-up` definidas no Tailwind, sem custo de JavaScript e desativadas por `prefers-reduced-motion` no CSS global.
 - **ReadingProgressBar:** barra de progresso fixa no topo atualizada por `ref` e `requestAnimationFrame`, sem renderização React a cada evento de scroll.
 - **ProjectCaseStudy:** cases dedicados aos dois projetos principais em `/projetos/[slug]` (estático via `generateStaticParams`, com `generateMetadata` e canonical), com showcase, problema, responsabilidade, decisão técnica, evidências e links de arquitetura.
 - **ProjectScreenShowcase:** carousel com auto-play pausável, swipe gestures para mobile, navegação por teclado e lightbox modal em alta resolução.
@@ -183,7 +182,7 @@ meu-portfolio/
 │   │   │   ├── sections/    # Seções do portfólio (Hero, Projects, ProjectCaseStudy, Process, Capabilities, About, Contact)
 │   │   │   └── ui/          # Componentes reutilizáveis (Button, Pill, Icons, TechIcons, ProjectScreenShowcase, etc.)
 │   │   ├── projetos/[slug]/ # Cases dos projetos principais (generateStaticParams + generateMetadata)
-│   │   └── hooks/           # Hooks customizados (useScrollReveal, useActiveSection, useLanguage)
+│   │   └── hooks/           # Hooks customizados (useActiveSection, useLanguage)
 │   ├── data/                # Projetos, habilidades, experiências, constantes e i18n (dicionários PT/EN)
 │   │   └── __tests__/       # Testes de dados
 │   └── lib/                 # Funções utilitárias (cn)
