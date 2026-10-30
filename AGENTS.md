@@ -569,11 +569,11 @@ tharcioport/
     â”œâ”€â”€ app/
     â”‚   â”œâ”€â”€ components/
     â”‚   â”‚   â”œâ”€â”€ sections/   # Hero, Projects, Process, Capabilities, About, Contact
-    â”‚   â”‚   â”œâ”€â”€ ui/         # Button, Pill, Section, SectionHeader, RevealOnScroll, Icons, TechIcons, ProjectScreenShowcase, etc.
+    â”‚   â”‚   â”œâ”€â”€ ui/         # Button, Pill, Section, SectionHeader, Icons, TechIcons, ProjectScreenShowcase, etc.
     â”‚   â”‚   â”œâ”€â”€ Navbar.tsx, MobileNav.tsx, Footer.tsx, BackToTop.tsx
     â”‚   â”‚   â”œâ”€â”€ ThemeProvider.tsx, ThemeSwitcher.tsx, ClientAnalytics.tsx
     â”‚   â”‚   â””â”€â”€ __tests__/
-    â”‚   â”œâ”€â”€ hooks/           # useScrollReveal, useActiveSection
+    â”‚   â”œâ”€â”€ hooks/           # useActiveSection
     â”‚   â”œâ”€â”€ layout.tsx       # RootLayout (SEO, Schema.org, fontes)
     â”‚   â”œâ”€â”€ page.tsx         # Home (Hero â†’ Projects â†’ Process â†’ ... â†’ Contact)
     â”‚   â”œâ”€â”€ error.tsx        # Error boundary
@@ -624,10 +624,9 @@ Button.displayName = 'Button';
 
 ### 12.2 Hooks
 
-| Hook                             | DescriÃ§Ã£o                           | Retorno             |
-| -------------------------------- | ------------------------------------- | ------------------- |
-| `useScrollReveal<T>(threshold?)` | IntersectionObserver para animaÃ§Ãµes | `{ ref, visible }`  |
-| `useActiveSection(ids)`          | Scroll spy                            | `string` (id ativo) |
+| Hook                    | DescriÃ§Ã£o | Retorno             |
+| ----------------------- | ----------- | ------------------- |
+| `useActiveSection(ids)` | Scroll spy  | `string` (id ativo) |
 
 ### 12.3 UtilitÃ¡rios
 
@@ -687,7 +686,7 @@ font-mono: var(--font-geist-mono); /* Geist Mono para cÃ³digo e metadados */
 | Entidade          | PadrÃ£o           | Exemplos                  |
 | ----------------- | ----------------- | ------------------------- |
 | Componentes       | PascalCase        | `ProjectCard`, `Navbar`   |
-| Hooks             | camelCase + `use` | `useScrollReveal`         |
+| Hooks             | camelCase + `use` | `useActiveSection`        |
 | Arquivos de dados | kebab-case        | `capabilities.ts`         |
 | Constantes        | UPPER_SNAKE_CASE  | `SECTION_IDS`             |
 | VariÃ¡veis        | camelCase         | `activeSection`           |
@@ -812,35 +811,20 @@ Hover: `accent-hover` (#991B1B) Â· Light: `accent-light` (#F87171)
 
 ## 15. AnimaÃ§Ãµes e Hooks
 
-### 15.1 RevealOnScroll
+### 15.1 prefers-reduced-motion
 
-```tsx
-<RevealOnScroll as="section" delay={200}>
-  <h2>ConteÃºdo animado</h2>
-</RevealOnScroll>
-```
+Todas as animações são desativadas quando o usuário pede menos movimento. A regra global em `globals.css` zera `animation-duration` e `scroll-behavior` sob `prefers-reduced-motion: reduce`.
 
-Props: `children`, `className`, `as` (tag, padrÃ£o `div`), `delay` (ms)
+### 15.2 Animações de entrada
 
-### 15.2 prefers-reduced-motion
+As entradas usam as animações declarativas do Tailwind (`animate-fade-in`, `fade-up`, `fade-down`, `scale-x-in`), definidas em `tailwind.config.js`. Não há wrapper de reveal por scroll nem custo de JavaScript.
 
-Todas as animaÃ§Ãµes desativadas quando ativo. `useScrollReveal` marca como visÃ­vel imediatamente.
-
-### 15.3 useScrollReveal
-
-```ts
-function useScrollReveal<T extends HTMLElement>(threshold = 0.12) {
-  // IntersectionObserver + prefers-reduced-motion
-  // Retorna { ref, visible }
-}
-```
-
-### 15.4 useActiveSection
+### 15.3 useActiveSection
 
 ```ts
 function useActiveSection(ids: readonly string[]): string {
   // rootMargin: '-40% 0px -55% 0px'
-  // Retorna id da seÃ§Ã£o visÃ­vel
+  // Retorna id da seção visível
 }
 ```
 
