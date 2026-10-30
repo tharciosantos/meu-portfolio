@@ -35,6 +35,20 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
       description: project.description,
       url: `${SITE_URL}/projetos/${project.slug}`,
       type: 'article',
+      images: [
+        {
+          url: `${SITE_URL}/projetos/${project.slug}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: `Case study: ${project.title}`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: project.title,
+      description: project.description,
+      images: [`${SITE_URL}/projetos/${project.slug}/opengraph-image`],
     },
   };
 }
