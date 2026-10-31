@@ -202,6 +202,12 @@ const pt = {
     ariaLinkedin: 'LinkedIn de Tharcio Santos',
     ariaEmail: 'Enviar e-mail para Tharcio Santos',
   },
+  error: {
+    eyebrow: 'Algo deu errado',
+    title: 'Erro inesperado',
+    description: 'Ocorreu um problema ao carregar esta página. Tente novamente.',
+    retry: 'Tentar novamente',
+  },
 };
 
 const en: typeof pt = {
@@ -406,6 +412,12 @@ const en: typeof pt = {
     ariaGithub: "Tharcio Santos's GitHub",
     ariaLinkedin: "Tharcio Santos's LinkedIn",
     ariaEmail: 'Email Tharcio Santos',
+  },
+  error: {
+    eyebrow: 'Something went wrong',
+    title: 'Unexpected error',
+    description: 'There was a problem loading this page. Please try again.',
+    retry: 'Try again',
   },
 };
 
