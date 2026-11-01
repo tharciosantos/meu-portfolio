@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { Button } from './components/ui/Button';
-import { useLanguage } from './hooks/useLanguage';
+import { useLanguage } from '@/app/hooks/useLanguage';
 
 type ErrorProps = {
   error: Error & { digest?: string };

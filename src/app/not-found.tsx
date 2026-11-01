@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import { buttonVariants } from './components/ui/Button';
-import { cn } from '@/lib/utils';
-import { useLanguage } from './hooks/useLanguage';
 import Section from './components/ui/Section';
+import { useLanguage } from '@/app/hooks/useLanguage';
+import { cn } from '@/lib/utils';
 
 export default function NotFound() {
   const { t } = useLanguage();
