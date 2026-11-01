@@ -202,6 +202,17 @@ const pt = {
     ariaLinkedin: 'LinkedIn de Tharcio Santos',
     ariaEmail: 'Enviar e-mail para Tharcio Santos',
   },
+  notFound: {
+    title: 'Página não encontrada',
+    description: 'A página que você está procurando não existe ou foi movida.',
+    backHome: 'Voltar para a home',
+  },
+  error: {
+    eyebrow: 'Algo deu errado',
+    title: 'Erro inesperado',
+    description: 'Ocorreu um problema ao carregar esta página. Tente novamente.',
+    retry: 'Tentar novamente',
+  },
 };
 
 const en: typeof pt = {
@@ -406,6 +417,17 @@ const en: typeof pt = {
     ariaGithub: "Tharcio Santos's GitHub",
     ariaLinkedin: "Tharcio Santos's LinkedIn",
     ariaEmail: 'Email Tharcio Santos',
+  },
+  notFound: {
+    title: 'Page not found',
+    description: 'The page you are looking for does not exist or has been moved.',
+    backHome: 'Back to home',
+  },
+  error: {
+    eyebrow: 'Something went wrong',
+    title: 'Unexpected error',
+    description: 'There was a problem loading this page. Please try again.',
+    retry: 'Try again',
   },
 };
 

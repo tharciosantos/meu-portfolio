@@ -76,4 +76,15 @@ describe('i18n (pt/en)', () => {
     expect(ptSlugs).toHaveLength(new Set(ptSlugs).size);
     expect(enSlugs).toEqual(ptSlugs);
   });
+
+  it('traduz os textos da página de erro', () => {
+    const pt = getDictionary('pt').error;
+    const en = getDictionary('en').error;
+
+    expect(pt.retry).toBe('Tentar novamente');
+    expect(en.retry).toBe('Try again');
+    expect(pt.title).not.toBe(en.title);
+    expect(pt.description).not.toBe(en.description);
+    expect(Object.keys(en)).toEqual(Object.keys(pt));
+  });
 });
