@@ -49,7 +49,7 @@ Mais do que uma vitrine, este repositório reúne práticas aplicadas em fronten
 - **SEO técnico:** sitemap com as rotas `/projetos/[slug]` dos cases principais, `robots.txt`, Open Graph, Twitter Card, Schema.org com endereço local (Caeté/MG) e keywords regionais, além de `themeColor` por preferência de tema.
 - **Internacionalização:** dicionários PT/EN sem dependências, com `LanguageProvider`, toggle PT/EN no navbar e persistência em `localStorage`.
 - **Integração contínua:** GitHub Actions validando formatação, lint, tipos, testes e build.
-- **Qualidade de código:** Vitest, Testing Library, ESLint, Prettier, Husky e lint-staged, com 80 testes automatizados cobrindo componentes, hooks e dados.
+- **Qualidade de código:** Vitest, Testing Library, ESLint, Prettier, Husky e lint-staged, com 101 testes automatizados cobrindo componentes, hooks e dados.
 
 ### Metas Lighthouse
 
@@ -162,7 +162,7 @@ Dashboard para consulta de criptomoedas com busca, rotas dinâmicas, renderizaç
 - **CSS crítico otimizado:** o build usa `optimizeCss` com `critters` para reduzir bloqueios na renderização inicial.
 - **Analytics dinâmico:** o Analytics da Vercel é isolado em um componente client carregado dinamicamente.
 - **Bundle de produção otimizado:** build via **Turbopack** (padrão do Next 16) com imagens em WebP/AVIF e quality tiers configurados (75, 78, 82, 85, 90, 95).
-- **Testes comportamentais:** parte dos 80 testes usa `userEvent` para simular interações mais próximas do uso real.
+- **Testes comportamentais:** parte dos 101 testes usa `userEvent` para simular interações mais próximas do uso real.
 - **CI:** GitHub Actions executa formatação, lint, TypeScript, testes e build antes da integração com `main`.
 - **Pre-commit automático:** Husky e lint-staged executam ESLint e Prettier nos arquivos staged.
 
