@@ -55,9 +55,20 @@ describe('NotFound (404)', () => {
     expect(screen.getByRole('link', { name: 'Back to home' })).toHaveAttribute('href', '/');
   });
 
-  it('mantém o código 404 visível nos dois idiomas', async () => {
+  it('trata o código 404 como elemento decorativo', async () => {
     await renderNotFound('en');
 
-    expect(screen.getByRole('heading', { name: '404' })).toBeInTheDocument();
+    // O código continua visível, mas não é heading: leitores de tela anunciam
+    // "Page not found" como título, não "404".
+    expect(screen.getByText('404')).toHaveAttribute('aria-hidden', 'true');
+    expect(screen.queryByRole('heading', { name: '404' })).not.toBeInTheDocument();
+  });
+
+  it('expõe um único título principal', async () => {
+    await renderNotFound('en');
+
+    const headings = screen.getAllByRole('heading');
+    expect(headings).toHaveLength(1);
+    expect(headings[0]).toHaveAccessibleName('Page not found');
   });
 });

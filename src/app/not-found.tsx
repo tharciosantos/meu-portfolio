@@ -12,10 +12,12 @@ export default function NotFound() {
   return (
     <Section id="not-found" spacing="editorial">
       <div className="flex min-h-[60vh] flex-col items-center justify-center px-6 text-center">
-        <h1 className="text-6xl font-bold text-primary-text dark:text-light-text">404</h1>
-        <h2 className="mt-4 text-2xl font-bold text-primary-text dark:text-light-text">
+        <p aria-hidden="true" className="text-6xl font-bold text-primary-text dark:text-light-text">
+          404
+        </p>
+        <h1 className="mt-4 text-2xl font-bold text-primary-text dark:text-light-text">
           {t.notFound.title}
-        </h2>
+        </h1>
         <p className="mt-2 max-w-md text-secondary-text dark:text-dark-text">
           {t.notFound.description}
         </p>
