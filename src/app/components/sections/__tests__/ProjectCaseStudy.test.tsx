@@ -27,7 +27,7 @@ describe('ProjectCaseStudy', () => {
     render(<ProjectCaseStudy slug="helpflow" />);
 
     expect(
-      screen.getByText('169 testes Vitest em 14 arquivos + 15 fluxos E2E no Cypress')
+      screen.getByText('169 testes Vitest em 14 arquivos + 20 fluxos E2E no Cypress')
     ).toBeInTheDocument();
   });
 
