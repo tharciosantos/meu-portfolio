@@ -32,7 +32,7 @@ describe('projects', () => {
     expect(manutflow!.kind).toBe('featured');
     expect(manutflow).toHaveProperty('demoUrl');
     expect(manutflow).toHaveProperty('imageUrl');
-    expect(manutflow!.evidence).toContain('207 testes automatizados em 19 arquivos');
+    expect(manutflow!.evidence).toContain('214 testes automatizados em 20 arquivos');
     expect(manutflow!.evidence).toContain('Proteção em camadas com sessão, user_id e RLS');
   });
 
@@ -44,7 +44,7 @@ describe('projects', () => {
       'Autenticação por credenciais e GitHub, com recuperação de senha'
     );
     expect(helpflow!.evidence).toContain(
-      '169 testes Vitest em 14 arquivos + 15 fluxos E2E no Cypress'
+      '169 testes Vitest em 14 arquivos + 20 fluxos E2E no Cypress'
     );
   });
 

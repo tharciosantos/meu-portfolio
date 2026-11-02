@@ -46,7 +46,7 @@ const pt = {
         sr: 'Projetos publicados',
       },
       {
-        value: '376 Testes',
+        value: '383 Testes',
         label: 'Vitest no ManutFlow e HelpFlow',
         sr: 'Testes automatizados',
       },
@@ -263,7 +263,7 @@ const en: typeof pt = {
         sr: 'Published projects',
       },
       {
-        value: '376 Tests',
+        value: '383 Tests',
         label: 'Vitest across ManutFlow and HelpFlow',
         sr: 'Automated tests',
       },
