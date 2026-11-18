@@ -35,8 +35,8 @@ export default async function ProjectOpenGraphImage({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        background: '#141712',
-        color: '#ECEFE8',
+        background: '#09090B',
+        color: '#FAFAFA',
         padding: '64px',
         fontFamily: 'Arial, sans-serif',
         position: 'relative',
@@ -47,7 +47,7 @@ export default async function ProjectOpenGraphImage({
           position: 'absolute',
           inset: 0,
           background:
-            'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(248, 113, 113, 0.22), transparent)',
+            'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(239, 68, 68, 0.22), transparent)',
         }}
       />
 
@@ -75,7 +75,8 @@ export default async function ProjectOpenGraphImage({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              background: '#B91C1C',
+              borderRadius: 8,
+              background: '#EF4444',
               color: '#ffffff',
               fontSize: 28,
               fontWeight: 900,
@@ -84,14 +85,14 @@ export default async function ProjectOpenGraphImage({
             T
           </div>
           <span>
-            Tharcio<span style={{ color: '#F87171' }}>.dev</span>
+            Tharcio<span style={{ color: '#A1A1AA' }}>.dev</span>
           </span>
         </div>
         <div
           style={{
-            border: '1px solid rgba(248, 113, 113, 0.45)',
-            borderRadius: 999,
-            color: '#F87171',
+            border: '1px solid rgba(255, 255, 255, 0.18)',
+            borderRadius: 6,
+            color: '#A1A1AA',
             padding: '10px 18px',
             fontSize: 22,
             fontWeight: 700,
@@ -109,11 +110,19 @@ export default async function ProjectOpenGraphImage({
           position: 'relative',
         }}
       >
-        <div style={{ color: '#F87171', fontSize: 28, fontWeight: 700 }}>{stack}</div>
-        <div style={{ maxWidth: 950, fontSize: 72, lineHeight: 1.04, fontWeight: 900 }}>
+        <div style={{ color: '#A1A1AA', fontSize: 28, fontWeight: 500 }}>{stack}</div>
+        <div
+          style={{
+            maxWidth: 950,
+            fontSize: 70,
+            lineHeight: 1.06,
+            fontWeight: 500,
+            letterSpacing: '-0.035em',
+          }}
+        >
           {title}
         </div>
-        <div style={{ maxWidth: 980, color: '#97A090', fontSize: 32, lineHeight: 1.3 }}>
+        <div style={{ maxWidth: 980, color: '#A1A1AA', fontSize: 32, lineHeight: 1.3 }}>
           {description}
         </div>
       </div>
@@ -122,7 +131,7 @@ export default async function ProjectOpenGraphImage({
         style={{
           display: 'flex',
           gap: '16px',
-          color: '#97A090',
+          color: '#A1A1AA',
           fontSize: 24,
           position: 'relative',
         }}

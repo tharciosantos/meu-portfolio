@@ -130,7 +130,7 @@ Dashboard para consulta de criptomoedas com busca, rotas dinâmicas, renderizaç
 ### Interface e infraestrutura
 
 - `class-variance-authority`, `clsx` e `tailwind-merge` — variantes e composição de classes.
-- `next-themes` — suporte a tema claro, escuro e preferência do sistema.
+- `next-themes` — suporte a tema claro e escuro com alternância manual. O tema inicial é o claro (`defaultTheme="light"`, `enableSystem={false}`), sem seguir a preferência do sistema.
 - Ícones SVG locais — 21 componentes gerais (`Icons.tsx`, incluindo `WhatsappIcon`) + 18 ícones técnicos (`TechIcons.tsx`) sem biblioteca externa.
 - `@vercel/analytics` — métricas de uso carregadas dinamicamente.
 
@@ -145,10 +145,10 @@ Dashboard para consulta de criptomoedas com busca, rotas dinâmicas, renderizaç
 
 ## Decisões Técnicas
 
-- **Paleta carmesim:** cores semânticas `accent` (#B91C1C) e `accent-light` (#F87171) centralizam a identidade visual energética nos dois temas.
+- **Paleta carmesim:** a cor semântica `accent` centraliza a identidade visual nos dois temas, com tons próprios por tema (claro `#B91C1C` / escuro `#EF4444`) definidos em variáveis CSS.
 - **Fontes Geist:** Geist Sans para body e headings, Geist Mono para código e metadados, carregadas via `next/font/google`.
 - **Dados e interface:** informações reutilizadas por diferentes componentes ficam em `src/data`; textos editoriais específicos permanecem nos componentes das seções para manter contexto e legibilidade.
-- **Sistema de componentes com CVA:** `Button` usa `class-variance-authority` com sombras sutis para hierarquia visual, sem depender apenas de cores.
+- **Sistema de componentes com CVA:** `Button` usa `class-variance-authority` com tokens semânticos (`btn-primary`, `btn-outline`, `btn-ghost`) e uma sombra de camada única (`--shadow-card`) para hierarquia visual, sem depender apenas de cores.
 - **Navbar interativa:** `Navbar.tsx` é um Server Component que importa `NavbarClient.tsx` (Client Component). Esta separação mantém o scroll spy, menu mobile e alternador de tema no cliente, enquanto o wrapper permanece no servidor.
 - **Animações declarativas:** entradas com `animate-fade-in`/`fade-up` definidas no Tailwind, sem custo de JavaScript e desativadas por `prefers-reduced-motion` no CSS global.
 - **ReadingProgressBar:** barra de progresso fixa no topo atualizada por `ref` e `requestAnimationFrame`, sem renderização React a cada evento de scroll.
