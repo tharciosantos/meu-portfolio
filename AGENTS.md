@@ -1,6 +1,6 @@
 # Tharcio Santos — Portfólio
 
-> Manual Operacional para Agentes de IA · v2.3
+> Manual Operacional para Agentes de IA · v2.4
 
 Este documento é a **fonte única de verdade** para agentes que trabalham neste repositório. Qualquer divergência entre o comportamento do agente e este manual é um bug — reporte ao usuário.
 
@@ -568,19 +568,23 @@ tharcioport/
 └── src/
     ├── app/
     │   ├── components/
-    │   │   ├── sections/   # Hero, Projects, Process, Capabilities, About, Contact
-    │   │   ├── ui/         # Button, Pill, Section, SectionHeader, Icons, TechIcons, ProjectScreenShowcase, etc.
-    │   │   ├── Navbar.tsx, MobileNav.tsx, Footer.tsx, BackToTop.tsx
+    │   │   ├── sections/   # Hero, Projects, Process, Capabilities, About, Contact, ProjectCaseStudy
+    │   │   ├── ui/         # Button, Pill, Metric, Section, SectionHeader, Icons,
+    │   │   │               # BrowserFrame, ProjectScreenShowcase, CopyEmailButton, ReadingProgressBar
+    │   │   ├── Navbar.tsx, NavbarClient.tsx, MobileNav.tsx, Footer.tsx, BackToTop.tsx
+    │   │   ├── LanguageProvider.tsx, LanguageSwitcher.tsx
     │   │   ├── ThemeProvider.tsx, ThemeSwitcher.tsx, ClientAnalytics.tsx
     │   │   └── __tests__/
-    │   ├── hooks/           # useActiveSection
+    │   ├── hooks/           # useActiveSection, useLanguage
     │   ├── layout.tsx       # RootLayout (SEO, Schema.org, fontes)
     │   ├── page.tsx         # Home (Hero → Projects → Process → ... → Contact)
     │   ├── error.tsx        # Error boundary
     │   ├── not-found.tsx    # Página 404
-    │   ├── globals.css      # Tailwind directives + estilos globais
+    │   ├── globals.css      # Tailwind directives, tokens CSS e estilos globais
     │   ├── opengraph-image.tsx, robots.ts, sitemap.ts
+    │   └── projetos/[slug]/ # Case study + opengraph-image por projeto
     ├── data/                # capabilities, constants, experience, projects
+    │   ├── i18n/            # dictionaries (PT/EN), types, index
     │   └── __tests__/
     └── lib/
         └── utils.ts         # cn()
@@ -595,18 +599,33 @@ tharcioport/
 **Regras de `'use client'`:**
 
 - Use **apenas** quando necessário (hooks, eventos, interatividade)
-- Seções (`sections/`) devem ser **server components** quando possível
 - Componentes são Server Components por padrão, inclusive em `ui/`
 - Use `'use client'` somente quando hooks, eventos ou APIs do navegador exigirem
 - Prefira receber dados como props (server→client)
 
+**Estado atual das seções:** todas as seções de `sections/` são Client Components porque
+consomem `useLanguage()` para alternar PT/EN em tempo de execução sem recarregar a página.
+Ao criar uma seção nova, mantenha esse padrão; se a seção não precisar de idioma nem de
+interatividade, prefira Server Component.
+
+O padrão server→client já é aplicado em `Navbar.tsx`: ele é um Server Component que apenas
+renderiza `NavbarClient`, mantendo scroll spy, tema e menu mobile no bundle do cliente.
+
 **Padrão de componente UI:**
 
 ```tsx
-const buttonVariants = cva('inline-flex items-center justify-center rounded-md', {
+const buttonVariants = cva('inline-flex items-center justify-center rounded-control', {
   variants: {
-    variant: { primary: 'bg-accent ...', outline: 'border ...', ghost: '...' },
-    size: { sm: 'px-3 py-1.5', default: 'px-4 py-2', lg: 'px-6 py-3', icon: 'size-10' },
+    variant: {
+      primary: 'bg-btn-primary text-btn-primary-fg hover:bg-btn-primary-hover',
+      outline: 'border border-border-default bg-btn-outline text-btn-outline-fg',
+      ghost: 'text-btn-ghost-fg hover:bg-btn-ghost-hover',
+    },
+    size: {
+      sm: 'h-8 px-3 font-mono text-metadata',
+      default: 'h-10 px-4 text-body',
+      lg: 'h-11 px-5 text-body',
+    },
   },
   defaultVariants: { variant: 'primary', size: 'default' },
 });
@@ -624,36 +643,48 @@ Button.displayName = 'Button';
 
 ### 12.2 Hooks
 
-| Hook                    | Descrição  | Retorno             |
-| ----------------------- | ---------- | ------------------- |
-| `useActiveSection(ids)` | Scroll spy | `string` (id ativo) |
+| Hook                    | Descrição                                            | Retorno                        |
+| ----------------------- | ---------------------------------------------------- | ------------------------------ |
+| `useActiveSection(ids)` | Scroll spy via `IntersectionObserver`                | `string` (id ativo)            |
+| `useLanguage()`         | Idioma atual (PT/EN), dicionário `t` e `setLanguage` | `{ language, t, setLanguage }` |
 
 ### 12.3 Utilitários
 
 ```ts
 // Use cn() para classes condicionais em código novo ou modificado.
+// extendTailwindMerge registra a escala tipográfica própria (hero, section-title,
+// subsection, body, body-lg, metadata) no grupo 'font-size'. Sem isso o twMerge
+// trataria text-body como cor e removeria a classe de tamanho.
+const customTwMerge = extendTailwindMerge({
+  extend: {
+    classGroups: {
+      'font-size': [
+        { text: ['hero', 'section-title', 'subsection', 'body', 'body-lg', 'metadata'] },
+      ],
+    },
+  },
+});
+
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return customTwMerge(clsx(inputs));
 }
 ```
 
+> ⚠️ Ao adicionar um novo token de `fontSize` no `tailwind.config.js`, registre-o também em
+> `lib/utils.ts`. Caso contrário, o `twMerge` vai descartar a classe em conflito.
+
 ### 12.4 Ícones
 
-Importe de `@/app/components/ui/Icons`:
+Todos os ícones vêm de `@/app/components/ui/Icons` (SVG inline, `aria-hidden` por padrão):
 
 `ArrowRightIcon`, `ArrowUpIcon`, `DocumentIcon`, `MenuIcon`, `CloseIcon`,
 `SunIcon`, `MoonIcon`, `MailIcon`, `GithubIcon`, `LinkedinIcon`,
-`ExternalLinkIcon`, `CheckIcon`, `CopyIcon`, `CodeIcon`, `DatabaseIcon`,
-`RocketIcon`, `SearchIcon`, `ChevronLeftIcon`, `ChevronRightIcon`,
-`TechBadgeIcon` (requer `label`)
+`WhatsappIcon`, `ExternalLinkIcon`, `CheckIcon`, `CopyIcon`, `SearchIcon`,
+`ChevronLeftIcon`, `ChevronRightIcon`
 
-Importe de `@/app/components/ui/TechIcons`:
-
-`TechIcon` (resolver automático por nome), `NextJsIcon`, `ReactIcon`,
-`TypeScriptIcon`, `TailwindIcon`, `NodeJsIcon`, `RestApiIcon`,
-`NextAuthIcon`, `ZodIcon`, `PrismaIcon`, `PostgresIcon`, `SupabaseIcon`,
-`RlsIcon`, `VercelIcon`, `VitestIcon`, `CypressIcon`, `GitIcon`,
-`GitHubIcon`, `GitHubActionsIcon`
+> Não existe mais `TechIcons.tsx`: os ícones de tecnologia foram removidos no redesign
+> editorial. Tecnologias são representadas pelo componente `Pill` com texto, nunca por logo.
+> Ao precisar de um ícone novo, adicione-o em `Icons.tsx` — não crie um arquivo de ícones.
 
 ### 12.5 Organização de Imports
 
@@ -671,15 +702,29 @@ Importe de `@/app/components/ui/TechIcons`:
 
 ### 12.6 CSS Custom Properties
 
-O projeto utiliza variáveis CSS para fontes (via `next/font/google`):
+O projeto usa variáveis CSS em dois papéis distintos:
+
+**1. Fontes** (`next/font/google`, definidas em `layout.tsx`):
 
 ```css
-/* Definidas em layout.tsx e consumidas via Tailwind */
-font-sans: var(--font-geist-sans); /* Geist Sans para body e headings */
-font-mono: var(--font-geist-mono); /* Geist Mono para código e metadados */
+--font-geist-sans; /* body e headings */
+--font-geist-mono; /* código e metadados */
 ```
 
-**Regra:** Use as classes Tailwind `font-sans`, `font-heading` (usa Geist Sans) e `font-mono`. Não declare novas variáveis CSS sem necessidade.
+**2. Tokens de tema** (definidos em `globals.css` sob `:root` e `.dark`):
+
+| Grupo de tokens   | Exemplo de valor Tailwind               |
+| ----------------- | --------------------------------------- |
+| Superfícies       | `bg-page`, `bg-surface-card`            |
+| Texto             | `text-text-primary`                     |
+| Bordas            | `border-border-default`                 |
+| Accent            | `bg-accent`, `text-accent-on-subtle`    |
+| Botões            | `bg-btn-primary`, `text-btn-outline-fg` |
+| Métrica de layout | `--navbar-height` (via ResizeObserver)  |
+
+**Regra:** Consuma sempre a classe Tailwind gerada pelo token. Nunca escreva `dark:` para
+cor — o token já resolve os dois temas. Use `dark:` apenas para casos que não são cor.
+Não declare variáveis CSS fora de `globals.css` sem necessidade.
 
 ### 12.7 Nomenclatura
 
@@ -703,6 +748,7 @@ font-mono: var(--font-geist-mono); /* Geist Mono para código e metadados */
 type Project = {
   title: string;
   shortTitle: string;
+  slug: string;
   description: string;
   imageUrl?: string;
   imageAlt?: string;
@@ -714,6 +760,7 @@ type Project = {
   metrics?: string[];
   tags: string[];
   kind: 'featured' | 'secondary';
+  status: 'production' | 'demo';
   outcome?: string;
   technicalHighlight?: string;
   responsibility?: string;
@@ -736,7 +783,7 @@ type Capability = {
 };
 ```
 
-### 13.3 ExperienciaAnterior
+### 13.3 ExperienciaAnterior e CompetenciaAplicada
 
 ```typescript
 type ExperienciaAnterior = {
@@ -745,12 +792,20 @@ type ExperienciaAnterior = {
   org: string;
   summary: string;
 };
+
+type CompetenciaAplicada = {
+  title: string;
+  description: string;
+};
 ```
+
+`getExperiencias(language)` e `getCompetenciasAplicadas(language)` selecionam PT ou EN.
 
 ### 13.4 Constantes
 
 ```typescript
 EMAIL = 'tharciosantos09@gmail.com';
+WHATSAPP_NUMBER = '5531995253423'; // + WHATSAPP_DISPLAY, WHATSAPP_MESSAGE, WHATSAPP_URL
 SITE_URL = 'https://tharcio-portfolio.vercel.app';
 GITHUB_URL = 'https://github.com/tharciosantos';
 LINKEDIN_URL = 'https://www.linkedin.com/in/tharcio-santos-dev/';
@@ -771,41 +826,72 @@ navLinks = [
 
 ### 14.1 Tema
 
-- `next-themes` com `attribute="class"` — tema inicial: sistema
-- Classes condicionais: `dark:` para escuro, sem prefixo para claro
+- `next-themes` com `attribute="class"` — `defaultTheme="light"`, `enableSystem={false}`
+  (o tema inicial é o claro; existe alternância manual, mas não segue a preferência do sistema)
+- **Nunca use `dark:` para cor.** Os tokens já resolvem os dois temas via `globals.css`
 
-### 14.2 Cores
+### 14.2 Cores (tokens semânticos)
 
-**Paleta:** Carmesim (accent) em fundos neutros gelo.
+A direção visual é **editorial**: acento vermelho sobre neutros. Os valores vivem em
+`globals.css` sob `:root` (claro) e `.dark` (escuro) e são expostos no Tailwind.
 
-| Uso              | Light                           | Dark                           |
-| ---------------- | ------------------------------- | ------------------------------ |
-| Fundo            | `bg-light-bg` (#FAFAF9)         | `bg-dark-bg` (#141210)         |
-| Card             | `bg-light-card` (#FFFFFF)       | `bg-dark-card` (#1D1917)       |
-| Superfície       | `bg-light-surface` (#F1ECE8)    | `bg-dark-surface` (#26211E)    |
-| Texto primário   | `text-primary-text` (#1C1917)   | `text-light-text` (#F5F0EB)    |
-| Texto secundário | `text-secondary-text` (#57534E) | `text-dark-text` (#A8A29E)     |
-| Borda            | `border-border-light` (#E7E0D9) | `border-border-dark` (#33302D) |
-| Accent           | `bg-accent` (#B91C1C)           | `bg-accent` (#B91C1C)          |
+| Uso                | Classe Tailwind             | Claro                 | Escuro                  |
+| ------------------ | --------------------------- | --------------------- | ----------------------- |
+| Fundo da página    | `bg-page`                   | `#FFFFFF`             | `#09090B`               |
+| Superfície sutil   | `bg-surface-subtle`         | `#F6F8FA`             | `#0E0E11`               |
+| Card               | `bg-surface-card`           | `#FFFFFF`             | `#121215`               |
+| Superfície elevada | `bg-surface-elevated`       | `#EEF1F5`             | `#18181C`               |
+| Texto primário     | `text-text-primary`         | `#0A0D12`             | `#FAFAFA`               |
+| Texto secundário   | `text-text-secondary`       | `#475467`             | `#A1A1AA`               |
+| Borda              | `border-border-default`     | `rgba(10,13,18,.09)`  | `rgba(255,255,255,.08)` |
+| Borda hover        | `border-border-hover`       | `rgba(10,13,18,.20)`  | `rgba(255,255,255,.18)` |
+| Accent             | `bg-accent` / `text-accent` | `#B91C1C`             | `#EF4444`               |
+| Accent hover       | `text-accent-hover`         | `#991B1B`             | `#F87171`               |
+| Accent sutil       | `bg-accent-subtle`          | `rgba(185,28,28,.06)` | `rgba(239,68,68,.10)`   |
 
-Hover: `accent-hover` (#991B1B) · Light: `accent-light` (#F87171)
+**Botões** usam tokens próprios: `btn-primary`, `btn-outline`, `btn-ghost` (cada um com
+`*-hover`, `*-active` e `*-fg`). No tema claro o botão primário é escuro; no escuro é claro.
+
+**Seções alternadas** usam a prop `surface` do componente `Section`: `default` (`bg-page`) e
+`muted` (`bg-surface-subtle`).
+
+> Não existem mais `light-bg`, `dark-bg`, `light-card`, `dark-card`, `border-light`,
+> `border-dark`, `primary-text`, `secondary-text` nem `accent-light`.
 
 ### 14.3 Fontes
 
 - **Body:** Geist Sans (`var(--font-geist-sans)`)
 - **Heading:** Geist Sans (`var(--font-geist-sans)`)
-- **Mono:** Geist Mono (`var(--font-geist-mono)`)
+- **Mono:** Geist Mono (`var(--font-geist-mono)`, com `preload: false`)
 - Carregadas via `next/font/google` em `layout.tsx`
 
-### 14.4 Animações
+**Escala tipográfica** (5 níveis, definidos em `tailwind.config.js`):
 
-| Animação     | Duração | Uso                        |
-| ------------ | ------- | -------------------------- |
-| `fade-in`    | 0.8s    | Entrada simples            |
-| `fade-up`    | 0.8s    | Revelação com deslocamento |
-| `fade-down`  | 0.5s    | Entrada do topo            |
-| `scale-x-in` | 0.6s    | Barra horizontal           |
-| `ping`       | 2s      | Efeito pulsante            |
+| Classe                  | Tamanho                          | Uso                             |
+| ----------------------- | -------------------------------- | ------------------------------- |
+| `text-hero`             | `clamp(2.25rem, 4.6vw, 3.25rem)` | H1 do Hero e dos cases          |
+| `text-section-title`    | `clamp(1.625rem, 3vw, 2.25rem)`  | H2 das seções                   |
+| `text-subsection`       | `1.25rem`                        | H3 dentro de uma seção          |
+| `text-body` / `body-lg` | `1rem`                           | Corpo de texto                  |
+| `text-metadata`         | `0.75rem`                        | Rótulos mono, datas, contadores |
+
+Pesos são contidos (500 nos títulos) com tracking negativo. Não use `text-[Npx]` avulso.
+
+### 14.4 Movimento
+
+Não há animações de entrada declarativas no `tailwind.config.js`. O movimento é restrito a
+**transições de 150ms em hover e foco** (`cubic-bezier(0.2, 0, 0, 1)`), aplicadas
+globalmente a `a` e `button` em `globals.css`.
+
+| Contexto                     | Duração | Propriedades                                           |
+| ---------------------------- | ------- | ------------------------------------------------------ |
+| Links e botões               | 150ms   | `background-color`, `border-color`, `color`, `opacity` |
+| Setas de CTA (grupo `group`) | 150ms   | `transform` (`translate-x-0.5`)                        |
+| Menu mobile                  | 180ms   | `opacity`                                              |
+| Barra de progresso           | 150ms   | `transform: scaleX`                                    |
+
+> As animações `fade-in`, `fade-up`, `fade-down`, `scale-x-in` e `ping` foram removidas
+> na migração para a estética editorial. Não as reintroduza sem necessidade.
 
 ---
 
@@ -813,11 +899,15 @@ Hover: `accent-hover` (#991B1B) · Light: `accent-light` (#F87171)
 
 ### 15.1 prefers-reduced-motion
 
-Todas as animações são desativadas quando o usuário pede menos movimento. A regra global em `globals.css` zera `animation-duration` e `scroll-behavior` sob `prefers-reduced-motion: reduce`.
+Quando o usuário pede menos movimento, a regra global em `globals.css` zera
+`animation-duration`, `animation-iteration-count`, `transition-duration` e `scroll-behavior`.
+Scroll suave só é ativado sob `prefers-reduced-motion: no-preference`.
 
-### 15.2 Animações de entrada
+### 15.2 Entrada de conteúdo
 
-As entradas usam as animações declarativas do Tailwind (`animate-fade-in`, `fade-up`, `fade-down`, `scale-x-in`), definidas em `tailwind.config.js`. Não há wrapper de reveal por scroll nem custo de JavaScript.
+Não há animação de entrada: o conteúdo aparece direto no primeiro paint. Isso mantém o
+LCP baixo e evita CLS. A única animação contínua é a barra de progresso de leitura
+(`ReadingProgressBar`), que usa `transform: scaleX` para não disparar layout.
 
 ### 15.3 useActiveSection
 
@@ -827,6 +917,22 @@ function useActiveSection(ids: readonly string[]): string {
   // Retorna id da seção visível
 }
 ```
+
+O `NavbarClient` registra `SECTION_IDS` mais `home` e usa o retorno para marcar
+`aria-current="location"` no link ativo.
+
+### 15.4 useLanguage
+
+```ts
+function useLanguage(): {
+  language: 'pt' | 'en';
+  t: Dictionary;
+  setLanguage: (l: Language) => void;
+};
+```
+
+Consulta o `LanguageProvider`, que persiste a escolha e atualiza `lang` do documento.
+É o motivo pelo qual todas as seções são Client Components.
 
 ---
 
@@ -891,7 +997,7 @@ npm run build          # 5° — build (mais lento)
 
 ### 18.2 CI Pipeline
 
-Executado em push/PR para `main` (Node 22):
+Executado em push/PR para `main` (Node `>=22.23.4`):
 
 **Job 1 — quality:**
 
@@ -899,7 +1005,20 @@ Executado em push/PR para `main` (Node 22):
 
 **Job 2 — build-and-test** (após quality):
 
-1. `npm run test:coverage` (Valida threshold de cobertura ≥ 80% stmts) · 2. `npm run build` (com cache do `.next`)
+1. `npm run test:coverage` · 2. `npm run build` (com cache do `.next`)
+
+**Thresholds de cobertura** (`vitest.config.ts`, provider `v8`):
+
+| Métrica    | Mínimo | Atual |
+| ---------- | ------ | ----- |
+| Statements | 80%    | ~93%  |
+| Branches   | 75%    | ~84%  |
+| Functions  | 75%    | ~94%  |
+| Lines      | 80%    | ~95%  |
+
+Ficam fora da cobertura por decisão de config: `layout.tsx`, `page.tsx`, `error.tsx`,
+`not-found.tsx`, `opengraph-image.tsx`, `robots.ts`, `sitemap.ts`, `ClientAnalytics.tsx`
+e `ThemeProvider.tsx`.
 
 ### 18.3 Husky + lint-staged
 
@@ -955,7 +1074,7 @@ Executado em push/PR para `main` (Node 22):
 ### 20.3 Acessibilidade
 
 - **Skip link:** `.skip-link` ao receber foco
-- **Focus-visible:** anel de foco com `accent`/`accent-light`
+- **Focus-visible:** anel de foco com `ring-accent` e `ring-offset-page` (o offset acompanha o tema)
 - **Reduced motion:** animações desativadas em `prefers-reduced-motion: reduce`
 - **ARIA:** labels e atributos em componentes interativos
 - **Scrollbar customizada:** webkit (claro/escuro)
@@ -964,14 +1083,23 @@ Executado em push/PR para `main` (Node 22):
 
 ## 21. Consistência de Conteúdo
 
-| Regra           | Valor             |
-| --------------- | ----------------- |
-| Conclusão ADS   | **julho de 2027** |
-| ManutFlow       | **em produção**   |
-| Idioma conteúdo | Português (BR)    |
-| Idioma código   | Inglês            |
+| Regra           | Valor                                                         |
+| --------------- | ------------------------------------------------------------- |
+| Conclusão ADS   | **julho de 2027**                                             |
+| ManutFlow       | **em produção**                                               |
+| HelpFlow        | **em produção**                                               |
+| Cargo           | **Desenvolvedor Full Stack Júnior**                           |
+| Localização     | **Caeté, Minas Gerais**                                       |
+| Disponibilidade | **Remoto, presencial ou híbrido** (sem preferência exclusiva) |
+| Nível de inglês | **Técnico — leitura de documentação e código**                |
+| Idioma conteúdo | Português (BR) com versão EN completa em `data/i18n`          |
+| Idioma código   | Inglês                                                        |
 
-**Superfícies a verificar:** README.md, AGENTS.md, código fonte, currículo, GitHub, LinkedIn. Todas devem ter datas, status de projetos e URLs consistentes.
+**Superfícies a verificar:** README.md, AGENTS.md, código fonte, currículo, GitHub, LinkedIn.
+
+> A disponibilidade deve aparecer como **remoto, presencial ou híbrido** em todas as
+> superfícies. Não restringir a modalidade no Hero, no Contato ou na Sobre — o Hero já
+> exibe `Brasil · Caeté, MG`, que descreve base geográfica, não modalidade.
 
 ---
 
@@ -1196,7 +1324,7 @@ refactor(hooks): extrai useActiveSection do Navbar para hook próprio
 
 ---
 
-> **Versão 2.3** · Fonte única de verdade para agentes de IA · Mantido por Tharcio Santos
+> **Versão 2.4** · Fonte única de verdade para agentes de IA · Mantido por Tharcio Santos
 >
 > | Versão | Data     | Mudanças                                                                                                                                                  |
 > | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1205,3 +1333,4 @@ refactor(hooks): extrai useActiveSection do Navbar para hook próprio
 > | 2.1    | Ago/2026 | Alinha stack à migração Next 16 (Turbopack), flat config do ESLint, CI com cobertura e pre-commit com lint                                                |
 > | 2.2    | Set/2026 | Corrige divergências: fontes (Geist Sans/Mono), paleta (carmesim #B91C1C), tipos (kind sem 'building'), SECTION_IDS (sem 'experiencia'), ícones completos |
 > | 2.3    | Out/2026 | Refina padrão de Pull Request com template limpo sem emojis, inclusão de verificação de formatação/tipos no checklist e exemplo Gold Standard             |
+> | 2.4    | Nov/2026 | Sincroniza com o redesign: tokens semânticos, tipografia, movimento, tema claro padrão, cobertura real e disponibilidade                                  |
