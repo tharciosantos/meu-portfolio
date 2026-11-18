@@ -32,15 +32,15 @@ export const CopyEmailButton = () => {
 
   return (
     <Button
+      type="button"
       onClick={handleCopyEmail}
       aria-label={copied ? t.contact.copyEmailCopied : t.contact.copyEmail}
       variant="outline"
       size="sm"
       className={cn(
-        'h-8 px-3 text-xs gap-1.5 transition-all duration-300 ease-out',
-        copied
-          ? 'border-accent bg-accent-subtle text-accent hover:border-accent hover:bg-accent-subtle hover:text-accent dark:border-accent-light dark:bg-accent-subtle-dark dark:text-accent-light scale-105'
-          : 'scale-100'
+        'gap-1.5',
+        copied &&
+          'border-accent-border bg-accent-subtle text-accent-on-subtle hover:border-accent-border hover:bg-accent-subtle'
       )}
     >
       {copied ? (

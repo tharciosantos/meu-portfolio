@@ -37,4 +37,16 @@ describe('NavbarClient', () => {
       'location'
     );
   });
+
+  it('não marca Projetos nem nenhum item como ativo quando a Hero (home) está no topo', () => {
+    useActiveSectionMock.mockReturnValue('home');
+
+    render(<NavbarClient />);
+
+    for (const name of ['Projetos', 'Processo', 'Habilidades', 'Sobre', 'Contato']) {
+      const link = screen.getByRole('link', { name });
+      expect(link).not.toHaveAttribute('aria-current');
+      expect(link.className).not.toContain('text-accent');
+    }
+  });
 });

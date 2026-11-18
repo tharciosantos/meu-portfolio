@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { dynamicParams, generateStaticParams, generateMetadata } from '../[slug]/page';
+import ProjectPage, { dynamicParams, generateStaticParams, generateMetadata } from '../[slug]/page';
 import { generateStaticParams as generateImageStaticParams } from '../[slug]/opengraph-image';
+import { getProjects } from '@/data/projects';
 
 describe('página de projeto (/projetos/[slug])', () => {
   it('gera params estáticos apenas para os cases principais', () => {
@@ -48,5 +49,27 @@ describe('página de projeto (/projetos/[slug])', () => {
 
   it('gera params estáticos para a imagem Open Graph dos cases', () => {
     expect(generateImageStaticParams().map((p) => p.slug)).toEqual(['manutflow', 'helpflow']);
+  });
+
+  it('resolve a rota sem 404 para todos os cases em PT e EN e dispara notFound para secundários/inexistentes', async () => {
+    const staticSlugs = new Set(generateStaticParams().map((p) => p.slug));
+
+    for (const lang of ['pt', 'en'] as const) {
+      const featured = getProjects(lang).filter((p) => p.kind === 'featured');
+      expect(featured.length).toBeGreaterThan(0);
+
+      for (const project of featured) {
+        expect(staticSlugs.has(project.slug)).toBe(true);
+        const element = await ProjectPage({ params: Promise.resolve({ slug: project.slug }) });
+        expect(element).toBeTruthy();
+      }
+    }
+
+    await expect(ProjectPage({ params: Promise.resolve({ slug: 'devlinks' }) })).rejects.toThrow(
+      /NEXT_HTTP_ERROR_FALLBACK;404|NEXT_NOT_FOUND/
+    );
+    await expect(ProjectPage({ params: Promise.resolve({ slug: 'inexistente' }) })).rejects.toThrow(
+      /NEXT_HTTP_ERROR_FALLBACK;404|NEXT_NOT_FOUND/
+    );
   });
 });

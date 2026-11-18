@@ -62,7 +62,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   return (
-    <div className="px-4 sm:px-6 py-10 sm:py-14">
+    <div className="px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
       <ProjectCaseStudy slug={slug} />
     </div>
   );

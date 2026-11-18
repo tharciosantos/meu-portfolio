@@ -9,10 +9,8 @@ interface MetricProps {
 export function Metric({ value, label, className }: MetricProps) {
   return (
     <div className={cn('flex flex-col gap-1', className)}>
-      <span className="font-heading text-subsection text-primary-text dark:text-light-text">
-        {value}
-      </span>
-      <span className="text-metadata text-secondary-text dark:text-dark-text">{label}</span>
+      <span className="font-mono text-body font-medium text-text-primary">{value}</span>
+      <span className="font-mono text-metadata text-text-secondary">{label}</span>
     </div>
   );
 }

@@ -3,12 +3,105 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Altura base da navbar sticky (atualizada dinamicamente por ResizeObserver no cliente) */
+    --navbar-height: 59px;
+
+    /* Superfícies — Tema Claro (padrão): branco alternando com cinza muito claro */
+    --bg-page: #ffffff;
+    --bg-subtle: #f6f8fa;
+    --bg-card: #ffffff;
+    --bg-elevated: #eef1f5;
+    --bg-overlay: rgba(10, 13, 18, 0.48);
+
+    /* Texto — Alto contraste WCAG AAA */
+    --text-primary: #0a0d12;
+    --text-secondary: #475467;
+
+    /* Bordas estruturais de 1px */
+    --border-default: rgba(10, 13, 18, 0.09);
+    --border-hover: rgba(10, 13, 18, 0.2);
+
+    /* Destaque Vermelho — 2 tons para o tema claro (#B91C1C e #991B1B) */
+    --accent: #b91c1c;
+    --accent-hover: #991b1b;
+    --accent-on-subtle: #b91c1c;
+    --accent-subtle: rgba(185, 28, 28, 0.06);
+    --accent-border: rgba(185, 28, 28, 0.28);
+
+    /* Botões — Tokens semânticos explícitos */
+    --button-primary-bg: #0a0d12;
+    --button-primary-bg-hover: #222731;
+    --button-primary-bg-active: #303744;
+    --button-primary-fg: #ffffff;
+
+    --button-outline-bg: #ffffff;
+    --button-outline-bg-hover: #f6f8fa;
+    --button-outline-bg-active: #eef1f5;
+    --button-outline-fg: #0a0d12;
+
+    --button-ghost-bg-hover: rgba(10, 13, 18, 0.05);
+    --button-ghost-bg-active: rgba(10, 13, 18, 0.09);
+    --button-ghost-fg: #475467;
+    --button-ghost-fg-hover: #0a0d12;
+
+    /* Sombra suave de camada única (cards elevados e mockups) */
+    --shadow-card: 0 2px 8px rgba(10, 13, 18, 0.04);
+  }
+
+  .dark {
+    /* Superfícies — Tema Escuro */
+    --bg-page: #09090b;
+    --bg-subtle: #0e0e11;
+    --bg-card: #121215;
+    --bg-elevated: #18181c;
+    --bg-overlay: rgba(0, 0, 0, 0.78);
+
+    /* Texto — Alto contraste WCAG AAA */
+    --text-primary: #fafafa;
+    --text-secondary: #a1a1aa;
+
+    /* Bordas estruturais de 1px */
+    --border-default: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 255, 255, 0.18);
+
+    /* Destaque Vermelho — 2 tons para o tema escuro (#EF4444 e #F87171) */
+    --accent: #ef4444;
+    --accent-hover: #f87171;
+    --accent-on-subtle: #f87171;
+    --accent-subtle: rgba(239, 68, 68, 0.1);
+    --accent-border: rgba(239, 68, 68, 0.34);
+
+    /* Botões — Tokens semânticos explícitos */
+    --button-primary-bg: #fafafa;
+    --button-primary-bg-hover: #e4e4e7;
+    --button-primary-bg-active: #d4d4d8;
+    --button-primary-fg: #09090b;
+
+    --button-outline-bg: #121215;
+    --button-outline-bg-hover: #18181c;
+    --button-outline-bg-active: #1f1f24;
+    --button-outline-fg: #fafafa;
+
+    --button-ghost-bg-hover: rgba(255, 255, 255, 0.06);
+    --button-ghost-bg-active: rgba(255, 255, 255, 0.1);
+    --button-ghost-fg: #a1a1aa;
+    --button-ghost-fg-hover: #fafafa;
+
+    /* Sombra suave de camada única (cards elevados e mockups) */
+    --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.28);
+  }
+
   * {
-    @apply border-border-light dark:border-border-dark;
+    @apply border-border-default;
   }
 
   html {
     scroll-behavior: auto;
+  }
+
+  section[id] {
+    scroll-margin-top: var(--navbar-height);
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -18,18 +111,19 @@
   }
 
   body {
-    @apply bg-light-bg text-primary-text dark:bg-dark-bg dark:text-light-text;
+    @apply bg-page text-text-primary;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
-  /* Transição de tema — apenas para elementos interativos */
+  /* Movimento contido (150ms) apenas em interações de hover e foco */
   a,
   button {
-    transition-property: background-color, border-color, color, box-shadow;
+    transition-property: background-color, border-color, color, opacity;
     transition-duration: 150ms;
-    transition-timing-function: ease;
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 dark:focus-visible:ring-accent-light dark:focus-visible:ring-offset-dark-bg;
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-page;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -38,6 +132,7 @@
     *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
   }
@@ -48,7 +143,11 @@
   h4,
   h5,
   h6 {
-    @apply font-heading font-bold;
+    @apply font-heading font-medium;
+  }
+
+  .font-mono {
+    font-variant-numeric: tabular-nums;
   }
 
   ::-webkit-scrollbar {
@@ -61,43 +160,18 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-border-light dark:bg-border-dark rounded-full;
+    @apply rounded-sm bg-border-default;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-[#D6CFC7] dark:bg-[#44403C];
+    @apply bg-border-hover;
   }
 }
 
 @layer utilities {
   .skip-link {
-    @apply absolute left-4 -top-16 z-[100] rounded-md bg-accent px-4 py-2.5 text-sm font-semibold text-white shadow-md;
-    @apply transition-[top] duration-200 ease-out;
-    @apply focus:top-4 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 dark:focus:ring-offset-dark-bg;
-  }
-
-  /* Stagger animations para listas de cards */
-  .stagger-1 {
-    animation-delay: 0ms;
-  }
-
-  .stagger-2 {
-    animation-delay: 100ms;
-  }
-
-  .stagger-3 {
-    animation-delay: 200ms;
-  }
-
-  .stagger-4 {
-    animation-delay: 300ms;
-  }
-
-  .stagger-5 {
-    animation-delay: 400ms;
-  }
-
-  .stagger-6 {
-    animation-delay: 500ms;
+    @apply absolute left-4 -top-16 z-[100] rounded-control border border-border-default bg-btn-primary px-4 py-2 font-mono text-metadata font-medium text-btn-primary-fg;
+    @apply transition-[top] duration-150 ease-out;
+    @apply focus:top-4 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-page;
   }
 }

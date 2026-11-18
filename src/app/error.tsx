@@ -2,6 +2,8 @@
 
 import { useEffect } from 'react';
 import { Button } from './components/ui/Button';
+import { ArrowRightIcon } from './components/ui/Icons';
+import Section from './components/ui/Section';
 import { useLanguage } from '@/app/hooks/useLanguage';
 
 type ErrorProps = {
@@ -17,15 +19,23 @@ export default function Error({ error, reset }: ErrorProps) {
   }, [error]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-6 px-4">
-      <p className="text-sm font-medium text-accent dark:text-accent-light">{t.error.eyebrow}</p>
-      <h1 className="text-4xl font-bold text-primary-text dark:text-light-text">{t.error.title}</h1>
-      <p className="max-w-md text-center text-secondary-text dark:text-dark-text">
-        {t.error.description}
-      </p>
-      <Button onClick={reset} variant="primary" size="lg">
-        {t.error.retry}
-      </Button>
-    </div>
+    <Section spacing="editorial" surface="default">
+      <div className="mx-auto flex min-h-[60vh] max-w-container flex-col justify-center">
+        <div className="max-w-prose-wide">
+          <p className="font-mono text-metadata uppercase tracking-wider text-text-secondary">
+            {t.error.eyebrow}
+          </p>
+          <h1 className="mt-3 font-heading text-hero text-text-primary">{t.error.title}</h1>
+          <p className="mt-3 text-body-lg text-text-secondary">{t.error.description}</p>
+          <Button onClick={reset} variant="primary" size="lg" className="group mt-6">
+            <span>{t.error.retry}</span>
+            <ArrowRightIcon
+              className="h-4 w-4 transition-transform duration-150 ease-out group-hover:translate-x-0.5"
+              aria-hidden="true"
+            />
+          </Button>
+        </div>
+      </div>
+    </Section>
   );
 }
