@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { getDictionary } from '../i18n';
 import { getProjects, projects, projectsEn } from '../projects';
 import { getCapabilities, capabilitiesEn } from '../capabilities';
-import { getExperiencias, getTrajectorySkills } from '../experience';
+import { getCompetenciasAplicadas, getExperiencias } from '../experience';
 
 describe('i18n (pt/en)', () => {
   it('retorna o dicionário correto por idioma', () => {
@@ -64,9 +64,13 @@ describe('i18n (pt/en)', () => {
     expect(getCapabilities('en').every((c) => c.id)).toBe(true);
   });
 
-  it('seleciona experiências e habilidades em inglês quando solicitado', () => {
+  it('seleciona experiências e competências em inglês quando solicitado', () => {
     expect(getExperiencias('en')[0].role).toBe('IT Support and Maintenance Technician');
-    expect(getTrajectorySkills('en')[0]).toBe('Organization and deadlines');
+    expect(getCompetenciasAplicadas('en')[0].title).toBe('Problem investigation and solving');
+    expect(getCompetenciasAplicadas('pt')).toHaveLength(4);
+    expect(getCompetenciasAplicadas('pt').every((item) => item.title && item.description)).toBe(
+      true
+    );
   });
 
   it('mantém slugs únicos e estáveis entre os idiomas', () => {

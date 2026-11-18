@@ -7,22 +7,51 @@ export type ExperienciaAnterior = {
   summary: string;
 };
 
-export const trajectorySkills = [
-  'Organização e prazos',
-  'Análise de problemas',
-  'Documentação de processos',
-  'Comunicação entre áreas',
-] as const;
+export type CompetenciaAplicada = {
+  title: string;
+  description: string;
+};
 
-export const trajectorySkillsEn = [
-  'Organization and deadlines',
-  'Problem analysis',
-  'Process documentation',
-  'Cross-team communication',
-] as const;
+export const competenciasAplicadas: CompetenciaAplicada[] = [
+  {
+    title: 'Investigação e resolução de problemas',
+    description: 'Partir do sintoma, formular hipóteses e testar antes de agir.',
+  },
+  {
+    title: 'Análise de causa raiz',
+    description: 'Corrigir a origem da falha em vez de apenas o efeito visível.',
+  },
+  {
+    title: 'Organização e documentação técnica',
+    description: 'Registrar decisões e processos para que o trabalho continue legível.',
+  },
+  {
+    title: 'Arquitetura segura e atenção aos detalhes',
+    description: 'Controle de acesso, validação e consistência desde a primeira camada.',
+  },
+];
 
-export function getTrajectorySkills(language: Language): readonly string[] {
-  return language === 'en' ? trajectorySkillsEn : trajectorySkills;
+export const competenciasAplicadasEn: CompetenciaAplicada[] = [
+  {
+    title: 'Problem investigation and solving',
+    description: 'Start from the symptom, form hypotheses, and test before acting.',
+  },
+  {
+    title: 'Root-cause analysis',
+    description: 'Fix the origin of the failure rather than only its visible effect.',
+  },
+  {
+    title: 'Organization and technical documentation',
+    description: 'Record decisions and processes so the work stays readable downstream.',
+  },
+  {
+    title: 'Secure architecture and attention to detail',
+    description: 'Access control, validation, and consistency from the very first layer.',
+  },
+];
+
+export function getCompetenciasAplicadas(language: Language): CompetenciaAplicada[] {
+  return language === 'en' ? competenciasAplicadasEn : competenciasAplicadas;
 }
 
 export const experienciasAnteriores: ExperienciaAnterior[] = [
@@ -31,21 +60,20 @@ export const experienciasAnteriores: ExperienciaAnterior[] = [
     role: 'Técnico de Suporte e Manutenção de TI',
     org: 'Autônomo',
     summary:
-      'Atendimento técnico para manutenção e configuração de computadores, incluindo diagnóstico de desempenho, hardware e rede básica, backup e migração de arquivos e orientação a clientes.',
+      'Diagnóstico de problemas, manutenção e configuração de computadores, hardware, redes básicas e atendimento técnico a clientes.',
   },
   {
     period: 'Mai/2023 – Out/2023',
     role: 'Auxiliar Administrativo',
     org: 'EPOS',
     summary:
-      'Organização de demandas internas, documentação de processos e comunicação entre equipes. Essa prática reforçou minha atenção a registro, clareza e fluxo de trabalho.',
+      'Organização de demandas, documentação de processos, comunicação entre equipes e organização de fluxos de trabalho.',
   },
   {
     period: 'Jan/2022 – Mai/2022',
     role: 'Auxiliar Mecânico',
     org: 'Komaq',
-    summary:
-      'Diagnóstico técnico de equipamentos e análise de causa raiz, experiência que contribui para investigar problemas com método antes de buscar soluções.',
+    summary: 'Diagnóstico técnico de equipamentos, investigação de falhas e análise de causa raiz.',
   },
 ];
 
@@ -55,21 +83,20 @@ export const experienciasAnterioresEn: ExperienciaAnterior[] = [
     role: 'IT Support and Maintenance Technician',
     org: 'Self-employed',
     summary:
-      'Technical support for computer maintenance and configuration, including performance diagnostics, hardware and basic networking, file backup and migration, and client guidance.',
+      'Problem diagnosis, computer maintenance and setup, hardware, basic networking, and technical support for clients.',
   },
   {
     period: 'May/2023 – Oct/2023',
     role: 'Administrative Assistant',
     org: 'EPOS',
     summary:
-      'Organized internal demands, documented processes, and communicated between teams. This practice reinforced my attention to record-keeping, clarity, and workflow.',
+      'Organization of demands, process documentation, communication between teams, and workflow organization.',
   },
   {
     period: 'Jan/2022 – May/2022',
     role: 'Mechanical Assistant',
     org: 'Komaq',
-    summary:
-      'Technical diagnostics of equipment and root-cause analysis, an experience that contributes to investigating problems with method before seeking solutions.',
+    summary: 'Technical equipment diagnostics, failure investigation, and root-cause analysis.',
   },
 ];
 
