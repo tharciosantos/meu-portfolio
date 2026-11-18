@@ -1,19 +1,16 @@
 'use client';
 
-import { useSyncExternalStore, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 import { useTheme } from 'next-themes';
 import { MoonIcon, SunIcon } from './ui/Icons';
 import { useLanguage } from '@/app/hooks/useLanguage';
 
-// Detecta renderização no cliente sem setState em effect —
-// evita mismatch de hidratação ao renderizar o tema apenas no browser.
 const subscribe = () => () => {};
 const getClientSnapshot = () => true;
 const getServerSnapshot = () => false;
 
 export const ThemeSwitcher = () => {
   const mounted = useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
-  const [rotation, setRotation] = useState(0);
   const { resolvedTheme, setTheme } = useTheme();
   const { t } = useLanguage();
   const isDark = resolvedTheme === 'dark';
@@ -23,30 +20,18 @@ export const ThemeSwitcher = () => {
   }
 
   const toggleTheme = () => {
-    setRotation((prev) => prev + 180);
     setTheme(isDark ? 'light' : 'dark');
   };
 
   return (
-    <div className="relative group">
-      <button
-        onClick={toggleTheme}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border-light/70 bg-light-surface text-secondary-text transition-all hover:border-accent hover:text-accent dark:border-border-dark/70 dark:bg-dark-surface dark:text-dark-text dark:hover:border-accent-light dark:hover:text-accent-light active:scale-95 cursor-pointer"
-        aria-label={t.theme.toggle}
-      >
-        <span
-          className="block transition-transform duration-300 ease-in-out"
-          style={{ transform: `rotate(${rotation}deg)` }}
-        >
-          {isDark ? <SunIcon className="h-4 w-4" /> : <MoonIcon className="h-4 w-4" />}
-        </span>
-      </button>
-      <span
-        className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded border border-border-light bg-white px-2 py-1 text-xs font-medium text-secondary-text opacity-0 shadow-sm transition-all duration-200 group-hover:opacity-100 dark:border-border-dark dark:bg-dark-card dark:text-dark-text"
-        aria-hidden="true"
-      >
-        {isDark ? t.theme.light : t.theme.dark}
-      </span>
-    </div>
+    <button
+      type="button"
+      onClick={toggleTheme}
+      className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-control border border-border-default bg-btn-outline text-text-secondary transition-colors duration-150 hover:border-border-hover hover:bg-btn-outline-hover hover:text-text-primary active:bg-btn-outline-active"
+      aria-label={t.theme.toggle}
+      title={isDark ? t.theme.light : t.theme.dark}
+    >
+      {isDark ? <SunIcon className="h-4 w-4" /> : <MoonIcon className="h-4 w-4" />}
+    </button>
   );
 };

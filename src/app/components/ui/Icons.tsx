@@ -24,8 +24,7 @@ export function ArrowRightIcon(props: IconProps) {
 export function ArrowUpIcon(props: IconProps) {
   return (
     <svg {...baseProps} {...props}>
-      <path d="m12 19-7-7" />
-      <path d="m12 5 7 7" />
+      <path d="m5 12 7-7 7 7" />
       <path d="M12 19V5" />
     </svg>
   );
@@ -149,36 +148,6 @@ export function CopyIcon(props: IconProps) {
   );
 }
 
-export function CodeIcon(props: IconProps) {
-  return (
-    <svg {...baseProps} {...props}>
-      <path d="m16 18 6-6-6-6" />
-      <path d="m8 6-6 6 6 6" />
-    </svg>
-  );
-}
-
-export function DatabaseIcon(props: IconProps) {
-  return (
-    <svg {...baseProps} {...props}>
-      <ellipse cx="12" cy="5" rx="9" ry="3" />
-      <path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5" />
-      <path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3" />
-    </svg>
-  );
-}
-
-export function RocketIcon(props: IconProps) {
-  return (
-    <svg {...baseProps} {...props}>
-      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
-      <path d="m9 15-3-3a22 22 0 0 1 2-3.95A12.9 12.9 0 0 1 18 2c0 2.72-.78 7.5-6 10a22 22 0 0 1-3 3z" />
-      <path d="M9 15s1 3 4 3c0 0 3.2-1.2 3-6" />
-      <path d="M12 9h.01" />
-    </svg>
-  );
-}
-
 export function SearchIcon(props: IconProps) {
   return (
     <svg {...baseProps} {...props}>
@@ -201,16 +170,5 @@ export function ChevronRightIcon(props: IconProps) {
     <svg {...baseProps} {...props}>
       <path d="m9 18 6-6-6-6" />
     </svg>
-  );
-}
-
-export function TechBadgeIcon({ label }: { label: string }) {
-  return (
-    <span
-      aria-hidden="true"
-      className="inline-flex h-5 min-w-5 items-center justify-center rounded bg-current/10 px-1 text-[10px] font-bold leading-none"
-    >
-      {label}
-    </span>
   );
 }

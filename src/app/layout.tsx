@@ -83,6 +83,7 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   subsets: ['latin'],
   display: 'swap',
+  preload: false,
   variable: '--font-geist-mono',
 });
 
@@ -189,15 +190,15 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#FAFAF9' },
-    { media: '(prefers-color-scheme: dark)', color: '#141210' },
+    { media: '(prefers-color-scheme: light)', color: '#FFFFFF' },
+    { media: '(prefers-color-scheme: dark)', color: '#09090B' },
   ],
   colorScheme: 'light dark',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html lang="pt-BR" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -207,9 +208,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-light-bg font-sans text-primary-text antialiased dark:bg-dark-bg dark:text-light-text`}
+        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-page font-sans text-text-primary antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <LanguageProvider>
             <ReadingProgressBar />
             <a href="#conteudo-principal" className="skip-link">

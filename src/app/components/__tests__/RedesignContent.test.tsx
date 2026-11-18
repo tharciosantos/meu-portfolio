@@ -117,7 +117,13 @@ describe('conteúdo principal do redesign', () => {
     expect(screen.getByRole('heading', { level: 2, name: 'Sobre mim' })).toBeInTheDocument();
     expect(screen.getByText('Análise e Desenvolvimento de Sistemas')).toBeInTheDocument();
     expect(screen.getByText('Julho de 2027')).toBeInTheDocument();
-    expect(screen.getByText('Organização e prazos')).toBeInTheDocument();
+    expect(screen.getByText('Anhanguera')).toBeInTheDocument();
+    expect(screen.getByText('Caeté, Minas Gerais')).toBeInTheDocument();
+    expect(
+      screen.getByText(/Disponível para oportunidades remotas, presenciais ou híbridas/)
+    ).toBeInTheDocument();
+    expect(screen.getByText('Investigação e resolução de problemas')).toBeInTheDocument();
+    expect(screen.getByText('Análise de causa raiz')).toBeInTheDocument();
     expect(
       screen.getByRole('heading', {
         level: 4,

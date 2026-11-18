@@ -1,181 +1,188 @@
 'use client';
 
 import Image from 'next/image';
-import { getExperiencias, getTrajectorySkills } from '@/data/experience';
+import {
+  getCompetenciasAplicadas,
+  getExperiencias,
+  type ExperienciaAnterior,
+} from '@/data/experience';
 import Section from '../ui/Section';
 import { SectionHeader } from '../ui/SectionHeader';
-import { Pill } from '../ui/Pill';
 import { useLanguage } from '@/app/hooks/useLanguage';
+import { cn } from '@/lib/utils';
+
+/**
+ * Bloco de fatos objetivos (formação, idiomas).
+ * Rótulo mono em caixa alta + pares termo/valor em `dl`, separados por divisores de 1px.
+ */
+function FactsGroup({
+  label,
+  items,
+}: {
+  label: string;
+  items: { term: string; value: string; emphasis?: boolean }[];
+}) {
+  return (
+    <div>
+      <h4 className="font-mono text-metadata uppercase tracking-wider text-text-secondary">
+        {label}
+      </h4>
+      <dl className="mt-2 divide-y divide-border-default border-t border-border-default">
+        {items.map((item) => (
+          <div key={item.term} className="grid grid-cols-[88px_1fr] items-baseline gap-x-3 py-1.5">
+            <dt className="font-mono text-metadata text-text-secondary">{item.term}</dt>
+            <dd
+              className={cn(
+                'min-w-0 text-sm leading-snug text-balance',
+                item.emphasis ? 'text-text-primary' : 'text-text-secondary'
+              )}
+            >
+              {item.value}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
+}
+
+/**
+ * Linha do tempo de experiência: período na coluna mono à esquerda,
+ * cargo e resumo à direita. Sem caixas, apenas divisores.
+ */
+function ExperienceEntry({ item }: { item: ExperienciaAnterior }) {
+  return (
+    <article className="grid grid-cols-1 gap-1 py-4 first:pt-0 last:pb-0 sm:grid-cols-[minmax(132px,auto)_1fr] sm:gap-5">
+      <span className="font-mono text-metadata text-text-secondary sm:pt-0.5">{item.period}</span>
+
+      <div className="min-w-0">
+        <h4 className="font-heading text-sm font-medium leading-snug text-balance text-text-primary">
+          {item.role} · {item.org}
+        </h4>
+        <p className="mt-1.5 max-w-[60ch] text-sm leading-relaxed text-text-secondary">
+          {item.summary}
+        </p>
+      </div>
+    </article>
+  );
+}
 
 const About = () => {
   const { language, t } = useLanguage();
-  const experienciasAnteriores = getExperiencias(language);
-  const trajectorySkills = getTrajectorySkills(language);
+  const experiencias = getExperiencias(language);
+  const competencias = getCompetenciasAplicadas(language);
 
   return (
     <Section
       id="sobre-mim"
       spacing="editorial"
-      className="border-b border-border-light dark:border-border-dark"
+      surface="default"
+      className="border-b border-border-default"
     >
       <div className="mx-auto max-w-container">
-        <SectionHeader
-          eyebrow={t.about.eyebrow}
-          title={t.about.title}
-          subtitle={t.about.subtitle}
-        />
+        <SectionHeader index="04" title={t.about.title} subtitle={t.about.subtitle} />
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-8 items-stretch w-full min-w-0">
-          {/* Coluna Esquerda: Perfil e Formação */}
-          <div className="flex flex-col justify-between gap-5 min-w-0 w-full">
-            {/* Card Principal de Perfil */}
-            <div className="flex-1 rounded-md border border-border-light/80 bg-light-surface/60 p-5 sm:p-6 dark:border-border-dark/80 dark:bg-dark-surface/60 flex flex-col justify-between">
-              <div>
-                <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3 border-b border-border-light/60 pb-3 dark:border-border-dark/60">
-                  <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
-                    {t.about.profileLabel}
-                  </p>
-                  <span className="font-mono text-[11px] text-primary-text dark:text-light-text">
-                    {t.about.location}
-                  </span>
-                </div>
-
-                <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-4">
-                  <div className="relative mx-auto sm:mx-0 h-24 w-24 sm:h-28 sm:w-28 shrink-0 overflow-hidden rounded-full border-2 border-border-light bg-light-bg shadow-sm dark:border-border-dark dark:bg-dark-bg">
-                    <Image
-                      src="/images/profile.webp"
-                      alt="Foto de Tharcio Santos"
-                      fill
-                      quality={75}
-                      className="object-cover"
-                      sizes="(max-width: 640px) 96px, 112px"
-                    />
-                  </div>
-                  <div className="space-y-0.5 text-center sm:text-left">
-                    <h3 className="font-heading text-lg sm:text-xl font-semibold tracking-tight text-primary-text dark:text-light-text">
-                      Tharcio Santos
-                    </h3>
-                    <p className="text-xs sm:text-sm font-medium text-secondary-text dark:text-dark-text">
-                      {t.about.role}
-                    </p>
-                    <p className="font-mono text-[11px] text-accent dark:text-accent-light">
-                      {t.about.focus}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-4 border-t border-border-light/60 pt-3.5 dark:border-border-dark/60">
-                  <p className="text-xs leading-relaxed text-secondary-text dark:text-dark-text">
-                    {t.about.bio}
-                  </p>
-                </div>
-              </div>
+        {/* Composição:
+            - Mobile/Tablet (<1024px): tudo empilhado na ordem foto > identificação > fatos > narrativa > experiências > competências
+            - Desktop (>=1024px): coluna esquerda fixa com foto, identificação e fatos; direita com a narrativa */}
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[340px_1fr] lg:items-start lg:gap-14 lg:pl-[96px]">
+          <div className="grid min-w-0 grid-cols-1 gap-8 md:grid-cols-[280px_1fr] md:items-start md:gap-8 lg:grid-cols-1 lg:gap-8">
+            <div className="relative aspect-square w-full max-w-[280px] overflow-hidden rounded-card border border-border-default bg-surface-subtle lg:max-w-none">
+              <Image
+                src="/images/profile.webp"
+                alt="Foto de Tharcio Santos"
+                fill
+                quality={75}
+                className="object-cover object-top"
+                sizes="(max-width: 767px) 100vw, (max-width: 1023px) 280px, 340px"
+              />
             </div>
 
-            {/* Card de Formação Acadêmica Compacto */}
-            <div className="rounded-md border border-border-light/80 bg-light-surface/60 p-4 sm:p-5 dark:border-border-dark/80 dark:bg-dark-surface/60">
-              <div className="flex items-center justify-between border-b border-border-light/60 pb-2.5 dark:border-border-dark/60">
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
-                  {t.about.educationLabel}
-                </p>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-primary-text dark:text-light-text">
-                  {t.about.graduation}
-                </span>
-              </div>
-              <h4 className="mt-3 font-heading text-sm sm:text-base font-semibold text-primary-text dark:text-light-text">
-                {t.about.course}
-              </h4>
-              <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] text-secondary-text dark:text-dark-text">
-                <span>Anhanguera</span>
-                <span>·</span>
-                <span>{t.about.studying}</span>
-                <span>·</span>
-                <span className="text-primary-text dark:text-light-text font-medium">
-                  {t.about.graduationDate}
-                </span>
-              </div>
+            <div className="min-w-0">
+              {/* Identificação */}
+              <h3 className="font-heading text-subsection leading-tight text-text-primary">
+                Tharcio Santos
+              </h3>
+              <p className="mt-1 text-sm leading-snug text-text-primary">{t.about.role}</p>
+              <p className="mt-0.5 font-mono text-metadata text-text-secondary">
+                {t.about.location}
+              </p>
 
-              <div className="mt-3 border-t border-border-light/60 pt-2.5 dark:border-border-dark/60">
-                <p className="font-mono text-[10px] font-semibold uppercase tracking-wider text-secondary-text dark:text-dark-text">
-                  {t.about.languagesLabel}
-                </p>
-                <dl className="mt-1.5 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[11px]">
-                  <div className="flex items-baseline gap-1.5">
-                    <dt className="text-secondary-text dark:text-dark-text">
-                      {t.about.languagePortuguese}
-                    </dt>
-                    <dd className="text-primary-text dark:text-light-text">
-                      {t.about.languagePortugueseLevel}
-                    </dd>
-                  </div>
-                  <span
-                    aria-hidden="true"
-                    className="text-secondary-text/50 dark:text-dark-text/50"
-                  >
-                    ·
-                  </span>
-                  <div className="flex items-baseline gap-1.5">
-                    <dt className="text-secondary-text dark:text-dark-text">
-                      {t.about.languageEnglish}
-                    </dt>
-                    <dd className="text-primary-text dark:text-light-text">
-                      {t.about.languageEnglishLevel}
-                    </dd>
-                  </div>
-                </dl>
+              {/* Disponibilidade — sinal de status, contido e legível */}
+              <p className="mt-3 flex items-start gap-2 border-t border-border-default pt-3 text-sm leading-snug text-text-secondary">
+                <span
+                  aria-hidden="true"
+                  className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                />
+                <span className="min-w-0">
+                  <span className="sr-only">{t.about.availabilityLabel}: </span>
+                  {t.about.availability}
+                </span>
+              </p>
+
+              {/* Fatos objetivos */}
+              <div className="mt-6 space-y-5">
+                <FactsGroup
+                  label={t.about.educationLabel}
+                  items={[
+                    { term: t.about.org, value: t.about.course, emphasis: true },
+                    { term: t.about.graduationLabel, value: t.about.graduationDate },
+                  ]}
+                />
+                <FactsGroup
+                  label={t.about.languagesLabel}
+                  items={[
+                    { term: t.about.languagePortuguese, value: t.about.languagePortugueseLevel },
+                    { term: t.about.languageEnglish, value: t.about.languageEnglishLevel },
+                  ]}
+                />
               </div>
             </div>
           </div>
 
-          {/* Coluna Direita: Trajetória Profissional e Competências Integradas */}
-          <div className="rounded-md border border-border-light/80 bg-light-surface/60 p-5 sm:p-6 dark:border-border-dark/80 dark:bg-dark-surface/60 flex flex-col justify-between w-full min-w-0">
-            <div>
-              <div className="mb-4 flex items-center justify-between border-b border-border-light/60 pb-3 dark:border-border-dark/60">
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent dark:text-accent-light">
-                  {t.about.experienceLabel}
-                </p>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-primary-text dark:text-light-text">
-                  {t.about.trajectoryLabel}
-                </span>
-              </div>
-
-              {/* Linha do Tempo */}
-              <div className="relative pl-5 space-y-4 before:absolute before:left-1.5 before:top-2 before:bottom-2 before:w-px before:bg-border-light dark:before:bg-border-dark">
-                {experienciasAnteriores.map((item) => (
-                  <article key={`${item.role}-${item.org}`} className="group relative">
-                    <span
-                      aria-hidden="true"
-                      className="absolute -left-[19px] top-1.5 h-2 w-2 rounded-full border border-accent bg-white dark:bg-dark-card"
-                    />
-
-                    <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-                      <h4 className="font-heading text-xs sm:text-sm font-semibold text-primary-text dark:text-light-text">
-                        {item.role} · {item.org}
-                      </h4>
-                      <span className="shrink-0 font-mono text-[10px] sm:text-[11px] text-primary-text dark:text-light-text">
-                        {item.period}
-                      </span>
-                    </div>
-                    <p className="mt-1 text-xs leading-relaxed text-secondary-text dark:text-dark-text">
-                      {item.summary}
-                    </p>
-                  </article>
+          {/* Narrativa */}
+          <div className="min-w-0 divide-y divide-border-default border-t border-border-default pt-8 lg:border-t-0 lg:pt-0">
+            <div className="pb-8">
+              <div className="max-w-[600px] space-y-4">
+                {t.about.bio.map((paragraph) => (
+                  <p key={paragraph} className="text-body leading-relaxed text-text-secondary">
+                    {paragraph}
+                  </p>
                 ))}
               </div>
             </div>
 
-            {/* Habilidades Transferidas Integradas Organicamente */}
-            <div className="mt-6 border-t border-border-light/60 pt-4 dark:border-border-dark/60">
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-secondary-text dark:text-dark-text mb-2.5">
-                {t.about.transferLabel}
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {trajectorySkills.map((skill) => (
-                  <Pill key={skill} className="text-[11px] px-2.5 py-0.5">
-                    {skill}
-                  </Pill>
+            <div className="py-8">
+              <h3 className="font-mono text-metadata uppercase tracking-wider text-text-secondary">
+                {t.about.experienceLabel}
+              </h3>
+              <div className="mt-4 divide-y divide-border-default">
+                {experiencias.map((item) => (
+                  <ExperienceEntry key={`${item.role}-${item.org}`} item={item} />
                 ))}
               </div>
+            </div>
+
+            <div className="pt-8">
+              <h3 className="font-mono text-metadata uppercase tracking-wider text-text-secondary">
+                {t.about.competencyLabel}
+              </h3>
+              {/* Lista com dois níveis de leitura: competência à esquerda, como se aplica à direita */}
+              <dl className="mt-4 divide-y divide-border-default">
+                {competencias.map((item) => (
+                  <div
+                    key={item.title}
+                    className="grid grid-cols-1 gap-0.5 py-3 first:pt-0 last:pb-0 sm:grid-cols-[1fr_1.15fr] sm:gap-6"
+                  >
+                    <dt className="font-heading text-sm font-medium leading-snug text-balance text-text-primary">
+                      {item.title}
+                    </dt>
+                    <dd className="text-sm leading-relaxed text-text-secondary">
+                      {item.description}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
             </div>
           </div>
         </div>

@@ -26,7 +26,7 @@ export const LanguageSwitcher = () => {
     <div
       role="group"
       aria-label="Idioma / Language"
-      className="inline-flex items-center rounded-md border border-border-light/70 bg-light-surface p-0.5 dark:border-border-dark/70 dark:bg-dark-surface"
+      className="inline-flex h-11 items-center rounded-control border border-border-default bg-btn-outline p-1"
     >
       {options.map((option) => {
         const isActive = language === option.value;
@@ -37,10 +37,10 @@ export const LanguageSwitcher = () => {
             onClick={() => setLanguage(option.value)}
             aria-pressed={isActive}
             className={cn(
-              'rounded px-2 py-1 font-mono text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-light',
+              'inline-flex h-8 min-w-8 cursor-pointer items-center justify-center rounded-[4px] px-2 font-mono text-metadata font-medium transition-colors duration-150',
               isActive
-                ? 'bg-accent text-white dark:bg-accent-light dark:text-dark-bg'
-                : 'text-secondary-text hover:text-primary-text dark:text-dark-text dark:hover:text-light-text'
+                ? 'bg-accent-subtle text-accent-on-subtle'
+                : 'text-text-secondary hover:text-text-primary'
             )}
           >
             {option.label}

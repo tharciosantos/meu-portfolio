@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { sectionIdFromHref, type NavLink } from '../../data/constants';
 import { buttonVariants } from './ui/Button';
 import { cn } from '@/lib/utils';
-import { CloseIcon, MenuIcon } from './ui/Icons';
+import { ArrowRightIcon, CloseIcon, MenuIcon } from './ui/Icons';
 import { useLanguage } from '@/app/hooks/useLanguage';
 
 type MobileNavProps = {
@@ -33,7 +33,7 @@ export function MobileNav({ links, activeSection = '' }: MobileNavProps) {
       setIsClosing(false);
       triggerButtonRef.current?.focus({ preventScroll: true });
       closeTimeoutRef.current = null;
-    }, 200);
+    }, 180);
   }, []);
 
   const handleOpen = () => {
@@ -108,26 +108,27 @@ export function MobileNav({ links, activeSection = '' }: MobileNavProps) {
     <>
       <button
         ref={triggerButtonRef}
+        type="button"
         onClick={isOpen ? handleClose : handleOpen}
         aria-label={isOpen ? t.nav.closeMenu : t.nav.openMenu}
         aria-expanded={isOpen}
         aria-controls={MOBILE_MENU_ID}
         className={cn(
-          'relative z-[60] inline-flex h-10 w-10 items-center justify-center rounded-md border transition-all active:scale-95',
+          'relative z-[60] inline-flex h-8 w-8 items-center justify-center rounded-control border transition-colors duration-150',
           isOpen
-            ? 'border-accent bg-accent text-white hover:bg-accent-hover dark:border-accent-light dark:bg-accent-light dark:text-dark-bg dark:hover:bg-accent-light-hover'
-            : 'border-border-light bg-light-surface text-primary-text hover:border-accent dark:border-border-dark dark:bg-dark-surface dark:text-light-text dark:hover:border-accent-light'
+            ? 'border-accent-border bg-accent-subtle text-accent-on-subtle'
+            : 'border-border-default bg-btn-outline text-btn-outline-fg hover:border-border-hover hover:bg-btn-outline-hover active:bg-btn-outline-active'
         )}
       >
-        {isOpen ? <CloseIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
+        {isOpen ? <CloseIcon className="h-4 w-4" /> : <MenuIcon className="h-4 w-4" />}
       </button>
 
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/30 md:hidden"
+          className="fixed inset-0 z-40 bg-overlay md:hidden"
           style={{
             opacity: isClosing ? 0 : 1,
-            transition: 'opacity 0.2s ease',
+            transition: 'opacity 180ms ease',
           }}
           onClick={handleClose}
           aria-hidden="true"
@@ -141,17 +142,17 @@ export function MobileNav({ links, activeSection = '' }: MobileNavProps) {
           role="dialog"
           aria-modal="true"
           aria-label={t.nav.ariaMenu}
-          className="fixed inset-x-4 top-16 z-50 rounded-md border border-border-light bg-light-card p-4 dark:border-border-dark dark:bg-dark-card md:hidden"
+          className="fixed inset-x-4 top-16 z-50 rounded-card border border-border-default bg-surface-card p-4 shadow-card md:hidden"
           style={{
             opacity: isClosing ? 0 : 1,
-            transform: isClosing ? 'translateY(-8px)' : 'translateY(0)',
-            transition: 'opacity 0.2s ease, transform 0.2s ease',
+            transition: 'opacity 180ms ease',
           }}
         >
-          <div className="flex flex-col items-stretch gap-1">
+          <div className="flex flex-col items-stretch divide-y divide-border-default">
             {links.map((link) => {
               const isActive = activeSection === sectionIdFromHref(link.href);
               const isFirstLink = link.href === links[0]?.href;
+              const label = t.nav.links[link.href] ?? link.label;
 
               return (
                 <Link
@@ -161,17 +162,18 @@ export function MobileNav({ links, activeSection = '' }: MobileNavProps) {
                   onClick={handleClose}
                   className={
                     link.cta
-                      ? cn(buttonVariants({ variant: 'primary', size: 'default' }), 'mt-2 w-full')
+                      ? cn(buttonVariants({ variant: 'primary', size: 'default' }), 'mt-3 w-full')
                       : cn(
-                          'w-full rounded-md px-4 py-2.5 text-center text-sm font-medium transition-colors',
+                          'w-full py-3 text-left text-body transition-colors duration-150',
                           isActive
-                            ? 'border border-border-light bg-light-surface font-semibold text-accent dark:border-border-dark dark:bg-dark-surface dark:text-accent-light'
-                            : 'text-secondary-text hover:bg-light-surface hover:text-primary-text dark:text-dark-text dark:hover:bg-dark-surface dark:hover:text-light-text'
+                            ? 'font-medium text-accent'
+                            : 'text-text-secondary hover:text-text-primary'
                         )
                   }
                   aria-current={isActive ? 'location' : undefined}
                 >
-                  {t.nav.links[link.href] ?? link.label}
+                  {label}
+                  {link.cta && <ArrowRightIcon className="h-4 w-4" aria-hidden="true" />}
                 </Link>
               );
             })}

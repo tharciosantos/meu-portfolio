@@ -3,21 +3,21 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:focus-visible:ring-accent-light dark:focus-visible:ring-offset-dark-bg',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-control font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-page disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
         primary:
-          'bg-accent text-white shadow-sm hover:bg-accent-hover hover:shadow-md dark:bg-accent-light dark:text-dark-bg dark:shadow-sm dark:hover:bg-accent-light-hover',
+          'border border-transparent bg-btn-primary text-btn-primary-fg hover:bg-btn-primary-hover active:bg-btn-primary-active',
         outline:
-          'border border-border-light bg-transparent text-primary-text hover:border-accent hover:text-accent dark:border-border-dark dark:text-light-text dark:hover:border-accent-light dark:hover:text-accent-light',
+          'border border-border-default bg-btn-outline text-btn-outline-fg hover:border-border-hover hover:bg-btn-outline-hover active:bg-btn-outline-active',
         ghost:
-          'text-secondary-text hover:bg-light-surface hover:text-primary-text dark:text-dark-text dark:hover:bg-dark-surface dark:hover:text-light-text',
+          'border border-transparent bg-transparent text-btn-ghost-fg hover:bg-btn-ghost-hover hover:text-btn-ghost-fg-hover active:bg-btn-ghost-active',
       },
       size: {
-        default: 'h-9 px-4 py-2 text-sm',
-        sm: 'h-8 px-3 text-xs',
-        lg: 'h-10 px-5 text-sm',
+        default: 'h-10 px-4 py-2 text-body',
+        sm: 'h-8 px-3 font-mono text-metadata',
+        lg: 'h-11 px-5 text-body',
         icon: 'h-9 w-9 p-0',
       },
     },

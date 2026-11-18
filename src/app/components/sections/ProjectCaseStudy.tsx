@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { getProjects } from '@/data/projects';
 import { buttonVariants } from '../ui/Button';
 import { Pill } from '../ui/Pill';
-import { ExternalLinkIcon, GithubIcon, CodeIcon, CheckIcon } from '../ui/Icons';
+import { ArrowRightIcon, ExternalLinkIcon, GithubIcon } from '../ui/Icons';
 import { ProjectScreenShowcase } from '../ui/ProjectScreenShowcase';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/app/hooks/useLanguage';
@@ -15,154 +15,151 @@ type ProjectCaseStudyProps = {
 
 export function ProjectCaseStudy({ slug }: ProjectCaseStudyProps) {
   const { language, t } = useLanguage();
-  const project = getProjects(language).find((p) => p.slug === slug);
+  const featuredProjects = getProjects(language).filter((p) => p.kind === 'featured');
+  const projectIndex = featuredProjects.findIndex((p) => p.slug === slug);
+  const project = projectIndex >= 0 ? featuredProjects[projectIndex] : undefined;
 
-  if (!project || project.kind !== 'featured') return null;
+  if (!project) return null;
+
+  const indexLabel = `0${projectIndex + 1}`;
 
   return (
-    <div className="mx-auto w-full max-w-container min-w-0">
-      {/* Voltar para projetos */}
-      <Link
-        href="/#projetos"
-        className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light mb-6"
-      >
-        ← {t.projects.back}
-      </Link>
-
-      {/* Título e descrição */}
-      <div className="flex flex-wrap items-center gap-3 mb-3">
-        <h1 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-primary-text dark:text-light-text">
-          {project.title}
-        </h1>
-        <span
-          className={cn(
-            'inline-flex items-center gap-1.5 font-mono text-[10px]',
-            project.status === 'production'
-              ? 'text-accent dark:text-accent-light'
-              : 'text-secondary-text dark:text-dark-text'
-          )}
+    <article className="mx-auto w-full max-w-container min-w-0">
+      {/* Navegação de retorno */}
+      <div className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-border-default pb-4">
+        <Link
+          href="/#projetos"
+          className="-my-2 inline-flex min-h-11 items-center gap-2 font-mono text-metadata font-medium text-accent hover:text-accent-hover hover:underline"
         >
+          <ArrowRightIcon className="h-3.5 w-3.5 rotate-180" aria-hidden="true" />
+          <span>{t.projects.back}</span>
+        </Link>
+
+        <span className="inline-flex items-center gap-2 font-mono text-metadata text-text-secondary">
           <span
             className={cn(
-              'h-1.5 w-1.5 rounded-full',
-              project.status === 'production'
-                ? 'bg-accent dark:bg-accent-light'
-                : 'bg-secondary-text dark:bg-dark-text'
+              'h-1.5 w-1.5 shrink-0 rounded-full',
+              project.status === 'production' ? 'bg-accent' : 'bg-text-secondary'
             )}
             aria-hidden="true"
           />
           {project.status === 'production' ? t.tabs.inProduction : t.tabs.demoProject}
         </span>
       </div>
-      <div className="mb-8 space-y-3">
-        <p className="max-w-prose-wide text-body-lg text-secondary-text dark:text-dark-text">
-          {project.description}
-        </p>
 
-        {project.challenge && (
-          <p className="max-w-prose-wide text-sm leading-relaxed text-secondary-text dark:text-dark-text">
-            <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-accent dark:text-accent-light">
-              {t.tabs.challenge}
-            </span>{' '}
-            {project.challenge}
+      {/* Cabeçalho Editorial */}
+      <header className="grid grid-cols-1 gap-4 lg:grid-cols-[72px_1fr] lg:gap-6">
+        <span aria-hidden="true" className="font-mono text-metadata text-text-secondary lg:pt-2">
+          [{indexLabel}]
+        </span>
+
+        <div className="min-w-0">
+          <h1 className="max-w-prose-wide font-heading text-hero text-text-primary [text-wrap:balance]">
+            {project.title}
+          </h1>
+
+          <p className="mt-4 max-w-prose-wide text-body-lg text-text-secondary">
+            {project.description}
           </p>
-        )}
 
-        {project.metrics && project.metrics.length > 0 && (
-          <ul aria-label={t.tabs.metrics} className="flex list-none flex-wrap gap-1.5 pt-1">
-            {project.metrics.map((metric) => (
-              <li
-                key={metric}
-                className="rounded-md border border-border-light/80 bg-light-card px-2.5 py-1 font-mono text-[10px] text-secondary-text dark:border-border-dark/80 dark:bg-dark-card dark:text-dark-text"
-              >
-                {metric}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full min-w-0 items-start">
-        {/* Coluna Esquerda: Showcase Visual e Ações (7 Colunas) */}
-        <div className="lg:col-span-7 flex flex-col justify-between space-y-4 rounded-md border border-border-light bg-light-surface p-4 sm:p-5 dark:border-border-dark dark:bg-dark-surface min-w-0 overflow-hidden">
-          <ProjectScreenShowcase
-            screens={project.screens ?? []}
-            title={project.title}
-            demoUrl={project.demoUrl}
-            defaultImageUrl={project.imageUrl}
-            defaultImageAlt={project.imageAlt}
-          />
-
-          <div className="space-y-3 pt-2">
-            <div className="grid gap-2.5 grid-cols-1 sm:grid-cols-2 w-full min-w-0">
+          {/* Hierarquia clara: primária (acessar →) + secundária (código) */}
+          <div className="mt-7 flex flex-wrap items-center gap-3">
+            {project.demoUrl && (
               <a
-                href={project.githubUrl}
+                href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cn(buttonVariants({ variant: 'outline', size: 'default' }), 'w-full')}
+                className={cn(buttonVariants({ variant: 'primary', size: 'lg' }), 'group')}
               >
-                <GithubIcon className="h-4 w-4" />
-                {t.tabs.viewCode}
+                <span>{project.demoLabel ?? t.projects.demoDefault}</span>
+                <ArrowRightIcon
+                  className="h-4 w-4 transition-transform duration-150 ease-out group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                />
               </a>
-              {project.demoUrl && (
-                <a
-                  href={project.demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(buttonVariants({ variant: 'primary', size: 'default' }), 'w-full')}
-                >
-                  <ExternalLinkIcon className="h-4 w-4" />
-                  {project.demoLabel ?? t.projects.demoDefault}
-                </a>
-              )}
-            </div>
+            )}
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
+            >
+              <GithubIcon className="h-4 w-4" />
+              <span>{t.tabs.viewCode}</span>
+            </a>
+          </div>
 
-            <div className="flex flex-wrap gap-1.5 pt-1 border-t border-border-light/70 dark:border-border-dark/70">
-              {project.tags.map((tag) => (
-                <Pill key={tag}>{tag}</Pill>
-              ))}
-            </div>
+          {/* Indicadores técnicos e tags de stack compactas */}
+          <div className="mt-6 flex flex-wrap items-center gap-1.5">
+            {project.metrics?.map((metric) => (
+              <Pill key={metric} className="bg-surface-subtle py-1 text-text-primary">
+                {metric}
+              </Pill>
+            ))}
+            {project.tags.map((tag) => (
+              <Pill key={tag}>{tag}</Pill>
+            ))}
           </div>
         </div>
+      </header>
 
-        {/* Coluna Direita: Engenharia, Responsabilidade & Decisões (5 Colunas) */}
-        <div className="lg:col-span-5 rounded-md border border-border-light bg-light-surface p-5 dark:border-border-dark dark:bg-dark-surface space-y-4 min-w-0">
+      {/* Conteúdo técnico estruturado */}
+      <div className="mt-10 space-y-8 lg:pl-[96px]">
+        {/* Showcase visual já emoldurado como janela de navegador */}
+        <ProjectScreenShowcase
+          screens={project.screens ?? []}
+          title={project.title}
+          demoUrl={project.demoUrl}
+          defaultImageUrl={project.imageUrl}
+          defaultImageAlt={project.imageAlt}
+        />
+
+        {/* Ledger de Engenharia */}
+        <div className="divide-y divide-border-default rounded-card border border-border-default bg-surface-card shadow-card">
+          {project.challenge && (
+            <dl className="grid grid-cols-1 gap-2 p-5 sm:grid-cols-[200px_1fr] sm:gap-6 sm:p-6">
+              <dt className="font-mono text-metadata uppercase tracking-wider text-text-secondary">
+                {t.tabs.challenge}
+              </dt>
+              <dd className="max-w-prose-wide text-body text-text-primary">{project.challenge}</dd>
+            </dl>
+          )}
+
           {project.responsibility && (
-            <div className="space-y-1 min-w-0">
-              <dl>
-                <dt className="font-mono text-[11px] font-bold uppercase tracking-wider text-primary-text dark:text-light-text">
-                  {t.tabs.responsibility}
-                </dt>
-                <dd className="text-xs sm:text-[13px] leading-relaxed text-primary-text dark:text-light-text">
-                  {project.responsibility}
-                </dd>
-              </dl>
-            </div>
+            <dl className="grid grid-cols-1 gap-2 p-5 sm:grid-cols-[200px_1fr] sm:gap-6 sm:p-6">
+              <dt className="font-mono text-metadata uppercase tracking-wider text-text-secondary">
+                {t.tabs.responsibility}
+              </dt>
+              <dd className="max-w-prose-wide text-body text-text-secondary">
+                {project.responsibility}
+              </dd>
+            </dl>
           )}
 
           {project.decision && (
-            <div className="space-y-1 min-w-0 pt-3 border-t border-border-light/60 dark:border-border-dark/60">
-              <dl>
-                <dt className="font-mono text-[11px] font-bold uppercase tracking-wider text-primary-text dark:text-light-text">
-                  {t.tabs.decision}
-                </dt>
-                <dd className="text-xs sm:text-[13px] leading-relaxed text-primary-text dark:text-light-text">
-                  {project.decision}
-                </dd>
-              </dl>
-            </div>
+            <dl className="grid grid-cols-1 gap-2 p-5 sm:grid-cols-[200px_1fr] sm:gap-6 sm:p-6">
+              <dt className="font-mono text-metadata uppercase tracking-wider text-text-secondary">
+                {t.tabs.decision}
+              </dt>
+              <dd className="max-w-prose-wide text-body text-text-secondary">{project.decision}</dd>
+            </dl>
           )}
 
           {project.evidence && project.evidence.length > 0 && (
-            <div className="space-y-2 min-w-0 pt-3 border-t border-border-light/60 dark:border-border-dark/60">
-              <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-primary-text dark:text-light-text">
+            <div className="grid grid-cols-1 gap-3 p-5 sm:grid-cols-[200px_1fr] sm:gap-6 sm:p-6">
+              <p className="font-mono text-metadata uppercase tracking-wider text-text-secondary">
                 {t.tabs.implemented}
               </p>
-              <ul className="grid gap-1.5 text-xs text-secondary-text dark:text-dark-text min-w-0">
-                {project.evidence.map((item) => (
-                  <li key={item} className="flex items-start gap-2 break-words">
-                    <CheckIcon className="h-3.5 w-3.5 text-accent dark:text-accent-light shrink-0 mt-0.5" />
-                    <span>{item}</span>
+              <ul className="max-w-prose-wide space-y-2">
+                {project.evidence.map((item, idx) => (
+                  <li key={item} className="flex items-baseline gap-3 text-body">
+                    <span
+                      aria-hidden="true"
+                      className="shrink-0 font-mono text-metadata text-text-secondary"
+                    >
+                      0{idx + 1}
+                    </span>
+                    <span className="text-text-secondary">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -170,28 +167,23 @@ export function ProjectCaseStudy({ slug }: ProjectCaseStudyProps) {
           )}
 
           {project.architectureLinks && project.architectureLinks.length > 0 && (
-            <div className="pt-3 border-t border-border-light/60 dark:border-border-dark/60 flex flex-wrap items-center gap-1.5 min-w-0">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-secondary-text dark:text-dark-text flex items-center gap-1 shrink-0">
-                <CodeIcon className="h-3 w-3 text-accent dark:text-accent-light" />
-                <span>{t.tabs.architecture}</span>
+            <div className="grid grid-cols-1 gap-3 p-5 sm:grid-cols-[200px_1fr] sm:gap-6 sm:p-6">
+              <span className="font-mono text-metadata uppercase tracking-wider text-text-secondary">
+                {t.tabs.architecture}
               </span>
-              <div className="flex flex-wrap gap-1.5 min-w-0">
+              <div className="flex flex-wrap gap-2">
                 {project.architectureLinks.map((link) => (
                   <a
                     key={link.label}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 rounded-md border border-border-light/80 bg-light-card px-2 py-0.5 font-mono text-[10px] text-secondary-text transition-colors hover:border-accent hover:text-accent dark:border-border-dark/80 dark:bg-dark-card dark:text-dark-text dark:hover:border-accent-light dark:hover:text-accent-light"
+                    className="inline-flex items-center gap-2 rounded-control border border-border-default bg-surface-subtle px-3 py-1.5 font-mono text-metadata text-text-primary transition-colors duration-150 hover:border-border-hover hover:text-accent"
                     title={t.tabs.ariaArchitecture.replace('{label}', link.label)}
                   >
-                    {link.badge && (
-                      <span className="font-bold text-accent dark:text-accent-light">
-                        [{link.badge}]
-                      </span>
-                    )}
-                    <span className="truncate">{link.label}</span>
-                    <ExternalLinkIcon className="h-2.5 w-2.5 opacity-60 shrink-0" />
+                    {link.badge && <span className="shrink-0 text-accent">[{link.badge}]</span>}
+                    <span>{link.label}</span>
+                    <ExternalLinkIcon className="h-3.5 w-3.5 shrink-0" />
                   </a>
                 ))}
               </div>
@@ -199,6 +191,6 @@ export function ProjectCaseStudy({ slug }: ProjectCaseStudyProps) {
           )}
         </div>
       </div>
-    </div>
+    </article>
   );
 }

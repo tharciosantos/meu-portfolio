@@ -1,7 +1,7 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import { type NavLink, navLinks, SECTION_IDS, sectionIdFromHref } from '@/data/constants';
 import { buttonVariants } from './ui/Button';
 import { cn } from '@/lib/utils';
@@ -13,49 +13,58 @@ import { useLanguage } from '@/app/hooks/useLanguage';
 
 const navLinkClass = (isActive: boolean) =>
   cn(
-    'relative text-sm font-medium transition-colors',
+    'relative py-1 text-body transition-colors duration-150',
     isActive
-      ? 'font-semibold text-accent dark:text-accent-light'
-      : 'text-secondary-text hover:text-primary-text dark:text-dark-text dark:hover:text-light-text',
-    isActive &&
-      'after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:rounded-full after:bg-accent dark:after:bg-accent-light'
+      ? 'font-medium text-accent after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-accent'
+      : 'text-text-secondary hover:text-text-primary'
   );
+
+const NAV_SECTION_IDS = ['home', ...SECTION_IDS] as const;
 
 export function NavbarClient() {
   const { t } = useLanguage();
-  const activeSection = useActiveSection(SECTION_IDS);
+  const navRef = useRef<HTMLElement | null>(null);
+  const activeSection = useActiveSection(NAV_SECTION_IDS);
   const mainLinks = navLinks.filter((link) => link.cta !== true);
   const ctaLink = navLinks.find((link) => link.cta === true);
   const isCtaActive = ctaLink ? activeSection === sectionIdFromHref(ctaLink.href) : false;
 
-  const [scrolled, setScrolled] = useState(false);
-
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const navEl = navRef.current;
+    if (!navEl) return;
+
+    const syncNavbarHeight = () => {
+      const height = Math.round(navEl.getBoundingClientRect().height);
+      if (height > 0) {
+        document.documentElement.style.setProperty('--navbar-height', `${height}px`);
+      }
+    };
+
+    syncNavbarHeight();
+
+    if (typeof ResizeObserver === 'undefined') return;
+
+    const observer = new ResizeObserver(syncNavbarHeight);
+    observer.observe(navEl);
+
+    return () => observer.disconnect();
   }, []);
 
   return (
     <nav
-      className={cn(
-        'sticky top-0 z-50 border-b px-4 sm:px-6 py-2.5 transition-colors duration-150',
-        scrolled
-          ? 'border-border-light bg-light-bg/95 backdrop-blur-xs dark:border-border-dark dark:bg-dark-bg/95'
-          : 'border-transparent bg-light-bg dark:bg-dark-bg'
-      )}
+      ref={navRef}
+      className="sticky top-0 z-50 min-h-[var(--navbar-height)] border-b border-border-default bg-page px-4 py-3 sm:px-6"
       role="navigation"
       aria-label={t.nav.ariaMain}
     >
-      <div className="mx-auto flex max-w-container items-center justify-between">
+      <div className="mx-auto flex max-w-container items-center justify-between gap-4">
         <Link
           href="/"
-          className="group inline-flex items-center gap-1.5 text-base font-bold tracking-tight text-primary-text transition-colors hover:text-accent dark:text-light-text dark:hover:text-accent-light"
+          className="-my-2 inline-flex min-h-11 items-center font-mono text-body font-medium tracking-tight text-text-primary hover:text-accent"
           aria-label={t.nav.backHome}
         >
-          <span className="font-heading text-lg font-bold tracking-tight">
-            Tharcio<span className="text-accent dark:text-accent-light">.dev</span>
+          <span>
+            Tharcio<span className="text-text-secondary">.dev</span>
           </span>
         </Link>
 
@@ -75,14 +84,13 @@ export function NavbarClient() {
           })}
         </div>
 
-        <div className="hidden items-center space-x-3 md:flex">
+        <div className="hidden items-center gap-2 md:flex">
           {ctaLink && (
             <Link
               href={ctaLink.href}
               className={cn(
                 buttonVariants({ variant: 'outline', size: 'sm' }),
-                isCtaActive &&
-                  'border-accent text-accent dark:border-accent-light dark:text-accent-light'
+                isCtaActive && 'border-accent-border bg-accent-subtle text-accent-on-subtle'
               )}
               aria-current={isCtaActive ? 'location' : undefined}
             >
@@ -93,7 +101,7 @@ export function NavbarClient() {
           <ThemeSwitcher />
         </div>
 
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-2 md:hidden">
           <LanguageSwitcher />
           <ThemeSwitcher />
           <MobileNav links={navLinks} activeSection={activeSection} />

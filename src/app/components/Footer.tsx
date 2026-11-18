@@ -8,29 +8,25 @@ const Footer = () => {
   const { t } = useLanguage();
 
   return (
-    <footer
-      className="border-t-2 border-accent/20 py-12 transition-colors dark:border-accent-light/20"
-      role="contentinfo"
-    >
+    <footer className="border-t border-border-default bg-page py-12" role="contentinfo">
       <div className="mx-auto flex max-w-container flex-col gap-8 px-4 sm:px-6">
-        {/* Linha Superior: Marca e Links Rápidos */}
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-6 md:flex-row md:items-baseline md:justify-between">
           <div>
-            <p className="font-heading text-sm font-semibold text-primary-text dark:text-light-text">
+            <p className="font-heading text-body font-medium text-text-primary">
               {t.footer.tagline}
             </p>
-            <p className="mt-1 text-xs text-secondary-text dark:text-dark-text">
-              {t.footer.taglineSub}
-            </p>
+            <p className="mt-1 text-metadata text-text-secondary">{t.footer.taglineSub}</p>
           </div>
 
-          {/* Navegação Rápida */}
-          <nav aria-label={t.nav.footerNav} className="flex flex-wrap items-center gap-x-5 gap-y-2">
+          <nav
+            aria-label={t.nav.footerNav}
+            className="-my-1 flex flex-wrap items-center gap-x-5 gap-y-1"
+          >
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="font-mono text-xs text-secondary-text hover:text-accent dark:text-dark-text dark:hover:text-accent-light transition-colors"
+                className="inline-flex min-h-11 items-center font-mono text-metadata text-text-secondary transition-colors duration-150 hover:text-accent"
               >
                 {t.nav.links[link.href] ?? link.label}
               </a>
@@ -38,35 +34,31 @@ const Footer = () => {
           </nav>
         </div>
 
-        {/* Divisor */}
-        <div className="border-t border-border-light/60 dark:border-border-dark/60" />
-
-        {/* Linha Inferior: Copyright, Localização, Código e Redes */}
-        <div className="flex flex-col gap-4 text-xs text-secondary-text dark:text-dark-text sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[11px]">
+        <div className="flex flex-col gap-4 border-t border-border-default pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-metadata text-text-secondary [&>a]:inline-flex [&>a]:min-h-11 [&>a]:items-center">
             <span>© {new Date().getFullYear()} Tharcio Santos</span>
-            <span>·</span>
+            <span aria-hidden="true">·</span>
             <span>{t.footer.location}</span>
-            <span>·</span>
+            <span aria-hidden="true">·</span>
             <a
               href={`${GITHUB_URL}/meu-portfolio`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-accent hover:underline dark:text-accent-light"
+              className="text-accent hover:text-accent-hover hover:underline"
             >
               {t.footer.viewCode}
             </a>
-            <span>·</span>
+            <span aria-hidden="true">·</span>
             <span>{t.footer.builtWith}</span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="-my-1 flex items-center gap-1">
             <a
               href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t.footer.ariaGithub}
-              className="text-secondary-text transition-colors hover:text-accent dark:text-dark-text dark:hover:text-accent-light"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-control text-text-secondary transition-colors duration-150 hover:bg-btn-ghost-hover hover:text-text-primary"
             >
               <GithubIcon className="h-4 w-4" />
             </a>
@@ -76,7 +68,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t.footer.ariaLinkedin}
-              className="text-secondary-text transition-colors hover:text-accent dark:text-dark-text dark:hover:text-accent-light"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-control text-text-secondary transition-colors duration-150 hover:bg-btn-ghost-hover hover:text-text-primary"
             >
               <LinkedinIcon className="h-4 w-4" />
             </a>
@@ -84,7 +76,7 @@ const Footer = () => {
             <a
               href={`mailto:${EMAIL}`}
               aria-label={t.footer.ariaEmail}
-              className="text-secondary-text transition-colors hover:text-accent dark:text-dark-text dark:hover:text-accent-light"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-control text-text-secondary transition-colors duration-150 hover:bg-btn-ghost-hover hover:text-text-primary"
             >
               <MailIcon className="h-4 w-4" />
             </a>

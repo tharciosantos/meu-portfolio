@@ -6,8 +6,10 @@ import { getProjects, type Project } from '@/data/projects';
 import { GITHUB_URL } from '@/data/constants';
 import Section from '../ui/Section';
 import { SectionHeader } from '../ui/SectionHeader';
+import { buttonVariants } from '../ui/Button';
+import { BrowserFrame, extractHostname } from '../ui/BrowserFrame';
 import { Pill } from '../ui/Pill';
-import { ExternalLinkIcon, GithubIcon, ArrowRightIcon } from '../ui/Icons';
+import { GithubIcon, ArrowRightIcon } from '../ui/Icons';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/app/hooks/useLanguage';
 
@@ -22,7 +24,7 @@ function ProjectScreenshot({ project, sizes }: { project: Project; sizes: string
       alt={project.imageAlt ?? `${project.title} — interface do sistema`}
       fill
       sizes={sizes}
-      className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02] motion-reduce:transform-none motion-reduce:transition-none"
+      className="object-cover object-top"
     />
   );
 }
@@ -37,179 +39,202 @@ const Projects = () => {
     <Section
       id="projetos"
       spacing="editorial"
-      className="border-b border-border-light dark:border-border-dark"
+      surface="muted"
+      className="border-b border-border-default"
     >
       <div className="mx-auto max-w-container">
-        <SectionHeader
-          eyebrow={t.projects.eyebrow}
-          title={t.projects.title}
-          subtitle={t.projects.subtitle}
-        />
+        <SectionHeader index="01" title={t.projects.title} subtitle={t.projects.subtitle} />
 
-        {/* Cases principais: cards com screenshot e link para a página do projeto */}
-        <ul className="grid list-none grid-cols-1 gap-4 lg:grid-cols-2">
-          {featuredProjects.map((project) => (
-            <li
-              key={project.slug}
-              className="group flex min-w-0 flex-col overflow-hidden rounded-md border border-border-light bg-light-card dark:border-border-dark dark:bg-dark-card"
-            >
-              <div className="relative aspect-[2.1/1] w-full overflow-hidden border-b border-border-light bg-light-surface dark:border-border-dark dark:bg-dark-surface">
-                <ProjectScreenshot project={project} sizes="(max-width: 1024px) 100vw, 600px" />
-              </div>
+        <div className="lg:pl-[96px]">
+          {/* Cases principais com moldura de navegador e sombra suave única */}
+          <ul className="grid list-none grid-cols-1 gap-6 lg:grid-cols-2">
+            {featuredProjects.map((project, idx) => (
+              <li
+                key={project.slug}
+                className="flex min-w-0 flex-col overflow-hidden rounded-card border border-border-default bg-surface-card shadow-card transition-colors duration-150 hover:border-border-hover"
+              >
+                <div className="border-b border-border-default bg-surface-subtle px-3 pt-3 sm:px-4 sm:pt-4">
+                  <BrowserFrame
+                    domain={extractHostname(project.demoUrl)}
+                    className="rounded-b-none border-b-0"
+                    contentClassName="aspect-[1920/909]"
+                  >
+                    <ProjectScreenshot project={project} sizes="(max-width: 1024px) 100vw, 520px" />
+                  </BrowserFrame>
+                </div>
 
-              <div className="flex flex-1 flex-col justify-between gap-4 p-5 sm:p-6">
-                <div className="min-w-0 space-y-3">
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-                    <h3 className="font-heading text-xl font-semibold tracking-tight text-primary-text dark:text-light-text">
+                <div className="flex flex-1 flex-col justify-between gap-6 p-5 sm:p-6">
+                  <div className="min-w-0 space-y-3">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span className="font-mono text-metadata text-text-secondary">
+                        0{idx + 1} / 0{featuredProjects.length}
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 font-mono text-metadata text-text-secondary">
+                        <span
+                          className={cn(
+                            'h-1.5 w-1.5 shrink-0 rounded-full',
+                            project.status === 'production' ? 'bg-accent' : 'bg-text-secondary'
+                          )}
+                          aria-hidden="true"
+                        />
+                        {project.status === 'production' ? t.tabs.inProduction : t.tabs.demoProject}
+                      </span>
+                    </div>
+
+                    <h3 className="py-2 font-heading text-subsection text-text-primary">
                       <Link
                         href={`/projetos/${project.slug}`}
-                        className="transition-colors hover:text-accent dark:hover:text-accent-light"
+                        className="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-accent"
                       >
                         {project.title}
                       </Link>
                     </h3>
-                    <span className="inline-flex items-center gap-1.5 rounded-md border border-border-light bg-light-surface px-2 py-0.5 font-mono text-[11px] text-secondary-text dark:border-border-dark dark:bg-dark-surface dark:text-dark-text">
-                      <span
-                        className={cn(
-                          'h-1.5 w-1.5 shrink-0 rounded-full',
-                          project.status === 'production'
-                            ? 'bg-accent dark:bg-accent-light'
-                            : 'bg-secondary-text dark:bg-dark-text'
-                        )}
-                        aria-hidden="true"
-                      />
-                      {project.status === 'production' ? t.tabs.inProduction : t.tabs.demoProject}
-                    </span>
-                  </div>
-                  <p className="text-sm leading-relaxed text-secondary-text dark:text-dark-text">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-1.5 pt-1">
-                    {project.tags.map((tag) => (
-                      <Pill key={tag}>{tag}</Pill>
-                    ))}
-                  </div>
-                </div>
 
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-border-light/70 pt-4 dark:border-border-dark/70">
-                  <Link
-                    href={`/projetos/${project.slug}`}
-                    className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light"
-                  >
-                    {t.projects.viewCase}
-                    <ArrowRightIcon className="h-3.5 w-3.5" />
-                  </Link>
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={t.projects.ariaViewCode.replace('{name}', project.shortTitle)}
-                    className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light"
-                  >
-                    <GithubIcon className="h-3.5 w-3.5" aria-hidden="true" />
-                    {t.projects.viewCode}
-                  </a>
-                  {project.demoUrl && (
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light"
-                    >
-                      <ExternalLinkIcon className="h-3.5 w-3.5" aria-hidden="true" />
-                      {project.demoLabel ?? t.projects.demoDefault}
-                    </a>
-                  )}
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+                    <p className="text-body text-text-secondary">{project.description}</p>
 
-        {/* Outros projetos: vitrine compacta com demo e código */}
-        {secondaryProjects.length > 0 && (
-          <div className="mt-10 w-full min-w-0">
-            <h3 className="font-heading text-lg sm:text-xl font-semibold tracking-tight text-primary-text dark:text-light-text">
-              {t.projects.othersTitle}
-            </h3>
-            <p className="mt-1 max-w-prose-wide text-sm leading-relaxed text-secondary-text dark:text-dark-text">
-              {t.projects.othersSubtitle}
-            </p>
-
-            <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {secondaryProjects.map((project) => (
-                <li
-                  key={project.slug}
-                  className="group flex min-w-0 flex-col overflow-hidden rounded-md border border-border-light bg-light-card dark:border-border-dark dark:bg-dark-card"
-                >
-                  <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border-light bg-light-surface dark:border-border-dark dark:bg-dark-surface">
-                    <ProjectScreenshot
-                      project={project}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-                    />
-                  </div>
-
-                  <div className="flex flex-1 flex-col justify-between gap-4 p-4 sm:p-5">
-                    <div className="min-w-0 space-y-2">
-                      <h4 className="font-heading text-base font-semibold tracking-tight text-primary-text dark:text-light-text">
-                        {project.shortTitle}
-                      </h4>
-                      {project.outcome && (
-                        <p className="font-mono text-[11px] font-medium text-accent dark:text-accent-light">
-                          {project.outcome}
-                        </p>
-                      )}
-                      <p className="text-xs leading-relaxed text-secondary-text dark:text-dark-text">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5 pt-1">
-                        {project.tags.map((tag) => (
-                          <Pill key={tag}>{tag}</Pill>
-                        ))}
-                      </div>
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {project.tags.map((tag) => (
+                        <Pill key={tag}>{tag}</Pill>
+                      ))}
                     </div>
+                  </div>
 
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-border-light/70 pt-3 dark:border-border-dark/70">
+                  {/* Hierarquia clara: primária (acessar →) + secundárias (case study e código) */}
+                  <div className="flex flex-wrap items-center gap-2 border-t border-border-default pt-4">
+                    {project.demoUrl && (
                       <a
-                        href={project.githubUrl}
+                        href={project.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={t.projects.ariaViewCode.replace('{name}', project.shortTitle)}
-                        className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light"
+                        className={cn(buttonVariants({ variant: 'primary', size: 'sm' }), 'group')}
                       >
-                        <GithubIcon className="h-3.5 w-3.5" aria-hidden="true" />
-                        {t.projects.viewCode}
+                        <span>{project.demoLabel ?? t.projects.demoDefault}</span>
+                        <ArrowRightIcon
+                          className="h-3.5 w-3.5 transition-transform duration-150 ease-out group-hover:translate-x-0.5"
+                          aria-hidden="true"
+                        />
                       </a>
-                      {project.demoUrl && (
+                    )}
+                    <Link
+                      href={`/projetos/${project.slug}`}
+                      className={cn(buttonVariants({ variant: 'outline', size: 'sm' }))}
+                    >
+                      <span>{t.projects.viewCase}</span>
+                      <ArrowRightIcon className="h-3.5 w-3.5" aria-hidden="true" />
+                    </Link>
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={t.projects.ariaViewCode.replace('{name}', project.shortTitle)}
+                      className={cn(buttonVariants({ variant: 'ghost', size: 'sm' }))}
+                    >
+                      <GithubIcon className="h-3.5 w-3.5" aria-hidden="true" />
+                      <span>{t.projects.viewCode}</span>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          {/* Outros projetos */}
+          {secondaryProjects.length > 0 && (
+            <div className="mt-14 w-full min-w-0">
+              <div className="max-w-prose-wide">
+                <h3 className="font-heading text-subsection text-text-primary">
+                  {t.projects.othersTitle}
+                </h3>
+                <p className="mt-2 text-body text-text-secondary">{t.projects.othersSubtitle}</p>
+              </div>
+
+              <ul className="mt-6 grid list-none grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {secondaryProjects.map((project) => (
+                  <li
+                    key={project.slug}
+                    className="flex min-w-0 flex-col overflow-hidden rounded-card border border-border-default bg-surface-card shadow-card transition-colors duration-150 hover:border-border-hover"
+                  >
+                    <div className="border-b border-border-default bg-surface-subtle px-3 pt-3">
+                      <BrowserFrame
+                        domain={extractHostname(project.demoUrl)}
+                        className="rounded-b-none border-b-0"
+                        contentClassName="aspect-[16/9]"
+                      >
+                        <ProjectScreenshot
+                          project={project}
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 350px"
+                        />
+                      </BrowserFrame>
+                    </div>
+
+                    <div className="flex flex-1 flex-col justify-between gap-5 p-4 sm:p-5">
+                      <div className="min-w-0 space-y-2">
+                        <h4 className="font-heading text-body font-medium text-text-primary">
+                          {project.shortTitle}
+                        </h4>
+
+                        {project.outcome && (
+                          <p className="font-mono text-metadata text-text-secondary">
+                            {project.outcome}
+                          </p>
+                        )}
+
+                        <p className="text-body text-text-secondary">{project.description}</p>
+
+                        <div className="flex flex-wrap gap-1.5 pt-1">
+                          {project.tags.map((tag) => (
+                            <Pill key={tag}>{tag}</Pill>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-2 border-t border-border-default pt-4">
+                        {project.demoUrl && (
+                          <a
+                            href={project.demoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={cn(
+                              buttonVariants({ variant: 'primary', size: 'sm' }),
+                              'group'
+                            )}
+                          >
+                            <span>{project.demoLabel ?? t.projects.demoDefault}</span>
+                            <ArrowRightIcon
+                              className="h-3.5 w-3.5 transition-transform duration-150 ease-out group-hover:translate-x-0.5"
+                              aria-hidden="true"
+                            />
+                          </a>
+                        )}
                         <a
-                          href={project.demoUrl}
+                          href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light"
+                          aria-label={t.projects.ariaViewCode.replace('{name}', project.shortTitle)}
+                          className={cn(buttonVariants({ variant: 'ghost', size: 'sm' }))}
                         >
-                          <ExternalLinkIcon className="h-3.5 w-3.5" aria-hidden="true" />
-                          {project.demoLabel ?? t.projects.demoDefault}
+                          <GithubIcon className="h-3.5 w-3.5" aria-hidden="true" />
+                          <span>{t.projects.viewCode}</span>
                         </a>
-                      )}
+                      </div>
                     </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-        {/* Nota elegante de outros projetos no GitHub */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 rounded-md border border-border-light/60 bg-light-surface/40 px-5 py-3.5 text-xs text-secondary-text dark:border-border-dark/60 dark:bg-dark-surface/40 dark:text-dark-text">
-          <p>{t.projects.viewAllNote}</p>
-          <a
-            href={GITHUB_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 font-mono text-xs font-semibold text-accent hover:underline dark:text-accent-light shrink-0"
-          >
-            {t.projects.viewAllRepos}
-          </a>
+          <div className="mt-8 flex flex-col gap-3 rounded-card border border-border-default bg-surface-card px-5 py-4 shadow-card sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-body text-text-secondary">{t.projects.viewAllNote}</p>
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="-my-2 inline-flex min-h-11 shrink-0 items-center font-mono text-metadata font-medium text-accent hover:text-accent-hover hover:underline sm:my-0"
+            >
+              {t.projects.viewAllRepos}
+            </a>
+          </div>
         </div>
       </div>
     </Section>
