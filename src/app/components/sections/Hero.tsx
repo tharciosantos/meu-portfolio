@@ -1,10 +1,13 @@
 'use client';
 
+import Image from 'next/image';
+import Link from 'next/link';
 import { buttonVariants } from '../ui/Button';
 import { GITHUB_URL, LINKEDIN_URL, RESUME_URL } from '@/data/constants';
 import { cn } from '@/lib/utils';
 import Section from '../ui/Section';
 import { Metric } from '../ui/Metric';
+import { BrowserFrame } from '../ui/BrowserFrame';
 import { ArrowRightIcon, DocumentIcon, GithubIcon, LinkedinIcon } from '../ui/Icons';
 import { useLanguage } from '@/app/hooks/useLanguage';
 
@@ -19,7 +22,7 @@ const Hero = () => {
       className="flex min-h-0 flex-col border-b border-border-default lg:min-h-[calc(100svh-var(--navbar-height))]"
     >
       <div className="mx-auto flex w-full max-w-container flex-1 flex-col justify-between gap-10">
-        <div className="my-auto grid grid-cols-1 gap-4 lg:grid-cols-[72px_1fr] lg:gap-6">
+        <div className="my-auto grid grid-cols-1 gap-4 lg:grid-cols-[72px_1fr] lg:gap-6 xl:grid-cols-[72px_minmax(0,1fr)_380px]">
           <span
             aria-hidden="true"
             className="hidden font-mono text-metadata text-text-secondary lg:block lg:pt-1.5"
@@ -27,7 +30,7 @@ const Hero = () => {
             [00]
           </span>
 
-          <div className="min-w-0">
+          <div className="order-first min-w-0 xl:order-none">
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-metadata">
               <span className="inline-flex items-center gap-2 text-text-primary">
                 <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true" />
@@ -90,6 +93,54 @@ const Hero = () => {
               </div>
             </div>
           </div>
+
+          {/* Prova visual: dois sistemas em produção, sem custo extra de JS */}
+          <figure className="min-w-0">
+            <div className="flex flex-col gap-4">
+              <div className="relative">
+                <BrowserFrame domain="manutflow.vercel.app" contentClassName="aspect-[1920/909]">
+                  <Image
+                    src="/images/manutflow/preview-landing.webp"
+                    alt={t.hero.showcasePrimaryAlt}
+                    fill
+                    sizes="(max-width: 1280px) 100vw, 380px"
+                    className="object-cover object-top"
+                  />
+                </BrowserFrame>
+                <span className="absolute -left-3 top-1/3 rounded-tag border border-border-default bg-surface-card px-2 py-1 font-mono text-metadata leading-none text-text-primary shadow-card">
+                  {t.hero.showcasePrimaryLabel}
+                </span>
+              </div>
+
+              <div className="ml-10 hidden xl:block">
+                <BrowserFrame domain="helpflow.vercel.app" contentClassName="aspect-[16/9]">
+                  <Image
+                    src="/images/helpflow/dashboard-agent.webp"
+                    alt={t.hero.showcaseSecondaryAlt}
+                    fill
+                    sizes="340px"
+                    className="object-cover object-top"
+                  />
+                </BrowserFrame>
+                <span className="mt-2 block font-mono text-metadata text-text-secondary">
+                  {t.hero.showcaseSecondaryLabel}
+                </span>
+              </div>
+            </div>
+
+            <figcaption className="mt-4 flex items-center justify-end">
+              <Link
+                href="/projetos/manutflow"
+                className="group inline-flex min-h-11 items-center gap-1.5 font-mono text-metadata font-medium text-accent hover:text-accent-hover hover:underline"
+              >
+                <span>{t.hero.showcaseCta}</span>
+                <ArrowRightIcon
+                  className="h-3.5 w-3.5 transition-transform duration-150 ease-out group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                />
+              </Link>
+            </figcaption>
+          </figure>
         </div>
 
         <dl className="grid grid-cols-1 gap-6 border-t border-border-default pt-6 sm:grid-cols-3 lg:ml-[96px]">

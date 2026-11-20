@@ -26,6 +26,7 @@ const pt = {
     showcasePrimaryLabel: 'ManutFlow · Em produção',
     showcaseSecondaryAlt: 'Painel de atendimento do HelpFlow com tickets e resumo geral',
     showcaseSecondaryLabel: 'HelpFlow · Em produção',
+    showcaseCta: 'Ver o case do ManutFlow',
     headline: 'Desenvolvo sistemas completos, da interface aos dados.',
     subtitle:
       'Com projetos publicados e experiência técnica autônoma, construo aplicações web focadas em usabilidade, controle de acesso seguro e cobertura consistente de testes.',
@@ -244,6 +245,7 @@ const en: typeof pt = {
     showcasePrimaryLabel: 'ManutFlow · In production',
     showcaseSecondaryAlt: 'HelpFlow support panel with tickets and overview',
     showcaseSecondaryLabel: 'HelpFlow · In production',
+    showcaseCta: 'Read the ManutFlow case',
     headline: 'I build complete systems, from interface to data.',
     subtitle:
       'With published projects and self-driven technical experience, I build web applications focused on usability, secure access control, and consistent test coverage.',
