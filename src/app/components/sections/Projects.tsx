@@ -13,7 +13,15 @@ import { GithubIcon, ArrowRightIcon } from '../ui/Icons';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/app/hooks/useLanguage';
 
-function ProjectScreenshot({ project, sizes }: { project: Project; sizes: string }) {
+function ProjectScreenshot({
+  project,
+  sizes,
+  priority = false,
+}: {
+  project: Project;
+  sizes: string;
+  priority?: boolean;
+}) {
   const src = project.imageUrl ?? project.screens?.[0]?.imageUrl;
 
   if (!src) return null;
@@ -24,6 +32,7 @@ function ProjectScreenshot({ project, sizes }: { project: Project; sizes: string
       alt={project.imageAlt ?? `${project.title} — interface do sistema`}
       fill
       sizes={sizes}
+      priority={priority}
       className="object-cover object-top"
     />
   );
@@ -59,7 +68,11 @@ const Projects = () => {
                     className="rounded-b-none border-b-0"
                     contentClassName="aspect-[1920/909]"
                   >
-                    <ProjectScreenshot project={project} sizes="(max-width: 1024px) 100vw, 520px" />
+                    <ProjectScreenshot
+                      project={project}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 492px"
+                      priority={idx === 0}
+                    />
                   </BrowserFrame>
                 </div>
 
@@ -162,7 +175,7 @@ const Projects = () => {
                       >
                         <ProjectScreenshot
                           project={project}
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 350px"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 328px"
                         />
                       </BrowserFrame>
                     </div>
