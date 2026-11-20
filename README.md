@@ -49,7 +49,7 @@ Mais do que uma vitrine, este repositório reúne práticas aplicadas em fronten
 - **SEO técnico:** sitemap com as rotas `/projetos/[slug]` dos cases principais, `robots.txt`, Open Graph, Twitter Card, Schema.org com endereço local (Caeté/MG) e keywords regionais, além de `themeColor` por preferência de tema.
 - **Internacionalização:** dicionários PT/EN sem dependências, com `LanguageProvider`, toggle PT/EN no navbar e persistência em `localStorage`.
 - **Integração contínua:** GitHub Actions validando formatação, lint, tipos, testes e build.
-- **Qualidade de código:** Vitest, Testing Library, ESLint, Prettier, Husky e lint-staged, com 101 testes automatizados cobrindo componentes, hooks e dados.
+- **Qualidade de código:** Vitest, Testing Library, ESLint, Prettier, Husky e lint-staged, com 109 testes automatizados cobrindo componentes, hooks e dados.
 
 ### Metas Lighthouse
 
@@ -131,7 +131,7 @@ Dashboard para consulta de criptomoedas com busca, rotas dinâmicas, renderizaç
 
 - `class-variance-authority`, `clsx` e `tailwind-merge` — variantes e composição de classes.
 - `next-themes` — suporte a tema claro e escuro com alternância manual. O tema inicial é o claro (`defaultTheme="light"`, `enableSystem={false}`), sem seguir a preferência do sistema.
-- Ícones SVG locais — 21 componentes gerais (`Icons.tsx`, incluindo `WhatsappIcon`) + 18 ícones técnicos (`TechIcons.tsx`) sem biblioteca externa.
+- Ícones SVG locais — 17 componentes em `Icons.tsx` (incluindo `WhatsappIcon`), sem biblioteca externa.
 - `@vercel/analytics` — métricas de uso carregadas dinamicamente.
 
 ### Qualidade e testes
@@ -150,7 +150,7 @@ Dashboard para consulta de criptomoedas com busca, rotas dinâmicas, renderizaç
 - **Dados e interface:** informações reutilizadas por diferentes componentes ficam em `src/data`; textos editoriais específicos permanecem nos componentes das seções para manter contexto e legibilidade.
 - **Sistema de componentes com CVA:** `Button` usa `class-variance-authority` com tokens semânticos (`btn-primary`, `btn-outline`, `btn-ghost`) e uma sombra de camada única (`--shadow-card`) para hierarquia visual, sem depender apenas de cores.
 - **Navbar interativa:** `Navbar.tsx` é um Server Component que importa `NavbarClient.tsx` (Client Component). Esta separação mantém o scroll spy, menu mobile e alternador de tema no cliente, enquanto o wrapper permanece no servidor.
-- **Animações declarativas:** entradas com `animate-fade-in`/`fade-up` definidas no Tailwind, sem custo de JavaScript e desativadas por `prefers-reduced-motion` no CSS global.
+- **Movimento contido:** sem animações de entrada declarativas — o conteúdo aparece no primeiro paint, mantendo o LCP baixo e evitando CLS. O movimento se limita a transições de 150ms em hover e foco, desativadas por `prefers-reduced-motion` no CSS global.
 - **ReadingProgressBar:** barra de progresso fixa no topo atualizada por `ref` e `requestAnimationFrame`, sem renderização React a cada evento de scroll.
 - **ProjectCaseStudy:** cases dedicados aos dois projetos principais em `/projetos/[slug]` (estático via `generateStaticParams`, com `generateMetadata` e canonical), com showcase, problema, responsabilidade, decisão técnica, evidências e links de arquitetura.
 - **ProjectScreenShowcase:** carousel com auto-play pausável, swipe gestures para mobile, navegação por teclado e lightbox modal em alta resolução.
@@ -158,11 +158,11 @@ Dashboard para consulta de criptomoedas com busca, rotas dinâmicas, renderizaç
 - **Contato com conversão:** CTA de WhatsApp (`wa.me` com mensagem pré-preenchida) como ação primária na seção de contato, além de botão de cópia de e-mail — ampliando os caminhos de conversão além do `mailto`.
 - **SEO local:** keywords regionais (Belo Horizonte, Caeté, Minas Gerais, Remoto) e `PostalAddress` + `homeLocation` no Schema.org para descoberta por recrutadores da região.
 - **i18n PT/EN:** dicionários próprios sem dependências, `LanguageProvider` com persistência em `localStorage`, toggle PT/EN no navbar e dados (projetos, capacidades, experiência) traduzidos — PT como padrão.
-- **Ícones SVG locais:** 21 componentes em `Icons.tsx` (incluindo `WhatsappIcon`) + 18 ícones técnicos em `TechIcons.tsx` com resolver automático por nome de tecnologia.
+- **Ícones SVG locais:** 17 componentes em `Icons.tsx`, todos com `aria-hidden` por padrão. Tecnologias são representadas pelo componente `Pill` com texto, nunca por logo.
 - **CSS crítico otimizado:** o build usa `optimizeCss` com `critters` para reduzir bloqueios na renderização inicial.
 - **Analytics dinâmico:** o Analytics da Vercel é isolado em um componente client carregado dinamicamente.
 - **Bundle de produção otimizado:** build via **Turbopack** (padrão do Next 16) com imagens em WebP/AVIF e quality tiers configurados (75, 78, 82, 85, 90, 95).
-- **Testes comportamentais:** parte dos 101 testes usa `userEvent` para simular interações mais próximas do uso real.
+- **Testes comportamentais:** parte dos 109 testes usa `userEvent` para simular interações mais próximas do uso real.
 - **CI:** GitHub Actions executa formatação, lint, TypeScript, testes e build antes da integração com `main`.
 - **Pre-commit automático:** Husky e lint-staged executam ESLint e Prettier nos arquivos staged.
 
@@ -180,7 +180,7 @@ meu-portfolio/
 │   │   ├── components/      # Navbar, Footer, seções e componentes de UI
 │   │   │   ├── __tests__/   # Testes de componentes
 │   │   │   ├── sections/    # Seções do portfólio (Hero, Projects, ProjectCaseStudy, Process, Capabilities, About, Contact)
-│   │   │   └── ui/          # Componentes reutilizáveis (Button, Pill, Icons, TechIcons, ProjectScreenShowcase, etc.)
+│   │   │   └── ui/          # Componentes reutilizáveis (Button, Pill, Icons, ProjectScreenShowcase, etc.)
 │   │   ├── projetos/[slug]/ # Cases dos projetos principais (generateStaticParams + generateMetadata)
 │   │   └── hooks/           # Hooks customizados (useActiveSection, useLanguage)
 │   ├── data/                # Projetos, habilidades, experiências, constantes e i18n (dicionários PT/EN)
